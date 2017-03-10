@@ -1,0 +1,48 @@
+{
+	"name": "yiisoft/yii2-app-advanced",
+	"description": "Yii 2 Advanced Project Template",
+	"homepage": "http://www.yiiframework.com/",
+	"type": "project",
+	"minimum-stability": "stable",
+	"require": {
+		"php": ">=5.4.0",
+		"yiisoft/yii2": "^2.0",
+		"yiisoft/yii2-bootstrap": "^2.0",
+		"yiisoft/yii2-swiftmailer": "^2.0",
+
+		"p2made/yii2-p2y2-things": "^2.0",
+		"p2made/yii2-p2y2-things-demo": "^2.0",
+		"p2made/yii2-flat-theme": "^0.3",
+		"p2made/yii2-startbootstrap-themes": "^2.12",
+		"p2made/yii2-sb-admin-theme": "^2.0",
+		"p2made/yii2-triangle-theme": "^0.5",
+
+		"p2made/yii2-p2y2-kartik-collection": "^0.1",
+		"amnah/yii2-user": "^5.0",
+		"webvimark/module-user-management": "^1.0"
+	},
+	"require-dev": {
+		"yiisoft/yii2-debug": "^2.0",
+		"yiisoft/yii2-gii": "^2.0",
+		"yiisoft/yii2-faker": "^2.0",
+		"codeception/codeception": "^2.2",
+		"codeception/base": "^2.2",
+		"codeception/verify": "^0.3",
+
+		"p2made/yii2-p2y2-gii-collection": "dev-master"
+	},
+	"config": {
+		"fxp-asset": {
+			"installer-paths": {
+				"npm-asset-library": "vendor/npm",
+				"bower-asset-library": "vendor/bower"
+			}
+		},
+		"process-timeout": 1800
+	},
+	"extra": {
+	},
+	"scripts": {
+		"post-install-cmd": "php init --env=Development --overwrite=n"
+	}
+}
