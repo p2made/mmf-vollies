@@ -9,6 +9,10 @@ var components = {
             "main": "ekko-lightbox-built.js"
         },
         {
+            "name": "jplayer",
+            "main": "jplayer-built.js"
+        },
+        {
             "name": "holder",
             "main": "holder-built.js"
         },
@@ -20,6 +24,11 @@ var components = {
     "shim": {
         "qunit": {
             "exports": "QUnit"
+        },
+        "jplayer": {
+            "deps": [
+                "jquery"
+            ]
         },
         "bootstrap-switch": {
             "exports": "BootstrapSwitch"
