@@ -19,6 +19,17 @@ $menuItems = [
 	['label' => 'Home', 'url' => ['/site/index']],
 	['label' => 'Info', 'url' =>['/site/page', 'view' => 'volunteer-info']],
 	['label' => 'Apply', 'url' =>['/site/page', 'view' => 'volunteer-apply']],
+	['label' => 'application', 'url' =>['/application/index']],
+	['label' => 'commitment', 'url' =>['/commitment/index']],
+	['label' => 'department', 'url' =>['/department/index']],
+	['label' => 'history-item', 'url' =>['/history-item/index']],
+	['label' => 'job', 'url' =>['/job/index']],
+	['label' => 'profile', 'url' =>['/profile/index']],
+	['label' => 'user', 'url' =>['/user/index']],
+	['label' => 'Dev', 'items' => [
+		['label' => 'Gii', 'url' => ['/gii']],
+		['label' => 'Debug', 'url' => ['/debug']],
+	]],
 ];
 if (Yii::$app->user->isGuest) {
 	//$menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -43,3 +54,11 @@ echo Nav::widget([
 	'items' => $menuItems,
 ]);
 NavBar::end();
+
+/*
+	['label' => 'Dev', 'items' => [
+		['label' => 'Info', 'url' =>['/site/page', 'view' => 'volunteer-info']],
+		['label' => 'Gii', 'url' => ['/gii']],
+		['label' => 'Debug', 'url' => ['/debug']],
+	]],
+*/

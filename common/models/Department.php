@@ -3,13 +3,13 @@
 namespace common\models;
 
 use Yii;
-use \common\models\base\User as BaseUser;
+use \common\models\base\Department as BaseDepartment;
 use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table "Department".
  */
-class User extends BaseUser
+class Department extends BaseDepartment
 {
 
 public function behaviors()
