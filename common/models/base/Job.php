@@ -27,75 +27,75 @@ abstract class Job extends \yii\db\ActiveRecord
 
 
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'Job';
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName()
+	{
+		return 'Job';
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'createdBy',
-                'updatedByAttribute' => 'updatedBy',
-            ],
-            [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created',
-                'updatedAtAttribute' => 'updated',
-            ],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => BlameableBehavior::className(),
+				'createdByAttribute' => 'createdBy',
+				'updatedByAttribute' => 'updatedBy',
+			],
+			[
+				'class' => TimestampBehavior::className(),
+				'createdAtAttribute' => 'created',
+				'updatedAtAttribute' => 'updated',
+			],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['deptId'], 'integer'],
-            [['name', 'menuGroup'], 'required'],
-            [['description'], 'string'],
-            [['name', 'menuGroup'], 'string', 'max' => 24]
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			[['deptId'], 'integer'],
+			[['name', 'menuGroup'], 'required'],
+			[['description'], 'string'],
+			[['name', 'menuGroup'], 'string', 'max' => 24]
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'deptId' => 'Dept ID',
-            'name' => 'Name',
-            'menuGroup' => 'Menu Group',
-            'description' => 'Description',
-            'created' => 'Created',
-            'createdBy' => 'Created By',
-            'updated' => 'Updated',
-            'updatedBy' => 'Updated By',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'deptId' => 'Dept ID',
+			'name' => 'Name',
+			'menuGroup' => 'Menu Group',
+			'description' => 'Description',
+			'created' => 'Created',
+			'createdBy' => 'Created By',
+			'updated' => 'Updated',
+			'updatedBy' => 'Updated By',
+		];
+	}
 
 
-    
-    /**
-     * @inheritdoc
-     * @return \common\models\JobQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new \common\models\JobQuery(get_called_class());
-    }
+	
+	/**
+	 * @inheritdoc
+	 * @return \common\models\JobQuery the active query used by this AR class.
+	 */
+	public static function find()
+	{
+		return new \common\models\JobQuery(get_called_class());
+	}
 
 
 }

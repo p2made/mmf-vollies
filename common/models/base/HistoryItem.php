@@ -52,105 +52,105 @@ abstract class HistoryItem extends \yii\db\ActiveRecord
 
 
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'HistoryItem';
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName()
+	{
+		return 'HistoryItem';
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'createdBy',
-                'updatedByAttribute' => 'updatedBy',
-            ],
-            [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created',
-                'updatedAtAttribute' => 'updated',
-            ],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => BlameableBehavior::className(),
+				'createdByAttribute' => 'createdBy',
+				'updatedByAttribute' => 'updatedBy',
+			],
+			[
+				'class' => TimestampBehavior::className(),
+				'createdAtAttribute' => 'created',
+				'updatedAtAttribute' => 'updated',
+			],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['profileId', 'rsa', 'dl_c', 'dl_h', 'cse', 'ohs', 'vol', 'mmfVol', 'mmfAtt', 'returned'], 'integer'],
-            [['givenName', 'familyName', 'email', 'locality', 'emergencyContact', 'emergencyPhone1', 'preferredJobs', 'availability', 'commentsInformation', 'discovery'], 'required'],
-            [['preferredJobs', 'availability', 'commentsInformation', 'discovery'], 'string'],
-            [['givenName', 'familyName', 'preferredName', 'country'], 'string', 'max' => 32],
-            [['email', 'locality', 'emergencyContact'], 'string', 'max' => 64],
-            [['phone1', 'phone2', 'emergencyPhone1', 'emergencyPhone2'], 'string', 'max' => 24],
-            [['address1', 'address2'], 'string', 'max' => 255],
-            [['state'], 'string', 'max' => 16],
-            [['postcode'], 'string', 'max' => 12]
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			[['profileId', 'rsa', 'dl_c', 'dl_h', 'cse', 'ohs', 'vol', 'mmfVol', 'mmfAtt', 'returned'], 'integer'],
+			[['givenName', 'familyName', 'email', 'locality', 'emergencyContact', 'emergencyPhone1', 'preferredJobs', 'availability', 'commentsInformation', 'discovery'], 'required'],
+			[['preferredJobs', 'availability', 'commentsInformation', 'discovery'], 'string'],
+			[['givenName', 'familyName', 'preferredName', 'country'], 'string', 'max' => 32],
+			[['email', 'locality', 'emergencyContact'], 'string', 'max' => 64],
+			[['phone1', 'phone2', 'emergencyPhone1', 'emergencyPhone2'], 'string', 'max' => 24],
+			[['address1', 'address2'], 'string', 'max' => 255],
+			[['state'], 'string', 'max' => 16],
+			[['postcode'], 'string', 'max' => 12]
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'profileId' => 'Profile ID',
-            'givenName' => 'Given Name',
-            'familyName' => 'Family Name',
-            'preferredName' => 'Preferred Name',
-            'email' => 'Email',
-            'phone1' => 'Phone1',
-            'phone2' => 'Phone2',
-            'address1' => 'Address1',
-            'address2' => 'Address2',
-            'locality' => 'Locality',
-            'state' => 'State',
-            'postcode' => 'Postcode',
-            'country' => 'Country',
-            'emergencyContact' => 'Emergency Contact',
-            'emergencyPhone1' => 'Emergency Phone1',
-            'emergencyPhone2' => 'Emergency Phone2',
-            'rsa' => 'Rsa',
-            'dl_c' => 'Dl C',
-            'dl_h' => 'Dl H',
-            'cse' => 'Cse',
-            'ohs' => 'Ohs',
-            'vol' => 'Vol',
-            'mmfVol' => 'Mmf Vol',
-            'mmfAtt' => 'Mmf Att',
-            'returned' => 'Returned',
-            'preferredJobs' => 'Preferred Jobs',
-            'availability' => 'Availability',
-            'commentsInformation' => 'Comments Information',
-            'discovery' => 'Discovery',
-            'created' => 'Created',
-            'createdBy' => 'Created By',
-            'updated' => 'Updated',
-            'updatedBy' => 'Updated By',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'profileId' => 'Profile ID',
+			'givenName' => 'Given Name',
+			'familyName' => 'Family Name',
+			'preferredName' => 'Preferred Name',
+			'email' => 'Email',
+			'phone1' => 'Phone1',
+			'phone2' => 'Phone2',
+			'address1' => 'Address1',
+			'address2' => 'Address2',
+			'locality' => 'Locality',
+			'state' => 'State',
+			'postcode' => 'Postcode',
+			'country' => 'Country',
+			'emergencyContact' => 'Emergency Contact',
+			'emergencyPhone1' => 'Emergency Phone1',
+			'emergencyPhone2' => 'Emergency Phone2',
+			'rsa' => 'Rsa',
+			'dl_c' => 'Dl C',
+			'dl_h' => 'Dl H',
+			'cse' => 'Cse',
+			'ohs' => 'Ohs',
+			'vol' => 'Vol',
+			'mmfVol' => 'Mmf Vol',
+			'mmfAtt' => 'Mmf Att',
+			'returned' => 'Returned',
+			'preferredJobs' => 'Preferred Jobs',
+			'availability' => 'Availability',
+			'commentsInformation' => 'Comments Information',
+			'discovery' => 'Discovery',
+			'created' => 'Created',
+			'createdBy' => 'Created By',
+			'updated' => 'Updated',
+			'updatedBy' => 'Updated By',
+		];
+	}
 
 
-    
-    /**
-     * @inheritdoc
-     * @return \common\models\HistoryItemQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new \common\models\HistoryItemQuery(get_called_class());
-    }
+	
+	/**
+	 * @inheritdoc
+	 * @return \common\models\HistoryItemQuery the active query used by this AR class.
+	 */
+	public static function find()
+	{
+		return new \common\models\HistoryItemQuery(get_called_class());
+	}
 
 
 }

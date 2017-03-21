@@ -33,81 +33,81 @@ abstract class Application extends \yii\db\ActiveRecord
 
 
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'Application';
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName()
+	{
+		return 'Application';
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'createdBy',
-                'updatedByAttribute' => 'updatedBy',
-            ],
-            [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created',
-                'updatedAtAttribute' => 'updated',
-            ],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => BlameableBehavior::className(),
+				'createdByAttribute' => 'createdBy',
+				'updatedByAttribute' => 'updatedBy',
+			],
+			[
+				'class' => TimestampBehavior::className(),
+				'createdAtAttribute' => 'created',
+				'updatedAtAttribute' => 'updated',
+			],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['profileId', 'preferredJobId1', 'preferredJobId2', 'preferredJobId3', 'availableFromTime', 'availableToTime'], 'integer'],
-            [['availableFromDate', 'availableFromTime', 'availableToDate', 'availableToTime'], 'required'],
-            [['availableFromDate', 'availableToDate'], 'safe'],
-            [['availabilityNotes', 'otherNotes'], 'string']
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			[['profileId', 'preferredJobId1', 'preferredJobId2', 'preferredJobId3', 'availableFromTime', 'availableToTime'], 'integer'],
+			[['availableFromDate', 'availableFromTime', 'availableToDate', 'availableToTime'], 'required'],
+			[['availableFromDate', 'availableToDate'], 'safe'],
+			[['availabilityNotes', 'otherNotes'], 'string']
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'profileId' => 'Profile ID',
-            'preferredJobId1' => 'Preferred Job Id1',
-            'preferredJobId2' => 'Preferred Job Id2',
-            'preferredJobId3' => 'Preferred Job Id3',
-            'availableFromDate' => 'Available From Date',
-            'availableFromTime' => 'Available From Time',
-            'availableToDate' => 'Available To Date',
-            'availableToTime' => 'Available To Time',
-            'availabilityNotes' => 'Availability Notes',
-            'otherNotes' => 'Other Notes',
-            'created' => 'Created',
-            'createdBy' => 'Created By',
-            'updated' => 'Updated',
-            'updatedBy' => 'Updated By',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'profileId' => 'Profile ID',
+			'preferredJobId1' => 'Preferred Job Id1',
+			'preferredJobId2' => 'Preferred Job Id2',
+			'preferredJobId3' => 'Preferred Job Id3',
+			'availableFromDate' => 'Available From Date',
+			'availableFromTime' => 'Available From Time',
+			'availableToDate' => 'Available To Date',
+			'availableToTime' => 'Available To Time',
+			'availabilityNotes' => 'Availability Notes',
+			'otherNotes' => 'Other Notes',
+			'created' => 'Created',
+			'createdBy' => 'Created By',
+			'updated' => 'Updated',
+			'updatedBy' => 'Updated By',
+		];
+	}
 
 
-    
-    /**
-     * @inheritdoc
-     * @return \common\models\ApplicationQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new \common\models\ApplicationQuery(get_called_class());
-    }
+	
+	/**
+	 * @inheritdoc
+	 * @return \common\models\ApplicationQuery the active query used by this AR class.
+	 */
+	public static function find()
+	{
+		return new \common\models\ApplicationQuery(get_called_class());
+	}
 
 
 }

@@ -12,63 +12,63 @@ use common\models\Department;
  */
 class DepartmentSearch extends Department
 {
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['id', 'createdBy', 'updatedBy'], 'integer'],
-            [['name', 'description', 'created', 'updated'], 'safe'],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			[['id', 'createdBy', 'updatedBy'], 'integer'],
+			[['name', 'description', 'created', 'updated'], 'safe'],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function scenarios()
+	{
+		// bypass scenarios() implementation in the parent class
+		return Model::scenarios();
+	}
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
-    public function search($params)
-    {
-        $query = Department::find();
+	/**
+	 * Creates data provider instance with search query applied
+	 *
+	 * @param array $params
+	 *
+	 * @return ActiveDataProvider
+	 */
+	public function search($params)
+	{
+		$query = Department::find();
 
-        // add conditions that should always apply here
+		// add conditions that should always apply here
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+		]);
 
-        $this->load($params);
+		$this->load($params);
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
+		if (!$this->validate()) {
+			// uncomment the following line if you do not want to return any records when validation fails
+			// $query->where('0=1');
+			return $dataProvider;
+		}
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'created' => $this->created,
-            'createdBy' => $this->createdBy,
-            'updated' => $this->updated,
-            'updatedBy' => $this->updatedBy,
-        ]);
+		// grid filtering conditions
+		$query->andFilterWhere([
+			'id' => $this->id,
+			'created' => $this->created,
+			'createdBy' => $this->createdBy,
+			'updated' => $this->updated,
+			'updatedBy' => $this->updatedBy,
+		]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+		$query->andFilterWhere(['like', 'name', $this->name])
+			->andFilterWhere(['like', 'description', $this->description]);
 
-        return $dataProvider;
-    }
+		return $dataProvider;
+	}
 }

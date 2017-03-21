@@ -14,7 +14,7 @@
  * p2m\SB\assets\VolliesFontsAsset::register($this);
  *
  * or specify as a dependency with...
- *     'p2m\SB\assets\VolliesFontsAsset',
+ *	 'p2m\SB\assets\VolliesFontsAsset',
  */
 
 namespace frontend\assets;

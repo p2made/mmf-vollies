@@ -18,8 +18,7 @@
 		"p2made/yii2-triangle-theme": "^0.5",
 
 		"p2made/yii2-p2y2-kartik-collection": "^0.1",
-		"amnah/yii2-user": "^5.0",
-		"webvimark/module-user-management": "^1.0"
+		"amnah/yii2-user": "^5.0"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "^2.0",

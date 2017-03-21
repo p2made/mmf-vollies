@@ -25,74 +25,74 @@ abstract class Department extends \yii\db\ActiveRecord
 
 
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'Department';
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName()
+	{
+		return 'Department';
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'createdBy',
-                'updatedByAttribute' => 'updatedBy',
-            ],
-            [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created',
-                'updatedAtAttribute' => 'updated',
-            ],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => BlameableBehavior::className(),
+				'createdByAttribute' => 'createdBy',
+				'updatedByAttribute' => 'updatedBy',
+			],
+			[
+				'class' => TimestampBehavior::className(),
+				'createdAtAttribute' => 'created',
+				'updatedAtAttribute' => 'updated',
+			],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['name'], 'required'],
-            [['description'], 'string'],
-            [['name'], 'string', 'max' => 24],
-            [['name'], 'unique'],
-            [['name'], 'unique']
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			[['name'], 'required'],
+			[['description'], 'string'],
+			[['name'], 'string', 'max' => 24],
+			[['name'], 'unique'],
+			[['name'], 'unique']
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'created' => 'Created',
-            'createdBy' => 'Created By',
-            'updated' => 'Updated',
-            'updatedBy' => 'Updated By',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'name' => 'Name',
+			'description' => 'Description',
+			'created' => 'Created',
+			'createdBy' => 'Created By',
+			'updated' => 'Updated',
+			'updatedBy' => 'Updated By',
+		];
+	}
 
 
-    
-    /**
-     * @inheritdoc
-     * @return \common\models\DepartmentQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new \common\models\DepartmentQuery(get_called_class());
-    }
+	
+	/**
+	 * @inheritdoc
+	 * @return \common\models\DepartmentQuery the active query used by this AR class.
+	 */
+	public static function find()
+	{
+		return new \common\models\DepartmentQuery(get_called_class());
+	}
 
 
 }

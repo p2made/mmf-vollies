@@ -14,7 +14,7 @@
  * p2m\SB\assets\VolliesAsset::register($this);
  *
  * or specify as a dependency with...
- *     'p2m\SB\assets\VolliesAsset',
+ *	 'p2m\SB\assets\VolliesAsset',
  */
 
 namespace frontend\assets;

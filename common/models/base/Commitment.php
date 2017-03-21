@@ -30,79 +30,79 @@ abstract class Commitment extends \yii\db\ActiveRecord
 
 
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'Commitment';
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName()
+	{
+		return 'Commitment';
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'createdBy',
-                'updatedByAttribute' => 'updatedBy',
-            ],
-            [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created',
-                'updatedAtAttribute' => 'updated',
-            ],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => BlameableBehavior::className(),
+				'createdByAttribute' => 'createdBy',
+				'updatedByAttribute' => 'updatedBy',
+			],
+			[
+				'class' => TimestampBehavior::className(),
+				'createdAtAttribute' => 'created',
+				'updatedAtAttribute' => 'updated',
+			],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['profileId', 'deptId', 'hours', 'reinvite'], 'integer'],
-            [['year', 'job', 'report', 'reinvite'], 'required'],
-            [['year'], 'safe'],
-            [['report'], 'string'],
-            [['job'], 'string', 'max' => 24]
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			[['profileId', 'deptId', 'hours', 'reinvite'], 'integer'],
+			[['year', 'job', 'report', 'reinvite'], 'required'],
+			[['year'], 'safe'],
+			[['report'], 'string'],
+			[['job'], 'string', 'max' => 24]
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'profileId' => 'Profile ID',
-            'deptId' => 'Dept ID',
-            'year' => 'Year',
-            'job' => 'Job',
-            'hours' => 'Hours',
-            'report' => 'Report',
-            'reinvite' => 'Reinvite',
-            'created' => 'Created',
-            'createdBy' => 'Created By',
-            'updated' => 'Updated',
-            'updatedBy' => 'Updated By',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'profileId' => 'Profile ID',
+			'deptId' => 'Dept ID',
+			'year' => 'Year',
+			'job' => 'Job',
+			'hours' => 'Hours',
+			'report' => 'Report',
+			'reinvite' => 'Reinvite',
+			'created' => 'Created',
+			'createdBy' => 'Created By',
+			'updated' => 'Updated',
+			'updatedBy' => 'Updated By',
+		];
+	}
 
 
-    
-    /**
-     * @inheritdoc
-     * @return \common\models\CommitmentQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new \common\models\CommitmentQuery(get_called_class());
-    }
+	
+	/**
+	 * @inheritdoc
+	 * @return \common\models\CommitmentQuery the active query used by this AR class.
+	 */
+	public static function find()
+	{
+		return new \common\models\CommitmentQuery(get_called_class());
+	}
 
 
 }
