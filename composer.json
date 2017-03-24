@@ -10,12 +10,10 @@
 		"yiisoft/yii2-bootstrap": "^2.0",
 		"yiisoft/yii2-swiftmailer": "^2.0",
 
-		"p2made/yii2-p2y2-things": "^2.0",
-		"p2made/yii2-p2y2-things-demo": "^2.0",
-		"p2made/yii2-flat-theme": "^0.3",
-		"p2made/yii2-startbootstrap-themes": "^2.12",
-		"p2made/yii2-sb-admin-theme": "^2.0",
-		"p2made/yii2-triangle-theme": "^0.5",
+		"p2made/yii2-p2y2-things": "^2.1",
+		"p2made/yii2-p2y2-things-demo": "^2.1",
+		"p2made/yii2-startbootstrap-themes": "^2.13",
+		"p2made/yii2-sb-admin-theme": "^2.1",
 
 		"p2made/yii2-p2y2-kartik-collection": "^0.1",
 		"amnah/yii2-user": "^5.0"

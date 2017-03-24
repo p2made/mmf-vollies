@@ -1,9 +1,18 @@
 <?php
+$_urlBase = 'mmf.yii.dev';
+$_urlBaseFrontend = '//vollies.' . $_urlBase;
+$_urlBaseBackend = '//volhq.'    . $_urlBase;
+//$_urlBaseBackend = '//static.'   . $_urlBase;
+
 return [
 	'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-	'modules' => [
-	],
 	'components' => [
+		// NOTE: in the yii2-advanced-app, the user component should be updated in
+		// 'frontend/config/main.php' and/or 'backend/config/main.php' (OR you can add it
+		// to 'common/config' if you remove it from frontend/backend)
+		'user' => [
+			'class' => 'amnah\yii2\user\components\User',
+		],
 		'assetManager' => [
 			//'appendTimestamp' => true,
 			'bundles' => [
@@ -48,12 +57,22 @@ return [
 			'class' => 'yii\caching\FileCache',
 		],
 	],
+	'modules' => [
+		'user' => [
+			//'class' => 'common\modules\UserModule',
+			'class' => 'amnah\yii2\user\Module',
+			// set custom module properties here ...
+		],
+	],
 ];
+
+// ----- ^ ----- ^ ----- ^ ----- ^ ----- ^ -----
 
 /*
 $_urlBase = 'mmf.yii.dev';
-$_urlBaseFrontend = '//'	 . $_urlBase;
-$_urlBaseBackend = '//hq.'   . $_urlBase;
+$_urlBaseFrontend = '//vollies.' . $_urlBase;
+$_urlBaseBackend = '//volhq.'    . $_urlBase;
+$_urlBaseBackend = '//static.'   . $_urlBase;
 
 return [
 	'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',

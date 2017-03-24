@@ -5,20 +5,19 @@
 namespace common\models\base;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the base-model class for table "user".
+ * This is the base-model class for table "user_token".
  *
  * @property integer $id
- * @property string $username
- * @property string $auth_key
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $email
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
+ * @property integer $user_id
+ * @property integer $type
+ * @property string $token
+ * @property string $data
+ * @property string $created_at
+ * @property string $expired_at
+ *
+ * @property \common\models\User $user
  * @property string $aliasModel
  */
 abstract class  extends \yii\db\ActiveRecord
@@ -31,21 +30,9 @@ abstract class  extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'user';
+        return 'user_token';
     }
 
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-            ],
-        ];
-    }
 
     /**
      * @inheritdoc
@@ -53,13 +40,12 @@ abstract class  extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email'], 'required'],
-            [['status'], 'integer'],
-            [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
-            [['auth_key'], 'string', 'max' => 32],
-            [['username'], 'unique'],
-            [['email'], 'unique'],
-            [['password_reset_token'], 'unique']
+            [['user_id', 'type'], 'integer'],
+            [['type', 'token'], 'required'],
+            [['created_at', 'expired_at'], 'safe'],
+            [['token', 'data'], 'string', 'max' => 255],
+            [['token'], 'unique'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\User::className(), 'targetAttribute' => ['user_id' => 'id']]
         ];
     }
 
@@ -70,15 +56,21 @@ abstract class  extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'username' => 'Username',
-            'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
-            'password_reset_token' => 'Password Reset Token',
-            'email' => 'Email',
-            'status' => 'Status',
+            'user_id' => 'User ID',
+            'type' => 'Type',
+            'token' => 'Token',
+            'data' => 'Data',
             'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'expired_at' => 'Expired At',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(\common\models\User::className(), ['id' => 'user_id']);
     }
 
 

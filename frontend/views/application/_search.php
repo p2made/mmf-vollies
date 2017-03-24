@@ -1,55 +1,42 @@
 <?php
+/**
+ * /WWW/yii.mmf-vollies/frontend/runtime/giiant/eeda5c365686c9888dbc13dbc58f89a1
+ *
+ * @package default
+ */
+
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\ApplicationSearch */
-/* @var $form yii\widgets\ActiveForm */
+/**
+ *
+ * @var yii\web\View $this
+ * @var common\models\ApplicationSearch $model
+ * @var yii\widgets\ActiveForm $form
+ */
 ?>
 
-<div class="application-search">
+<div class="application-job-search">
 
-	<?php $form = ActiveForm::begin([
+    <?php $form = ActiveForm::begin([
 		'action' => ['index'],
 		'method' => 'get',
 	]); ?>
 
-	<?= $form->field($model, 'id') ?>
+    		<?php echo $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'profileId') ?>
+		<?php echo $form->field($model, 'appl_id') ?>
 
-	<?= $form->field($model, 'preferredJobId1') ?>
+		<?php echo $form->field($model, 'job_id') ?>
 
-	<?= $form->field($model, 'preferredJobId2') ?>
+		<?php echo $form->field($model, 'preference') ?>
 
-	<?= $form->field($model, 'preferredJobId3') ?>
+    <div class="form-group">
+        <?php echo Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+    </div>
 
-	<?php // echo $form->field($model, 'availableFromDate') ?>
-
-	<?php // echo $form->field($model, 'availableFromTime') ?>
-
-	<?php // echo $form->field($model, 'availableToDate') ?>
-
-	<?php // echo $form->field($model, 'availableToTime') ?>
-
-	<?php // echo $form->field($model, 'availabilityNotes') ?>
-
-	<?php // echo $form->field($model, 'otherNotes') ?>
-
-	<?php // echo $form->field($model, 'created') ?>
-
-	<?php // echo $form->field($model, 'createdBy') ?>
-
-	<?php // echo $form->field($model, 'updated') ?>
-
-	<?php // echo $form->field($model, 'updatedBy') ?>
-
-	<div class="form-group">
-		<?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-		<?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-	</div>
-
-	<?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
 
 </div>

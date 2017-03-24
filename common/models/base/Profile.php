@@ -9,13 +9,13 @@ use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the base-model class for table "Profile".
+ * This is the base-model class for table "profile".
  *
  * @property integer $id
+ * @property integer $user_id
  * @property string $givenName
  * @property string $familyName
  * @property string $preferredName
- * @property string $email
  * @property string $phone1
  * @property string $phone2
  * @property string $address1
@@ -37,10 +37,15 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $mmfAtt
  * @property string $discovery
  * @property string $discoveryDetail
- * @property string $created
- * @property integer $createdBy
- * @property string $updated
- * @property integer $updatedBy
+ * @property integer $returned
+ * @property string $dnr
+ * @property string $timezone
+ * @property string $created_at
+ * @property integer $created_by
+ * @property string $updated_at
+ * @property integer $updated_by
+ *
+ * @property \common\models\User $user
  * @property string $aliasModel
  */
 abstract class Profile extends \yii\db\ActiveRecord
@@ -48,100 +53,100 @@ abstract class Profile extends \yii\db\ActiveRecord
 
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'Profile';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'profile';
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function behaviors()
-	{
-		return [
-			[
-				'class' => BlameableBehavior::className(),
-				'createdByAttribute' => 'createdBy',
-				'updatedByAttribute' => 'updatedBy',
-			],
-			[
-				'class' => TimestampBehavior::className(),
-				'createdAtAttribute' => 'created',
-				'updatedAtAttribute' => 'updated',
-			],
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => BlameableBehavior::className(),
+            ],
+            [
+                'class' => TimestampBehavior::className(),
+            ],
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['givenName', 'familyName', 'email', 'locality', 'emergencyContact', 'emergencyPhone1'], 'required'],
-			[['rsa', 'dl_c', 'dl_h', 'cse', 'ohs', 'vol', 'mmfVol', 'mmfAtt'], 'integer'],
-			[['givenName', 'familyName', 'preferredName', 'country'], 'string', 'max' => 32],
-			[['email', 'locality', 'emergencyContact'], 'string', 'max' => 64],
-			[['phone1', 'phone2', 'emergencyPhone1', 'emergencyPhone2', 'discovery'], 'string', 'max' => 24],
-			[['address1', 'address2', 'discoveryDetail'], 'string', 'max' => 255],
-			[['state'], 'string', 'max' => 16],
-			[['postcode'], 'string', 'max' => 12]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['user_id', 'givenName', 'familyName', 'locality', 'emergencyContact', 'emergencyPhone1'], 'required'],
+            [['user_id', 'rsa', 'dl_c', 'dl_h', 'cse', 'ohs', 'vol', 'mmfVol', 'mmfAtt', 'returned'], 'integer'],
+            [['dnr'], 'safe'],
+            [['givenName', 'familyName', 'preferredName', 'country'], 'string', 'max' => 32],
+            [['phone1', 'phone2', 'emergencyPhone1', 'emergencyPhone2', 'discovery'], 'string', 'max' => 24],
+            [['address1', 'address2', 'discoveryDetail', 'timezone'], 'string', 'max' => 255],
+            [['locality', 'emergencyContact'], 'string', 'max' => 64],
+            [['state'], 'string', 'max' => 16],
+            [['postcode'], 'string', 'max' => 12],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\User::className(), 'targetAttribute' => ['user_id' => 'id']]
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'givenName' => 'Given Name',
-			'familyName' => 'Family Name',
-			'preferredName' => 'Preferred Name',
-			'email' => 'Email',
-			'phone1' => 'Phone1',
-			'phone2' => 'Phone2',
-			'address1' => 'Address1',
-			'address2' => 'Address2',
-			'locality' => 'Locality',
-			'state' => 'State',
-			'postcode' => 'Postcode',
-			'country' => 'Country',
-			'emergencyContact' => 'Emergency Contact',
-			'emergencyPhone1' => 'Emergency Phone1',
-			'emergencyPhone2' => 'Emergency Phone2',
-			'rsa' => 'Rsa',
-			'dl_c' => 'Dl C',
-			'dl_h' => 'Dl H',
-			'cse' => 'Cse',
-			'ohs' => 'Ohs',
-			'vol' => 'Vol',
-			'mmfVol' => 'Mmf Vol',
-			'mmfAtt' => 'Mmf Att',
-			'discovery' => 'Discovery',
-			'discoveryDetail' => 'Discovery Detail',
-			'created' => 'Created',
-			'createdBy' => 'Created By',
-			'updated' => 'Updated',
-			'updatedBy' => 'Updated By',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'user_id' => 'User ID',
+            'givenName' => 'Given Name',
+            'familyName' => 'Family Name',
+            'preferredName' => 'Preferred Name',
+            'phone1' => 'Phone1',
+            'phone2' => 'Phone2',
+            'address1' => 'Address1',
+            'address2' => 'Address2',
+            'locality' => 'Locality',
+            'state' => 'State',
+            'postcode' => 'Postcode',
+            'country' => 'Country',
+            'emergencyContact' => 'Emergency Contact',
+            'emergencyPhone1' => 'Emergency Phone1',
+            'emergencyPhone2' => 'Emergency Phone2',
+            'rsa' => 'Rsa',
+            'dl_c' => 'Dl C',
+            'dl_h' => 'Dl H',
+            'cse' => 'Cse',
+            'ohs' => 'Ohs',
+            'vol' => 'Vol',
+            'mmfVol' => 'Mmf Vol',
+            'mmfAtt' => 'Mmf Att',
+            'discovery' => 'Discovery',
+            'discoveryDetail' => 'Discovery Detail',
+            'returned' => 'Returned',
+            'dnr' => 'Dnr',
+            'timezone' => 'Timezone',
+            'created_at' => 'Created At',
+            'created_by' => 'Created By',
+            'updated_at' => 'Updated At',
+            'updated_by' => 'Updated By',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(\common\models\User::className(), ['id' => 'user_id']);
+    }
 
 
-	
-	/**
-	 * @inheritdoc
-	 * @return \common\models\ProfileQuery the active query used by this AR class.
-	 */
-	public static function find()
-	{
-		return new \common\models\ProfileQuery(get_called_class());
-	}
 
 
 }

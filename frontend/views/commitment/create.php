@@ -1,21 +1,44 @@
 <?php
+/**
+ * /WWW/yii.mmf-vollies/frontend/runtime/giiant/fccccf4deb34aed738291a9c38e87215
+ *
+ * @package default
+ */
+
 
 use yii\helpers\Html;
 
-
-/* @var $this yii\web\View */
-/* @var $model common\models\Commitment */
-
-$this->title = 'Create Commitment';
-$this->params['breadcrumbs'][] = ['label' => 'Commitments', 'url' => ['index']];
+/**
+ *
+ * @var yii\web\View $this
+ * @var common\models\Commitment $model
+ */
+$this->title = 'Create';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('models', 'Commitments'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="commitment-create">
+<div class="giiant-crud commitment-create">
 
-	<h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?php echo Yii::t('models', 'Commitment') ?>
+        <small>
+                        <?php echo $model->id ?>
+        </small>
+    </h1>
 
-	<?= $this->render('_form', [
+    <div class="clearfix crud-navigation">
+        <div class="pull-left">
+            <?php echo             Html::a(
+	'Cancel',
+	\yii\helpers\Url::previous(),
+	['class' => 'btn btn-default']) ?>
+        </div>
+    </div>
+
+    <hr />
+
+    <?php echo $this->render('_form', [
 		'model' => $model,
-	]) ?>
+	]); ?>
 
 </div>

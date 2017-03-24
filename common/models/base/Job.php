@@ -9,17 +9,21 @@ use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the base-model class for table "Job".
+ * This is the base-model class for table "job".
  *
  * @property integer $id
- * @property integer $deptId
+ * @property integer $dept_id
+ * @property integer $sequence
  * @property string $name
  * @property string $menuGroup
  * @property string $description
- * @property string $created
- * @property integer $createdBy
- * @property string $updated
- * @property integer $updatedBy
+ * @property string $created_at
+ * @property integer $created_by
+ * @property string $updated_at
+ * @property integer $updated_by
+ *
+ * @property \common\models\ApplicationJob[] $applicationJobs
+ * @property \common\models\Department $dept
  * @property string $aliasModel
  */
 abstract class Job extends \yii\db\ActiveRecord
@@ -27,75 +31,80 @@ abstract class Job extends \yii\db\ActiveRecord
 
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'Job';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'job';
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function behaviors()
-	{
-		return [
-			[
-				'class' => BlameableBehavior::className(),
-				'createdByAttribute' => 'createdBy',
-				'updatedByAttribute' => 'updatedBy',
-			],
-			[
-				'class' => TimestampBehavior::className(),
-				'createdAtAttribute' => 'created',
-				'updatedAtAttribute' => 'updated',
-			],
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => BlameableBehavior::className(),
+            ],
+            [
+                'class' => TimestampBehavior::className(),
+            ],
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['deptId'], 'integer'],
-			[['name', 'menuGroup'], 'required'],
-			[['description'], 'string'],
-			[['name', 'menuGroup'], 'string', 'max' => 24]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['dept_id', 'sequence', 'name', 'menuGroup'], 'required'],
+            [['dept_id', 'sequence'], 'integer'],
+            [['description'], 'string'],
+            [['name', 'menuGroup'], 'string', 'max' => 24],
+            [['dept_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Department::className(), 'targetAttribute' => ['dept_id' => 'id']]
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'deptId' => 'Dept ID',
-			'name' => 'Name',
-			'menuGroup' => 'Menu Group',
-			'description' => 'Description',
-			'created' => 'Created',
-			'createdBy' => 'Created By',
-			'updated' => 'Updated',
-			'updatedBy' => 'Updated By',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'dept_id' => 'Dept ID',
+            'sequence' => 'Sequence',
+            'name' => 'Name',
+            'menuGroup' => 'Menu Group',
+            'description' => 'Description',
+            'created_at' => 'Created At',
+            'created_by' => 'Created By',
+            'updated_at' => 'Updated At',
+            'updated_by' => 'Updated By',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getApplicationJobs()
+    {
+        return $this->hasMany(\common\models\ApplicationJob::className(), ['job_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDept()
+    {
+        return $this->hasOne(\common\models\Department::className(), ['id' => 'dept_id']);
+    }
 
 
-	
-	/**
-	 * @inheritdoc
-	 * @return \common\models\JobQuery the active query used by this AR class.
-	 */
-	public static function find()
-	{
-		return new \common\models\JobQuery(get_called_class());
-	}
 
 
 }

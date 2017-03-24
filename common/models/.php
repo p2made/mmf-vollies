@@ -7,7 +7,7 @@ use \common\models\base\ as Base;
 use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table "user_token".
  */
 class  extends Base
 {

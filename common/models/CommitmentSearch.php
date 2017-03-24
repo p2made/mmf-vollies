@@ -12,68 +12,69 @@ use common\models\Commitment;
  */
 class CommitmentSearch extends Commitment
 {
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['id', 'profileId', 'deptId', 'hours', 'reinvite', 'createdBy', 'updatedBy'], 'integer'],
-			[['year', 'job', 'report', 'created', 'updated'], 'safe'],
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['id', 'user_id', 'appl_id', 'dept_id', 'hours', 'reinvite', 'created_by', 'updated_by'], 'integer'],
+            [['year', 'job', 'report', 'created_at', 'updated_at'], 'safe'],
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function scenarios()
-	{
-		// bypass scenarios() implementation in the parent class
-		return Model::scenarios();
-	}
+    /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        // bypass scenarios() implementation in the parent class
+        return Model::scenarios();
+    }
 
-	/**
-	 * Creates data provider instance with search query applied
-	 *
-	 * @param array $params
-	 *
-	 * @return ActiveDataProvider
-	 */
-	public function search($params)
-	{
-		$query = Commitment::find();
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function search($params)
+    {
+        $query = Commitment::find();
 
-		// add conditions that should always apply here
+        // add conditions that should always apply here
 
-		$dataProvider = new ActiveDataProvider([
-			'query' => $query,
-		]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
-		$this->load($params);
+        $this->load($params);
 
-		if (!$this->validate()) {
-			// uncomment the following line if you do not want to return any records when validation fails
-			// $query->where('0=1');
-			return $dataProvider;
-		}
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
 
-		// grid filtering conditions
-		$query->andFilterWhere([
-			'id' => $this->id,
-			'profileId' => $this->profileId,
-			'deptId' => $this->deptId,
-			'year' => $this->year,
-			'hours' => $this->hours,
-			'reinvite' => $this->reinvite,
-			'created' => $this->created,
-			'createdBy' => $this->createdBy,
-			'updated' => $this->updated,
-			'updatedBy' => $this->updatedBy,
-		]);
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'appl_id' => $this->appl_id,
+            'dept_id' => $this->dept_id,
+            'year' => $this->year,
+            'hours' => $this->hours,
+            'reinvite' => $this->reinvite,
+            'created_at' => $this->created_at,
+            'created_by' => $this->created_by,
+            'updated_at' => $this->updated_at,
+            'updated_by' => $this->updated_by,
+        ]);
 
-		$query->andFilterWhere(['like', 'job', $this->job])
-			->andFilterWhere(['like', 'report', $this->report]);
+        $query->andFilterWhere(['like', 'job', $this->job])
+            ->andFilterWhere(['like', 'report', $this->report]);
 
-		return $dataProvider;
-	}
+        return $dataProvider;
+    }
 }

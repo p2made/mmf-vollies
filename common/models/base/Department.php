@@ -9,15 +9,21 @@ use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the base-model class for table "Department".
+ * This is the base-model class for table "department".
  *
  * @property integer $id
+ * @property integer $head_id
+ * @property integer $sequence
  * @property string $name
  * @property string $description
- * @property string $created
- * @property integer $createdBy
- * @property string $updated
- * @property integer $updatedBy
+ * @property string $created_at
+ * @property integer $created_by
+ * @property string $updated_at
+ * @property integer $updated_by
+ *
+ * @property \common\models\Commitment[] $commitments
+ * @property \common\models\User $head
+ * @property \common\models\Job[] $jobs
  * @property string $aliasModel
  */
 abstract class Department extends \yii\db\ActiveRecord
@@ -25,74 +31,87 @@ abstract class Department extends \yii\db\ActiveRecord
 
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'Department';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'department';
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function behaviors()
-	{
-		return [
-			[
-				'class' => BlameableBehavior::className(),
-				'createdByAttribute' => 'createdBy',
-				'updatedByAttribute' => 'updatedBy',
-			],
-			[
-				'class' => TimestampBehavior::className(),
-				'createdAtAttribute' => 'created',
-				'updatedAtAttribute' => 'updated',
-			],
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => BlameableBehavior::className(),
+            ],
+            [
+                'class' => TimestampBehavior::className(),
+            ],
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['name'], 'required'],
-			[['description'], 'string'],
-			[['name'], 'string', 'max' => 24],
-			[['name'], 'unique'],
-			[['name'], 'unique']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['head_id', 'sequence'], 'integer'],
+            [['sequence', 'name'], 'required'],
+            [['description'], 'string'],
+            [['name'], 'string', 'max' => 24],
+            [['head_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\User::className(), 'targetAttribute' => ['head_id' => 'id']]
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'name' => 'Name',
-			'description' => 'Description',
-			'created' => 'Created',
-			'createdBy' => 'Created By',
-			'updated' => 'Updated',
-			'updatedBy' => 'Updated By',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'head_id' => 'Head ID',
+            'sequence' => 'Sequence',
+            'name' => 'Name',
+            'description' => 'Description',
+            'created_at' => 'Created At',
+            'created_by' => 'Created By',
+            'updated_at' => 'Updated At',
+            'updated_by' => 'Updated By',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCommitments()
+    {
+        return $this->hasMany(\common\models\Commitment::className(), ['dept_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getHead()
+    {
+        return $this->hasOne(\common\models\User::className(), ['id' => 'head_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getJobs()
+    {
+        return $this->hasMany(\common\models\Job::className(), ['dept_id' => 'id']);
+    }
 
 
-	
-	/**
-	 * @inheritdoc
-	 * @return \common\models\DepartmentQuery the active query used by this AR class.
-	 */
-	public static function find()
-	{
-		return new \common\models\DepartmentQuery(get_called_class());
-	}
 
 
 }

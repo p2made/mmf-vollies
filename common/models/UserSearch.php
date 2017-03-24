@@ -1,4 +1,10 @@
 <?php
+/**
+ * /WWW/yii.mmf-vollies/backend/runtime/giiant/e0080b9d6ffa35acb85312bf99a557f2
+ *
+ * @package default
+ */
+
 
 namespace common\models;
 
@@ -12,65 +18,74 @@ use common\models\User;
  */
 class UserSearch extends User
 {
+
 	/**
+	 *
 	 * @inheritdoc
+	 * @return unknown
 	 */
-	public function rules()
-	{
+	public function rules() {
 		return [
-			[['id', 'status', 'created_at', 'updated_at'], 'integer'],
-			[['username', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'safe'],
+			[['id', 'role_id', 'status'], 'integer'],
+			[['email', 'username', 'password', 'auth_key', 'access_token', 'logged_in_ip', 'logged_in_at', 'created_ip', 'created_at', 'updated_at', 'banned_at', 'banned_reason'], 'safe'],
 		];
 	}
 
+
 	/**
+	 *
 	 * @inheritdoc
+	 * @return unknown
 	 */
-	public function scenarios()
-	{
+	public function scenarios() {
 		// bypass scenarios() implementation in the parent class
 		return Model::scenarios();
 	}
 
+
 	/**
 	 * Creates data provider instance with search query applied
 	 *
-	 * @param array $params
 	 *
+	 * @param array   $params
 	 * @return ActiveDataProvider
 	 */
-	public function search($params)
-	{
+	public function search($params) {
 		$query = User::find();
 
-		// add conditions that should always apply here
-
 		$dataProvider = new ActiveDataProvider([
-			'query' => $query,
-		]);
+				'query' => $query,
+			]);
 
 		$this->load($params);
 
 		if (!$this->validate()) {
-			// uncomment the following line if you do not want to return any records when validation fails
+			// uncomment the following line if you do not want to any records when validation fails
 			// $query->where('0=1');
 			return $dataProvider;
 		}
 
-		// grid filtering conditions
 		$query->andFilterWhere([
-			'id' => $this->id,
-			'status' => $this->status,
-			'created_at' => $this->created_at,
-			'updated_at' => $this->updated_at,
-		]);
+				'id' => $this->id,
+				'role_id' => $this->role_id,
+				'status' => $this->status,
+				'logged_in_at' => $this->logged_in_at,
+				'created_at' => $this->created_at,
+				'updated_at' => $this->updated_at,
+				'banned_at' => $this->banned_at,
+			]);
 
-		$query->andFilterWhere(['like', 'username', $this->username])
-			->andFilterWhere(['like', 'auth_key', $this->auth_key])
-			->andFilterWhere(['like', 'password_hash', $this->password_hash])
-			->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-			->andFilterWhere(['like', 'email', $this->email]);
+		$query->andFilterWhere(['like', 'email', $this->email])
+		->andFilterWhere(['like', 'username', $this->username])
+		->andFilterWhere(['like', 'password', $this->password])
+		->andFilterWhere(['like', 'auth_key', $this->auth_key])
+		->andFilterWhere(['like', 'access_token', $this->access_token])
+		->andFilterWhere(['like', 'logged_in_ip', $this->logged_in_ip])
+		->andFilterWhere(['like', 'created_ip', $this->created_ip])
+		->andFilterWhere(['like', 'banned_reason', $this->banned_reason]);
 
 		return $dataProvider;
 	}
+
+
 }

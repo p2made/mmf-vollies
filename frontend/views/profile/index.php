@@ -1,78 +1,166 @@
 <?php
+/**
+ * /WWW/yii.mmf-vollies/frontend/runtime/giiant/a0a12d1bd32eaeeb8b2cff56d511aa22
+ *
+ * @package default
+ */
+
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $searchModel common\models\ProfileSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Profiles';
+/**
+ *
+ * @var yii\web\View $this
+ * @var yii\data\ActiveDataProvider $dataProvider
+ * @var common\models\ProfileSearch $searchModel
+ */
+$this->title = Yii::t('models', 'Profiles');
 $this->params['breadcrumbs'][] = $this->title;
-$assetDir = Yii::$app->assetManager->getPublishedUrl(
-	'@frontend/assets/lib'
+
+if (isset($actionColumnTemplates)) {
+	$actionColumnTemplate = implode(' ', $actionColumnTemplates);
+	$actionColumnTemplateString = $actionColumnTemplate;
+} else {
+	Yii::$app->view->params['pageButtons'] = Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New', ['create'], ['class' => 'btn btn-success']);
+	$actionColumnTemplateString = "{view} {update} {delete}";
+}
+$actionColumnTemplateString = '<div class="action-buttons">'.$actionColumnTemplateString.'</div>';
+?>
+<div class="giiant-crud profile-index">
+
+    <?php
+//             echo $this->render('_search', ['model' =>$searchModel]);
+?>
+
+
+    <?php \yii\widgets\Pjax::begin(['id'=>'pjax-main', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-main ul.pagination a, th a', 'clientOptions' => ['pjax:success'=>'function(){alert("yo")}']]) ?>
+
+    <h1>
+        <?php echo Yii::t('models', 'Profiles') ?>
+        <small>
+            List
+        </small>
+    </h1>
+    <div class="clearfix crud-navigation">
+        <div class="pull-left">
+            <?php echo Html::a('<span class="glyphicon glyphicon-plus"></span> ' . 'New', ['create'], ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <div class="pull-right">
+
+
+            <?php echo
+\yii\bootstrap\ButtonDropdown::widget(
+	[
+		'id' => 'giiant-relations',
+		'encodeLabel' => false,
+		'label' => '<span class="glyphicon glyphicon-paperclip"></span> ' . 'Relations',
+		'dropdown' => [
+			'options' => [
+				'class' => 'dropdown-menu-right'
+			],
+			'encodeLabels' => false,
+			'items' => [
+				[
+					'url' => ['user/index'],
+					'label' => '<i class="glyphicon glyphicon-arrow-left"></i> ' . Yii::t('models', 'User'),
+				],
+
+			]
+		],
+		'options' => [
+			'class' => 'btn-default'
+		]
+	]
 );
 ?>
-<div class="container profile-index">
+        </div>
+    </div>
 
-	<div class="row">
-		<div class="box">
-			<div class="col-md-12">
-				<hr>
-				<h2 class="intro-text text-center">
-					<?= Html::encode($this->title) ?>
-				</h2>
-				<hr>
-			</div>
-			<div class="col-md-12">
-				<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <hr />
 
-				<p>
-					<?= Html::a('Create Profile', ['create'], ['class' => 'btn btn-success']) ?>
-				</p>
-				<?php Pjax::begin(); ?>
-					<?= GridView::widget([
-						'dataProvider' => $dataProvider,
-						'filterModel' => $searchModel,
-						'columns' => [
-							['class' => 'yii\grid\SerialColumn'],
+    <div class="table-responsive">
+        <?php echo GridView::widget([
+		'dataProvider' => $dataProvider,
+		'pager' => [
+			'class' => yii\widgets\LinkPager::className(),
+			'firstPageLabel' => 'First',
+			'lastPageLabel' => 'Last',
+		],
+		'filterModel' => $searchModel,
+		'tableOptions' => ['class' => 'table table-striped table-bordered table-hover'],
+		'headerRowOptions' => ['class'=>'x'],
+		'columns' => [
+			[
+				'class' => 'yii\grid\ActionColumn',
+				'template' => $actionColumnTemplateString,
+				'buttons' => [
+					'view' => function ($url, $model, $key) {
+						$options = [
+							'title' => Yii::t('yii', 'View'),
+							'aria-label' => Yii::t('yii', 'View'),
+							'data-pjax' => '0',
+						];
+						return Html::a('<span class="glyphicon glyphicon-file"></span>', $url, $options);
+					}
 
-							'id',
-							'givenName',
-							'familyName',
-							'preferredName',
-							// 'email:email',
-							// 'phone1',
-							// 'phone2',
-							// 'address1',
-							// 'address2',
-							// 'locality',
-							// 'state',
-							// 'postcode',
-							// 'country',
-							// 'emergencyContact',
-							// 'emergencyPhone1',
-							// 'emergencyPhone2',
-							// 'rsa',
-							// 'dl_c',
-							// 'dl_h',
-							// 'cse',
-							// 'ohs',
-							// 'vol',
-							// 'mmfVol',
-							// 'mmfAtt',
-							// 'discovery',
-							// 'discoveryDetail',
-							// 'created',
-							// 'createdBy',
-							// 'updated',
-							// 'updatedBy',
 
-							['class' => 'yii\grid\ActionColumn'],
-						],
-					]); ?>
-				<?php Pjax::end(); ?></div>
-			</div>
-		</div>
+				],
+				'urlCreator' => function($action, $model, $key, $index) {
+					// using the column name as key, not mapping to 'id' like the standard generator
+					$params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+					$params[0] = \Yii::$app->controller->id ? \Yii::$app->controller->id . '/' . $action : $action;
+					return Url::toRoute($params);
+				},
+				'contentOptions' => ['nowrap'=>'nowrap']
+			],
+			// generated by schmunk42\giiant\generators\crud\providers\core\RelationProvider::columnFormat
+			[
+				'class' => yii\grid\DataColumn::className(),
+				'attribute' => 'user_id',
+				'value' => function ($model) {
+					if ($rel = $model->getUser()->one()) {
+						return Html::a($rel->id, ['user/view', 'id' => $rel->id, ], ['data-pjax' => 0]);
+					} else {
+						return '';
+					}
+				},
+				'format' => 'raw',
+			],
+			'givenName',
+			'familyName',
+			'locality',
+			'emergencyContact',
+			'emergencyPhone1',
+			'rsa',
+			/*'dl_c',*/
+			/*'dl_h',*/
+			/*'cse',*/
+			/*'ohs',*/
+			/*'vol',*/
+			/*'mmfVol',*/
+			/*'mmfAtt',*/
+			/*'returned',*/
+			/*'dnr',*/
+			/*'preferredName',*/
+			/*'country',*/
+			/*'phone1',*/
+			/*'phone2',*/
+			/*'emergencyPhone2',*/
+			/*'discovery',*/
+			/*'address1',*/
+			/*'address2',*/
+			/*'discoveryDetail',*/
+			/*'timezone',*/
+			/*'state',*/
+			/*'postcode',*/
+		],
+	]); ?>
+    </div>
 
 </div>
+
+
+<?php \yii\widgets\Pjax::end() ?>

@@ -1,10 +1,6 @@
 var components = {
     "packages": [
         {
-            "name": "qunit",
-            "main": "qunit-built.js"
-        },
-        {
             "name": "ekko-lightbox",
             "main": "ekko-lightbox-built.js"
         },
@@ -22,9 +18,6 @@ var components = {
         }
     ],
     "shim": {
-        "qunit": {
-            "exports": "QUnit"
-        },
         "jplayer": {
             "deps": [
                 "jquery"
