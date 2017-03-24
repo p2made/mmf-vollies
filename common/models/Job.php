@@ -2,33 +2,7 @@
 
 namespace common\models;
 
-use Yii;
-use \common\models\base\Job as BaseJob;
-use yii\helpers\ArrayHelper;
-
-/**
- * This is the model class for table "job".
- */
-class Job extends BaseJob
+class Job extends \common\models\base\JobBase
 {
-
-public function behaviors()
-    {
-        return ArrayHelper::merge(
-            parent::behaviors(),
-            [
-                # custom behaviors
-            ]
-        );
-    }
-
-    public function rules()
-    {
-        return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-             ]
-        );
-    }
+    
 }

@@ -1,44 +1,21 @@
 <?php
-/**
- * /WWW/yii.mmf-vollies/frontend/runtime/giiant/fccccf4deb34aed738291a9c38e87215
- *
- * @package default
- */
-
 
 use yii\helpers\Html;
 
-/**
- *
- * @var yii\web\View $this
- * @var common\models\User $model
- */
-$this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => Yii::t('models', 'Users'), 'url' => ['index']];
+
+/* @var $this yii\web\View */
+/* @var $model common\models\User */
+
+$this->title = 'Create User';
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="giiant-crud user-create">
+<div class="user-create">
 
-    <h1>
-        <?php echo Yii::t('models', 'User') ?>
-        <small>
-                        <?php echo $model->id ?>
-        </small>
-    </h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="clearfix crud-navigation">
-        <div class="pull-left">
-            <?php echo             Html::a(
-	'Cancel',
-	\yii\helpers\Url::previous(),
-	['class' => 'btn btn-default']) ?>
-        </div>
-    </div>
-
-    <hr />
-
-    <?php echo $this->render('_form', [
-		'model' => $model,
-	]); ?>
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
 
 </div>

@@ -17,15 +17,19 @@ use p2m\helpers\FA;
 
 $menuItems = [
 	['label' => 'Home', 'url' => ['/site/index']],
-	['label' => 'Info', 'url' =>['/site/page', 'view' => 'volunteer-info']],
-	['label' => 'Apply', 'url' =>['/site/page', 'view' => 'volunteer-apply']],
-	['label' => 'application', 'url' =>['/application/index']],
-	['label' => 'commitment', 'url' =>['/commitment/index']],
-	['label' => 'department', 'url' =>['/department/index']],
-	['label' => 'history-item', 'url' =>['/history-item/index']],
-	['label' => 'job', 'url' =>['/job/index']],
-	['label' => 'profile', 'url' =>['/profile/index']],
-	['label' => 'user', 'url' =>['/user/index']],
+	['label' => 'Profile', 'url' =>['/site/page', 'view' => 'profile']],
+	['label' => 'Application', 'url' =>['/site/page', 'view' => 'application']],
+	['label' => 'Models', 'items' => [
+		['label' => 'Application', 'url' =>['/application/index']],
+		['label' => 'Application Job', 'url' =>['/application-job/index']],
+		['label' => 'Commitment', 'url' =>['/commitment/index']],
+		['label' => 'Department', 'url' =>['/department/index']],
+		['label' => 'History', 'url' =>['/history/index']],
+		['label' => 'Job', 'url' =>['/job/index']],
+		['label' => 'Profile', 'url' =>['/profile/index']],
+		['label' => 'Role', 'url' =>['/role/index']],
+		['label' => 'User', 'url' =>['/user/index']],
+	]],
 	['label' => 'Dev', 'items' => [
 		['label' => 'Gii', 'url' => ['/gii']],
 		['label' => 'Debug', 'url' => ['/debug']],

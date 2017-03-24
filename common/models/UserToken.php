@@ -2,33 +2,7 @@
 
 namespace common\models;
 
-use Yii;
-use \common\models\base\UserToken as BaseUserToken;
-use yii\helpers\ArrayHelper;
-
-/**
- * This is the model class for table "user_token".
- */
-class UserToken extends BaseUserToken
+class UserToken extends \common\models\base\UserTokenBase
 {
-
-public function behaviors()
-    {
-        return ArrayHelper::merge(
-            parent::behaviors(),
-            [
-                # custom behaviors
-            ]
-        );
-    }
-
-    public function rules()
-    {
-        return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-             ]
-        );
-    }
+    
 }

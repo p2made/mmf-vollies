@@ -1,50 +1,41 @@
 <?php
-/**
- * /WWW/yii.mmf-vollies/frontend/runtime/giiant/eeda5c365686c9888dbc13dbc58f89a1
- *
- * @package default
- */
-
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/**
- *
- * @var yii\web\View $this
- * @var common\models\DepartmentSearch $model
- * @var yii\widgets\ActiveForm $form
- */
+/* @var $this yii\web\View */
+/* @var $model common\models\DepartmentSearch */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="department-search">
 
     <?php $form = ActiveForm::begin([
-		'action' => ['index'],
-		'method' => 'get',
-	]); ?>
+        'action' => ['index'],
+        'method' => 'get',
+    ]); ?>
 
-    		<?php echo $form->field($model, 'id') ?>
+    <?= $form->field($model, 'id') ?>
 
-		<?php echo $form->field($model, 'head_id') ?>
+    <?= $form->field($model, 'head_id') ?>
 
-		<?php echo $form->field($model, 'sequence') ?>
+    <?= $form->field($model, 'sequence') ?>
 
-		<?php echo $form->field($model, 'name') ?>
+    <?= $form->field($model, 'name') ?>
 
-		<?php echo $form->field($model, 'description') ?>
+    <?= $form->field($model, 'description') ?>
 
-		<?php // echo $form->field($model, 'created_at') ?>
+    <?php // echo $form->field($model, 'created_at') ?>
 
-		<?php // echo $form->field($model, 'created_by') ?>
+    <?php // echo $form->field($model, 'created_by') ?>
 
-		<?php // echo $form->field($model, 'updated_at') ?>
+    <?php // echo $form->field($model, 'updated_at') ?>
 
-		<?php // echo $form->field($model, 'updated_by') ?>
+    <?php // echo $form->field($model, 'updated_by') ?>
 
     <div class="form-group">
-        <?php echo Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

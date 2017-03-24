@@ -2,33 +2,7 @@
 
 namespace common\models;
 
-use Yii;
-use \common\models\base\User as BaseUser;
-use yii\helpers\ArrayHelper;
-
-/**
- * This is the model class for table "user".
- */
-class User extends BaseUser
+class User extends \common\models\base\UserBase
 {
-
-public function behaviors()
-    {
-        return ArrayHelper::merge(
-            parent::behaviors(),
-            [
-                # custom behaviors
-            ]
-        );
-    }
-
-    public function rules()
-    {
-        return ArrayHelper::merge(
-             parent::rules(),
-             [
-                  # custom validation rules
-             ]
-        );
-    }
+    
 }

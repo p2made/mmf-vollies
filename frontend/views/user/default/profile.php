@@ -14,9 +14,22 @@ use amnah\yii2\user\helpers\Timezone;
 $this->title = Yii::t('user', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-default-profile">
 
-	<h1><?= Html::encode($this->title) ?></h1>
+<div class="container user-default-login">
+
+	<div class="row">
+		<div class="box">
+			<div class="col-md-12">
+				<hr>
+				<h1 class="intro-text text-center">
+					<?= Html::encode($this->title) ?>
+				</h1>
+				<hr>
+			</div>
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-10">
+
 
 	<?php if ($flash = Yii::$app->session->getFlash("Profile-success")): ?>
 
@@ -54,5 +67,10 @@ $this->params['breadcrumbs'][] = $this->title;
 	</div>
 
 	<?php ActiveForm::end(); ?>
+
+
+			</div>
+		</div>
+	</div>
 
 </div>
