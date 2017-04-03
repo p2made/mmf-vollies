@@ -6,18 +6,25 @@
  * #####                                                           #####
  * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
  */
-$_urlBase = 'mmf.yii.dev';
-$_urlBaseFrontend = 'http://vollies'  . $_urlBase;
-$_urlBaseBackend  = 'http://volhq.'   . $_urlBase;
+$_urlBase = 'a6e-dev.dev';
+$_urlBaseFrontend = 'http://'         . $_urlBase;
+$_urlBaseBackend  = 'http://backend.' . $_urlBase;
 $_urlBaseAssets   = 'http://static.'  . $_urlBase;
+$_urlBaseApi      = 'http://api.'     . $_urlBase;
 
 return [
 	'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
 	'components' => [
+		// NOTE: in the yii2-advanced-app, the user component should be updated in
+		// 'frontend/config/main.php' and/or 'backend/config/main.php' (OR you can add it
+		// to 'common/config' if you remove it from frontend/backend)
+		/*
 		'user' => [
-			'class' => 'amnah\yii2\user\components\User',
 		],
+		*/
 		'assetManager' => [
+			//'basePath' => '@assets/web/pub',
+			//'baseUrl' => '@assetsUrl/pub',
 			//'appendTimestamp' => true, // useful while developing custom assets
 			'bundles' => [
 				'yii\web\JqueryAsset' => [
@@ -40,7 +47,7 @@ return [
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
-			'suffix' => '.mmf',
+			'suffix' => '.p2m',
 			'rules' => [
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -60,14 +67,16 @@ return [
 			'class' => 'yii\web\urlManager',
 			'baseUrl' => $_urlBaseAssets,
 		],
+		'urlManagerApi' => [
+			'class' => 'yii\web\urlManager',
+			'baseUrl' => $_urlBaseApi,
+		],
 		'cache' => [
 			'class' => 'yii\caching\FileCache',
 		],
 	],
+	/*
 	'modules' => [
-		'user' => [
-			'class' => 'amnah\yii2\user\Module',
-			// set custom module properties here ...
-		],
 	],
+	*/
 ];
