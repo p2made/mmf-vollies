@@ -1,22 +1,26 @@
 {
-	"name": "yiisoft/yii2-app-advanced",
-	"description": "Yii 2 Advanced Project Template",
-	"homepage": "http://www.yiiframework.com/",
+	"name": "p2made/yii.mmf-vollies",
+	"description": "Maleny Music Festival volunteers app",
+	"homepage": "https://github.com/p2made/yii.mmf-vollies",
 	"type": "project",
 	"minimum-stability": "stable",
+
 	"require": {
 		"php": ">=5.4.0",
 		"yiisoft/yii2": "^2.0",
-		"yiisoft/yii2-bootstrap": "^2.0",
 		"yiisoft/yii2-swiftmailer": "^2.0",
 
-		"p2made/yii2-p2y2-things": "^2.1",
-		"p2made/yii2-p2y2-things-demo": "^2.1",
-		"p2made/yii2-startbootstrap-themes": "^2.13",
-		"p2made/yii2-sb-admin-theme": "^2.1",
+		"p2made/yii2-a4e": "^0.0",
+		"p2made/yii2-p2y2-things": "^2.2",
+		"p2made/yii2-p2y2-things-demo": "^2.2",
+		"p2made/yii2-startbootstrap-themes": "^2.14",
+		"p2made/yii2-sb-admin-theme": "^2.3",
 
-		"p2made/yii2-p2y2-kartik-collection": "^0.1",
-		"amnah/yii2-user": "^5.0"
+		"amnah/yii2-user": "^5.0",
+		"ruskid/yii2-ip-behavior": "dev-master",
+		"yii2mod/collection": "^1.2",
+		"yii2mod/yii2-rbac": "^2.0",
+		"yii2mod/yii2-user": "^2.0"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "^2.0",
@@ -26,8 +30,10 @@
 		"codeception/base": "^2.2",
 		"codeception/verify": "^0.3",
 
+		"yii2mod/yii2-gii-extended": "^1.0",
 		"p2made/yii2-p2y2-gii-collection": "dev-master"
 	},
+
 	"config": {
 		"fxp-asset": {
 			"installer-paths": {

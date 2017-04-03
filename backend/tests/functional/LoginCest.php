@@ -10,27 +10,27 @@ use common\fixtures\User as UserFixture;
  */
 class LoginCest
 {
-	public function _before(FunctionalTester $I)
-	{
-		$I->haveFixtures([
-			'user' => [
-				'class' => UserFixture::className(),
-				'dataFile' => codecept_data_dir() . 'login_data.php'
-			]
-		]);
-	}
-	/**
-	 * @param FunctionalTester $I
-	 */
-	public function loginUser(FunctionalTester $I)
-	{
-		$I->amOnPage('/site/login');
-		$I->fillField('Username', 'erau');
-		$I->fillField('Password', 'password_0');
-		$I->click('login-button');
+    public function _before(FunctionalTester $I)
+    {
+        $I->haveFixtures([
+            'user' => [
+                'class' => UserFixture::className(),
+                'dataFile' => codecept_data_dir() . 'login_data.php'
+            ]
+        ]);
+    }
+    /**
+     * @param FunctionalTester $I
+     */
+    public function loginUser(FunctionalTester $I)
+    {
+        $I->amOnPage('/site/login');
+        $I->fillField('Username', 'erau');
+        $I->fillField('Password', 'password_0');
+        $I->click('login-button');
 
-		$I->see('Logout (erau)', 'form button[type=submit]');
-		$I->dontSeeLink('Login');
-		$I->dontSeeLink('Signup');
-	}
+        $I->see('Logout (erau)', 'form button[type=submit]');
+        $I->dontSeeLink('Login');
+        $I->dontSeeLink('Signup');
+    }
 }

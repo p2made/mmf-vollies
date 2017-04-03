@@ -1,8 +1,15 @@
 <?php
+/*
+ * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
+ * #####                                                           #####
+ * #####   Customise these lines to suit your host configuration   #####
+ * #####                                                           #####
+ * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
+ */
 $_urlBase = 'mmf.yii.dev';
-$_urlBaseFrontend = '//vollies.' . $_urlBase;
-$_urlBaseBackend = '//volhq.'    . $_urlBase;
-//$_urlBaseBackend = '//static.'   . $_urlBase;
+$_urlBaseFrontend = 'http://vollies'  . $_urlBase;
+$_urlBaseBackend  = 'http://volhq.'   . $_urlBase;
+$_urlBaseAssets   = 'http://static.'  . $_urlBase;
 
 return [
 	'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
@@ -10,11 +17,12 @@ return [
 		// NOTE: in the yii2-advanced-app, the user component should be updated in
 		// 'frontend/config/main.php' and/or 'backend/config/main.php' (OR you can add it
 		// to 'common/config' if you remove it from frontend/backend)
+		/*
 		'user' => [
-			'class' => 'amnah\yii2\user\components\User',
 		],
+		*/
 		'assetManager' => [
-			//'appendTimestamp' => true,
+			//'appendTimestamp' => true, // useful while developing custom assets
 			'bundles' => [
 				'yii\web\JqueryAsset' => [
 					'sourcePath' => null, 'js' => [],
@@ -36,8 +44,7 @@ return [
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
-			//'enableStrictParsing' => true,
-			'suffix' => '.mmf',
+			'suffix' => '.p2m',
 			'rules' => [
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -53,36 +60,12 @@ return [
 			'class' => 'yii\web\urlManager',
 			'baseUrl' => $_urlBaseBackend,
 		],
-		'cache' => [
-			'class' => 'yii\caching\FileCache',
+		'urlManagerAssets' => [
+			'class' => 'yii\web\urlManager',
+			'baseUrl' => $_urlBaseAssets,
 		],
-	],
-	'modules' => [
-		'user' => [
-			//'class' => 'common\modules\UserModule',
-			'class' => 'amnah\yii2\user\Module',
-			// set custom module properties here ...
-		],
-	],
-];
-
-// ----- ^ ----- ^ ----- ^ ----- ^ ----- ^ -----
-
-/*
-$_urlBase = 'mmf.yii.dev';
-$_urlBaseFrontend = '//vollies.' . $_urlBase;
-$_urlBaseBackend = '//volhq.'    . $_urlBase;
-$_urlBaseBackend = '//static.'   . $_urlBase;
-
-return [
-	'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-	'components' => [
-		//'authManager' => [
-		//	'class' => 'yii\rbac\DbManager',
-		//],
 		'cache' => [
 			'class' => 'yii\caching\FileCache',
 		],
 	],
 ];
-*/
