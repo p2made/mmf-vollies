@@ -16,6 +16,14 @@ return [
 		'request' => [
 			'csrfParam' => '_csrf-frontend',
 		],
+		'view' => [
+			'theme' => [
+				'pathMap' => [
+					'@vendor/amnah/yii2-user/views/' => '@app/views/user',
+					//'@vendor/amnah/yii2-user/views/default' => '@app/views/user',
+				],
+			],
+		],
 		/*
 		'user' => [
 			'identityClass' => 'common\models\User',

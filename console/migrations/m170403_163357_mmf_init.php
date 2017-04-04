@@ -115,7 +115,7 @@ class m170403_163357_mmf_init extends \yii\db\Migration
 			'token' => $this->string()->notNull(),
 			'data' => $this->string()->defaultValue(null),
 			'created_at' => $this->timestamp()->defaultValue(null),
-			'updated_at' => $this->timestamp()->defaultValue(null),
+			'expired_at' => $this->timestamp()->defaultValue(null),
 		], $tableOptions); // user_token
 
 		$this->createTable('{{%profile}}', [
