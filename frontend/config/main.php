@@ -19,8 +19,11 @@ return [
 		'view' => [
 			'theme' => [
 				'pathMap' => [
-					'@vendor/amnah/yii2-user/views/' => '@app/views/user',
+					'@vendor/amnah/yii2-user/views' => '@app/views/user'
+					//'@vendor/amnah/yii2-user/views/' => '@app/views/user',
 					//'@vendor/amnah/yii2-user/views/default' => '@app/views/user',
+					//'@vendor/amnah/yii2-user/views' => '@app/views/user', // example: @app/views/user/default/login.php
+					//'@app/views' => '@vendor/p2made/yii2-flat-theme/views',
 				],
 			],
 		],

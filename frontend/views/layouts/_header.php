@@ -13,15 +13,9 @@ use yii\bootstrap\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+
+$assetDir = Yii::$app->assetManager->getPublishedUrl(
+	'@frontend/assets/lib'
+);
 ?>
-<?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-	<meta charset="<?= Yii::$app->charset ?>"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<?= Html::csrfMetaTags() ?>
-	<title><?= Html::encode($this->title) ?></title>
-	<?php $this->head() ?>
-</head>
+<div class="brand"><img src="<?= $assetDir ?>/img/2017-header-900.png" width="900" alt="Maleny Music Festival"></div>

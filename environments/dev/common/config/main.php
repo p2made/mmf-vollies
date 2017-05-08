@@ -6,7 +6,7 @@
  * #####                                                           #####
  * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
  */
-$_urlBase = 'a6e-dev.dev';
+$_urlBase = 'a4e-dev.dev';
 $_urlBaseFrontend = 'http://'         . $_urlBase;
 $_urlBaseBackend  = 'http://backend.' . $_urlBase;
 $_urlBaseAssets   = 'http://static.'  . $_urlBase;

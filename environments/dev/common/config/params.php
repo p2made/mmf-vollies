@@ -8,8 +8,8 @@ return [
 		'assets' => [
 			'useStatic' => true, // false or not set to use published assets
 			'staticEnd' => [
-				'basePath' => '@static',
-				'baseUrl' => '@staticUrl',
+				'basePath' => '@assets',
+				'baseUrl' => '@assetsUrl',
 			],
 		],
 		'reverseDomain' => 'dev.a4e-dev', // customise for your host configuration

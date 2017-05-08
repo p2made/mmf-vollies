@@ -11,16 +11,13 @@
 		"yiisoft/yii2-swiftmailer": "^2.0",
 
 		"p2made/yii2-a4e": "^0.0",
-		"p2made/yii2-p2y2-things": "^2.2",
-		"p2made/yii2-p2y2-things-demo": "^2.2",
-		"p2made/yii2-startbootstrap-themes": "^2.14",
-		"p2made/yii2-sb-admin-theme": "^2.3",
+		"p2made/yii2-p2y2-things": "^2.5",
+		"p2made/yii2-p2y2-things-demo": "^2.5",
+		"p2made/yii2-startbootstrap-themes": "^2.15",
+		"p2made/yii2-sb-admin-theme": "^2.4",
 
 		"amnah/yii2-user": "^5.0",
-		"ruskid/yii2-ip-behavior": "dev-master",
-		"yii2mod/collection": "^1.2",
-		"yii2mod/yii2-rbac": "^2.0",
-		"yii2mod/yii2-user": "^2.0"
+		"ruskid/yii2-ip-behavior": "dev-master"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "^2.0",
@@ -29,9 +26,7 @@
 		"codeception/codeception": "^2.2",
 		"codeception/base": "^2.2",
 		"codeception/verify": "^0.3",
-
-		"yii2mod/yii2-gii-extended": "^1.0",
-		"p2made/yii2-p2y2-gii-collection": "dev-master"
+		"yii2mod/yii2-gii-extended": "^1.0"
 	},
 
 	"config": {
@@ -42,8 +37,6 @@
 			}
 		},
 		"process-timeout": 1800
-	},
-	"extra": {
 	},
 	"scripts": {
 		"post-install-cmd": "php init --env=Development --overwrite=n"
