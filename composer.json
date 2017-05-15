@@ -26,6 +26,8 @@
 		"codeception/codeception": "^2.2",
 		"codeception/base": "^2.2",
 		"codeception/verify": "^0.3",
+
+		"claudejanz/yii2-mygii": "^0.0.8",
 		"yii2mod/yii2-gii-extended": "^1.0"
 	},
 

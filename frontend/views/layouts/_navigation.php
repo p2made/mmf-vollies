@@ -21,13 +21,11 @@ $menuItems = [
 	['label' => 'Application', 'url' =>['/site/page', 'view' => 'application']],
 	['label' => 'Models', 'items' => [
 		['label' => 'Application', 'url' =>['/application/index']],
-		['label' => 'Application Job', 'url' =>['/application-job/index']],
 		['label' => 'Commitment', 'url' =>['/commitment/index']],
-		['label' => 'Department', 'url' =>['/department/index']],
 		['label' => 'History', 'url' =>['/history/index']],
 		['label' => 'Job', 'url' =>['/job/index']],
 		['label' => 'Profile', 'url' =>['/profile/index']],
-		['label' => 'Role', 'url' =>['/role/index']],
+		['label' => 'Team', 'url' =>['/team/index']],
 		['label' => 'User', 'url' =>['/user/index']],
 	]],
 	['label' => 'Dev', 'items' => [
@@ -66,3 +64,5 @@ NavBar::end();
 		['label' => 'Debug', 'url' => ['/debug']],
 	]],
 */
+
+
