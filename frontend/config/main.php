@@ -20,7 +20,6 @@ return [
 			'theme' => [
 				'pathMap' => [
 					'@vendor/amnah/yii2-user/views/default' => '@frontend/views/user'
-					//'@vendor/amnah/yii2-user/views' => '@app/views/user', // example: @app/views/user/default/login.php
 				],
 			],
 		],
