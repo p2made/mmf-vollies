@@ -19,8 +19,7 @@ return [
 		'view' => [
 			'theme' => [
 				'pathMap' => [
-					'@vendor/amnah/yii2-user/views' => '@app/views/user',
-					//'@vendor/amnah/yii2-user/views/admin' => '@app/views/user',
+					'@vendor/amnah/yii2-user/admin' => '@backend/views/user',
 				],
 			],
 		],

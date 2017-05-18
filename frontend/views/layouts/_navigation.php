@@ -17,16 +17,14 @@ use p2m\helpers\FA;
 
 $menuItems = [
 	['label' => 'Home', 'url' => ['/site/index']],
-	['label' => 'Profile', 'url' =>['/site/page', 'view' => 'profile']],
-	['label' => 'Application', 'url' =>['/site/page', 'view' => 'application']],
 	['label' => 'Models', 'items' => [
-		['label' => 'Application', 'url' =>['/application/index']],
-		['label' => 'Commitment', 'url' =>['/commitment/index']],
-		['label' => 'History', 'url' =>['/history/index']],
-		['label' => 'Job', 'url' =>['/job/index']],
-		['label' => 'Profile', 'url' =>['/profile/index']],
-		['label' => 'Team', 'url' =>['/team/index']],
 		['label' => 'User', 'url' =>['/user/index']],
+		['label' => 'Account', 'url' =>['/user/account']],
+		['label' => 'Profile', 'url' =>['user/profile']],
+		['label' => 'Application', 'url' =>['/application/create']],
+		'<li role="presentation" class="divider"></li>',
+		['label' => 'Profile', 'url' =>['/site/page', 'view' => 'profile']],
+		['label' => 'Application', 'url' =>['/site/page', 'view' => 'application']],
 	]],
 	['label' => 'Dev', 'items' => [
 		['label' => 'Gii', 'url' => ['/gii']],
@@ -34,13 +32,13 @@ $menuItems = [
 	]],
 ];
 if (Yii::$app->user->isGuest) {
-	//$menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-	//$menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+	$menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
+	$menuItems[] = ['label' => 'Signup', 'url' => ['/user/register']];
 } else {
 	$menuItems[] = [
 		'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-		'url' => ['/site/logout'],
-		'linkOptions' => ['data-method' => 'post']
+		'url' => ['/user/logout'],
+		'linkOptions' => ['data-method' => 'POST']
 	];
 }
 
@@ -56,13 +54,5 @@ echo Nav::widget([
 	'items' => $menuItems,
 ]);
 NavBar::end();
-
-/*
-	['label' => 'Dev', 'items' => [
-		['label' => 'Info', 'url' =>['/site/page', 'view' => 'volunteer-info']],
-		['label' => 'Gii', 'url' => ['/gii']],
-		['label' => 'Debug', 'url' => ['/debug']],
-	]],
-*/
 
 

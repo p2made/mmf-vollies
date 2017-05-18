@@ -12,6 +12,9 @@ return [
 				'baseUrl' => '@assetsUrl',
 			],
 		],
-		'reverseDomain' => 'dev.yii.mmf', // customise for your host configuration
+		/* dev */
+		'reverseDomain' => 'dev.yii.mmf',
+		/* prod */
+		//'reverseDomain' => 'com.malenymusicfestival',
 	],
 ];

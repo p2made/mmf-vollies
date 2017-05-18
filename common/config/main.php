@@ -6,16 +6,26 @@
  * #####                                                           #####
  * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
  */
+
+/* dev
 $_urlBase = 'mmf.yii.dev';
 $_urlBaseFrontend = 'http://vollies'  . $_urlBase;
 $_urlBaseBackend  = 'http://volhq.'   . $_urlBase;
 $_urlBaseAssets   = 'http://static.'  . $_urlBase;
+
+/* prod
+$_urlBase = 'malenymusicfestival.com';
+$_urlBaseFrontend = 'http://vollies'  . $_urlBase;
+$_urlBaseBackend  = 'http://volhq.'   . $_urlBase;
+$_urlBaseAssets   = 'http://static.'  . $_urlBase;
+ */
 
 return [
 	'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
 	'components' => [
 		'user' => [
 			'class' => 'amnah\yii2\user\components\User',
+			'identityClass' => 'common\models\User',
 		],
 		'assetManager' => [
 			//'appendTimestamp' => true, // useful while developing custom assets
@@ -68,6 +78,16 @@ return [
 		'user' => [
 			'class' => 'amnah\yii2\user\Module',
 			// set custom module properties here ...
+			'useUsername' => false,
+			'loginUsername' => false,
+			//'controllerMap' => [
+			//	'default' => 'app\controllers\MyDefaultController',
+			//],
+			'modelClasses'  => [
+				'User' => 'common\models\User',
+				'Profile' => 'common\models\Profile',
+			],
+			//'emailViewPath' => '@app/mail/user', // example: @app/mail/user/confirmEmail.php
 		],
 	],
 ];

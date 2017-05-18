@@ -1,46 +1,56 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $searchModel common\models\UserSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+use p2m\helpers\FA;
 
-$this->title = 'Users';
-$this->params['breadcrumbs'][] = $this->title;
+/**
+ * @var yii\web\View $this
+ * @var amnah\yii2\user\Module $module
+ * @var array $actions
+ */
+
+$module = $this->context->module;
+
+$this->title = Yii::t('user', 'Yii 2 User');
 ?>
-<div class="user-index">
+<div class="container">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+	<div class="row">
+		<div class="box">
+			<div class="col-md-12">
+				<hr>
+				<h2 class="intro-text text-center">Yii 2 User Module - <?= $module->getVersion(); ?></h2>
+				<hr>
+				<h3>Actions in this module</h3>
+			</div>
 
-    <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+	<p>
+		<em><strong>Note:</strong> Some actions may be unavailable depending on if you are logged in/out, or as an
+			admin/regular user</em>
+	</p>
 
-            'id',
-            'role_id',
-            'status',
-            'email:email',
-            'username',
-            // 'password',
-            // 'auth_key',
-            // 'access_token',
-            // 'logged_in_ip',
-            // 'logged_in_at',
-            // 'created_ip',
-            // 'created_at',
-            // 'updated_at',
-            // 'banned_at',
-            // 'banned_reason',
+	<table class="table table-bordered">
+		<tr>
+			<th>URL</th>
+			<th>Description</th>
+		</tr>
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-<?php Pjax::end(); ?></div>
+		<?php foreach ($actions as $url => $description): ?>
+
+			<tr>
+				<td>
+					<strong><?= Html::a($url, [$url]) ?></strong>
+				</td>
+				<td>
+					<?= $description ?>
+				</td>
+			</tr>
+
+		<?php endforeach; ?>
+
+	</table>
+
+		</div>
+	</div>
+
+</div>
