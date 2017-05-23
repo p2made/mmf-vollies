@@ -17,11 +17,11 @@ $this->params['breadcrumbs'][] = Yii::t('user', 'Update');
 ?>
 <div class="user-update">
 
-	<h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-	<?= $this->render('_form', [
-		'user' => $user,
-		'profile' => $profile,
-	]) ?>
+    <?= $this->render('_form', [
+        'user' => $user,
+        'profile' => $profile,
+    ]) ?>
 
 </div>

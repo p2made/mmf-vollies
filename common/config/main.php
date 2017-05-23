@@ -7,7 +7,7 @@
  * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
  */
 
-/* dev
+/* dev */
 $_urlBase = 'mmf.yii.dev';
 $_urlBaseFrontend = 'http://vollies'  . $_urlBase;
 $_urlBaseBackend  = 'http://volhq.'   . $_urlBase;
@@ -23,6 +23,10 @@ $_urlBaseAssets   = 'http://static.'  . $_urlBase;
 return [
 	'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
 	'components' => [
+		'db' => require(__DIR__ . '/database.dev.php'),
+		//'db' => require(__DIR__ . '/database.prod.php'),
+		'mailer' => require(__DIR__ . '/mailer.dev.php'),
+		//'mailer' => require(__DIR__ . '/mailer.prod.php'),
 		'user' => [
 			'class' => 'amnah\yii2\user\components\User',
 			'identityClass' => 'common\models\User',

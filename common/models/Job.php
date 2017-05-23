@@ -2,15 +2,33 @@
 
 namespace common\models;
 
-class Job extends \common\models\base\JobBase
+use Yii;
+use \common\models\base\Job as BaseJob;
+use yii\helpers\ArrayHelper;
+
+/**
+ * This is the model class for table "mmf_job".
+ */
+class Job extends BaseJob
 {
 
-	/**
-	 * @inheritdoc
-	 * @return JobQuery the active query used by this AR class.
-	 */
-	public static function find()
+public function behaviors()
 	{
-		return new JobQuery(get_called_class());
+		return ArrayHelper::merge(
+			parent::behaviors(),
+			[
+				# custom behaviors
+			]
+		);
+	}
+
+	public function rules()
+	{
+		return ArrayHelper::merge(
+			 parent::rules(),
+			 [
+				  # custom validation rules
+			 ]
+		);
 	}
 }

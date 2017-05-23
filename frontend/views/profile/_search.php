@@ -1,11 +1,20 @@
 <?php
+/**
+ * /WWW/yii.mmf-vollies/frontend/runtime/giiant/eeda5c365686c9888dbc13dbc58f89a1
+ *
+ * @package default
+ */
+
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\ProfileSearch */
-/* @var $form yii\widgets\ActiveForm */
+/**
+ *
+ * @var yii\web\View $this
+ * @var common\models\ProfileSearch $model
+ * @var yii\widgets\ActiveForm $form
+ */
 ?>
 
 <div class="profile-search">
@@ -15,81 +24,81 @@ use yii\widgets\ActiveForm;
 		'method' => 'get',
 	]); ?>
 
-	<?= $form->field($model, 'id') ?>
+			<?php echo $form->field($model, 'id') ?>
 
-	<?= $form->field($model, 'user_id') ?>
+		<?php echo $form->field($model, 'user_id') ?>
 
-	<?= $form->field($model, 'givenName') ?>
+		<?php echo $form->field($model, 'givenName') ?>
 
-	<?= $form->field($model, 'familyName') ?>
+		<?php echo $form->field($model, 'familyName') ?>
 
-	<?= $form->field($model, 'preferredName') ?>
+		<?php echo $form->field($model, 'preferredName') ?>
 
-	<?php // echo $form->field($model, 'phone1') ?>
+		<?php // echo $form->field($model, 'phone1') ?>
 
-	<?php // echo $form->field($model, 'phone2') ?>
+		<?php // echo $form->field($model, 'phone2') ?>
 
-	<?php // echo $form->field($model, 'address1') ?>
+		<?php // echo $form->field($model, 'address1') ?>
 
-	<?php // echo $form->field($model, 'address2') ?>
+		<?php // echo $form->field($model, 'address2') ?>
 
-	<?php // echo $form->field($model, 'locality') ?>
+		<?php // echo $form->field($model, 'locality') ?>
 
-	<?php // echo $form->field($model, 'state') ?>
+		<?php // echo $form->field($model, 'state') ?>
 
-	<?php // echo $form->field($model, 'postcode') ?>
+		<?php // echo $form->field($model, 'postcode') ?>
 
-	<?php // echo $form->field($model, 'country') ?>
+		<?php // echo $form->field($model, 'country') ?>
 
-	<?php // echo $form->field($model, 'emergencyContact') ?>
+		<?php // echo $form->field($model, 'emergencyContact') ?>
 
-	<?php // echo $form->field($model, 'emergencyPhone1') ?>
+		<?php // echo $form->field($model, 'emergencyPhone1') ?>
 
-	<?php // echo $form->field($model, 'emergencyPhone2') ?>
+		<?php // echo $form->field($model, 'emergencyPhone2') ?>
 
-	<?php // echo $form->field($model, 'rsa') ?>
+		<?php // echo $form->field($model, 'rsa') ?>
 
-	<?php // echo $form->field($model, 'dl_c') ?>
+		<?php // echo $form->field($model, 'dl_c') ?>
 
-	<?php // echo $form->field($model, 'dl_h') ?>
+		<?php // echo $form->field($model, 'dl_h') ?>
 
-	<?php // echo $form->field($model, 'cse') ?>
+		<?php // echo $form->field($model, 'cse') ?>
 
-	<?php // echo $form->field($model, 'ohs') ?>
+		<?php // echo $form->field($model, 'ohs') ?>
 
-	<?php // echo $form->field($model, 'bc') ?>
+		<?php // echo $form->field($model, 'bc') ?>
 
-	<?php // echo $form->field($model, 'vol') ?>
+		<?php // echo $form->field($model, 'vol') ?>
 
-	<?php // echo $form->field($model, 'mmfVol') ?>
+		<?php // echo $form->field($model, 'mmfVol') ?>
 
-	<?php // echo $form->field($model, 'mmfAtt') ?>
+		<?php // echo $form->field($model, 'mmfAtt') ?>
 
-	<?php // echo $form->field($model, 'returned') ?>
+		<?php // echo $form->field($model, 'returned') ?>
 
-	<?php // echo $form->field($model, 'dnr') ?>
+		<?php // echo $form->field($model, 'dnr') ?>
 
-	<?php // echo $form->field($model, 'discovery') ?>
+		<?php // echo $form->field($model, 'discovery') ?>
 
-	<?php // echo $form->field($model, 'discoveryDetail') ?>
+		<?php // echo $form->field($model, 'discoveryDetail') ?>
 
-	<?php // echo $form->field($model, 'email') ?>
+		<?php // echo $form->field($model, 'email') ?>
 
-	<?php // echo $form->field($model, 'timezone') ?>
+		<?php // echo $form->field($model, 'timezone') ?>
 
-	<?php // echo $form->field($model, 'full_name') ?>
+		<?php // echo $form->field($model, 'full_name') ?>
 
-	<?php // echo $form->field($model, 'created_at') ?>
+		<?php // echo $form->field($model, 'created_at') ?>
 
-	<?php // echo $form->field($model, 'created_by') ?>
+		<?php // echo $form->field($model, 'created_by') ?>
 
-	<?php // echo $form->field($model, 'updated_at') ?>
+		<?php // echo $form->field($model, 'updated_at') ?>
 
-	<?php // echo $form->field($model, 'updated_by') ?>
+		<?php // echo $form->field($model, 'updated_by') ?>
 
 	<div class="form-group">
-		<?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-		<?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+		<?php echo Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+		<?php echo Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
 	</div>
 
 	<?php ActiveForm::end(); ?>

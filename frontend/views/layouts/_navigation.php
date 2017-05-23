@@ -20,11 +20,12 @@ $menuItems = [
 	['label' => 'Models', 'items' => [
 		['label' => 'User', 'url' =>['/user/index']],
 		['label' => 'Account', 'url' =>['/user/account']],
-		['label' => 'Profile', 'url' =>['user/profile']],
+		['label' => 'Profile', 'url' =>['/user/profile']],
 		['label' => 'Application', 'url' =>['/application/create']],
 		'<li role="presentation" class="divider"></li>',
 		['label' => 'Profile', 'url' =>['/site/page', 'view' => 'profile']],
 		['label' => 'Application', 'url' =>['/site/page', 'view' => 'application']],
+		['label' => 'Thank You', 'url' =>['/site/page', 'view' => 'thank-you']],
 	]],
 	['label' => 'Dev', 'items' => [
 		['label' => 'Gii', 'url' => ['/gii']],
@@ -54,5 +55,3 @@ echo Nav::widget([
 	'items' => $menuItems,
 ]);
 NavBar::end();
-
-

@@ -79,7 +79,7 @@ class m170517_162647_mmf_init_tables extends \yii\db\Migration
 		$this->profileTable();
 		$this->userAuthTable();
 		$this->teamTable();
-		$this->jobMenuGroupTable();
+		$this->menuGroupTable();
 		$this->jobTable();
 		$this->applicationTable();
 		$this->commitmentTable();
@@ -103,7 +103,7 @@ class m170517_162647_mmf_init_tables extends \yii\db\Migration
 		$this->commitmentTable(true);
 		$this->applicationTable(true);
 		$this->jobTable(true);
-		$this->jobMenuGroupTable(true);
+		$this->menuGroupTable(true);
 		$this->teamTable(true);
 		$this->userAuthTable(true);
 		$this->profileTable(true);
@@ -124,9 +124,7 @@ class m170517_162647_mmf_init_tables extends \yii\db\Migration
 			'name' => $this->string(32)->notNull(),
 			'can_admin' => $this->smallInteger()->defaultValue(0),
 			'created_at' => $this->timestamp()->defaultValue(null),
-			'created_by' => $this->integer()->defaultValue(0),
 			'updated_at' => $this->timestamp()->defaultValue(null),
-			'updated_by' => $this->integer()->defaultValue(0),
 		], $this->tableOptions);
 	}
 
@@ -257,14 +255,14 @@ class m170517_162647_mmf_init_tables extends \yii\db\Migration
 		], $this->tableOptions);
 	}
 
-	protected function jobMenuGroupTable($down = false)
+	protected function menuGroupTable($down = false)
 	{
 		if($down) {
-			$this->dropTable('{{%job_menu_group}}');
+			$this->dropTable('{{%menu_group}}');
 			return;
 		}
 
-		$this->createTable('{{%job_menu_group}}', [
+		$this->createTable('{{%menu_group}}', [
 			'id' => $this->primaryKey(),
 			'sequence' => $this->smallInteger()->notNull(),
 			'name' => $this->string(24)->notNull(),
@@ -305,6 +303,7 @@ class m170517_162647_mmf_init_tables extends \yii\db\Migration
 			'job_choice_1' => $this->integer()->notNull(),
 			'job_choice_2' => $this->integer()->defaultValue(null),
 			'job_choice_3' => $this->integer()->defaultValue(null),
+			'year' => 'year(4) not null',
 			'availableFromDate' => $this->string(8)->notNull(),
 			'availableFromTime' => $this->smallInteger(2)->notNull(),
 			'availableToDate' => $this->string(8)->notNull(),
@@ -454,7 +453,7 @@ class m170517_162647_mmf_init_tables extends \yii\db\Migration
 			'{{%job}}', 'team_id', '{{%team}}', 'id'
 		);
 		$this->addForeignKey('job_group_id',
-			'{{%job}}', 'group_id', '{{%job_menu_group}}', 'id'
+			'{{%job}}', 'group_id', '{{%menu_group}}', 'id'
 		);
 		$this->addForeignKey('application_user_id',
 			'{{%application}}', 'user_id', '{{%user}}', 'id'
@@ -603,7 +602,7 @@ class m170517_162647_mmf_init_tables extends \yii\db\Migration
 
 		// insert menu groups data
 		$columns = ['sequence', 'name'];
-		$this->batchInsert('{{%job_menu_group}}', $columns, [
+		$this->batchInsert('{{%menu_group}}', $columns, [
 			[3, 'Setup & Bump Out'],
 			[6, 'Children’s Festival'],
 			[9, 'Hospitality'],

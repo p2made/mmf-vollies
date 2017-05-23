@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+use p2m\helpers\FA;
 
 /**
  * @var yii\web\View $this
@@ -23,13 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div class="col-md-12">
 				<hr>
 					<h2 class="intro-text text-center">
-						<?= Html::encode($this->title) ?>
+						<?php // Html::encode($this->title) ?>
+						First Review Your Login
 					</h2>
 				<hr>
 			</div>
 		</div>
 
-		<div class="user-default-account">
+		<div class="col-lg-6 col-lg-offset-3">
 
 			<?php if ($flash = Yii::$app->session->getFlash("Account-success")): ?>
 
@@ -52,42 +55,36 @@ $this->params['breadcrumbs'][] = $this->title;
 			<?php endif; ?>
 
 			<?php $form = ActiveForm::begin([
+				'type'=>ActiveForm::TYPE_VERTICAL,
 				'id' => 'account-form',
-				'options' => ['class' => 'form-horizontal'],
-				'fieldConfig' => [
-					'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-7\">{error}</div>",
-					'labelOptions' => ['class' => 'col-lg-2 control-label'],
-				],
 				'enableAjaxValidation' => true,
 			]); ?>
 
 			<?php if ($user->password): ?>
-				<?= $form->field($user, 'currentPassword')->passwordInput() ?>
+				<?= $form->field($user, 'currentPassword')->passwordInput()->hint('Only enter if making changes') ?>
 			<?php endif ?>
 
-			<hr/>
+			<hr>
 
 			<?php if ($module->useEmail): ?>
-				<?= $form->field($user, 'email') ?>
+				<?= $form->field($user, 'email')->hint('This email is also used for your application') ?>
 			<?php endif; ?>
 
 			<div class="form-group">
-				<div class="col-lg-offset-2 col-lg-10">
 
-					<?php if (!empty($userToken->data)): ?>
+				<?php if (!empty($userToken->data)): ?>
 
-						<p class="small"><?= Yii::t('user', "Pending email confirmation: [ {newEmail} ]", ["newEmail" => $userToken->data]) ?></p>
-						<p class="small">
-							<?= Html::a(Yii::t("user", "Resend"), ["/user/resend-change"]) ?> / <?= Html::a(Yii::t("user", "Cancel"), ["/user/cancel"]) ?>
-						</p>
+					<p class="small"><?= Yii::t('user', "Pending email confirmation: [ {newEmail} ]", ["newEmail" => $userToken->data]) ?></p>
+					<p class="small">
+						<?= Html::a(Yii::t("user", "Resend"), ["/user/resend-change"]) ?> / <?= Html::a(Yii::t("user", "Cancel"), ["/user/cancel"]) ?>
+					</p>
 
-					<?php elseif ($module->emailConfirmation): ?>
+				<?php elseif ($module->emailConfirmation): ?>
 
-						<p class="small"><?= Yii::t('user', 'Changing your email requires email confirmation') ?></p>
+					<p><?= Yii::t('user', 'Changing your email requires email confirmation.') ?></p>
 
-					<?php endif; ?>
+				<?php endif; ?>
 
-				</div>
 			</div>
 
 			<?php if ($module->useUsername): ?>
@@ -96,11 +93,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
 			<?= $form->field($user, 'newPassword')->passwordInput() ?>
 
-			<div class="form-group">
-				<div class="col-lg-offset-2 col-lg-10">
-					<?= Html::submitButton(Yii::t('user', 'Update'), ['class' => 'btn btn-primary']) ?>
-				</div>
-			</div>
+		</div>
+
+		<div class="col-lg-3 col-lg-offset-2">
+			<p>Making changes...</p>
+			<?= Html::submitButton(Yii::t('user', 'Update'),
+				['class' => 'btn btn-danger btn-lg btn-block'
+			]) ?>
+		</div>
+		<div class="col-lg-3 col-lg-offset-2">
+			<p>No changes...</p>
+			<?= Html::a('Continue', ['/user/profile'], [
+				'class' => 'btn btn-success btn-lg btn-block',
+				'role' => 'button',
+			]) ?>
+		</div>
+
 
 			<?php ActiveForm::end(); ?>
 
@@ -112,9 +120,9 @@ $this->params['breadcrumbs'][] = $this->title;
 				</div>
 			</div>
 
-		</div>
-
 	</div>
 
 </div>
 <!-- /.container -->
+			<?php
+			?>

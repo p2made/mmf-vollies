@@ -1,0 +1,56 @@
+{
+	"name": "p2made/yii.mmf-vollies",
+	"description": "Maleny Music Festival Volunteers Webapp",
+	"homepage": "https://github.com/p2made/yii.mmf-vollies",
+	"type": "project",
+	"minimum-stability": "stable",
+
+	"require": {
+		"php": ">=5.4.0",
+		"yiisoft/yii2": "^2.0",
+		"yiisoft/yii2-swiftmailer": "^2.0",
+
+		"p2made/yii2-a4e": "^0.0",
+		"p2made/yii2-p2y2-things": "^2.5",
+		"p2made/yii2-p2y2-things-demo": "^2.5",
+		"p2made/yii2-startbootstrap-themes": "^2.15",
+		"p2made/yii2-sb-admin-theme": "^2.4",
+
+		"amnah/yii2-user": "^5.0",
+		"ruskid/yii2-ip-behavior": "dev-master"
+	},
+	"require-dev": {
+		"yiisoft/yii2-debug": "^2.0",
+		"yiisoft/yii2-gii": "^2.0",
+		"yiisoft/yii2-faker": "^2.0",
+		"codeception/codeception": "^2.2",
+		"codeception/base": "^2.2",
+		"codeception/verify": "^0.3",
+
+		"claudejanz/yii2-mygii": "^0.0.8",
+		"cornernote/yii2-gii": "^0.1",
+		"deesoft/yii2-gii": "^1.4",
+		"ElisDN/yii2-gii-fixture-generator": "^1.1",
+		"herroffizier/yii2-gii-custom": "^1.0",
+		"mdmsoft/yii2-gii": "^1.1",
+		"mootensai/yii2-enhanced-gii": "^1.0",
+		"schmunk42/yii2-giiant": "^0.9.0",
+		"shirase55/yii2-gii": "^2.0",
+		"sintret/yii2-gii-adminlte": "^1.0",
+		"wilwade/gii-migration": "^1.0",
+		"yii2mod/yii2-gii-extended": "^1.0"
+	},
+
+	"config": {
+		"fxp-asset": {
+			"installer-paths": {
+				"npm-asset-library": "vendor/npm",
+				"bower-asset-library": "vendor/bower"
+			}
+		},
+		"process-timeout": 1800
+	},
+	"scripts": {
+		"post-install-cmd": "php init --env=Development --overwrite=n"
+	}
+}

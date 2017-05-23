@@ -4,11 +4,15 @@ namespace common\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use common\models\Profile;
 use common\models\Team;
 use common\models\Role;
 use common\models\UserAuth;
 use common\models\UserToken;
+use common\models\Application;
+use common\models\Commitment;
+use common\models\History;
 
 /*
 use yii\web\IdentityInterface;
@@ -19,29 +23,34 @@ use ReflectionClass;
 */
 
 /**
- * This is the model class for table "{{%user}}".
+ * This is the model class for table "mmf_user".
  *
-	* @property integer $id
-	* @property integer $role_id
-	* @property integer $status
-	* @property string $email
-	* @property string $password
-	* @property string $auth_key
-	* @property string $access_token
-	* @property string $logged_in_ip
-	* @property string $logged_in_at
-	* @property string $created_ip
-	* @property string $created_at
-	* @property string $updated_at
-	* @property string $banned_at
-	* @property string $banned_reason
-	*
-		* @property Profile $profile
-		* @property Team[] $teams
-		* @property Role $role
-		* @property UserAuth[] $userAuths
-		* @property UserToken[] $userTokens
-	*/
+ * @property integer $id
+ * @property integer $role_id
+ * @property integer $status
+ * @property string $email
+ * @property string $username
+ * @property string $password
+ * @property string $auth_key
+ * @property string $access_token
+ * @property string $logged_in_ip
+ * @property string $logged_in_at
+ * @property string $created_ip
+ * @property string $banned_at
+ * @property string $banned_reason
+ * @property string $created_at
+ * @property string $updated_at
+ *
+ * @property \common\models\Application[] $applications
+ * @property \common\models\Commitment[] $commitments
+ * @property \common\models\History[] $histories
+ * @property \common\models\Profile $profile
+ * @property \common\models\Team[] $teams
+ * @property \common\models\Role $role
+ * @property \common\models\UserAuth[] $userAuths
+ * @property \common\models\UserToken[] $userTokens
+ * @property string $aliasModel
+ */
 
 class User extends \amnah\yii2\user\models\User
 {
@@ -104,11 +113,46 @@ class User extends \amnah\yii2\user\models\User
 	}
 
 	/**
-	* @return \yii\db\ActiveQuery
-	*/
-	public function getTeams()
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
 	{
-	return $this->hasMany(Team::className(), ['head_id' => 'id']);
+		return [
+			'id' => Yii::t('user', 'ID'),
+			'role_id' => Yii::t('user', 'Role ID'),
+			'status' => Yii::t('user', 'Status'),
+			'email' => Yii::t('user', 'Email'),
+			'password' => Yii::t('user', 'Password'),
+			'auth_key' => Yii::t('user', 'Auth Key'),
+			'access_token' => Yii::t('user', 'Access Token'),
+			'logged_in_ip' => Yii::t('user', 'Logged In Ip'),
+			'logged_in_at' => Yii::t('user', 'Logged In At'),
+			'created_ip' => Yii::t('user', 'Created Ip'),
+			'created_at' => Yii::t('user', 'Created At'),
+			'updated_at' => Yii::t('user', 'Updated At'),
+			'banned_at' => Yii::t('user', 'Banned At'),
+			'banned_reason' => Yii::t('user', 'Banned Reason'),
+
+			// virtual attributes set above
+			'currentPassword' => Yii::t('user', 'Current Password'),
+			'newPassword' => $this->isNewRecord ? Yii::t('user', 'Password') : Yii::t('user', 'New Password'),
+			'newPasswordConfirm' => Yii::t('user', 'New Password Confirm'),
+		];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			'timestamp' => [
+				'class' => 'yii\behaviors\TimestampBehavior',
+				'value' => function ($event) {
+					return gmdate("Y-m-d H:i:s");
+				},
+			],
+		];
 	}
 
 	/**
@@ -158,56 +202,84 @@ class User extends \amnah\yii2\user\models\User
 	}
 
 	/**
-	 * Validate current password (account page)
+	 * @inheritdoc
 	 */
-	public function validateCurrentPassword()
+	public function getId()
 	{
-		if (!$this->validatePassword($this->currentPassword)) {
-			$this->addError("currentPassword", "Current password incorrect");
+		return $this->id;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public static function findIdentity($id)
+	{
+		return static::findOne($id);
+	}
+
+	public function pastJobs()
+	{
+		$commitments = Commitment::find()
+			->where(['user_id' => $this->id])
+			->orderBy('year')
+			->all();
+		$jobs = [];
+
+
+
+
+
+
+
+
+		if (count($commitments) < 1) {
+			return null;
 		}
+
+		foreach ($commitments as $commitment) {
+			$jobs = array_merge($jobs,
+				[$commitment->year => $commitment->job]
+			);
+		}
+
+		if (count($jobs) == 1) {
+			return 'Previous job:' . $jobs[0];
+		}
+
+		ksort($jobs);
+		$jobString = 'Previous jobs:' . array_shift($jobs);
+		foreach ($jobs as $job) {
+			$jobString .= ', ' . ksort($jobs);
+		}
+
+		return $jobString;
+	}
+
+	public function hasCurentApplication()
+	{
+		$application = Application::find()
+			->where(['id' => 123])
+			->one();
+
+		return ($application != null);
 	}
 
 	/**
-	 * @inheritdoc
+	 * Get display name for the user
+	 * @return string|int
 	 */
-	public function attributeLabels()
+	public function getDisplayName()
 	{
-		return [
-			'id' => Yii::t('user', 'ID'),
-			'role_id' => Yii::t('user', 'Role ID'),
-			'status' => Yii::t('user', 'Status'),
-			'email' => Yii::t('user', 'Email'),
-			'password' => Yii::t('user', 'Password'),
-			'auth_key' => Yii::t('user', 'Auth Key'),
-			'access_token' => Yii::t('user', 'Access Token'),
-			'logged_in_ip' => Yii::t('user', 'Logged In Ip'),
-			'logged_in_at' => Yii::t('user', 'Logged In At'),
-			'created_ip' => Yii::t('user', 'Created Ip'),
-			'created_at' => Yii::t('user', 'Created At'),
-			'updated_at' => Yii::t('user', 'Updated At'),
-			'banned_at' => Yii::t('user', 'Banned At'),
-			'banned_reason' => Yii::t('user', 'Banned Reason'),
-
-			// virtual attributes set above
-			'currentPassword' => Yii::t('user', 'Current Password'),
-			'newPassword' => $this->isNewRecord ? Yii::t('user', 'Password') : Yii::t('user', 'New Password'),
-			'newPasswordConfirm' => Yii::t('user', 'New Password Confirm'),
-		];
+		return $this->username ?: $this->email ?: $this->id;
 	}
 
 	/**
-	 * @inheritdoc
+	 * @return \yii\db\ActiveQuery
 	 */
-	public function behaviors()
+	public function getRole()
 	{
-		return [
-			'timestamp' => [
-				'class' => 'yii\behaviors\TimestampBehavior',
-				'value' => function ($event) {
-					return gmdate("Y-m-d H:i:s");
-				},
-			],
-		];
+		$role = $this->module->model("Role");
+		return $this->hasOne($role::className(), ['id' => 'role_id']);
 	}
 
 	/**
@@ -222,10 +294,43 @@ class User extends \amnah\yii2\user\models\User
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getRole()
+	public function getApplications()
 	{
-		$role = $this->module->model("Role");
-		return $this->hasOne($role::className(), ['id' => 'role_id']);
+		return $this->hasMany(Application::className(), ['user_id' => 'id']);
+	}
+
+	/**
+	* @return \yii\db\ActiveQuery
+	*/
+	public function getTeams()
+	{
+		return $this->hasMany(Team::className(), ['head_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getCommitments()
+	{
+		return $this->hasMany(Commitment::className(), ['user_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getHistories()
+	{
+		return $this->hasMany(History::className(), ['user_id' => 'id']);
+	}
+
+	/**
+	 * Validate current password (account page)
+	 */
+	public function validateCurrentPassword()
+	{
+		if (!$this->validatePassword($this->currentPassword)) {
+			$this->addError("currentPassword", "Current password incorrect");
+		}
 	}
 
 	/**
@@ -248,25 +353,9 @@ class User extends \amnah\yii2\user\models\User
 	/**
 	 * @inheritdoc
 	 */
-	public static function findIdentity($id)
-	{
-		return static::findOne($id);
-	}
-
-	/**
-	 * @inheritdoc
-	 */
 	public static function findIdentityByAccessToken($token, $type = null)
 	{
 		return static::findOne(["access_token" => $token]);
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function getId()
-	{
-		return $this->id;
 	}
 
 	/**
@@ -450,15 +539,6 @@ class User extends \amnah\yii2\user\models\User
 
 		// otherwise use our own custom permission (via the role table)
 		return $this->role->checkPermission($permissionName);
-	}
-
-	/**
-	 * Get display name for the user
-	 * @return string|int
-	 */
-	public function getDisplayName()
-	{
-		return $this->username ?: $this->email ?: $this->id;
 	}
 
 	/**

@@ -9,19 +9,6 @@ use kartik\builder\Form;
 /* @var $form yii\widgets\ActiveForm */
 
 $userEmail = $model->user->email;
-
-$statesData = [
-	'ACT' => 'ACT',
-	'NSW' => 'NSW',
-	'NT' => 'NT',
-	'Qld' => 'Qld',
-	'SA' => 'SA',
-	'Tas' => 'Tas',
-	'Vic' => 'Vic',
-	'WA' => 'WA',
-	'International' => 'International',
-];
-
 $checkboxOptions = [
 	'options' => ['tag' => false],
 	'template' => '<div class=\'checkbox\'>{input}</div>'
@@ -35,7 +22,7 @@ $discoveryData = [
 	'Media' => 'Media',
 	'Other' => 'Other',
 ];
-
+$userDiscovery = $model->discovery;
 ?>
 <div class="profile-form">
 
@@ -87,7 +74,7 @@ $discoveryData = [
 			'attributes' => [
 				'email' => [
 					'type' => Form::INPUT_STATIC,
-					'options' => ['placeholder' => 'Email Address'],
+					'staticValue' => $userEmail,
 					'columnOptions' => ['colspan' => 2],
 				],
 				'phone1' => [
@@ -141,7 +128,17 @@ $discoveryData = [
 					'type' => Form::INPUT_WIDGET,
 					'widgetClass' => '\kartik\widgets\Select2',
 					'options' => [
-						'data' => $statesData,
+						'data' => [
+							'ACT' => 'ACT',
+							'NSW' => 'NSW',
+							'NT' => 'NT',
+							'Qld' => 'Qld',
+							'SA' => 'SA',
+							'Tas' => 'Tas',
+							'Vic' => 'Vic',
+							'WA' => 'WA',
+							'International' => 'International',
+						],
 					],
 					'columnOptions' => ['colspan' => 1],
 				],
@@ -227,6 +224,25 @@ $discoveryData = [
 	</div>
 
 	<?php
+		$discoveryWidget;
+		if ($userDiscovery) {
+			$discoveryWidget = [
+				'label' => false,
+				'type' => Form::INPUT_STATIC,
+				'staticValue' => $userDiscovery,
+				'columnOptions' => ['colspan' => 1],
+			];
+		} else {
+			$discoveryWidget = [
+				'label' => false,
+				'type' => Form::INPUT_WIDGET,
+				'widgetClass' => '\kartik\widgets\Select2',
+				'options' => [
+					'data' => $discoveryData,
+				],
+				'columnOptions' => ['colspan' => 1],
+			];
+		}
 		echo Form::widget([
 			'model' => $model,
 			'form' => $form,
@@ -237,33 +253,25 @@ $discoveryData = [
 					'labelSpan' => 4,
 					'label' => 'How did you hear about volunteering for Maleny Music Festival?',
 					'attributes' => [
-						'discovery' => [
-							'label' => false,
-							'type' => Form::INPUT_WIDGET,
-							'widgetClass' => '\kartik\widgets\Select2',
-							'options' => [
-								'data' => $discoveryData,
-							],
-							'columnOptions' => ['colspan' => 1],
-						],
+						'discovery' => $discoveryWidget,
 						'discoveryDetail' => [
 							'label' => false,
 							'type' => Form::INPUT_TEXT,
 							'options' => ['placeholder' => 'Details (optional)'],
 							'columnOptions' => ['colspan' => 3],
 						],
-					]
-				]
+					],
+				],
 			]
 		]);
 	?>
 
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-9">
 			<p>Check that everything above is correct, & then...</p>
 		</div><!-- / Check -->
-		<div class="col-md-4">
-			<?= Html::submitButton('Continue', ['class' => 'btn btn-primary btn-lg btn-block']) ?>
+		<div class="col-md-3">
+			<?= Html::submitButton('Continue', ['class' => 'btn btn-success btn-lg btn-block']) ?>
 		</div><!-- / Continue -->
 	</div>
 

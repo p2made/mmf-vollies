@@ -11,7 +11,6 @@ return [
 	'basePath' => dirname(__DIR__),
 	'controllerNamespace' => 'frontend\controllers',
 	'bootstrap' => ['log'],
-	'modules' => [],
 	'components' => [
 		'request' => [
 			'csrfParam' => '_csrf-frontend',
@@ -49,6 +48,13 @@ return [
 		],
 		'errorHandler' => [
 			'errorAction' => 'site/error',
+		],
+	],
+	'modules' => [
+		'user' => [
+			'controllerMap' => [
+				'default' => 'frontend\controllers\UserProfileController',
+			],
 		],
 	],
 	'params' => $params,

@@ -2,15 +2,33 @@
 
 namespace common\models;
 
-class History extends \common\models\base\HistoryBase
+use Yii;
+use \common\models\base\History as BaseHistory;
+use yii\helpers\ArrayHelper;
+
+/**
+ * This is the model class for table "mmf_history".
+ */
+class History extends BaseHistory
 {
 
-	/**
-	 * @inheritdoc
-	 * @return HistoryQuery the active query used by this AR class.
-	 */
-	public static function find()
+public function behaviors()
 	{
-		return new HistoryQuery(get_called_class());
+		return ArrayHelper::merge(
+			parent::behaviors(),
+			[
+				# custom behaviors
+			]
+		);
+	}
+
+	public function rules()
+	{
+		return ArrayHelper::merge(
+			 parent::rules(),
+			 [
+				  # custom validation rules
+			 ]
+		);
 	}
 }

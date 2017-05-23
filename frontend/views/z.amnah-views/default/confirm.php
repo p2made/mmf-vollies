@@ -12,33 +12,33 @@ $this->title = Yii::t('user', $success ? 'Confirmed' : 'Error');
 ?>
 <div class="user-default-confirm">
 
-	<?php if ($success): ?>
+    <?php if ($success): ?>
 
-		<div class="alert alert-success">
+        <div class="alert alert-success">
 
-			<p><?= Yii::t("user", "Your email [ {email} ] has been confirmed", ["email" => $email]) ?></p>
+            <p><?= Yii::t("user", "Your email [ {email} ] has been confirmed", ["email" => $email]) ?></p>
 
-			<?php if (Yii::$app->user->isLoggedIn): ?>
+            <?php if (Yii::$app->user->isLoggedIn): ?>
 
-				<p><?= Html::a(Yii::t("user", "Go to my account"), ["/user/account"]) ?></p>
-				<p><?= Html::a(Yii::t("user", "Go home"), Yii::$app->getHomeUrl()) ?></p>
+                <p><?= Html::a(Yii::t("user", "Go to my account"), ["/user/account"]) ?></p>
+                <p><?= Html::a(Yii::t("user", "Go home"), Yii::$app->getHomeUrl()) ?></p>
 
-			<?php else: ?>
+            <?php else: ?>
 
-				<p><?= Html::a(Yii::t("user", "Log in here"), ["/user/login"]) ?></p>
+                <p><?= Html::a(Yii::t("user", "Log in here"), ["/user/login"]) ?></p>
 
-			<?php endif; ?>
+            <?php endif; ?>
 
-		</div>
+        </div>
 
-	<?php elseif ($email): ?>
+    <?php elseif ($email): ?>
 
-		<div class="alert alert-danger">[ <?= $email ?> ] <?= Yii::t("user", "Email is already active") ?></div>
+        <div class="alert alert-danger">[ <?= $email ?> ] <?= Yii::t("user", "Email is already active") ?></div>
 
-	<?php else: ?>
+    <?php else: ?>
 
-		<div class="alert alert-danger"><?= Yii::t("user", "Invalid token") ?></div>
+        <div class="alert alert-danger"><?= Yii::t("user", "Invalid token") ?></div>
 
-	<?php endif; ?>
+    <?php endif; ?>
 
 </div>

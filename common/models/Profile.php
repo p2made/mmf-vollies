@@ -3,56 +3,53 @@
 namespace common\models;
 
 use Yii;
-use yii\db\ActiveRecord;
-use common\models\Application;
-use common\models\Commitment;
-use common\models\History;
-use common\models\User;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "{{%profile}}".
+ * This is the model class for table "mmf_profile".
  *
-	* @property integer $id
-	* @property integer $user_id
-	* @property string $givenName
-	* @property string $familyName
-	* @property string $preferredName
-	* @property string $phone1
-	* @property string $phone2
-	* @property string $address1
-	* @property string $address2
-	* @property string $locality
-	* @property string $state
-	* @property string $postcode
-	* @property string $country
-	* @property string $emergencyContact
-	* @property string $emergencyPhone1
-	* @property string $emergencyPhone2
-	* @property integer $rsa
-	* @property integer $dl_c
-	* @property integer $dl_h
-	* @property integer $cse
-	* @property integer $ohs
-	* @property integer $bc
-	* @property integer $vol
-	* @property integer $mmfVol
-	* @property integer $mmfAtt
-	* @property integer $returned
-	* @property string $dnr
-	* @property string $discovery
-	* @property string $discoveryDetail
-	* @property string $email
-	* @property string $timezone
-	* @property string $created_at
-	* @property integer $created_by
-	* @property string $updated_at
-	* @property integer $updated_by
-	*
-		* @property Application[] $applications
-		* @property Commitment[] $commitments
-		* @property History[] $histories
-		* @property User $user
-	*/
+ * @property integer $id
+ * @property integer $user_id
+ * @property string $givenName
+ * @property string $familyName
+ * @property string $preferredName
+ * @property string $phone1
+ * @property string $phone2
+ * @property string $address1
+ * @property string $address2
+ * @property string $locality
+ * @property string $state
+ * @property string $postcode
+ * @property string $country
+ * @property string $emergencyContact
+ * @property string $emergencyPhone1
+ * @property string $emergencyPhone2
+ * @property integer $rsa
+ * @property integer $dl_c
+ * @property integer $dl_h
+ * @property integer $cse
+ * @property integer $ohs
+ * @property integer $bc
+ * @property integer $vol
+ * @property integer $mmfVol
+ * @property integer $mmfAtt
+ * @property integer $returned
+ * @property string $dnr
+ * @property string $discovery
+ * @property string $discoveryDetail
+ * @property string $email
+ * @property string $timezone
+ * @property string $full_name
+ * @property string $created_at
+ * @property integer $created_by
+ * @property string $updated_at
+ * @property integer $updated_by
+ *
+ * @property \common\models\User $user
+ * @property string $aliasModel
+ */
 
 class Profile extends \amnah\yii2\user\models\Profile
 {
@@ -72,12 +69,59 @@ class Profile extends \amnah\yii2\user\models\Profile
 	}
 
 	/**
-	* @inheritdoc
-	*/
+	 * @inheritdoc
+	 */
 	public static function tableName()
 	{
 	return '{{%profile}}';
 	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => BlameableBehavior::className(),
+			],
+			[
+				'class' => TimestampBehavior::className(),
+				'value' => function ($event) {
+					return gmdate("Y-m-d H:i:s");
+				},
+			],
+		];
+	}
+
+	/*
+	public function behaviors()
+	{
+		return [
+			'timestamp' => [
+				'class' => 'yii\behaviors\TimestampBehavior',
+				'value' => function ($event) {
+					return gmdate("Y-m-d H:i:s");
+				},
+			],
+		];
+	}
+	 */
+
+	/**
+	 * @inheritdoc
+	public function behaviors()
+	{
+		return [
+			'timestamp' => [
+				'class' => 'yii\behaviors\TimestampBehavior',
+				'value' => function ($event) {
+					return gmdate("Y-m-d H:i:s");
+				},
+			],
+		];
+	}
+	 */
 
 	/**
 	 * @inheritdoc
@@ -139,45 +183,6 @@ class Profile extends \amnah\yii2\user\models\Profile
 			'updated_at' => Yii::t('user', 'Updated At'),
 			'updated_by' => 'Updated By',
 		];
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function behaviors()
-	{
-		return [
-			'timestamp' => [
-				'class' => 'yii\behaviors\TimestampBehavior',
-				'value' => function ($event) {
-					return gmdate("Y-m-d H:i:s");
-				},
-			],
-		];
-	}
-
-	/**
-	* @return \yii\db\ActiveQuery
-	*/
-	public function getApplications()
-	{
-	return $this->hasMany(Application::className(), ['profile_id' => 'id']);
-	}
-
-	/**
-	* @return \yii\db\ActiveQuery
-	*/
-	public function getCommitments()
-	{
-	return $this->hasMany(Commitment::className(), ['profile_id' => 'id']);
-	}
-
-	/**
-	* @return \yii\db\ActiveQuery
-	*/
-	public function getHistories()
-	{
-	return $this->hasMany(History::className(), ['profile_id' => 'id']);
 	}
 
 	/**

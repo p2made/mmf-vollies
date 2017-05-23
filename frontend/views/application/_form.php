@@ -34,6 +34,19 @@ $jobsMenu = [
 	22 => 'Other - Special',
 ];
 
+$user = \Yii::$app->user->identity;
+
+$userProfile = $user->profile;
+$rsa = [$userProfile->rsa, 'Responsible Service of Alcohol'];
+$dl_c = [$userProfile->dl_c, 'Driver\'s Licence (car)'];
+$dl_h = [$userProfile->dl_h, 'Driver\'s Licence (LR or above)'];
+$cse = [$userProfile->cse, 'Customer Service Experience'];
+$ohs = [$userProfile->ohs, 'OHS qualifications'];
+$bc = [$userProfile->bc, 'Blue Card (working with children)'];
+$skillsCheck = '<input type="checkbox" value="DL/C" disabled';
+
+$pastJobs = $user->pastJobs();
+
 ?>
 <div class="application-form">
 
@@ -42,42 +55,57 @@ $jobsMenu = [
 	]); ?>
 
 	<div class="row">
+		<div class="col-md-12">
+			<label>You have entered these skills...</label>
+		</div>
 		<div class="col-md-6">
 			<div class="form-group">
-				<label>You have entered these skills...</label>
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" value="RSA" disabled>
-						Responsible Service of Alcohol
+						<?= $skillsCheck . ($rsa[0] == 1 ? ' checked' : '') . '>' ?>
+						<?= $rsa[1] ?>
 					</label>
-				</div><!-- / RSA -->
+				</div>
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" value="DL/C" checked disabled>
-						Driver's Licence (car)
+						<?= $skillsCheck . ($dl_c[0] == 1 ? ' checked' : '') . '>' ?>
+						<?= $dl_c[1] ?>
 					</label>
-				</div><!-- / DL/C -->
+				</div>
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" value="DL/H" checked disabled>
-						Driver's Licence (LR or above)
+						<?= $skillsCheck . ($dl_h[0] == 1 ? ' checked' : '') . '>' ?>
+						<?= $dl_h[1] ?>
 					</label>
-				</div><!-- / DL/H -->
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" value="CSE" disabled>
-						Customer Service Experience
-					</label>
-				</div><!-- / CSE -->
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" value="OHS" checked disabled>
-						OHS qualifications
-					</label>
-				</div><!-- / OHS -->
+				</div>
 			</div>
-		</div><!-- / Skills entered -->
-	</div><!-- / Skills -->
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<div class="checkbox">
+					<label>
+						<?= $skillsCheck . ($cse[0] == 1 ? ' checked' : '') . '>' ?>
+						<?= $cse[1] ?>
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<?= $skillsCheck . ($ohs[0] == 1 ? ' checked' : '') . '>' ?>
+						<?= $ohs[1] ?>
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<?= $skillsCheck . ($bc[0] == 1 ? ' checked' : '') . '>' ?>
+						<?= $bc[1] ?>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<label><?= $user->pastJobs() ?></label>
+		</div>
+	</div><!-- / Skills entered -->
 
 	<?php // $form->field($model, 'user_id')->textInput() ?>
 
@@ -85,6 +113,99 @@ $jobsMenu = [
 		<div class="col-md-12">
 			<h4>Job Choices</h4>
 			<p>Nominate up to 3 job choices. We will do our best to fit you in to one of those.</p>
+			<p>Choices are in six groupings...</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Setup &amp; Bump Out</h3>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li>General Setup</li>
+						<li>Fencing</li>
+						<li>Decor</li>
+						<li>Bar Setup</li>
+						<li>Children’s Festival Setup</li>
+						<li>Bump Out</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Children’s Festival title</h3>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li>Presenter</li>
+						<li>Helper</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Hospitality</h3>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li>Bar Doors</li>
+						<li>Bar Service</li>
+						<li>Vollies Tent</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Around the Site</h3>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li>Campground</li>
+						<li>Cleaning</li>
+						<li>Ticket Gates</li>
+						<li>Traffic</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Stages</h3>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li>MC</li>
+						<li>Stage Manager</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Other</h3>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li>Instrument Lockup</li>
+						<li>Shop</li>
+						<li>Treasury</li>
+						<li>I will do anything</li>
+						<li>Special (<strong>only</strong> select if you've been asked to apply for a specific job)</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div><!-- / Job Choices -->
 	<?php
@@ -118,7 +239,7 @@ $jobsMenu = [
 	<div class="row">
 		<div class="col-md-12">
 			<h4>Volunteer Availability</h4>
-			<p>Pre and post-festival shift times are listed above. Festival volunteer shifts run from Friday morning to Sunday late afternoon, including late nights.</p>
+			<p>Pre-festival is from Wednesday August 30 to Friday September 1. Post-festival is afternoon of Sunday September 3 &amp; all day Monday September 4. Festival volunteer shifts run from Friday morning to Sunday late afternoon, including late nights.</p>
 		</div>
 	</div><!-- / Availability -->
 	<?php
@@ -226,7 +347,7 @@ $jobsMenu = [
 	<div class="row">
 		<div class="col-md-12">
 			<h4>Referee (optional)</h4>
-			<p>For some job giving a referee can be helpful.</p>
+			<p>If applying for Shop, Treasury, or Ticket Gates, please provide a referee. Otherwise optional.</p>
 		</div>
 	</div><!-- / Referee -->
 	<?php
@@ -259,10 +380,10 @@ $jobsMenu = [
 	</div>
 
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-9">
 			<p>Once you're happy with everything above, go ahead and...</p>
 		</div><!-- / Check -->
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="form-group">
 				<?= Html::submitButton(
 					$model->isNewRecord ? 'Submit Your Application' : 'Update Your Application',
