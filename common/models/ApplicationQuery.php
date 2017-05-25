@@ -9,27 +9,27 @@ namespace common\models;
  */
 class ApplicationQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        $this->andWhere('[[status]]=1');
-        return $this;
-    }*/
+	/*public function active()
+	{
+		$this->andWhere('[[status]]=1');
+		return $this;
+	}*/
 
-    /**
-     * @inheritdoc
-     * @return Application[]|array
-     */
-    public function all($db = null)
-    {
-        return parent::all($db);
-    }
+	/**
+	 * @inheritdoc
+	 * @return Application[]|array
+	 */
+	public function all($db = null)
+	{
+		return parent::all($db);
+	}
 
-    /**
-     * @inheritdoc
-     * @return Application|array|null
-     */
-    public function one($db = null)
-    {
-        return parent::one($db);
-    }
+	/**
+	 * @inheritdoc
+	 * @return Application|array|null
+	 */
+	public function one($db = null)
+	{
+		return parent::one($db);
+	}
 }

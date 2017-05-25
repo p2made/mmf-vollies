@@ -32,15 +32,15 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $team_id
  * @property integer $rejected
  * @property string $rejectedReason
- * @property string $created_at
+ * @property integer $created_at
  * @property integer $created_by
- * @property string $updated_at
+ * @property integer $updated_at
  * @property integer $updated_by
  *
  * @property \common\models\Job $jobChoice1
  * @property \common\models\Job $jobChoice2
  * @property \common\models\Job $jobChoice3
- * @property \common\models\User $user
+ * @property \common\models\Profile $user
  * @property string $aliasModel
  */
 abstract class Application extends \yii\db\ActiveRecord
@@ -48,126 +48,126 @@ abstract class Application extends \yii\db\ActiveRecord
 
 
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'mmf_application';
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName()
+	{
+		return 'mmf_application';
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => BlameableBehavior::className(),
-            ],
-            [
-                'class' => TimestampBehavior::className(),
-            ],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => BlameableBehavior::className(),
+			],
+			[
+				'class' => TimestampBehavior::className(),
+			],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['user_id', 'job_choice_1', 'year', 'availableFromDate', 'availableFromTime', 'availableToDate', 'availableToTime'], 'required'],
-            [['user_id', 'job_choice_1', 'job_choice_2', 'job_choice_3', 'availableFromTime', 'availableToTime', 'bestTIme', 'double', 'accepted', 'team_id', 'rejected'], 'integer'],
-            [['year'], 'safe'],
-            [['availabilityNotes', 'otherNotes', 'rejectedReason'], 'string'],
-            [['availableFromDate', 'availableToDate'], 'string', 'max' => 8],
-            [['referee'], 'string', 'max' => 64],
-            [['refereeRelationship', 'refereePhone'], 'string', 'max' => 32],
-            [['job_choice_1'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Job::className(), 'targetAttribute' => ['job_choice_1' => 'id']],
-            [['job_choice_2'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Job::className(), 'targetAttribute' => ['job_choice_2' => 'id']],
-            [['job_choice_3'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Job::className(), 'targetAttribute' => ['job_choice_3' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\User::className(), 'targetAttribute' => ['user_id' => 'id']]
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			[['user_id', 'job_choice_1', 'year', 'availableFromDate', 'availableFromTime', 'availableToDate', 'availableToTime'], 'required'],
+			[['user_id', 'job_choice_1', 'job_choice_2', 'job_choice_3', 'availableFromTime', 'availableToTime', 'bestTIme', 'double', 'accepted', 'team_id', 'rejected'], 'integer'],
+			[['year'], 'safe'],
+			[['availabilityNotes', 'otherNotes', 'rejectedReason'], 'string'],
+			[['availableFromDate', 'availableToDate'], 'string', 'max' => 8],
+			[['referee'], 'string', 'max' => 64],
+			[['refereeRelationship', 'refereePhone'], 'string', 'max' => 32],
+			[['job_choice_1'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Job::className(), 'targetAttribute' => ['job_choice_1' => 'id']],
+			[['job_choice_2'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Job::className(), 'targetAttribute' => ['job_choice_2' => 'id']],
+			[['job_choice_3'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Job::className(), 'targetAttribute' => ['job_choice_3' => 'id']],
+			[['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Profile::className(), 'targetAttribute' => ['user_id' => 'user_id']]
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'job_choice_1' => 'Job Choice 1',
-            'job_choice_2' => 'Job Choice 2',
-            'job_choice_3' => 'Job Choice 3',
-            'year' => 'Year',
-            'availableFromDate' => 'Available From Date',
-            'availableFromTime' => 'Available From Time',
-            'availableToDate' => 'Available To Date',
-            'availableToTime' => 'Available To Time',
-            'bestTIme' => 'Best Time',
-            'availabilityNotes' => 'Availability Notes',
-            'double' => 'Double',
-            'otherNotes' => 'Other Notes',
-            'referee' => 'Referee',
-            'refereeRelationship' => 'Referee Relationship',
-            'refereePhone' => 'Referee Phone',
-            'accepted' => 'Accepted',
-            'team_id' => 'Team ID',
-            'rejected' => 'Rejected',
-            'rejectedReason' => 'Rejected Reason',
-            'created_at' => 'Created At',
-            'created_by' => 'Created By',
-            'updated_at' => 'Updated At',
-            'updated_by' => 'Updated By',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'user_id' => 'User ID',
+			'job_choice_1' => 'Job Choice 1',
+			'job_choice_2' => 'Job Choice 2',
+			'job_choice_3' => 'Job Choice 3',
+			'year' => 'Year',
+			'availableFromDate' => 'Available From Date',
+			'availableFromTime' => 'Available From Time',
+			'availableToDate' => 'Available To Date',
+			'availableToTime' => 'Available To Time',
+			'bestTIme' => 'Best Time',
+			'availabilityNotes' => 'Availability Notes',
+			'double' => 'Double',
+			'otherNotes' => 'Other Notes',
+			'referee' => 'Referee',
+			'refereeRelationship' => 'Referee Relationship',
+			'refereePhone' => 'Referee Phone',
+			'accepted' => 'Accepted',
+			'team_id' => 'Team ID',
+			'rejected' => 'Rejected',
+			'rejectedReason' => 'Rejected Reason',
+			'created_at' => 'Created At',
+			'created_by' => 'Created By',
+			'updated_at' => 'Updated At',
+			'updated_by' => 'Updated By',
+		];
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getJobChoice1()
-    {
-        return $this->hasOne(\common\models\Job::className(), ['id' => 'job_choice_1']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getJobChoice1()
+	{
+		return $this->hasOne(\common\models\Job::className(), ['id' => 'job_choice_1']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getJobChoice2()
-    {
-        return $this->hasOne(\common\models\Job::className(), ['id' => 'job_choice_2']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getJobChoice2()
+	{
+		return $this->hasOne(\common\models\Job::className(), ['id' => 'job_choice_2']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getJobChoice3()
-    {
-        return $this->hasOne(\common\models\Job::className(), ['id' => 'job_choice_3']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getJobChoice3()
+	{
+		return $this->hasOne(\common\models\Job::className(), ['id' => 'job_choice_3']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(\common\models\User::className(), ['id' => 'user_id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getUser()
+	{
+		return $this->hasOne(\common\models\Profile::className(), ['user_id' => 'user_id']);
+	}
 
 
-    
-    /**
-     * @inheritdoc
-     * @return \common\models\ApplicationQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new \common\models\ApplicationQuery(get_called_class());
-    }
+	
+	/**
+	 * @inheritdoc
+	 * @return \common\models\ApplicationQuery the active query used by this AR class.
+	 */
+	public static function find()
+	{
+		return new \common\models\ApplicationQuery(get_called_class());
+	}
 
 
 }

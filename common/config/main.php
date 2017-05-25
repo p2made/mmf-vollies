@@ -1,9 +1,9 @@
 <?php
 /*
  * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
- * #####                                                           #####
+ * #####														   #####
  * #####   Customise these lines to suit your host configuration   #####
- * #####                                                           #####
+ * #####														   #####
  * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
  */
 /* dev */
@@ -21,6 +21,26 @@ $_urlBaseAssets   = 'http://static.'  . $_urlBase;
 
 return [
 	'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+	'modules' => [
+		'user' => [
+			'class' => 'dektrium\user\Module',
+			// or if need different configuration for frontend and backend you may
+			// configure in needed configs
+			'urlPrefix' => 'vollie',
+			'modelMap' => [
+				'User' => 'common\models\User',
+				'Profile' => 'common\models\Profile',
+			],
+			'mailer' => [
+				'sender' => [
+					'no-reply@malenymusicfestival.com' => 'Maleny Music Festival Vollies'
+				],
+				'confirmationSubject'   => 'MMF Vollies - Please confirm your email',
+				'reconfirmationSubject' => 'MMF Vollies - Please confirm your new email',
+				'recoverySubject'       => 'MMF Vollies - Recover your login',
+			],
+		],
+	],
 	'components' => [
 		'assetManager' => [
 			//'appendTimestamp' => true, // useful while developing custom assets
@@ -45,7 +65,7 @@ return [
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
-			'suffix' => '.p2m',
+			'suffix' => '.mmf',
 			'rules' => [
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

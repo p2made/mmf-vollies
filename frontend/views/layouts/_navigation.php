@@ -30,6 +30,8 @@ $menuItems = [
 	['label' => 'Dev', 'items' => [
 		['label' => 'Gii', 'url' => ['/gii']],
 		['label' => 'Debug', 'url' => ['/debug']],
+		'<li role="presentation" class="divider"></li>',
+		['label' => 'User Actions', 'url' =>['/site/page', 'view' => 'user-actions']],
 	]],
 ];
 /*

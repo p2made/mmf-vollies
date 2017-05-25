@@ -46,12 +46,12 @@ use yii\behaviors\TimestampBehavior;
  * @property string $key_orig
  * @property string $created_orig
  * @property string $updated_orig
- * @property string $created_at
+ * @property integer $created_at
  * @property integer $created_by
- * @property string $updated_at
+ * @property integer $updated_at
  * @property integer $updated_by
  *
- * @property \common\models\User $user
+ * @property \common\models\Profile $user
  * @property string $aliasModel
  */
 abstract class History extends \yii\db\ActiveRecord
@@ -59,117 +59,117 @@ abstract class History extends \yii\db\ActiveRecord
 
 
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'mmf_history';
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName()
+	{
+		return 'mmf_history';
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => BlameableBehavior::className(),
-            ],
-            [
-                'class' => TimestampBehavior::className(),
-            ],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => BlameableBehavior::className(),
+			],
+			[
+				'class' => TimestampBehavior::className(),
+			],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['user_id', 'givenName', 'familyName', 'email', 'locality', 'emergencyContact', 'emergencyPhone1', 'id_orig', 'ip', 'key_orig'], 'required'],
-            [['user_id', 'rsa', 'dl_c', 'dl_h', 'cse', 'ohs', 'vol', 'mmfVol', 'mmfAtt', 'returned', 'id_orig'], 'integer'],
-            [['preferredJobs', 'availability', 'commentsInfo', 'discovery'], 'string'],
-            [['created_orig', 'updated_orig'], 'safe'],
-            [['givenName', 'familyName', 'preferredName', 'country'], 'string', 'max' => 32],
-            [['email', 'locality', 'emergencyContact'], 'string', 'max' => 64],
-            [['phone1', 'phone2', 'emergencyPhone1', 'emergencyPhone2'], 'string', 'max' => 24],
-            [['address1', 'address2'], 'string', 'max' => 255],
-            [['state', 'ip'], 'string', 'max' => 16],
-            [['postcode'], 'string', 'max' => 12],
-            [['key_orig'], 'string', 'max' => 8],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\User::className(), 'targetAttribute' => ['user_id' => 'id']]
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			[['user_id', 'givenName', 'familyName', 'email', 'locality', 'emergencyContact', 'emergencyPhone1', 'id_orig', 'ip', 'key_orig'], 'required'],
+			[['user_id', 'rsa', 'dl_c', 'dl_h', 'cse', 'ohs', 'vol', 'mmfVol', 'mmfAtt', 'returned', 'id_orig'], 'integer'],
+			[['preferredJobs', 'availability', 'commentsInfo', 'discovery'], 'string'],
+			[['created_orig', 'updated_orig'], 'safe'],
+			[['givenName', 'familyName', 'preferredName', 'country'], 'string', 'max' => 32],
+			[['email', 'locality', 'emergencyContact'], 'string', 'max' => 64],
+			[['phone1', 'phone2', 'emergencyPhone1', 'emergencyPhone2'], 'string', 'max' => 24],
+			[['address1', 'address2'], 'string', 'max' => 255],
+			[['state', 'ip'], 'string', 'max' => 16],
+			[['postcode'], 'string', 'max' => 12],
+			[['key_orig'], 'string', 'max' => 8],
+			[['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Profile::className(), 'targetAttribute' => ['user_id' => 'user_id']]
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'givenName' => 'Given Name',
-            'familyName' => 'Family Name',
-            'preferredName' => 'Preferred Name',
-            'email' => 'Email',
-            'phone1' => 'Phone1',
-            'phone2' => 'Phone2',
-            'address1' => 'Address1',
-            'address2' => 'Address2',
-            'locality' => 'Locality',
-            'state' => 'State',
-            'postcode' => 'Postcode',
-            'country' => 'Country',
-            'emergencyContact' => 'Emergency Contact',
-            'emergencyPhone1' => 'Emergency Phone1',
-            'emergencyPhone2' => 'Emergency Phone2',
-            'rsa' => 'Rsa',
-            'dl_c' => 'Dl C',
-            'dl_h' => 'Dl H',
-            'cse' => 'Cse',
-            'ohs' => 'Ohs',
-            'vol' => 'Vol',
-            'mmfVol' => 'Mmf Vol',
-            'mmfAtt' => 'Mmf Att',
-            'returned' => 'Returned',
-            'preferredJobs' => 'Preferred Jobs',
-            'availability' => 'Availability',
-            'commentsInfo' => 'Comments Info',
-            'discovery' => 'Discovery',
-            'id_orig' => 'Id Orig',
-            'ip' => 'Ip',
-            'key_orig' => 'Key Orig',
-            'created_orig' => 'Created Orig',
-            'updated_orig' => 'Updated Orig',
-            'created_at' => 'Created At',
-            'created_by' => 'Created By',
-            'updated_at' => 'Updated At',
-            'updated_by' => 'Updated By',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'user_id' => 'User ID',
+			'givenName' => 'Given Name',
+			'familyName' => 'Family Name',
+			'preferredName' => 'Preferred Name',
+			'email' => 'Email',
+			'phone1' => 'Phone1',
+			'phone2' => 'Phone2',
+			'address1' => 'Address1',
+			'address2' => 'Address2',
+			'locality' => 'Locality',
+			'state' => 'State',
+			'postcode' => 'Postcode',
+			'country' => 'Country',
+			'emergencyContact' => 'Emergency Contact',
+			'emergencyPhone1' => 'Emergency Phone1',
+			'emergencyPhone2' => 'Emergency Phone2',
+			'rsa' => 'Rsa',
+			'dl_c' => 'Dl C',
+			'dl_h' => 'Dl H',
+			'cse' => 'Cse',
+			'ohs' => 'Ohs',
+			'vol' => 'Vol',
+			'mmfVol' => 'Mmf Vol',
+			'mmfAtt' => 'Mmf Att',
+			'returned' => 'Returned',
+			'preferredJobs' => 'Preferred Jobs',
+			'availability' => 'Availability',
+			'commentsInfo' => 'Comments Info',
+			'discovery' => 'Discovery',
+			'id_orig' => 'Id Orig',
+			'ip' => 'Ip',
+			'key_orig' => 'Key Orig',
+			'created_orig' => 'Created Orig',
+			'updated_orig' => 'Updated Orig',
+			'created_at' => 'Created At',
+			'created_by' => 'Created By',
+			'updated_at' => 'Updated At',
+			'updated_by' => 'Updated By',
+		];
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(\common\models\User::className(), ['id' => 'user_id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getUser()
+	{
+		return $this->hasOne(\common\models\Profile::className(), ['user_id' => 'user_id']);
+	}
 
 
-    
-    /**
-     * @inheritdoc
-     * @return \common\models\HistoryQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new \common\models\HistoryQuery(get_called_class());
-    }
+	
+	/**
+	 * @inheritdoc
+	 * @return \common\models\HistoryQuery the active query used by this AR class.
+	 */
+	public static function find()
+	{
+		return new \common\models\HistoryQuery(get_called_class());
+	}
 
 
 }

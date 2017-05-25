@@ -13,8 +13,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $id
  * @property integer $sequence
  * @property string $name
- * @property string $created_at
- * @property string $updated_at
+ * @property integer $created_at
+ * @property integer $updated_at
  *
  * @property \common\models\Job[] $jobs
  * @property string $aliasModel
@@ -24,60 +24,60 @@ abstract class MenuGroup extends \yii\db\ActiveRecord
 
 
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'mmf_menu_group';
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName()
+	{
+		return 'mmf_menu_group';
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-            ],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => TimestampBehavior::className(),
+			],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['sequence', 'name'], 'required'],
-            [['sequence'], 'integer'],
-            [['name'], 'string', 'max' => 24]
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			[['sequence', 'name'], 'required'],
+			[['sequence'], 'integer'],
+			[['name'], 'string', 'max' => 24]
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'sequence' => 'Sequence',
-            'name' => 'Name',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'sequence' => 'Sequence',
+			'name' => 'Name',
+			'created_at' => 'Created At',
+			'updated_at' => 'Updated At',
+		];
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getJobs()
-    {
-        return $this->hasMany(\common\models\Job::className(), ['group_id' => 'id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getJobs()
+	{
+		return $this->hasMany(\common\models\Job::className(), ['group_id' => 'id']);
+	}
 
 
 
