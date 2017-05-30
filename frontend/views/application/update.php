@@ -20,20 +20,20 @@ $this->params['breadcrumbs'][] = 'Edit';
 ?>
 <div class="giiant-crud application-update">
 
-	<h1>
-		<?php echo Yii::t('models', 'Application') ?>
-		<small>
-						<?php echo $model->id ?>
-		</small>
-	</h1>
+    <h1>
+        <?php echo Yii::t('models', 'Application') ?>
+        <small>
+                        <?php echo $model->id ?>
+        </small>
+    </h1>
 
-	<div class="crud-navigation">
-		<?php echo Html::a('<span class="glyphicon glyphicon-file"></span> ' . 'View', ['view', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
-	</div>
+    <div class="crud-navigation">
+        <?php echo Html::a('<span class="glyphicon glyphicon-file"></span> ' . 'View', ['view', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+    </div>
 
-	<hr />
+    <hr />
 
-	<?php echo $this->render('_form', [
+    <?php echo $this->render('_form', [
 		'model' => $model,
 	]); ?>
 

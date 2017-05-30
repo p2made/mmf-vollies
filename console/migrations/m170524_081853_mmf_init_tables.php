@@ -112,19 +112,19 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 		}
 
 		$this->createTable('{{%user}}', [
-			'id'                => $this->primaryKey(),
-			'email'             => $this->string()->notNull(),
-			'password_hash'     => $this->string(60)->notNull(),
-			'auth_key'          => $this->string(32)->notNull(),
-			'confirmed_at'      => $this->integer()->null(),
-			'unconfirmed_email' => $this->string()->null(),
-			'registration_ip'   => $this->string(45)->null(),
-			'flags'             => $this->integer()->defaultValue(0),
-			'created_at'        => $this->integer()->notNull(),
-			'updated_at'        => $this->integer()->notNull(),
-			'last_login_at'     => $this->integer()->null(),
-			'blocked_at'        => $this->integer()->null(),
-			'username'          => $this->string(60)->notNull(),
+			'id'                   => $this->primaryKey(),
+			'email'                => $this->string()->notNull(),
+			'password_hash'        => $this->string(60)->notNull(),
+			'auth_key'             => $this->string(32)->notNull(),
+			'confirmed_at'         => $this->integer()->null(),
+			'unconfirmed_email'    => $this->string()->null(),
+			'registration_ip'      => $this->string(45)->null(),
+			'flags'                => $this->integer()->defaultValue(0),
+			'created_at'           => $this->integer()->notNull(),
+			'updated_at'           => $this->integer()->notNull(),
+			'last_login_at'        => $this->integer()->null(),
+			'blocked_at'           => $this->integer()->null(),
+			'username'             => $this->string(60)->notNull(),
 		], $this->tableOptions);
 
 		$this->createIndex('{{%user_unique_username}}', '{{%user}}', 'username', true);
@@ -139,22 +139,21 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 		}
 
 		$this->createTable('{{%profile}}', [
-			//'id'               => $this->integer()->notNull()->unique(),
 			'user_id'          => $this->primaryKey(),
 
-			'givenName'        => $this->string(64)->null(),
-			'familyName'       => $this->string(64)->null(),
+			'givenName'        => $this->string(64)->notNull(),
+			'familyName'       => $this->string(64)->notNull(),
 			'preferredName'    => $this->string(64)->null(),
-			'phone1'           => $this->string(32)->null(),
+			'phone1'           => $this->string(32)->notNull(),
 			'phone2'           => $this->string(32)->null(),
-			'address1'         => $this->string()->null(),
+			'address1'         => $this->string()->notNull(),
 			'address2'         => $this->string()->null(),
-			'locality'         => $this->string(64)->null(),
+			'locality'         => $this->string(64)->notNull(),
 			'state'            => $this->string(32)->defaultValue('Qld'),
 			'postcode'         => $this->string(32)->null(),
 			'country'          => $this->string(32)->defaultValue('Australia'),
-			'emergencyContact' => $this->string(64)->null(),
-			'emergencyPhone1'  => $this->string(32)->null(),
+			'emergencyContact' => $this->string(64)->notNull(),
+			'emergencyPhone1'  => $this->string(32)->notNull(),
 			'emergencyPhone2'  => $this->string(32)->null(),
 			'rsa'              => $this->smallInteger(1)->defaultValue(0),
 			'dl_c'             => $this->smallInteger(1)->defaultValue(0),
@@ -167,11 +166,11 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'mmfAtt'           => $this->smallInteger(1)->defaultValue(0),
 			'returned'         => $this->smallInteger(1)->defaultValue(0),
 			'dnr'              => 'year(4) default null',
-			'discovery'        => $this->string(24)->null(),
+			'discovery'        => $this->string(24)->notNull(),
 			'discoveryDetail'  => $this->string()->null(),
 			'timezone'         => $this->string(40)->null(),
-			'created_at'       => $this->integer()->null(),
-			'updated_at'       => $this->integer()->null(),
+			'created_at'       => $this->timestamp()->null(),
+			'updated_at'       => $this->timestamp()->null(),
 
 			'name'             => $this->string(255)->null(),
 			'public_email'     => $this->string(255)->null(),
@@ -219,10 +218,10 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 		}
 
 		$this->createTable('{{%token}}', [
-			'user_id'    => $this->integer()->notNull(),
-			'code'       => $this->string(32)->notNull(),
+			'user_id'	=> $this->integer()->notNull(),
+			'code'	   => $this->string(32)->notNull(),
 			'created_at' => $this->integer()->notNull(),
-			'type'       => $this->smallInteger()->notNull(),
+			'type'	   => $this->smallInteger()->notNull(),
 		], $this->tableOptions);
 
 		$this->createIndex('token_unique', '{{%token}}', ['user_id', 'code', 'type'], true);
@@ -241,8 +240,8 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'sequence'    => $this->smallInteger()->notNull(),
 			'name'        => $this->string(24)->notNull(),
 			'description' => $this->text()->null(),
-			'created_at'  => $this->integer()->notNull(),
-			'updated_at'  => $this->integer()->notNull(),
+			'created_at'  => $this->timestamp()->null(),
+			'updated_at'  => $this->timestamp()->null(),
 		], $this->tableOptions);
 	}
 
@@ -257,8 +256,8 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'id'         => $this->primaryKey(),
 			'sequence'   => $this->smallInteger()->notNull(),
 			'name'       => $this->string(24)->notNull(),
-			'created_at' => $this->integer()->notNull(),
-			'updated_at' => $this->integer()->notNull(),
+			'created_at' => $this->timestamp()->null(),
+			'updated_at' => $this->timestamp()->null(),
 		], $this->tableOptions);
 	}
 
@@ -276,8 +275,8 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'sequence'    => $this->smallInteger()->notNull(),
 			'name'        => $this->string(48)->notNull(),
 			'description' => $this->text()->null(),
-			'created_at'  => $this->integer()->notNull(),
-			'updated_at'  => $this->integer()->notNull(),
+			'created_at'  => $this->timestamp()->null(),
+			'updated_at'  => $this->timestamp()->null(),
 		], $this->tableOptions);
 	}
 
@@ -310,9 +309,9 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'team_id'             => $this->integer()->null(),
 			'rejected'            => $this->smallInteger(1)->defaultValue(0),
 			'rejectedReason'      => $this->text()->null(),
-			'created_at'          => $this->integer()->notNull(),
+			'created_at'          => $this->timestamp()->null(),
 			'created_by'          => $this->integer()->defaultValue(0),
-			'updated_at'          => $this->integer()->notNull(),
+			'updated_at'          => $this->timestamp()->null(),
 			'updated_by'          => $this->integer()->defaultValue(0),
 		], $this->tableOptions);
 	}
@@ -334,9 +333,9 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'hours'          => $this->smallInteger(6)->defaultValue(0),
 			'report'         => $this->text()->null(),
 			'reinvite'       => $this->smallInteger(1)->defaultValue(0),
-			'created_at'     => $this->integer()->notNull(),
+			'created_at'     => $this->timestamp()->null(),
 			'created_by'     => $this->integer()->defaultValue(0),
-			'updated_at'     => $this->integer()->notNull(),
+			'updated_at'     => $this->timestamp()->null(),
 			'updated_by'     => $this->integer()->defaultValue(0),
 		], $this->tableOptions);
 	}
@@ -384,9 +383,9 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'key_orig'         => $this->string(8)->notNull(),
 			'created_orig'     => $this->timestamp()->notNull(),
 			'updated_orig'     => $this->timestamp()->notNull(),
-			'created_at'       => $this->integer()->notNull(),
+			'created_at'       => $this->timestamp()->null(),
 			'created_by'       => $this->integer()->defaultValue(0),
-			'updated_at'       => $this->integer()->notNull(),
+			'updated_at'       => $this->timestamp()->null(),
 			'updated_by'       => $this->integer()->defaultValue(0),
 		], $this->tableOptions);
 	}
@@ -394,12 +393,12 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 	protected function foreignKeys($down = false)
 	{
 		if($down) {
-			$this->dropForeignKey('fk_history_profile_id', '{{%history}}');
-			$this->dropForeignKey('fk_commitment_profile_id', '{{%commitment}}');
+			$this->dropForeignKey('fk_history_user_id', '{{%history}}');
+			$this->dropForeignKey('fk_commitment_user_id', '{{%commitment}}');
 			$this->dropForeignKey('fk_application_job_choice_3', '{{%application}}');
 			$this->dropForeignKey('fk_application_job_choice_2', '{{%application}}');
 			$this->dropForeignKey('fk_application_job_choice_1', '{{%application}}');
-			$this->dropForeignKey('fk_application_profile_id', '{{%application}}');
+			$this->dropForeignKey('fk_application_user_id', '{{%application}}');
 			$this->dropForeignKey('fk_job_group_id', '{{%job}}');
 			$this->dropForeignKey('fk_job_team_id', '{{%job}}');
 			$this->dropForeignKey('fk_team_head_id', '{{%team}}');
@@ -420,7 +419,7 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'{{%token}}', 'user_id', '{{%user}}', 'id', 'cascade', 'restrict'
 		);
 		$this->addForeignKey('fk_team_head_id',
-			'{{%team}}', 'head_id', '{{%profile}}', 'user_id'
+			'{{%team}}', 'head_id', '{{%user}}', 'id'
 		);
 		$this->addForeignKey('fk_job_team_id',
 			'{{%job}}', 'team_id', '{{%team}}', 'id'
@@ -428,8 +427,8 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 		$this->addForeignKey('fk_job_group_id',
 			'{{%job}}', 'group_id', '{{%menu_group}}', 'id'
 		);
-		$this->addForeignKey('fk_application_profile_id',
-			'{{%application}}', 'user_id', '{{%profile}}', 'user_id'
+		$this->addForeignKey('fk_application_user_id',
+			'{{%application}}', 'user_id', '{{%user}}', 'id'
 		);
 		$this->addForeignKey('fk_application_job_choice_1',
 			'{{%application}}', 'job_choice_1', '{{%job}}', 'id'
@@ -440,11 +439,11 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 		$this->addForeignKey('fk_application_job_choice_3',
 			'{{%application}}', 'job_choice_3', '{{%job}}', 'id'
 		);
-		$this->addForeignKey('fk_commitment_profile_id',
-			'{{%commitment}}', 'user_id', '{{%profile}}', 'user_id'
+		$this->addForeignKey('fk_commitment_user_id',
+			'{{%commitment}}', 'user_id', '{{%user}}', 'id'
 		);
-		$this->addForeignKey('fk_history_profile_id',
-			'{{%history}}', 'user_id', '{{%profile}}', 'user_id'
+		$this->addForeignKey('fk_history_user_id',
+			'{{%history}}', 'user_id', '{{%user}}', 'id'
 		);
 	}
 }

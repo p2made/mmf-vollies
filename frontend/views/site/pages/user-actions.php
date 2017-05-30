@@ -12,27 +12,29 @@
 /* @var $this yii\web\View */
 
 use yii\bootstrap\Html;
+use yii\widgets\Breadcrumbs;
 use p2m\helpers\FA;
 
 $this->title = 'User Actions';
-$assetDir = Yii::$app->assetManager->getPublishedUrl(
-	'@vendor/p2made/yii2-startbootstrap-themes/assets/lib/business-casual'
-);
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="container">
 
+	<!-- Page Heading/Breadcrumbs -->
 	<div class="row">
-		<div class="box">
-			<div class="col-lg-12">
-				<hr>
-					<h2 class="intro-text text-center">
-						<?= Html::encode($this->title) ?>
-						<strong>business casual</strong>
-					</h2>
-				<hr>
-			</div>
+		<div class="col-lg-12">
+			<h1 class="page-header"><?= Html::encode($this->title) ?>
+				<small>Subheading</small>
+			</h1>
+<?= Breadcrumbs::widget([
+	'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+]) ?>
+		</div>
+	</div>
+	<!-- /.row -->
 
+	<div class="row">
 		<div class="col-lg-12">
 			<table class="table table-striped">
 				<tr>
@@ -88,10 +90,17 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl(
 				</tr>
 			</table>
 		</div>
+	</div>
 
-			<div class="clearfix"></div>
+	<?= $this->render('../_footer.php') ?>
+
+	<!-- Page Code Location - remove in production -->
+	<div class="row">
+		<div class="col-lg-12">
+			<code><?= __FILE__ ?></code>
 		</div>
 	</div>
 
 </div>
-<!-- /.container -->
+
+

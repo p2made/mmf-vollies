@@ -13,22 +13,22 @@ class Commitment extends BaseCommitment
 {
 
 public function behaviors()
-	{
-		return ArrayHelper::merge(
-			parent::behaviors(),
-			[
-				# custom behaviors
-			]
-		);
-	}
+    {
+        return ArrayHelper::merge(
+            parent::behaviors(),
+            [
+                # custom behaviors
+            ]
+        );
+    }
 
-	public function rules()
-	{
-		return ArrayHelper::merge(
-			 parent::rules(),
-			 [
-				  # custom validation rules
-			 ]
-		);
-	}
+    public function rules()
+    {
+        return ArrayHelper::merge(
+             parent::rules(),
+             [
+                  # custom validation rules
+             ]
+        );
+    }
 }
