@@ -12,6 +12,6 @@ return [
 				'baseUrl' => '@assetsUrl',
 			],
 		],
-		'reverseDomain' => 'dev.yii.mmf',
+		'reverseDomain' => 'dev.a4e-dev', // customise for your host configuration
 	],
 ];

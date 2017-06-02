@@ -6,22 +6,22 @@
  * #####                                                           #####
  * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
  */
-/* dev */
-$_urlBase = 'mmf.yii.dev';
-$_urlBaseFrontend = 'http://vollies'  . $_urlBase;
-$_urlBaseBackend  = 'http://volhq.'   . $_urlBase;
+$_urlBase = 'a4e-dev.dev';
+$_urlBaseFrontend = 'http://'         . $_urlBase;
+$_urlBaseBackend  = 'http://backend.' . $_urlBase;
 $_urlBaseAssets   = 'http://static.'  . $_urlBase;
-
-/* prod
-$_urlBase = 'malenymusicfestival.com';
-$_urlBaseFrontend = 'http://vollies'  . $_urlBase;
-$_urlBaseBackend  = 'http://volhq.'   . $_urlBase;
-$_urlBaseAssets   = 'http://static.'  . $_urlBase;
- */
+$_urlBaseApi      = 'http://api.'     . $_urlBase;
 
 return [
 	'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
 	'components' => [
+		// NOTE: in the yii2-advanced-app, the user component should be updated in
+		// 'frontend/config/main.php' and/or 'backend/config/main.php' (OR you can add it
+		// to 'common/config' if you remove it from frontend/backend)
+		/*
+		'user' => [
+		],
+		*/
 		'assetManager' => [
 			//'appendTimestamp' => true, // useful while developing custom assets
 			'bundles' => [
@@ -64,6 +64,10 @@ return [
 		'urlManagerAssets' => [
 			'class' => 'yii\web\urlManager',
 			'baseUrl' => $_urlBaseAssets,
+		],
+		'urlManagerApi' => [
+			'class' => 'yii\web\urlManager',
+			'baseUrl' => $_urlBaseApi,
 		],
 		'cache' => [
 			'class' => 'yii\caching\FileCache',

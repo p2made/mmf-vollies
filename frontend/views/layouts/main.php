@@ -12,11 +12,9 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-frontend\assets\VolliesAsset::register($this);
-
 $layout = 'primary';
 $actionId = Yii::$app->controller->action->id;
-$entryIds  = [NULL, 'login', 'signup', 'request-password-reset', 'error'];
+$entryIds  = [NULL, 'login', 'signup', 'request-password-reset'];
 $foundId = array_search($actionId, $entryIds);
 
 if (false !== $foundId) {

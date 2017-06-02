@@ -16,52 +16,43 @@ use yii\bootstrap\NavBar;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-$loginItem = ['label' => 'Login', 'url' => ['/site/login']];
-$signupItem = ['label' => 'Signup', 'url' => ['/site/signup']];
-
-$menuItems = [['label' => 'Home', 'url' => Yii::$app->homeUrl]];
-if (Yii::$app->controller->action->id === 'login') {
-	$menuItems[] = $signupItem;
-} else {
-	$menuItems[] = $loginItem;
-}
-if (Yii::$app->controller->action->id === 'error') {
-	$menuItems[] = $signupItem;
-}
-?>
-
+p2m\SB\assets\ModernBusinessAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-	<?= $this->render('_head.php') ?>
+	<?= $this->render('_header.php', []) ?>
 </head>
 <body>
-	<?php $this->beginBody() ?>
+<?php $this->beginBody() ?>
 
-	<?= $this->render('_header.php') ?>
+<?php
+NavBar::begin([
+	'brandLabel' => 'P2 Modern Business',
+	'brandUrl' => Yii::$app->homeUrl,
+	'options' => [
+		'class' => 'navbar navbar-inverse navbar-fixed-top',
+	],
+]);
 
-	<?php
-		NavBar::begin([
-			'brandLabel' => 'P2 Modern Business',
-			'brandUrl' => Yii::$app->homeUrl,
-			'options' => [
-				'class' => 'navbar navbar-default',
-			],
-		]);
-		echo Nav::widget([
-			'options' => ['class' => 'nav navbar-nav'],
-			'items' => $menuItems,
-		]);
-		NavBar::end();
-	?>
+$menuItems = [];
+if (Yii::$app->controller->action->id === 'signup') {
+	$menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+} else {
+	$menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+}
 
-	<?= $content ?>
+echo Nav::widget([
+	'options' => ['class' => 'navbar-nav navbar-right'],
+	'items' => $menuItems,
+]);
+NavBar::end();
+?>
 
-	<?= $this->render('_footer.php') ?>
+<?= $content ?>
 
-	<?php $this->endBody() ?>
+<?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>
