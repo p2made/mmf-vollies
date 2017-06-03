@@ -1,189 +1,187 @@
 <?php
+
 namespace common\models;
 
 use Yii;
-use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
+use yii\helpers\ArrayHelper;
 
 /**
- * User model
+ * User ActiveRecord model.
  *
+ * @property bool	$isAdmin
+ * @property bool	$isBlocked
+ * @property bool	$isConfirmed
+ *
+ * Database fields:
  * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $email
- * @property string $auth_key
- * @property integer $status
+ * @property string  $username
+ * @property string  $email
+ * @property string  $unconfirmed_email
+ * @property string  $password_hash
+ * @property string  $auth_key
+ * @property string  $registration_ip
+ * @property integer $confirmed_at
+ * @property integer $blocked_at
  * @property integer $created_at
  * @property integer $updated_at
- * @property string $password write-only password
+ * @property integer $last_login
+ * @property integer $flags
+ *
+ * Defined relations:
+ * @property Account[] $accounts
+ * @property Profile   $profile
+ *
+ * Dependencies:
+ * @property-read Finder $finder
+ * @property-read Module $module
+ * @property-read Mailer $mailer
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends \dektrium\user\models\User
 {
-    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
+	//use ModuleTrait;
+
+	//const BEFORE_CREATE   = 'beforeCreate';
+	//const AFTER_CREATE	= 'afterCreate';
+	//const BEFORE_REGISTER = 'beforeRegister';
+	//const AFTER_REGISTER  = 'afterRegister';
+	//const BEFORE_CONFIRM  = 'beforeConfirm';
+	//const AFTER_CONFIRM   = 'afterConfirm';
+
+	// following constants are used on secured email changing process
+	//const OLD_EMAIL_CONFIRMED = 0b1;
+	//const NEW_EMAIL_CONFIRMED = 0b10;
+
+	/** @var string Plain password. Used for model validation. */
+	//public $password;
+
+	/** @var Profile|null */
+	//private $_profile;
+
+	/** @var string Default username regexp */
+	//public static $usernameRegexp = '/^[-a-zA-Z0-9_\.@]+$/';
+
+	public function behaviors()
+	{
+		return ArrayHelper::merge(
+			parent::behaviors(),
+			[
+				# custom behaviors
+			]
+		);
+	}
+
+	public function rules()
+	{
+		return ArrayHelper::merge(
+			parent::rules(),
+			[
+				# custom validation rules
+			]
+		);
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return '{{%user}}';
-    }
+	public function pastJobs()
+	{
+		$commitments = Commitment::find()
+			->where(['user_id' => $this->id])
+			->orderBy('year')
+			->all();
+		$jobs = [];
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
+		if (count($commitments) < 1) {
+			return null;
+		}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-        ];
-    }
+		foreach ($commitments as $commitment) {
+			$jobs = array_merge($jobs,
+				[$commitment->year => $commitment->job]
+			);
+		}
 
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentity($id)
-    {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-    }
+		if (count($jobs) == 1) {
+			return 'Previous job:' . $jobs[0];
+		}
 
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-    }
+		ksort($jobs);
+		$jobString = 'Previous jobs:' . array_shift($jobs);
+		foreach ($jobs as $job) {
+			$jobString .= ', ' . ksort($jobs);
+		}
 
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
-    }
+		return $jobString;
+	}
 
-    /**
-     * Finds user by password reset token
-     *
-     * @param string $token password reset token
-     * @return static|null
-     */
-    public static function findByPasswordResetToken($token)
-    {
-        if (!static::isPasswordResetTokenValid($token)) {
-            return null;
-        }
+	public function hasCurentApplication()
+	{
+		$application = Application::find()
+			->where(['id' => 123])
+			->one();
 
-        return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
-        ]);
-    }
+		return ($application != null);
+	}
+	//protected function getFinder()
 
-    /**
-     * Finds out if password reset token is valid
-     *
-     * @param string $token password reset token
-     * @return bool
-     */
-    public static function isPasswordResetTokenValid($token)
-    {
-        if (empty($token)) {
-            return false;
-        }
+	//protected function getMailer()
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
-        return $timestamp + $expire >= time();
-    }
+	//public function getIsConfirmed()
 
-    /**
-     * @inheritdoc
-     */
-    public function getId()
-    {
-        return $this->getPrimaryKey();
-    }
+	//public function getIsBlocked()
 
-    /**
-     * @inheritdoc
-     */
-    public function getAuthKey()
-    {
-        return $this->auth_key;
-    }
+	//public function getIsAdmin()
 
-    /**
-     * @inheritdoc
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->getAuthKey() === $authKey;
-    }
+	//public function getProfile()
 
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return Yii::$app->security->validatePassword($password, $this->password_hash);
-    }
+	//public function setProfile(Profile $profile)
 
-    /**
-     * Generates password hash from password and sets it to the model
-     *
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
-    }
+	//public function getAccounts()
 
-    /**
-     * Generates "remember me" authentication key
-     */
-    public function generateAuthKey()
-    {
-        $this->auth_key = Yii::$app->security->generateRandomString();
-    }
+	//public function getAccountByProvider($provider)
 
-    /**
-     * Generates new password reset token
-     */
-    public function generatePasswordResetToken()
-    {
-        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
-    }
+	//public function getId()
 
-    /**
-     * Removes password reset token
-     */
-    public function removePasswordResetToken()
-    {
-        $this->password_reset_token = null;
-    }
+	//public function getAuthKey()
+
+	//public function attributeLabels()
+
+	//public function behaviors()
+
+	//public function scenarios()
+
+	//public function rules()
+
+	//public function validateAuthKey($authKey)
+
+	//public function create()
+
+	//public function register()
+
+	//public function attemptConfirmation($code)
+
+	//public function resendPassword()
+
+	//public function attemptEmailChange($code)
+
+	//public function confirm()
+
+	//public function resetPassword($password)
+
+	//public function block()
+
+	//public function unblock()
+
+	//public function generateUsername()
+
+	//public function beforeSave($insert)
+
+	//public function afterSave($insert, $changedAttributes)
+
+	//public static function tableName()
+
+	//public static function findIdentity($id)
+
+	//public static function findIdentityByAccessToken($token, $type = null)
+
+
+
 }

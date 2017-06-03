@@ -6,12 +6,12 @@ return [
 
 	'p2m' => [
 		'assets' => [
-			'useStatic' => true, // false or not set to use published assets
+			'useStatic' => true,
 			'staticEnd' => [
 				'basePath' => '@assets',
 				'baseUrl' => '@assetsUrl',
 			],
 		],
-		'reverseDomain' => 'dev.a4e-dev', // customise for your host configuration
+		'reverseDomain' => 'dev.yii.mmf',
 	],
 ];

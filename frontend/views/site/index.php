@@ -12,183 +12,53 @@
 /* @var $this yii\web\View */
 
 use yii\bootstrap\Html;
-use p2m\helpers\FA;
+use yii\helpers\Url;
 
 $this->title = 'Home';
+$assetDir = Yii::$app->assetManager->getPublishedUrl(
+	'@frontend/assets/lib'
+);
 ?>
 
-<!-- Header Carousel -->
-<header id="myCarousel" class="carousel slide">
-	<!-- Indicators -->
-	<ol class="carousel-indicators">
-		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		<li data-target="#myCarousel" data-slide-to="1"></li>
-		<li data-target="#myCarousel" data-slide-to="2"></li>
-	</ol>
-
-	<!-- Wrapper for slides -->
-	<div class="carousel-inner">
-		<div class="item active">
-			<div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
-			<div class="carousel-caption">
-				<h2>Caption 1</h2>
-			</div>
-		</div>
-		<div class="item">
-			<div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
-			<div class="carousel-caption">
-				<h2>Caption 2</h2>
-			</div>
-		</div>
-		<div class="item">
-			<div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
-			<div class="carousel-caption">
-				<h2>Caption 3</h2>
-			</div>
-		</div>
-	</div>
-
-	<!-- Controls -->
-	<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-		<span class="icon-prev"></span>
-	</a>
-	<a class="right carousel-control" href="#myCarousel" data-slide="next">
-		<span class="icon-next"></span>
-	</a>
-</header>
-
-<!-- Page Content -->
 <div class="container">
 
-	<!-- Marketing Icons Section -->
 	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">
-					Welcome to Modern Business
-			</h1>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4><i class="fa fa-fw fa-check"></i> Bootstrap v3.3.7</h4>
-				</div>
-				<div class="panel-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
+		<div class="box">
+			<div class="col-md-12">
+				<hr>
+				<h2 class="intro-text text-center">Thanks for helping!</h2>
+				<hr>
 			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4><i class="fa fa-fw fa-gift"></i> Free &amp; Open Source</h4>
-				</div>
-				<div class="panel-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4><i class="fa fa-fw fa-compass"></i> Easy to Use</h4>
-				</div>
-				<div class="panel-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /.row -->
-
-	<!-- Portfolio Section -->
-	<div class="row">
-		<div class="col-lg-12">
-			<h2 class="page-header">Portfolio Heading</h2>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<a href="portfolio-item.html">
-				<img src="http://placehold.it/700x450" alt="" class="img-responsive img-portfolio img-hover">
-			</a>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<a href="portfolio-item.html">
-				<img src="http://placehold.it/700x450" alt="" class="img-responsive img-portfolio img-hover">
-			</a>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<a href="portfolio-item.html">
-				<img src="http://placehold.it/700x450" alt="" class="img-responsive img-portfolio img-hover">
-			</a>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<a href="portfolio-item.html">
-				<img src="http://placehold.it/700x450" alt="" class="img-responsive img-portfolio img-hover">
-			</a>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<a href="portfolio-item.html">
-				<img src="http://placehold.it/700x450" alt="" class="img-responsive img-portfolio img-hover">
-			</a>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<a href="portfolio-item.html">
-				<img src="http://placehold.it/700x450" alt="" class="img-responsive img-portfolio img-hover">
-			</a>
-		</div>
-	</div>
-	<!-- /.row -->
-
-	<!-- Features Section -->
-	<div class="row">
-		<div class="col-lg-12">
-			<h2 class="page-header">Modern Business Features</h2>
-		</div>
-		<div class="col-md-6">
-			<p>The Modern Business template by Start Bootstrap includes:</p>
-			<ul>
-				<li><strong>Bootstrap v3.3.7</strong></li>
-				<li>jQuery v2.2.4</li>
-				<li>Font Awesome v4.7.0</li>
-				<li>Working PHP contact form with validation</li>
-				<li>Unstyled page elements for easy customization</li>
-				<li>17 HTML pages</li>
-			</ul>
-			<p>This Yii2 implementation of Modern Business is crafted with <?= FA::icon('heart') ?> by Pedro fp, on the
-			<a href="https://en.wikipedia.org/wiki/Sunshine_Coast,_Queensland" target="_blank">
-					Sunshine Coast <?= FA::icon(FA::_EXTERNAL_LINK) ?>
-			</a> of Queensland Australia.</p>
-		</div>
-		<div class="col-md-6">
-			<img src="http://placehold.it/700x450" alt="" class="img-responsive">
-		</div>
-	</div>
-	<!-- /.row -->
-
-	<hr>
-
-	<!-- Call to Action Section -->
-	<div class="well">
-		<div class="row">
 			<div class="col-md-8">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+				<p>Volunteering is a great way to support and get involved with the Maleny Music Festival.</p>
+				<p>We  offer volunteers a 3 day Festival pass in return for working 8 hours during the event, or for helping set up/take down the Festival (hours as required during the week before the event).</p>
+				<p>We also provide a dedicated volunteer tent where you can recharge and refresh before or after your shifts. All volunteers have to complete a brief Safety Induction before they start work.</p>
+				<p>Your Volunteers Coordinator for Maleny Music Festival 2017 is Pedro. He's the chap pictured wearing the top hat. If you have any questions about volunteering, or have volunteered before but not recieved the email invitation to apply, contact him at <strong><a href="m&#x61;i&#108;&#x74;o&#58;&#x76;o&#x6c;&#x6c;i&#x65;s&#64;&#x6d;a&#108;&#x65;n&#x79;&#x6d;u&#x73;&#x69;c&#x66;e&#115;&#x74;i&#118;&#x61;l&#x2e;&#x63;o&#x6d;">&#118;o&#x6c;l&#x69;e&#x73;&#64;&#x6d;a&#x6c;e&#x6e;&#121;&#x6d;&#117;s&#105;c&#x66;e&#x73;t&#x69;v&#x61;l&#x2e;c&#x6f;&#109;</a></strong> or <strong>0400&nbsp;473&nbsp;376</strong>.</p>
+				<p><strong>Important notes for volunteering</strong> &#8211; Volunteers need to:</p>
+				<ul>
+					<li>be over 18 years of age</li>
+					<li>complete a brief safety induction before starting work</li>
+					<li>provide a photo ID before starting work</li>
+				</ul>
+				<p>Thanks again for your help – we couldn’t do it without you!</p>
 			</div>
 			<div class="col-md-4">
-				<a class="btn btn-lg btn-default btn-block" href="#">Call to Action</a>
+				<img src="<?= $assetDir ?>/img/vollies+pedro.jpg" alt="Vollies" width="300" height="450">
 			</div>
-		</div>
-	</div>
-
-	<?= $this->render('_footer.php') ?>
-
-	<!-- Page Code Location - remove in production -->
-	<div class="row">
-		<div class="col-lg-12">
-			<code><?= __FILE__ ?></code>
+			<div class="col-md-12"><hr></div>
+			<div class="col-md-4 col-md-offset-1">
+				<?= Html::a('New Volunteers Start Here', ['/user/registration/register'], [
+					'class' => 'btn btn-warning btn-lg btn-block',
+					'role' => 'button',
+				]) ?>
+			</div>
+			<div class="col-md-4 col-md-offset-2">
+				<?= Html::a('Returning Volunteers Start Here', ['/user/security/login'], [
+					'class' => 'btn btn-success btn-lg btn-block',
+					'role' => 'button',
+				]) ?>
+			</div>
 		</div>
 	</div>
 
 </div>
-<!-- /.container -->

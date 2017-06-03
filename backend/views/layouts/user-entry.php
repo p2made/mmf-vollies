@@ -5,7 +5,7 @@
  * @copyright Copyright &copy; Pedro Plowman, 2017
  * @author Pedro Plowman
  * @link https://github.com/p2made
- * @package p2made/yii2-a4e
+ * @package p2made/yii2-sb-admin-theme
  * @license MIT
  */
 

@@ -2,25 +2,24 @@
 	"name": "p2made/yii.mmf-vollies",
 	"description": "Maleny Music Festival Volunteers Webapp",
 	"homepage": "https://github.com/p2made/yii.mmf-vollies",
-	"type": "project",
 	"minimum-stability": "stable",
 
 	"require": {
 		"php": ">=5.4.0",
 		"yiisoft/yii2": "^2.0",
 		"yiisoft/yii2-swiftmailer": "^2.0",
-		"p2made/yii2-a4e": "^0.0",
-		"p2made/yii2-p2y2-things": "^2.5",
-		"p2made/yii2-p2y2-things-demo": "^2.5",
-		"p2made/yii2-p2y2-kartik-collection": "^0.1",
+		"p2made/yii2-a4e": "^0.1",
 		"ruskid/yii2-ip-behavior": "dev-master",
+		"kartik-v/yii2-builder": "^1.6",
+		"kartik-v/yii2-widget-activeform": "^1.4",
+		"kartik-v/yii2-widget-select2": "^2.0",
+		"kartik-v/yii2-widgets": "^3.4",
 		"dektrium/yii2-user": "^0.9"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "^2.0",
 		"yiisoft/yii2-gii": "^2.0",
 		"yiisoft/yii2-faker": "^2.0",
-		"codeception/codeception": "^2.2",
 		"codeception/base": "^2.2",
 		"codeception/verify": "^0.3",
 		"schmunk42/yii2-giiant": "^0.9.0"
@@ -34,6 +33,8 @@
 			}
 		},
 		"process-timeout": 1800
+	},
+	"extra": {
 	},
 	"scripts": {
 		"post-install-cmd": "php init --env=Development --overwrite=n"

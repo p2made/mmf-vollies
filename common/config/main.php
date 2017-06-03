@@ -1,27 +1,26 @@
 <?php
 /*
  * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
- * #####                                                           #####
+ * #####														   #####
  * #####   Customise these lines to suit your host configuration   #####
- * #####                                                           #####
+ * #####														   #####
  * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
  */
-$_urlBase = 'a4e-dev.dev';
-$_urlBaseFrontend = 'http://'         . $_urlBase;
-$_urlBaseBackend  = 'http://backend.' . $_urlBase;
+$_urlBase = 'mmf.yii.dev';
+$_urlBaseFrontend = 'http://vollies.' . $_urlBase;
+$_urlBaseBackend  = 'http://volhq.'   . $_urlBase;
 $_urlBaseAssets   = 'http://static.'  . $_urlBase;
-$_urlBaseApi      = 'http://api.'     . $_urlBase;
+
+//	vollies.mmf.yii.dev
+//	volhq.mmf.yii.dev
+//	static.mmf.yii.dev
 
 return [
 	'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+	'modules' => [
+		'user' => require(__DIR__ . '/user.php'),
+	],
 	'components' => [
-		// NOTE: in the yii2-advanced-app, the user component should be updated in
-		// 'frontend/config/main.php' and/or 'backend/config/main.php' (OR you can add it
-		// to 'common/config' if you remove it from frontend/backend)
-		/*
-		'user' => [
-		],
-		*/
 		'assetManager' => [
 			//'appendTimestamp' => true, // useful while developing custom assets
 			'bundles' => [
@@ -45,7 +44,7 @@ return [
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
-			'suffix' => '.p2m',
+			'suffix' => '.mff',
 			'rules' => [
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -64,10 +63,6 @@ return [
 		'urlManagerAssets' => [
 			'class' => 'yii\web\urlManager',
 			'baseUrl' => $_urlBaseAssets,
-		],
-		'urlManagerApi' => [
-			'class' => 'yii\web\urlManager',
-			'baseUrl' => $_urlBaseApi,
 		],
 		'cache' => [
 			'class' => 'yii\caching\FileCache',

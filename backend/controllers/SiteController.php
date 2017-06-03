@@ -50,9 +50,6 @@ class SiteController extends Controller
 			'error' => [
 				'class' => 'yii\web\ErrorAction',
 			],
-			'page' => [
-				'class' => 'yii\web\ViewAction',
-			],
 		];
 	}
 
