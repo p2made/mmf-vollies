@@ -39,46 +39,44 @@ $fieldOptions2 = [
 	<div class="sb-logo">
 		MMF Vollies HQ
 	</div>
-
 	<div class="sb-box-body panel panel-default">
 		<div class="panel-body">
+
+			<p class="sb-box-msg">Login to start your session</p>
+
 			<?php $form = ActiveForm::begin([
 				'id' => 'login-form',
-				'enableAjaxValidation' => true,
-				'enableClientValidation' => false,
-				'validateOnBlur' => false,
-				'validateOnType' => false,
-				'validateOnChange' => false,
-			]) ?>
+				'enableClientValidation' => false
+			]); ?>
 
-				<?= $form->field($model, 'login', ['inputOptions' => [
-					'autofocus' => 'autofocus',
-					'class' => 'form-control',
-					'tabindex' => '1'
-				]]) ?>
+				<?= $form
+					->field($model, 'username', $fieldOptions1)
+					->label(false)
+					->textInput(['placeholder' => $model->getAttributeLabel('username')])
+				?>
 
-				<?= $form->field($model, 'password', ['inputOptions' => [
-					'class' => 'form-control',
-					'tabindex' => '2'
-				]])->passwordInput()->label(Yii::t('user', 'Password') . ($module->enablePasswordRecovery ? ' (' . Html::a(Yii::t('user', 'Forgot password?'), ['/user/recovery/request'], ['tabindex' => '5']) . ')' : '')) ?>
+				<?= $form
+					->field($model, 'password', $fieldOptions2)
+					->label(false)
+					->passwordInput(['placeholder' => $model->getAttributeLabel('password')])
+				?>
 
 				<div class="row">
-					<div class="col-md-8">
-						<?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '3']) ?>
+					<div class="col-xs-8">
+						<?= $form->field($model, 'rememberMe')->checkbox() ?>
 					</div>
-					<div class="col-md-4">
-						<?= Html::submitButton(Yii::t('user', 'Sign in'), [
+					<div class="col-xs-4">
+						<?= Html::submitButton('Login', [
 							'class' => 'btn btn-primary btn-block btn-flat',
-							'name' => 'login-button',
-							'tabindex' => '4',
+							'name' => 'login-button'
 						]) ?>
 					</div>
 				</div>
 
 			<?php ActiveForm::end(); ?>
+
 		</div>
 	</div>
-	<?= Connect::widget([
-		'baseAuthUrl' => ['/user/security/auth'],
-	]) ?>
 </div>
+
+

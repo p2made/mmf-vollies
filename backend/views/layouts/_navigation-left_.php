@@ -21,7 +21,7 @@ $arrowIcon = FA::i('arrow')->tag('span');
 <section class="navbar-default sidebar" role="navigation">
 	<div class="sidebar-nav navbar-collapse">
 		<ul class="nav" id="side-menu">
-			<!--<li class="sidebar-search">
+			<li class="sidebar-search">
 				<div class="input-group custom-search-form">
 					<input type="text" class="form-control" placeholder="Search...">
 					<span class="input-group-btn">
@@ -30,40 +30,64 @@ $arrowIcon = FA::i('arrow')->tag('span');
 						</button>
 					</span>
 				</div>
-			</li>-->
+			</li>
 			<li><?= Html::a(
 				FA::fw('dashboard') . ' Dashboard',
 				Yii::$app->homeUrl
 			) ?></li><!-- Dashboard -->
+			<li>
+				<a href="#"><?= FA::fw('bar-chart-o') ?> Charts<?= $arrowIcon ?></a>
+				<?= MetisNav::widget([
+					'encodeLabels' => false,
+					'options' => ['class' => 'nav nav-second-level'],
+					'items' => [
+						['label' => 'Flot Charts', 'url' => ['/site/page', 'view' => 'flot']],
+						['label' => 'Morris.js Charts', 'url' => ['/site/page', 'view' => 'morris']],
+					],
+				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+				]) ?>
+			</li><!-- Charts -->
 			<li><?= Html::a(
-				FA::fw('group') . 'Applications',
-				Url::to(['/application/index'])
-			) ?></li><!-- Applications -->
+				FA::fw('table') . 'Tables',
+				Url::to(['/site/page', 'view' => 'tables'])
+			) ?></li><!-- Tables -->
 			<li><?= Html::a(
-				FA::fw('group') . 'Commitments',
-				Url::to(['/commitment/index'])
-			) ?></li><!-- Commitments -->
+				FA::fw('edit') . 'Forms',
+				Url::to(['/site/page', 'view' => 'forms'])
+			) ?></li><!-- Forms -->
 			<li><?= Html::a(
-				FA::fw('group') . 'Histories',
-				Url::to(['/history/index'])
-			) ?></li><!-- Histories -->
-			<li><?= Html::a(
-				FA::fw('group') . 'Jobs',
-				Url::to(['/job/index'])
-			) ?></li><!-- Jobs -->
-			<li><?= Html::a(
-				FA::fw('group') . 'Profiles',
-				Url::to(['/profile/index'])
-			) ?></li><!-- Profiles -->
-			<li><?= Html::a(
-				FA::fw('group') . 'Teams',
-				Url::to(['/Teams/index'])
-			) ?></li><!-- team -->
-			<li><?= Html::a(
-				FA::fw('group') . 'Users',
-				Url::to(['/Users/index'])
-			) ?></li><!-- user -->
-
+				FA::fw('calendar') . 'Calendar',
+				Url::to(['/site/page', 'view' => 'calendar'])
+			) ?></li><!-- Calendar -->
+			<li>
+				<a href="#"><?= FA::fw('wrench') ?> UI Elements<?= $arrowIcon ?></a>
+				<?= MetisNav::widget([
+					'encodeLabels' => false,
+					'options' => ['class' => 'nav nav-second-level'],
+					'items' => [
+						['label' => 'Panels and Wells', 'url' => ['/site/page', 'view' => 'panels-wells']],
+						['label' => 'Buttons', 'url' => ['/site/page', 'view' => 'buttons']],
+						['label' => 'Notifications', 'url' => ['/site/page', 'view' => 'notifications']],
+						['label' => 'Typography', 'url' => ['/site/page', 'view' => 'typography']],
+						['label' => 'Grid', 'url' => ['/site/page', 'view' => 'grid']],
+					],
+				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+				]) ?>
+			</li><!-- UI Elements -->
+			<li>
+				<a href="#"><?= FA::fw('image') ?> Icons<?= $arrowIcon ?></a>
+				<?= MetisNav::widget([
+					'encodeLabels' => false,
+					'options' => ['class' => 'nav nav-second-level'],
+					'items' => [
+						['label' => 'Font Awesome', 'url' => ['/site/page', 'view' => 'font-awesome']],
+						['label' => 'Font Awesome Examples', 'url' => ['/site/page', 'view' => 'font-awesome-examples']],
+						['label' => 'Glyphicons', 'url' => ['/site/page', 'view' => 'glyphicons']],
+						['label' => 'Flag Icon CSS', 'url' => ['/site/page', 'view' => 'flag-icon-css']],
+						['label' => 'Bootstrap Social', 'url' => ['/site/page', 'view' => 'bootstrap-social']],
+					],
+				]) ?>
+			</li><!-- Icons -->
 			<li>
 				<a href="#"><?= FA::fw('sitemap') ?> Multi-Level Dropdown<?= $arrowIcon ?></a>
 				<ul class="nav nav-second-level">
@@ -128,4 +152,11 @@ $arrowIcon = FA::i('arrow')->tag('span');
 </section>
 
 <!--
+application
+commitment
+history
+job
+profile
+team
+user
 -->

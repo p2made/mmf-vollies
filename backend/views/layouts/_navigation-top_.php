@@ -113,9 +113,9 @@ if (Yii::$app->user->isGuest) {
 echo Nav::widget([
 	'options' => ['class' => 'nav navbar-top-links navbar-right'],
 	'items' => [
-		//$messagesMenu, // dropdown-messages
-		//$tasksMenu, // dropdown-tasks
-		//$alertsMenu, // dropdown-alerts
+		$messagesMenu, // dropdown-messages
+		$tasksMenu, // dropdown-tasks
+		$alertsMenu, // dropdown-alerts
 		$userMenu, // dropdown-user
 	],
 	'encodeLabels' => false,

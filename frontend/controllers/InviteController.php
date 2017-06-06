@@ -50,8 +50,8 @@ class InviteController extends Controller
 		$layout = ($model->role == 1 ? 'invite-special' : 'invite-vollies');
 
 		Yii::$app->mailer->compose($layout, [
-			'email'    => $model->email,
-			'name'     => $model->name,
+			'email'	=> $model->email,
+			'name'	 => $model->name,
 			'password' => $model->password,
 		])
 			->setFrom('vollies@malenymusicfestival.com')

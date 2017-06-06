@@ -29,9 +29,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string $refereeRelationship
  * @property string $refereePhone
  * @property string $bestCallingTime
- * @property integer $accepted
+ * @property integer $status
  * @property integer $team_id
- * @property integer $rejected
  * @property string $rejectedReason
  * @property integer $created_at
  * @property integer $created_by
@@ -80,7 +79,7 @@ abstract class Application extends \yii\db\ActiveRecord
 	{
 		return [
 			[['user_id', 'job_choice_1', 'year', 'availableFromDate', 'availableFromTime', 'availableToDate', 'availableToTime'], 'required'],
-			[['user_id', 'job_choice_1', 'job_choice_2', 'job_choice_3', 'availableFromTime', 'availableToTime', 'bestTIme', 'double', 'accepted', 'team_id', 'rejected'], 'integer'],
+			[['user_id', 'job_choice_1', 'job_choice_2', 'job_choice_3', 'availableFromTime', 'availableToTime', 'bestTIme', 'double', 'status', 'team_id'], 'integer'],
 			[['year'], 'safe'],
 			[['availabilityNotes', 'otherNotes', 'rejectedReason'], 'string'],
 			[['availableFromDate', 'availableToDate'], 'string', 'max' => 8],
@@ -118,9 +117,8 @@ abstract class Application extends \yii\db\ActiveRecord
 			'refereeRelationship' => 'Referee Relationship',
 			'refereePhone' => 'Referee Phone',
 			'bestCallingTime' => 'Best Calling Time',
-			'accepted' => 'Accepted',
+			'status' => 'Status',
 			'team_id' => 'Team ID',
-			'rejected' => 'Rejected',
 			'rejectedReason' => 'Rejected Reason',
 			'created_at' => 'Created At',
 			'created_by' => 'Created By',

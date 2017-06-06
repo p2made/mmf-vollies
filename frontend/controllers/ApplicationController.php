@@ -64,11 +64,8 @@ class ApplicationController extends Controller
 	public function actionCreate()
 	{
 		$model = new Application();
-		$model->user_id = Yii::$app->user->identity->id;
-		$model->year = gmdate('Y');
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			$this->emailApplicant($model);
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('create', [
@@ -124,17 +121,4 @@ class ApplicationController extends Controller
 			throw new NotFoundHttpException('The requested page does not exist.');
 		}
 	}
-
-	protected function emailApplicant($model)
-	{
-		Yii::$app->mailer->compose('application-complete', [
-			'vollieName' => $model->vollieName(),
-			'jobChoices' => $model->jobChoices(),
-		])
-			->setFrom('vollies@malenymusicfestival.com')
-			->setTo(Yii::$app->user->identity->email)
-			->setSubject('Maleny Music Festival 2017 Volunteer Application')
-			->send();;
-	}
-
 }

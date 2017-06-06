@@ -1,7 +1,7 @@
 <?php
 return [
 	'class' => \dektrium\user\Module::className(),
-	'urlPrefix' => 'vollie',
+	'urlPrefix' => 'mmf',
 	'modelMap' => [
 		'User' => 'common\models\User',
 		'Profile' => 'common\models\Profile',
@@ -14,5 +14,5 @@ return [
 		'reconfirmationSubject' => 'Please confirm your new email',
 		'recoverySubject'	   => 'Recover your login',
 	],
-	'admins' => ['vollies', 'noel', 'joan', 'john', 'lisa', 'tom', 'pedro', 'nahum'],
+	'admins' => ['vollies', 'joan', 'john', 'lisa', 'nahum', 'noel', 'pedro', 'susie', 'tom'],
 ];
