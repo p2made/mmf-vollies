@@ -24,13 +24,12 @@ $this->title = Yii::t('user', 'Sign in');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
-
 <div class="container">
 	<div class="box">
 
 		<div class="row">
 			<div class="col-lg-12">
+				<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
 				<hr>
 					<h2 class="intro-text text-center">
 						<?= Html::encode($this->title) ?>
