@@ -35,7 +35,6 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl(
 </head>
 <body>
 	<?php $this->beginBody() ?>
-	<?= Alert::widget() ?>
 
 	<div class="brand">
 		<a href="/"><img src="<?= $assetDir ?>/img/2017-header-900.png" width="900" alt="Maleny Music Festival"></a>
@@ -57,15 +56,6 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl(
 	</footer>
 
 	<?php $this->endBody() ?>
-
-	<!-- Script to Activate the Carousel -->
-	<script>
-		$(document).ready(function(){
-			$('.carousel').carousel({
-				interval: 5000 //changes the speed
-			})
-		});
-	</script>
 </body>
 </html>
 <?php $this->endPage() ?>
