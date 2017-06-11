@@ -9,6 +9,8 @@
 		"yiisoft/yii2": "^2.0",
 		"yiisoft/yii2-swiftmailer": "^2.0",
 		"p2made/yii2-a4e": "^0.1",
+		"p2made/yii2-p2y2-things": "^2.8",
+		"p2made/yii2-p2y2-things-demo": "^2.8",
 		"ruskid/yii2-ip-behavior": "dev-master",
 		"kartik-v/yii2-builder": "^1.6",
 		"kartik-v/yii2-widget-activeform": "^1.4",
