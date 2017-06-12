@@ -17,4 +17,14 @@
 $this->title = $title;
 ?>
 
-<?= $this->render('/_alert', ['module' => $module]);
+<div class="container">
+	<div class="box">
+
+		<div class="row">
+			<div class="col-md-12">
+				<?= $this->render('/_alert', ['module' => $module]) ?>
+			</div>
+		</div>
+
+	</div>
+</div>
