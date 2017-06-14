@@ -36,6 +36,22 @@ $arrowIcon = FA::i('arrow')->tag('span');
 				Yii::$app->homeUrl
 			) ?></li><!-- Dashboard -->
 			<li><?= Html::a(
+				FA::fw('group') . 'Users',
+				Url::to(['/user/admin/index'])
+			) ?></li><!-- Users -->
+			<li><?= Html::a(
+				FA::fw('group') . 'Profiles',
+				Url::to(['/profile/index'])
+			) ?></li><!-- Profiles -->
+			<li><?= Html::a(
+				FA::fw('group') . 'Teams',
+				Url::to(['/team/index'])
+			) ?></li><!-- Teams -->
+			<li><?= Html::a(
+				FA::fw('group') . 'Jobs',
+				Url::to(['/job/index'])
+			) ?></li><!-- Jobs -->
+			<li><?= Html::a(
 				FA::fw('group') . 'Applications',
 				Url::to(['/application/index'])
 			) ?></li><!-- Applications -->
@@ -47,22 +63,6 @@ $arrowIcon = FA::i('arrow')->tag('span');
 				FA::fw('group') . 'Histories',
 				Url::to(['/history/index'])
 			) ?></li><!-- Histories -->
-			<li><?= Html::a(
-				FA::fw('group') . 'Jobs',
-				Url::to(['/job/index'])
-			) ?></li><!-- Jobs -->
-			<li><?= Html::a(
-				FA::fw('group') . 'Profiles',
-				Url::to(['/profile/index'])
-			) ?></li><!-- Profiles -->
-			<li><?= Html::a(
-				FA::fw('group') . 'Teams',
-				Url::to(['/Teams/index'])
-			) ?></li><!-- team -->
-			<li><?= Html::a(
-				FA::fw('group') . 'Users',
-				Url::to(['/Users/index'])
-			) ?></li><!-- user -->
 
 			<li>
 				<a href="#"><?= FA::fw('sitemap') ?> Multi-Level Dropdown<?= $arrowIcon ?></a>

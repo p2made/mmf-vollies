@@ -1,26 +1,30 @@
 <?php
-
-/*
- * This file is part of the Dektrium project.
- *
- * (c) Dektrium project <http://github.com/dektrium>
- *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
- */
-
-use yii\bootstrap\Nav;
-
 /**
- * @var \yii\web\View $this
- * @var \dektrium\user\models\User $user
- * @var string $content
+ * blank.php
+ *
+ * @copyright Copyright &copy; Pedro Plowman, 2017
+ * @author Pedro Plowman
+ * @link https://github.com/p2made
+ * @package p2made/yii2-sb-admin-theme
+ * @license MIT
  */
+
+use yii\bootstrap\Html;
+use yii\bootstrap\Nav;
+use p2m\helpers\FA;
+
+p2m\sbAdmin\assets\SBAdmin2Asset::register($this);
+
+/* @var $this yii\web\View */
 
 $this->title = Yii::t('user', 'Update user account');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div id="content-wrapper">
+
+	<div class="row">
+		<div class="col-lg-12">
 
 <?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
 
@@ -102,3 +106,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div>
 	</div>
 </div>
+
+		</div>
+	</div>
+
+</div><!-- /#content-wrapper -->

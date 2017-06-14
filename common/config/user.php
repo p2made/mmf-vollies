@@ -14,5 +14,5 @@ return [
 		'reconfirmationSubject' => 'Please confirm your new email',
 		'recoverySubject'	   => 'Recover your login',
 	],
-	'admins' => ['vollies', 'joan', 'john', 'lisa', 'nahum', 'noel', 'pedro', 'susie', 'tom'],
+	'admins' => ['vollies', 'gay', 'joan', 'john', 'lisa', 'nahum', 'noel', 'pedro', 'susie', 'tom'],
 ];
