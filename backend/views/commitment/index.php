@@ -10,7 +10,7 @@
  */
 
 use yii\bootstrap\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use p2m\helpers\FA;
 
@@ -32,8 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 	<p>
-		<?= Html::a('Create Commitment', ['create'], ['class' => 'btn btn-success']) ?>
+		<?php //Html::a('Create Commitment', ['create'], ['class' => 'btn btn-success']) ?>
 	</p>
+
 <?php Pjax::begin(); ?>
 	<?= GridView::widget([
 		'dataProvider' => $dataProvider,
@@ -41,14 +42,40 @@ $this->params['breadcrumbs'][] = $this->title;
 		'columns' => [
 			['class' => 'yii\grid\SerialColumn'],
 
-			'id',
-			'user_id',
-			'application_id',
-			'team_id',
-			'year',
-			// 'job',
+			// 'id',
+			'user.fullName',
+			// 'application_id',
+			// 'team_id',
+			[
+				'header' => 'Year',
+				'headerOptions' => ['class' => 'text-center'],
+				'value' => 'year',
+				'contentOptions' => ['class' => 'text-center', 'style' => 'width:80px;'],
+			],
+			// 'year',
+			'job',
 			// 'hours',
 			// 'report:ntext',
+			[
+				'header' => 'Reinvite',
+				'headerOptions' => ['class' => 'text-center'],
+				'value' => function ($model) {
+					$class = '';
+					$text = '';
+					if ($model->reinvite) {
+						$class = 'success';
+						$text = 'Yes';
+					} else {
+						$class = 'danger';
+						$text = 'NO';
+					}
+					//return '<div class="text-center"><span class="' . $class . '">' . $text . '</span></div>';
+					return '<div class="btn btn-xs btn-block btn-'
+						. $class . '">' . $text . '</div>';
+				},
+				'contentOptions' => ['style' => 'width:120px;'],
+				'format' => 'raw',
+			],
 			// 'reinvite',
 			// 'created_at',
 			// 'created_by',

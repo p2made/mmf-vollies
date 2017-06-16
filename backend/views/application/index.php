@@ -41,11 +41,28 @@ $this->params['breadcrumbs'][] = $this->title;
 		'columns' => [
 			['class' => 'yii\grid\SerialColumn'],
 
-			'id',
-			'user_id',
-			'job_choice_1',
-			'job_choice_2',
-			'job_choice_3',
+			// 'id',
+			// 'user.givenName',
+			// 'user.familyName',
+			'volunteerName',
+			[
+				'header' => 'Job Choice 1',
+				'value' => function ($model) {
+					return $model->jobChoices[0];
+				}
+			],
+			[
+				'header' => 'Job Choice 2',
+				'value' => function ($model) {
+					return count($model->jobChoices) > 1 ? $model->jobChoices[1] : '';
+				}
+			],
+			[
+				'header' => 'Job Choice 3',
+				'value' => function ($model) {
+					return count($model->jobChoices) > 2 ? $model->jobChoices[2] : '';
+				}
+			],
 			// 'year',
 			// 'availableFromDate',
 			// 'availableFromTime:datetime',

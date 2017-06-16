@@ -44,6 +44,30 @@ use yii\helpers\ArrayHelper;
  */
 class Application extends BaseApplication
 {
+	public $volunteerName;
+
+	public $jobChoices;
+
+	public function behaviors()
+	{
+		return ArrayHelper::merge(
+			parent::behaviors(),
+			[
+				# custom behaviors
+			]
+		);
+	}
+
+	public function rules()
+	{
+		return ArrayHelper::merge(
+			parent::rules(),
+			[
+				# custom validation rules
+				[['volunteerName', 'jobChoices'], 'safe'],
+			]
+		);
+	}
 
 	/**
 	 * @inheritdoc
@@ -53,6 +77,7 @@ class Application extends BaseApplication
 		return [
 			'id' => 'ID',
 			'user_id' => 'User ID',
+			'volunteerName' => 'Volunteer Name',
 			'job_choice_1' => 'Job Choice 1',
 			'job_choice_2' => 'Job Choice 2',
 			'job_choice_3' => 'Job Choice 3',
@@ -80,43 +105,18 @@ class Application extends BaseApplication
 		];
 	}
 
-	public function behaviors()
+	public function afterFind()
 	{
-		return ArrayHelper::merge(
-			parent::behaviors(),
-			[
-				# custom behaviors
-			]
-		);
-	}
+		parent::afterFind();
 
-	public function rules()
-	{
-		return ArrayHelper::merge(
-			parent::rules(),
-			[
-				# custom validation rules
-			]
-		);
-	}
+		$this->volunteerName = $this->user->fullName;
 
-	public function vollieName()
-	{
-		if ($this->user->preferredName) {
-			return $this->user->preferredName;
-		}
-		return $this->user->givenName;
-	}
-
-	public function jobChoices()
-	{
-		$choices = [$this->jobChoice1->name];
+		$this->jobChoices = [$this->jobChoice1->name];
 		if ($this->jobChoice2) {
-			$choices[] = $this->jobChoice2->name;
+			$this->jobChoices[] = $this->jobChoice2->name;
 		}
 		if ($this->jobChoice3) {
-			$choices[] = $this->jobChoice3->name;
+			$this->jobChoices[] = $this->jobChoice3->name;
 		}
-		return $choices;
 	}
 }

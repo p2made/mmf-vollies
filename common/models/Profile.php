@@ -56,6 +56,8 @@ class Profile extends \dektrium\user\models\Profile
 	/** @var \dektrium\user\Module */
 	//protected $module;
 
+	public $fullName;
+
 	/**
 	 * @inheritdoc
 	 */
@@ -81,7 +83,7 @@ class Profile extends \dektrium\user\models\Profile
 			[
 				[['givenName', 'familyName', 'phone1', 'address1', 'locality', 'emergencyContact', 'emergencyPhone1', 'discovery'], 'required'],
 				[['rsa', 'dl_c', 'dl_h', 'cse', 'ohs', 'bc', 'fa', 'vol', 'mmfVol', 'mmfAtt', 'returned'], 'integer'],
-				[['dnr'], 'safe'],
+				[['dnr', 'fullName'], 'safe'],
 				[['bio'], 'string'],
 				[['givenName', 'familyName', 'preferredName', 'locality', 'emergencyContact'], 'string', 'max' => 64],
 				[['phone1', 'phone2', 'state', 'postcode', 'country', 'emergencyPhone1', 'emergencyPhone2', 'gravatar_id'], 'string', 'max' => 32],
@@ -102,6 +104,7 @@ class Profile extends \dektrium\user\models\Profile
 			'user_id' => 'User ID',
 			'givenName' => 'Given Name',
 			'familyName' => 'Family Name',
+			'fullName' => 'Full Name',
 			'preferredName' => 'Preferred Name',
 			'phone1' => 'Phone 1',
 			'phone2' => 'Phone 2',
@@ -132,6 +135,13 @@ class Profile extends \dektrium\user\models\Profile
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		];
+	}
+
+	public function afterFind()
+	{
+		parent::afterFind();
+
+		$this->fullName = ($this->familyName ? $this->familyName . ', ' : '') . $this->givenName;
 	}
 
 	/**

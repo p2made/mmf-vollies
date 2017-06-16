@@ -57,6 +57,34 @@ class CommitmentSearch extends Commitment
 			return $dataProvider;
 		}
 
+		$dataProvider->setSort([
+			'attributes' => [
+				// 'id',
+				'probability',
+				'risks',
+				'influence',
+				'del' => [
+					'asc' => ['risks.del' => SORT_ASC],
+					'desc' => ['risks.del' => SORT_DESC],
+				],
+				'priority' => [
+					'asc' => ['priority' => SORT_ASC],
+					'desc' => ['priority' => SORT_DESC],
+					'label' => 'Priority',
+				],
+				'proj' => [
+					'asc' => ['projects.name' => SORT_ASC],
+					'desc' => ['projects.name' => SORT_DESC],
+				],
+				'author' => [
+					'asc' => ['users.name' => SORT_ASC],
+					'desc' => ['users.name' => SORT_DESC],
+				]
+			]
+		]);
+
+
+
 		// grid filtering conditions
 		$query->andFilterWhere([
 			'id' => $this->id,
