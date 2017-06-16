@@ -41,11 +41,13 @@ $this->params['breadcrumbs'][] = $this->title;
 		'columns' => [
 			['class' => 'yii\grid\SerialColumn'],
 
-			'id',
-			'user_id',
-			'job_choice_1',
-			'job_choice_2',
-			'job_choice_3',
+			// 'id',
+			// 'user.givenName',
+			// 'user.familyName',
+			'user.fullName',
+			'jobChoice1.name',
+			'jobChoice2.name',
+			'jobChoice3.name',
 			// 'year',
 			// 'availableFromDate',
 			// 'availableFromTime:datetime',

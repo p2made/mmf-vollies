@@ -12,6 +12,8 @@
 		"p2made/yii2-p2y2-things": "^2.8",
 		"p2made/yii2-p2y2-things-demo": "^2.8",
 		"ruskid/yii2-ip-behavior": "dev-master",
+		"kartik-v/yii2-grid": "^3.1",
+		"kartik-v/yii2-detail-view": "^1.7",
 		"kartik-v/yii2-builder": "^1.6",
 		"kartik-v/yii2-widget-activeform": "^1.4",
 		"kartik-v/yii2-widget-select2": "^2.0",

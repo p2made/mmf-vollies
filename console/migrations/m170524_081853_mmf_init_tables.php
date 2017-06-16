@@ -307,7 +307,7 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'refereeRelationship' => $this->string(32)->null(),
 			'refereePhone'        => $this->string(32)->null(),
 			'bestCallingTime'     => $this->string()->null(),
-			'accepted'            => 'tinyint(2) not null default 0',
+			'status'            => 'tinyint(2) not null default 0',
 			'team_id'             => $this->integer()->null(),
 			'rejectedReason'      => $this->text()->null(),
 			'created_at'          => $this->integer()->notNull(),

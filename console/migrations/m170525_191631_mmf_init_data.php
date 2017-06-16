@@ -63,15 +63,16 @@ class m170525_191631_mmf_init_data extends \yii\db\Migration
 		// insert teams data
 		$columns = ['head_id', 'sequence', 'name', 'created_at', 'updated_at'];
 		$this->batchInsert('{{%team}}', $columns, [
+			[3, 12, 'Bars', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[null, 21, 'Children’s Festival', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 			[null, 3, 'Setup & Bump Out', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 			[null, 6, 'Site', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[null, 9, 'Stages', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[3, 12, 'Bars', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[null, 15, 'Treasury', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[4, 9, 'Stages', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 			[null, 18, 'Ticket Gates', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[null, 21, 'Childrens Festival', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[1, 24, 'Vollies', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[null, 27, 'Other', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[5, 15, 'Treasury', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[null, 15, 'Shop', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[null, 24, 'Vollies’ Tent', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[1, 27, 'Other', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 		]);
 
 		// insert menu groups data
@@ -98,18 +99,18 @@ class m170525_191631_mmf_init_data extends \yii\db\Migration
 			[3, 1, 9, 'Decor', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 			[3, 1, 6, 'Fencing', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 			[3, 1, 3, 'General Setup', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[2, 2, 24, 'Helper', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[2, 2, 24, 'Children’s Festival Helper', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 			[7, 6, 54, 'Instrument Lockup', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 			[5, 5, 48, 'MC', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[2, 2, 21, 'Presenter', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[7, 6, 57, 'Shop', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[2, 2, 21, 'Children’s Festival Presenter', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[8, 6, 57, 'Shop', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 			[5, 5, 51, 'Stage Manager', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 			[6, 4, 42, 'Ticket Gates', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 			[4, 4, 45, 'Traffic', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 			[7, 6, 60, 'Treasury', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[8, 3, 33, 'Vollies Tent', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[9, 6, 63, 'I will do anything', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
-			[9, 6, 66, 'Special', 'People asked to do a specific job as vollies.', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[9, 3, 33, 'Vollies’ Tent', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[10, 6, 63, 'I will do anything', null, gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
+			[10, 6, 66, 'Special', 'People asked to do a specific job as vollies.', gmdate('Y-m-d H:i:s'), gmdate('Y-m-d H:i:s')],
 		]);
 	}
 
