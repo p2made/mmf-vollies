@@ -63,6 +63,10 @@ $this->params['breadcrumbs'][] = $this->title;
 					return count($model->jobChoices) > 2 ? $model->jobChoices[2] : '';
 				}
 			],
+			// 'user.fullName',
+			// 'jobChoice1.name',
+			// 'jobChoice2.name',
+			// 'jobChoice3.name',
 			// 'year',
 			// 'availableFromDate',
 			// 'availableFromTime:datetime',
