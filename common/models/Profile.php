@@ -52,11 +52,13 @@ use yii\behaviors\TimestampBehavior;
  */
 class Profile extends \dektrium\user\models\Profile
 {
+	// virtual attributes
+	public $fullName;
+	public $emailAddress;
+
 	//use ModuleTrait;
 	/** @var \dektrium\user\Module */
 	//protected $module;
-
-	public $fullName;
 
 	/**
 	 * @inheritdoc
@@ -83,11 +85,11 @@ class Profile extends \dektrium\user\models\Profile
 			[
 				[['givenName', 'familyName', 'phone1', 'address1', 'locality', 'emergencyContact', 'emergencyPhone1', 'discovery'], 'required'],
 				[['rsa', 'dl_c', 'dl_h', 'cse', 'ohs', 'bc', 'fa', 'vol', 'mmfVol', 'mmfAtt', 'returned'], 'integer'],
-				[['dnr', 'fullName'], 'safe'],
+				[['dnr', 'fullName', 'emailAddress'], 'safe'],
 				[['bio'], 'string'],
 				[['givenName', 'familyName', 'preferredName', 'locality', 'emergencyContact'], 'string', 'max' => 64],
 				[['phone1', 'phone2', 'state', 'postcode', 'country', 'emergencyPhone1', 'emergencyPhone2', 'gravatar_id'], 'string', 'max' => 32],
-				[['address1', 'address2', 'discoveryDetail', 'name', 'public_email', 'gravatar_email', 'location', 'website'], 'string', 'max' => 255],
+				[['address1', 'address2', 'discoveryDetail', 'name', 'location', 'website'], 'string', 'max' => 255],
 				[['discovery'], 'string', 'max' => 24],
 				[['timezone'], 'string', 'max' => 40],
 				[['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\User::className(), 'targetAttribute' => ['user_id' => 'id']]
@@ -102,35 +104,36 @@ class Profile extends \dektrium\user\models\Profile
 	{
 		return [
 			'user_id' => 'User ID',
-			'givenName' => 'Given Name',
-			'familyName' => 'Family Name',
-			'fullName' => 'Full Name',
-			'preferredName' => 'Preferred Name',
-			'phone1' => 'Phone 1',
-			'phone2' => 'Phone 2',
-			'address1' => 'Address 1',
-			'address2' => 'Address 2',
-			'locality' => 'Locality',
-			'state' => 'State',
-			'postcode' => 'Postcode',
-			'country' => 'Country',
+			'givenName' =>        'Given Name',
+			'familyName' =>       'Family Name',
+			'fullName' =>         'Full Name',
+			'preferredName' =>    'Preferred Name',
+			'phone1' =>           'Primary Phone',
+			'phone2' =>           'Secondary Phone',
+			'emailAddress' =>     'Email Address',
+			'address1' =>         'Address 1',
+			'address2' =>         'Address 2',
+			'locality' =>         'Locality',
+			'state' =>            'State',
+			'postcode' =>         'Postcode',
+			'country' =>          'Country',
 			'emergencyContact' => 'Emergency Contact',
-			'emergencyPhone1' => 'Phone 1',
-			'emergencyPhone2' => 'Phone 2',
-			'rsa' => 'Responsible Service of Alcohol',
-			'dl_c' => 'Driver\'s Licence (car)',
-			'dl_h' => 'Driver\'s Licence (LR or above)',
-			'cse' => 'Customer Service Experience',
-			'ohs' => 'OH&S Qualifications',
-			'bc' => 'Blue Card (working with children)',
-			'fa' => 'First Aid Certificate',
-			'vol' => 'I have volunteered before',
-			'mmfVol' => 'I have volunteered at MMF',
-			'mmfAtt' => 'I have attended MMF',
-			'returned' => 'Returned',
-			'dnr' => 'Do Not Reinvite',
-			'discovery' => 'Discovery',
-			'discoveryDetail' => 'Discovery Detail',
+			'emergencyPhone1' =>  'Primary Phone',
+			'emergencyPhone2' =>  'Secondary Phone',
+			'rsa' =>              'Responsible Service of Alcohol',
+			'dl_c' =>             'Driver\'s Licence (car)',
+			'dl_h' =>             'Driver\'s Licence (LR or above)',
+			'cse' =>              'Customer Service Experience',
+			'ohs' =>              'OH&S Qualifications',
+			'bc' =>               'Blue Card (working with children)',
+			'fa' =>               'First Aid Certificate',
+			'vol' =>              'I have volunteered before',
+			'mmfVol' =>           'I have volunteered at MMF',
+			'mmfAtt' =>           'I have attended MMF',
+			'returned' =>         'Returned',
+			'dnr' =>              'Do Not Reinvite',
+			'discovery' =>        'Discovery',
+			'discoveryDetail' =>  'Discovery Detail',
 			'timezone' => 'Timezone',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
@@ -142,6 +145,7 @@ class Profile extends \dektrium\user\models\Profile
 		parent::afterFind();
 
 		$this->fullName = ($this->familyName ? $this->familyName . ', ' : '') . $this->givenName;
+		$this->fullName = $this->user->email;
 	}
 
 	/**

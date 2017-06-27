@@ -180,7 +180,7 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 		], $this->tableOptions);
 
 		$this->createTable('{{%application}}', [
-			'id' => $this->primaryKey(),
+			'id'                  => $this->primaryKey(),
 			'user_id'             => $this->integer()->notNull(),
 			'job_choice_1'        => $this->integer()->notNull(),
 			'job_choice_2'        => $this->integer()->null(),
@@ -190,7 +190,7 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'availableFromTime'   => $this->smallInteger(2)->notNull(),
 			'availableToDate'     => $this->string(8)->notNull(),
 			'availableToTime'     => $this->smallInteger(2)->notNull(),
-			'bestTIme'            => $this->smallInteger(1)->null(),
+			'bestTime'            => $this->smallInteger(1)->null(),
 			'availabilityNotes'   => $this->text()->null(),
 			'double'              => $this->boolean()->defaultValue(0),
 			'otherNotes'          => $this->text()->null(),
@@ -198,7 +198,7 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'refereeRelationship' => $this->string(32)->null(),
 			'refereePhone'        => $this->string(32)->null(),
 			'bestCallingTime'     => $this->string()->null(),
-			'status'            => 'tinyint(2) not null default 0',
+			'status'              => 'tinyint(2) not null default 0',
 			'team_id'             => $this->integer()->null(),
 			'rejectedReason'      => $this->text()->null(),
 			'created_at'          => $this->integer()->notNull(),
