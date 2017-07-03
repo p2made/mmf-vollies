@@ -26,9 +26,9 @@ composer.phar
 # Mac DS_Store Files
 .DS_Store
 
-/assets/web/backend
-/assets/web/common
-/assets/web/frontend
+/assets/web/backend/pub
+/assets/web/common/pub
+/assets/web/frontend/pub
 
 # environments folder
 /environments
