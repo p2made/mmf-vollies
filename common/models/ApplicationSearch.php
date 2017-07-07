@@ -18,7 +18,7 @@ class ApplicationSearch extends Application
 	public function rules()
 	{
 		return [
-			[['id', 'user_id', 'job_choice_1', 'job_choice_2', 'job_choice_3', 'availableFromTime', 'availableToTime', 'bestTIme', 'double', 'status', 'team_id', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
+			[['id', 'user_id', 'job_choice_1', 'job_choice_2', 'job_choice_3', 'availableFromTime', 'availableToTime', 'bestTime', 'double', 'status', 'team_id', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
 			[['year', 'availableFromDate', 'availableToDate', 'availabilityNotes', 'otherNotes', 'referee', 'refereeRelationship', 'refereePhone', 'bestCallingTime', 'rejectedReason'], 'safe'],
 		];
 	}
@@ -67,7 +67,7 @@ class ApplicationSearch extends Application
 			'year' => $this->year,
 			'availableFromTime' => $this->availableFromTime,
 			'availableToTime' => $this->availableToTime,
-			'bestTIme' => $this->bestTIme,
+			'bestTime' => $this->bestTime,
 			'double' => $this->double,
 			'status' => $this->status,
 			'team_id' => $this->team_id,

@@ -145,7 +145,8 @@ class Profile extends \dektrium\user\models\Profile
 		parent::afterFind();
 
 		$this->fullName = ($this->familyName ? $this->familyName . ', ' : '') . $this->givenName;
-		$this->fullName = $this->user->email;
+		$this->preferredName = ($this->preferredName ? $this->preferredName : $this->givenName);
+		$this->emailAddress = $this->user->email;
 	}
 
 	/**

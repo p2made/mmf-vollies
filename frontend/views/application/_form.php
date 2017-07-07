@@ -160,7 +160,7 @@ $jobSelectWidget = array(
 					'widgetClass' => '\kartik\widgets\Select2',
 					'options' => ['data' => [
 						null => 'Time available from',
-						1 => 'Early, 6:00 AM',
+						1 => 'Early, 8:00 AM',
 						2 => 'Midday, 12:00 PM',
 						3 => 'Evening, 6:00 PM',
 					]],
@@ -189,7 +189,7 @@ $jobSelectWidget = array(
 					]],
 					'columnOptions' => ['colspan' => 2],
 				],
-				'bestTIme' => [
+				'bestTime' => [
 					'type' => Form::INPUT_WIDGET,
 					'widgetClass' => '\kartik\widgets\Select2',
 					'options' => ['data' => [

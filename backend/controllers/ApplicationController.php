@@ -3,11 +3,13 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Application;
-use common\models\ApplicationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\Application;
+use common\models\ApplicationSearch;
+use common\models\Profile;
+use common\models\Commitment;
 
 /**
  * ApplicationController implements the CRUD actions for Application model.
@@ -51,8 +53,17 @@ class ApplicationController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model = $this->findModel($id);
+		$profile = $model->user;
+		$commitments = (count($profile->commitments > 0)
+			? $profile->commitments
+			: null
+		);
+
 		return $this->render('view', [
-			'model' => $this->findModel($id),
+			'model'      => $model,
+			'profile'    => $profile,
+			'commitments' => $commitments,
 		]);
 	}
 

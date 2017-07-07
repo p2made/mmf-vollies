@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
 
 	<?php // echo $form->field($model, 'availableToTime') ?>
 
-	<?php // echo $form->field($model, 'bestTIme') ?>
+	<?php // echo $form->field($model, 'bestTime') ?>
 
 	<?php // echo $form->field($model, 'availabilityNotes') ?>
 

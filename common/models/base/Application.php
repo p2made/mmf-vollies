@@ -21,7 +21,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $availableFromTime
  * @property string $availableToDate
  * @property integer $availableToTime
- * @property integer $bestTIme
+ * @property integer $bestTime
  * @property string $availabilityNotes
  * @property integer $double
  * @property string $otherNotes
@@ -79,7 +79,7 @@ abstract class Application extends \yii\db\ActiveRecord
 	{
 		return [
 			[['user_id', 'job_choice_1', 'year', 'availableFromDate', 'availableFromTime', 'availableToDate', 'availableToTime'], 'required'],
-			[['user_id', 'job_choice_1', 'job_choice_2', 'job_choice_3', 'availableFromTime', 'availableToTime', 'bestTIme', 'double', 'status', 'team_id'], 'integer'],
+			[['user_id', 'job_choice_1', 'job_choice_2', 'job_choice_3', 'availableFromTime', 'availableToTime', 'bestTime', 'double', 'status', 'team_id'], 'integer'],
 			[['year'], 'safe'],
 			[['availabilityNotes', 'otherNotes', 'rejectedReason'], 'string'],
 			[['availableFromDate', 'availableToDate'], 'string', 'max' => 8],
@@ -109,7 +109,7 @@ abstract class Application extends \yii\db\ActiveRecord
 			'availableFromTime' => 'Available From Time',
 			'availableToDate' => 'Available To Date',
 			'availableToTime' => 'Available To Time',
-			'bestTIme' => 'Best Time',
+			'bestTime' => 'Best Time',
 			'availabilityNotes' => 'Availability Notes',
 			'double' => 'Double',
 			'otherNotes' => 'Other Notes',
@@ -160,7 +160,7 @@ abstract class Application extends \yii\db\ActiveRecord
 	}
 
 
-	
+
 	/**
 	 * @inheritdoc
 	 * @return \common\models\ApplicationQuery the active query used by this AR class.

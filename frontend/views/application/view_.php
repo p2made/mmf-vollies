@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						'availableFromTime:datetime',
 						'availableToDate',
 						'availableToTime:datetime',
-						'bestTIme:datetime',
+						'bestTime:datetime',
 						'availabilityNotes:ntext',
 						'double',
 						'otherNotes:ntext',
