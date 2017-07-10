@@ -24,7 +24,7 @@ p2m\sbAdmin\assets\SBAdmin2Asset::register($this);
  * @var \dektrium\user\models\UserSearch $searchModel
  */
 
-$this->title = Yii::t('user', 'Manage users');
+$this->title = Yii::t('user', 'Manage Vollies');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div id="content-wrapper">

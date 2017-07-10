@@ -49,11 +49,16 @@ use yii\behaviors\TimestampBehavior;
  * @property \common\models\User $user
  * @property \common\models\Team[] $teams
  * @property string $aliasModel
+ *
+ * @property string $fullName;
+ * @property string[] $fullNameArray;
+ * @property string $emailAddress;
  */
 class Profile extends \dektrium\user\models\Profile
 {
 	// virtual attributes
 	public $fullName;
+	public $fullNameArray = [];
 	public $emailAddress;
 
 	//use ModuleTrait;
@@ -144,7 +149,17 @@ class Profile extends \dektrium\user\models\Profile
 	{
 		parent::afterFind();
 
-		$this->fullName = ($this->familyName ? $this->familyName . ', ' : '') . $this->givenName;
+		$fName = $this->familyName;
+		$gName = $this->givenName;
+		if ($fName) {
+			$this->fullName = $fName . ', ' . $gName;
+			$this->fullNameArray[0] = $gName . $fName;
+			$this->fullNameArray[1] = $this->fullName;
+		} else {
+			$this->fullName = $gName;
+			$this->fullNameArray[0] = $gName . $fName;
+			$this->fullNameArray[1] = $this->fullName;
+		}
 		$this->preferredName = ($this->preferredName ? $this->preferredName : $this->givenName);
 		$this->emailAddress = $this->user->email;
 	}

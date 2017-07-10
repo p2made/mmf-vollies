@@ -11,6 +11,27 @@ use yii\filters\VerbFilter;
 
 /**
  * JobController implements the CRUD actions for Job model.
+ *
+ * Model properties...
+ *
+ * @property integer $id
+ * @property integer $team_id
+ * @property integer $group_id
+ * @property integer $sequence
+ * @property string $name
+ * @property string $shortName
+ * @property string $description
+ * @property integer $created_at
+ * @property integer $updated_at
+ *
+ * @property \common\models\Application[] $applications
+ * @property \common\models\Application[] $applications0
+ * @property \common\models\Application[] $applications1
+ * @property \common\models\MenuGroup $group
+ * @property \common\models\Team $team
+ * @property string $aliasModel
+ *
+ * @property string $teamName
  */
 class JobController extends Controller
 {

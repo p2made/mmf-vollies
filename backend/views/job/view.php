@@ -9,7 +9,7 @@
  * @license MIT
  */
 
-use yii\bootstrap\Html;
+use yii\helpers\Html;
 use yii\widgets\DetailView;
 use p2m\helpers\FA;
 
@@ -27,6 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-lg-12">
 
 <div class="job-view">
+
+	<h1><?= Html::encode($this->title) ?></h1>
 
 	<p>
 		<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -47,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'group_id',
 			'sequence',
 			'name',
+			'shortName',
 			'description:ntext',
 			'created_at',
 			'updated_at',

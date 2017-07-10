@@ -9,9 +9,31 @@ use common\models\Job;
 
 /**
  * JobSearch represents the model behind the search form about `common\models\Job`.
+ *
+ * @property integer $id
+ * @property integer $team_id
+ * @property integer $group_id
+ * @property integer $sequence
+ * @property string $name
+ * @property string $shortName
+ * @property string $description
+ * @property integer $created_at
+ * @property integer $updated_at
+ *
+ * @property \common\models\Application[] $applications
+ * @property \common\models\Application[] $applications0
+ * @property \common\models\Application[] $applications1
+ * @property \common\models\MenuGroup $group
+ * @property \common\models\Team $team
+ * @property string $aliasModel
+ *
+ * @property string $teamName
  */
 class JobSearch extends Job
 {
+	// virtual attributes
+	public $teamName;
+
 	/**
 	 * @inheritdoc
 	 */
@@ -19,7 +41,7 @@ class JobSearch extends Job
 	{
 		return [
 			[['id', 'team_id', 'group_id', 'sequence', 'created_at', 'updated_at'], 'integer'],
-			[['name', 'description'], 'safe'],
+			[['teamName', 'name', 'shortName', 'description'], 'safe'],
 		];
 	}
 
@@ -69,6 +91,27 @@ class JobSearch extends Job
 
 		$query->andFilterWhere(['like', 'name', $this->name])
 			->andFilterWhere(['like', 'description', $this->description]);
+
+
+		$dataProvider->setSort([
+			'attributes' => [
+				'team_id',
+				'sequence',
+				'name',
+				'shortName',
+				'teamName' => [
+					'asc' => ['mmf_team.name' => SORT_ASC],
+					'desc' => ['mmf_team.name' => SORT_DESC],
+					'label' => 'Team Name'
+				]
+			],
+        	'defaultOrder' => ['team_id' => SORT_ASC, 'sequence' => SORT_ASC]
+		]);
+
+		// filter by team name
+		$query->joinWith(['team' => function ($q) {
+			$q->where('mmf_team.name LIKE "%' . $this->teamName . '%"');
+		}]);
 
 		return $dataProvider;
 	}
