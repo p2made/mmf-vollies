@@ -58,6 +58,7 @@ class Profile extends \dektrium\user\models\Profile
 {
 	// virtual attributes
 	public $fullName;
+	public $fullName1;
 	public $fullNameArray = [];
 	public $emailAddress;
 

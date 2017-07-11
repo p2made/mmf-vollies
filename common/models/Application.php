@@ -41,6 +41,17 @@ use yii\helpers\ArrayHelper;
  * @property \common\models\Job $jobChoice3
  * @property \common\models\Profile $user
  * @property string $aliasModel
+ *
+ * @property string $volunteerName
+ * @property string $preferredName
+ * @property string $jobPreference1
+ * @property string $jobPreference2
+ * @property string $jobPreference3
+ * @property string $availableFrom
+ * @property string $availableTo
+ * @property string $earlyLate
+ *
+ * @property string[] $jobChoices
  */
 class Application extends BaseApplication
 {
