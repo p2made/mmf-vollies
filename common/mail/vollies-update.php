@@ -7,16 +7,16 @@ use yii\bootstrap\Html;
  */
 ?>
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-	G’day <?= $name ?>,
+	G&rsquo;day <?= $name ?>,
 </p>
 
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-	A quick update for all who’ve applied to volunteer at Maleny Music Festival 2017.
+	A quick update for all who&rsquo;ve applied to volunteer at Maleny Music Festival 2017.
 </p>
 
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
 	First of all, thanks to all of you. Your contribution makes Maleny Music Festival possible.<br>
-	Next, there will be volunteer places for all who’ve applied so far.
+	Next, there will be volunteer places for all who&rsquo;ve applied so far.
 </p>
 
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
@@ -24,15 +24,15 @@ use yii\bootstrap\Html;
 </p>
 
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-	As volunteer coordinator for the festival I’m also programming a new online system for volunteer applications. In that I’ve had some setbacks, but am working hard to give the area heads (myself included) means to accept applications in the next couple of days. When that happens you’ll start getting emails telling you what job you have.
+	As volunteer coordinator for the festival I&rsquo;m also programming a new online system for volunteer applications. In that I&rsquo;ve had some setbacks, but am working hard to give the area heads (myself included) means to accept applications in the next couple of days. When that happens you&rsquo;ll start getting emails telling you what job you have.
 </p>
 
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-	Finally, about a week ago some of you got an error when you submitted your applications. I’d let a mistake get past my programming checks, &amp; I apologise for that. The error only affected the acknowledgement email, &amp; your applications still went in. That’s all fixed now.
+	Finally, for some recent applications the computer said &ldquo;no&rdquo; when you submitted your application. I&rsquo;d let a mistake get past my programming checks, &amp; I apologise for that. The good news is that the computer was only saying &ldquo;no&rdquo; to sending the acknowledgement email, but was accepting you application. That&rsquo;s all fixed now. Thanks to the ones who sent helpful information in reporting this to me.
 </p>
 
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-	Here’s to a great festival &amp; a good time to be had by all.
+	Here&rsquo;s to a great festival &amp; a good time to be had by all.
 </p>
 
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">

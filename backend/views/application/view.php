@@ -263,10 +263,7 @@ $attrModel = array();
 										? '<span class="label label-success">Yes</span>'
 										: '<span class="label label-danger">No</span>',
 								],
-								[
-									'label' => '',
-									'value' => '',
-								],
+								['label' => '', 'value' => ''],
 							],
 						],
 						[
@@ -292,14 +289,6 @@ $attrModel = array();
 						[
 							'columns' => [
 								[
-									'attribute' => 'dl_c',
-									'format' => 'raw',
-									'displayOnly' => true,
-									'value' => $profile->dl_c
-										? '<span class="label label-success">Yes</span>'
-										: '<span class="label label-danger">No</span>',
-								],
-								[
 									'attribute' => 'dl_h',
 									'format' => 'raw',
 									'displayOnly' => true,
@@ -307,10 +296,6 @@ $attrModel = array();
 										? '<span class="label label-success">Yes</span>'
 										: '<span class="label label-danger">No</span>',
 								],
-							],
-						],
-						[
-							'columns' => [
 								[
 									'attribute' => 'cse',
 									'format' => 'raw',
@@ -319,6 +304,10 @@ $attrModel = array();
 										? '<span class="label label-success">Yes</span>'
 										: '<span class="label label-danger">No</span>',
 								],
+							],
+						],
+						[
+							'columns' => [
 								[
 									'attribute' => 'ohs',
 									'format' => 'raw',
@@ -327,10 +316,6 @@ $attrModel = array();
 										? '<span class="label label-success">Yes</span>'
 										: '<span class="label label-danger">No</span>',
 								],
-							],
-						],
-						[
-							'columns' => [
 								[
 									'attribute' => 'bc',
 									'format' => 'raw',
@@ -339,6 +324,10 @@ $attrModel = array();
 										? '<span class="label label-success">Yes</span>'
 										: '<span class="label label-danger">No</span>',
 								],
+							],
+						],
+						[
+							'columns' => [
 								[
 									'attribute' => 'fa',
 									'format' => 'raw',
@@ -347,6 +336,7 @@ $attrModel = array();
 										? '<span class="label label-success">Yes</span>'
 										: '<span class="label label-danger">No</span>',
 								],
+								['label' => '', 'value' => ''],
 							],
 						],
 					],

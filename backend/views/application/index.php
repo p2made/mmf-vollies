@@ -27,72 +27,75 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="row">
 		<div class="col-lg-12">
 
-<div class="application-index">
+			<div class="application-index">
 
-	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+				<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-	<p>
-		<?= Html::a('Create Application', ['create'], ['class' => 'btn btn-success']) ?>
-	</p>
-<?php Pjax::begin(); ?>
-	<?= GridView::widget([
-		'dataProvider' => $dataProvider,
-		'filterModel' => $searchModel,
-		'columns' => [
-			['class' => 'yii\grid\SerialColumn'],
+				<p>
+					<?= Html::a('Create Application', ['create'], ['class' => 'btn btn-success']) ?>
+				</p>
 
-			// 'id',
-			// 'user.givenName',
-			// 'user.familyName',
-			'volunteerName',
-			[
-				'header' => 'Job Choice 1',
-				'value' => function ($model) {
-					return $model->jobChoices[0];
-				}
-			],
-			[
-				'header' => 'Job Choice 2',
-				'value' => function ($model) {
-					return count($model->jobChoices) > 1 ? $model->jobChoices[1] : '';
-				}
-			],
-			[
-				'header' => 'Job Choice 3',
-				'value' => function ($model) {
-					return count($model->jobChoices) > 2 ? $model->jobChoices[2] : '';
-				}
-			],
-			// 'user.fullName',
-			// 'jobChoice1.name',
-			// 'jobChoice2.name',
-			// 'jobChoice3.name',
-			// 'year',
-			// 'availableFromDate',
-			// 'availableFromTime:datetime',
-			// 'availableToDate',
-			// 'availableToTime:datetime',
-			// 'bestTime:datetime',
-			// 'availabilityNotes:ntext',
-			// 'double',
-			// 'otherNotes:ntext',
-			// 'referee',
-			// 'refereeRelationship',
-			// 'refereePhone',
-			// 'bestCallingTime',
-			// 'status',
-			// 'team_id',
-			// 'rejectedReason:ntext',
-			// 'created_at',
-			// 'created_by',
-			// 'updated_at',
-			// 'updated_by',
+				<?php Pjax::begin(); ?>
+					<?= GridView::widget([
+						'dataProvider' => $dataProvider,
+						'filterModel' => $searchModel,
+						'columns' => [
+							['class' => 'yii\grid\SerialColumn'],
 
-			['class' => 'yii\grid\ActionColumn'],
-		],
-	]); ?>
-<?php Pjax::end(); ?></div>
+							// 'id',
+							// 'user.givenName',
+							// 'user.familyName',
+							'volunteerName',
+							[
+								'header' => 'Job Choice 1',
+								'value' => function ($model) {
+									return $model->jobChoices[0];
+								}
+							],
+							[
+								'header' => 'Job Choice 2',
+								'value' => function ($model) {
+									return count($model->jobChoices) > 1 ? $model->jobChoices[1] : '';
+								}
+							],
+							[
+								'header' => 'Job Choice 3',
+								'value' => function ($model) {
+									return count($model->jobChoices) > 2 ? $model->jobChoices[2] : '';
+								}
+							],
+							// 'user.fullName',
+							// 'jobChoice1.name',
+							// 'jobChoice2.name',
+							// 'jobChoice3.name',
+							// 'year',
+							// 'availableFromDate',
+							// 'availableFromTime:datetime',
+							// 'availableToDate',
+							// 'availableToTime:datetime',
+							// 'bestTime:datetime',
+							// 'availabilityNotes:ntext',
+							// 'double',
+							// 'otherNotes:ntext',
+							// 'referee',
+							// 'refereeRelationship',
+							// 'refereePhone',
+							// 'bestCallingTime',
+							// 'status',
+							// 'team_id',
+							// 'rejectedReason:ntext',
+							// 'created_at',
+							// 'created_by',
+							// 'updated_at',
+							// 'updated_by',
+
+							['class' => 'yii\grid\ActionColumn'],
+						],
+					]); ?>
+				<?php Pjax::end(); ?>
+
+			</div>
 
 		</div>
 	</div>
-</div><!-- /#content-wrapper -->
+</div>
