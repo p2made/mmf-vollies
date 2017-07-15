@@ -13,6 +13,52 @@ use common\models\Commitment;
 
 /**
  * ApplicationController implements the CRUD actions for Application model.
+ *
+ * Model properties...
+ *
+ * @property integer $id
+ * @property integer $user_id
+ * @property integer $job_choice_1
+ * @property integer $job_choice_2
+ * @property integer $job_choice_3
+ * @property string $year
+ * @property string $availableFromDate
+ * @property integer $availableFromTime
+ * @property string $availableToDate
+ * @property integer $availableToTime
+ * @property integer $bestTime
+ * @property string $availabilityNotes
+ * @property integer $double
+ * @property string $otherNotes
+ * @property string $referee
+ * @property string $refereeRelationship
+ * @property string $refereePhone
+ * @property string $bestCallingTime
+ * @property integer $accepted
+ * @property integer $team_id
+ * @property integer $rejected
+ * @property string $rejectedReason
+ * @property integer $created_at
+ * @property integer $created_by
+ * @property integer $updated_at
+ * @property integer $updated_by
+ *
+ * @property \common\models\Job $jobChoice1
+ * @property \common\models\Job $jobChoice2
+ * @property \common\models\Job $jobChoice3
+ * @property \common\models\Profile $user
+ * @property string $aliasModel
+ *
+ * @property string $volunteerName;
+ * @property string $preferredName;
+ * @property string $jobPreference1;
+ * @property string $jobPreference2 = 'none';
+ * @property string $jobPreference3 = 'none';
+ * @property string $availableFrom;
+ * @property string $availableTo;
+ * @property string $earlyLate;
+
+ * @property string[] $jobChoices = [];
  */
 class ApplicationController extends Controller
 {
@@ -61,8 +107,8 @@ class ApplicationController extends Controller
 		);
 
 		return $this->render('view', [
-			'model'      => $model,
-			'profile'    => $profile,
+			'model'       => $model,
+			'profile'     => $profile,
 			'commitments' => $commitments,
 		]);
 	}
@@ -132,4 +178,27 @@ class ApplicationController extends Controller
 			throw new NotFoundHttpException('The requested page does not exist.');
 		}
 	}
+
+	protected function actionMessage()
+	{
+		/*
+		$applicants = Application::find()
+			->where(['status' => 0])
+			->orderBy('id')
+			->all();
+
+		foreach($applicants as $applicant) {
+			$name = $applicant->preferredName;
+			$email = $applicant->user->emailAddress;
+
+			Yii::$app->mailer->compose('vollies-update', [
+				'name' => $applicant->preferredName
+			])->setTo($applicant->user->emailAddress)
+				->setSubject('Maleny Music Festival 2017 Vollies Update')
+				->send();
+		}
+		*/
+		return $this->redirect(['index']);
+	}
+
 }

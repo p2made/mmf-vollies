@@ -11,6 +11,22 @@ use yii\filters\VerbFilter;
 
 /**
  * TeamController implements the CRUD actions for Team model.
+ *
+ * Model properties...
+ *
+ * @property integer $id
+ * @property integer $head_id
+ * @property integer $sequence
+ * @property string $name
+ * @property string $description
+ * @property integer $created_at
+ * @property integer $updated_at
+ *
+ * @property \common\models\Job[] $jobs
+ * @property \common\models\Profile $head
+ * @property string $aliasModel
+ *
+ * @property string $headName;
  */
 class TeamController extends Controller
 {
@@ -37,6 +53,14 @@ class TeamController extends Controller
 	{
 		$searchModel = new TeamSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$dataProvider->setSort([
+			'attributes' => [
+				'sequence',
+				'name',
+				'headName',
+			],
+        	'defaultOrder' => ['sequence' => SORT_ASC]
+		]);
 
 		return $this->render('index', [
 			'searchModel' => $searchModel,

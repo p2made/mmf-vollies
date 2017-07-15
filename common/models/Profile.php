@@ -9,7 +9,6 @@ use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "profile".
  *
- *
  * @property integer $user_id
  * @property string $givenName
  * @property string $familyName
@@ -49,12 +48,17 @@ use yii\behaviors\TimestampBehavior;
  * @property \common\models\User $user
  * @property \common\models\Team[] $teams
  * @property string $aliasModel
+ *
+ * @property string $vollieName;
+ * @property string $lexicalName;
+ * @property string $email;
  */
 class Profile extends \dektrium\user\models\Profile
 {
 	// virtual attributes
-	public $fullName;
-	public $emailAddress;
+	private $vollieName;
+	private $lexicalName;
+	private $email;
 
 	//use ModuleTrait;
 	/** @var \dektrium\user\Module */
@@ -85,7 +89,7 @@ class Profile extends \dektrium\user\models\Profile
 			[
 				[['givenName', 'familyName', 'phone1', 'address1', 'locality', 'emergencyContact', 'emergencyPhone1', 'discovery'], 'required'],
 				[['rsa', 'dl_c', 'dl_h', 'cse', 'ohs', 'bc', 'fa', 'vol', 'mmfVol', 'mmfAtt', 'returned'], 'integer'],
-				[['dnr', 'fullName', 'emailAddress'], 'safe'],
+				[['dnr', 'vollieName', 'lexicalName', 'email'], 'safe'],
 				[['bio'], 'string'],
 				[['givenName', 'familyName', 'preferredName', 'locality', 'emergencyContact'], 'string', 'max' => 64],
 				[['phone1', 'phone2', 'state', 'postcode', 'country', 'emergencyPhone1', 'emergencyPhone2', 'gravatar_id'], 'string', 'max' => 32],
@@ -103,14 +107,15 @@ class Profile extends \dektrium\user\models\Profile
 	public function attributeLabels()
 	{
 		return [
-			'user_id' => 'User ID',
+			'user_id' =>          'User ID',
 			'givenName' =>        'Given Name',
 			'familyName' =>       'Family Name',
-			'fullName' =>         'Full Name',
-			'preferredName' =>    'Preferred Name',
+			'preferredName' =>    'Preferred',
+			'vollieName' =>       'Name',
+			'lexicalName' =>      'Name',
 			'phone1' =>           'Primary Phone',
 			'phone2' =>           'Secondary Phone',
-			'emailAddress' =>     'Email Address',
+			'email' =>            'Email Address',
 			'address1' =>         'Address 1',
 			'address2' =>         'Address 2',
 			'locality' =>         'Locality',
@@ -131,7 +136,8 @@ class Profile extends \dektrium\user\models\Profile
 			'mmfVol' =>           'I have volunteered at MMF',
 			'mmfAtt' =>           'I have attended MMF',
 			'returned' =>         'Returned',
-			'dnr' =>              'Do Not Reinvite',
+		//	'dnr' =>              'Do Not Reinvite',
+			'dnr' =>              'DNR',
 			'discovery' =>        'Discovery',
 			'discoveryDetail' =>  'Discovery Detail',
 			'timezone' => 'Timezone',
@@ -144,9 +150,16 @@ class Profile extends \dektrium\user\models\Profile
 	{
 		parent::afterFind();
 
-		$this->fullName = ($this->familyName ? $this->familyName . ', ' : '') . $this->givenName;
-		$this->preferredName = ($this->preferredName ? $this->preferredName : $this->givenName);
-		$this->emailAddress = $this->user->email;
+		$this->email = $this->user->email;
+	}
+
+	public function beforeSave($insert)
+	{
+		parent::beforeSave($insert);
+
+		if (!$this->preferredName) {
+			$this->preferredName = $this->givenName;
+		}
 	}
 
 	/**
@@ -190,10 +203,6 @@ class Profile extends \dektrium\user\models\Profile
 		return new \common\models\ProfileQuery(get_called_class());
 	}
 
-	//public function init()
-
-	//public function getAvatarUrl($size = 200)
-
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
@@ -201,6 +210,59 @@ class Profile extends \dektrium\user\models\Profile
 	{
 		return $this->hasOne(User::className(), ['id' => 'user_id']);
 	}
+
+	public function getPreferredName()
+	{
+		if ($this->preferredName) {
+			return $this->preferredName;
+		}
+
+		$this->preferredName = $this->givenName;
+		$this->save();
+
+		return $this->preferredName;
+	}
+
+	public function getVollieName()
+	{
+		if ($this->vollieName) {
+			return $this->vollieName;
+		}
+
+		return $this->vollieName = $this->givenName
+			. ($this->familyName ? ' ' . $this->familyName : '');
+	}
+
+	public function getLexicalName()
+	{
+		if ($this->lexicalName) {
+			return $this->lexicalName;
+		}
+
+		return $this->lexicalName =
+			($this->familyName ? $this->familyName . ', ' : '')
+			. $this->givenName;
+	}
+
+	public function getEmail()
+	{
+		return $this->email;
+	}
+
+	public function getReturned()
+	{
+		if ($this->returned == true) {
+			return $this->returned;
+		}
+
+		if (count($this->commitments) > 1) {
+			$this->returned = 1;
+			$this->save();
+		}
+
+		return $this->returned;
+	}
+
 
 	/**
 	 * @return \yii\db\ActiveQueryInterface
@@ -210,9 +272,9 @@ class Profile extends \dektrium\user\models\Profile
 	}
 	 */
 
-	//public function rules()
+	//public function init()
 
-	//public function attributeLabels()
+	//public function getAvatarUrl($size = 200)
 
 	//public function validateTimeZone($attribute, $params)
 
@@ -222,9 +284,6 @@ class Profile extends \dektrium\user\models\Profile
 
 	//public function toLocalTime(\DateTime $dateTime = null)
 
-	//public function beforeSave($insert)
-
 	//public static function tableName()
-
 
 }

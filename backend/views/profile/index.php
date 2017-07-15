@@ -20,7 +20,7 @@ p2m\sbAdmin\assets\SBAdmin2Asset::register($this);
 /* @var $searchModel common\models\ProfileSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Profiles';
+$this->title = 'Vollies';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div id="content-wrapper">
@@ -41,12 +41,14 @@ $this->params['breadcrumbs'][] = $this->title;
 		'columns' => [
 			['class' => 'yii\grid\SerialColumn'],
 
-			'user_id',
-			'givenName',
-			'familyName',
+			// 'givenName',
+			// 'familyName',
+			'vollieName',
 			'preferredName',
 			'phone1',
-			// 'phone2',
+			'phone2',
+			// 'lexicalName',
+			'email',
 			// 'address1',
 			// 'address2',
 			// 'locality',

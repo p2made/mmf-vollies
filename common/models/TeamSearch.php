@@ -18,7 +18,7 @@ class TeamSearch extends Team
 	public function rules()
 	{
 		return [
-			[['id', 'head_id', 'sequence', 'created_at', 'updated_at'], 'integer'],
+			[['id', 'head_id', 'headName', 'sequence', 'created_at', 'updated_at'], 'integer'],
 			[['name', 'description'], 'safe'],
 		];
 	}
@@ -68,6 +68,15 @@ class TeamSearch extends Team
 
 		$query->andFilterWhere(['like', 'name', $this->name])
 			->andFilterWhere(['like', 'description', $this->description]);
+
+		$dataProvider->setSort([
+			'attributes' => [
+				'sequence',
+				'name',
+				'headName',
+			],
+        	'defaultOrder' => ['sequence' => SORT_ASC]
+		]);
 
 		return $dataProvider;
 	}

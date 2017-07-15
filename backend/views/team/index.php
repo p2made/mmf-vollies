@@ -45,7 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 			'id',
 			'head_id',
-			'sequence',
+			'head_id',
+			'headName',
 			'name',
 			'description:ntext',
 			// 'created_at',

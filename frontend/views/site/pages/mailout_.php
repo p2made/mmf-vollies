@@ -389,3 +389,19 @@ $mailoutData = [
 	</div>
 </div>
 <!-- /.container -->
+
+
+
+
+
+	protected function emailApplicant($model)
+	{
+		Yii::$app->mailer->compose('application-complete', [
+			'vollieName' => $model->vollieName(),
+			'jobChoices' => $model->jobChoices(),
+		])
+			->setFrom('vollies@malenymusicfestival.com')
+			->setTo(Yii::$app->user->identity->email)
+			->setSubject('Maleny Music Festival 2017 Volunteer Application')
+			->send();;
+	}

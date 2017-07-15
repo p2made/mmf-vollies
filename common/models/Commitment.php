@@ -25,11 +25,13 @@ use yii\helpers\ArrayHelper;
  *
  * @property \common\models\Profile $user
  * @property string $aliasModel
+ *
+ * @property string $vollieName;
  */
 class Commitment extends BaseCommitment
 {
-
-	public $volunteerName;
+	// virtual attributes
+	private $vollieName;
 
 	public function behaviors()
 	{
@@ -47,7 +49,7 @@ class Commitment extends BaseCommitment
 			 parent::rules(),
 			 [
 				# custom validation rules
-				[['volunteerName'], 'safe'],
+				[['vollieName'], 'safe'],
 			 ]
 		);
 	}
@@ -59,19 +61,40 @@ class Commitment extends BaseCommitment
 	{
 		return [
 			'id' => 'ID',
-			'user_id' => 'User ID',
-			'volunteerName' => 'Volunteer Name',
+			'user_id' =>        'User ID',
+			'vollieName' =>     'Vollie Name',
 			'application_id' => 'Application ID',
-			'team_id' => 'Team ID',
-			'year' => 'Year',
-			'job' => 'Job',
-			'hours' => 'Hours',
-			'report' => 'Report',
-			'reinvite' => 'Reinvite',
+			'team_id' =>        'Team ID',
+			'year' =>           'Year',
+			'job' =>            'Job',
+			'hours' =>          'Hours',
+			'report' =>         'Report',
+			'reinvite' =>       'Reinvite',
 			'created_at' => 'Created At',
 			'created_by' => 'Created By',
 			'updated_at' => 'Updated At',
 			'updated_by' => 'Updated By',
 		];
 	}
+
+	public function afterFind()
+	{
+		parent::afterFind();
+
+		$this->vollieName = $this->user->vollieName;
+	}
+
+	public function getVollieName()
+	{
+		if ($this->vollieName) {
+			return $this->vollieName;
+		}
+
+		$this->vollieName = $this->user->vollieName;
+
+		return $this->vollieName;
+	}
+
+
+
 }

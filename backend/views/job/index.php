@@ -10,15 +10,16 @@
  */
 
 use yii\bootstrap\Html;
+use p2m\helpers\FA;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use p2m\helpers\FA;
+/* @var $this yii\web\View */
+/* @var $searchModel common\models\JobSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 p2m\sbAdmin\assets\SBAdmin2Asset::register($this);
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\JobSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Jobs';
 $this->params['breadcrumbs'][] = $this->title;
@@ -29,20 +30,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="job-index">
 
+	<h1><?= Html::encode($this->title) ?></h1>
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 	<p>
 		<?= Html::a('Create Job', ['create'], ['class' => 'btn btn-success']) ?>
 	</p>
-<?php Pjax::begin(); ?>
-	<?= GridView::widget([
+<?php Pjax::begin(); ?>	<?= GridView::widget([
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
 		'columns' => [
 			['class' => 'yii\grid\SerialColumn'],
 
-			'team.name',
+			// 'id',
+			// 'team_id',
+			'teamName',
+			// 'group_id',
+			// 'sequence',
 			'name',
+			'shortName',
 			'description:ntext',
 			// 'created_at',
 			// 'updated_at',
@@ -50,7 +56,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			['class' => 'yii\grid\ActionColumn'],
 		],
 	]); ?>
-<?php Pjax::end(); ?></div>
+<?php Pjax::end(); ?>
+</div>
 
 		</div>
 	</div>

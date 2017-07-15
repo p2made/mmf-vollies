@@ -9,9 +9,65 @@ use common\models\Application;
 
 /**
  * ApplicationSearch represents the model behind the search form about `common\models\Application`.
+ *
+ * @property integer $id
+ * @property integer $user_id
+ * @property integer $job_choice_1
+ * @property integer $job_choice_2
+ * @property integer $job_choice_3
+ * @property string $year
+ * @property string $availableFromDate
+ * @property integer $availableFromTime
+ * @property string $availableToDate
+ * @property integer $availableToTime
+ * @property integer $bestTime
+ * @property string $availabilityNotes
+ * @property integer $double
+ * @property string $otherNotes
+ * @property string $referee
+ * @property string $refereeRelationship
+ * @property string $refereePhone
+ * @property string $bestCallingTime
+ * @property integer $accepted
+ * @property integer $team_id
+ * @property integer $rejected
+ * @property string $rejectedReason
+ * @property integer $created_at
+ * @property integer $created_by
+ * @property integer $updated_at
+ * @property integer $updated_by
+ *
+ * @property \common\models\Job $jobChoice1
+ * @property \common\models\Job $jobChoice2
+ * @property \common\models\Job $jobChoice3
+ * @property \common\models\Profile $user
+ * @property string $aliasModel
+ *
+ * @property string $vollieName
+ * @property string $preferredName
+ * @property string $jobPreference1
+ * @property string $jobPreference2
+ * @property string $jobPreference3
+ * @property string $availableFrom
+ * @property string $availableTo
+ * @property string $earlyLate
+ *
+ * @property string[] $jobChoices
  */
 class ApplicationSearch extends Application
 {
+	// virtual attributes
+	public $vollieName;
+	public $preferredName;
+	public $jobPreference1;
+	public $jobPreference2 = 'none';
+	public $jobPreference3 = 'none';
+	public $availableFrom;
+	public $availableTo;
+	public $earlyLate;
+
+	public $jobChoices = [];
+
 	/**
 	 * @inheritdoc
 	 */
@@ -19,7 +75,7 @@ class ApplicationSearch extends Application
 	{
 		return [
 			[['id', 'user_id', 'job_choice_1', 'job_choice_2', 'job_choice_3', 'availableFromTime', 'availableToTime', 'bestTime', 'double', 'status', 'team_id', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-			[['year', 'availableFromDate', 'availableToDate', 'availabilityNotes', 'otherNotes', 'referee', 'refereeRelationship', 'refereePhone', 'bestCallingTime', 'rejectedReason'], 'safe'],
+			[['year', 'availableFromDate', 'availableToDate', 'availabilityNotes', 'otherNotes', 'referee', 'refereeRelationship', 'refereePhone', 'bestCallingTime', 'rejectedReason', 'vollieName', 'preferredName', 'jobPreference1', 'jobPreference2', 'jobPreference3', 'availableFrom', 'availableTo', 'earlyLate'], 'safe'],
 		];
 	}
 
@@ -86,6 +142,20 @@ class ApplicationSearch extends Application
 			->andFilterWhere(['like', 'refereePhone', $this->refereePhone])
 			->andFilterWhere(['like', 'bestCallingTime', $this->bestCallingTime])
 			->andFilterWhere(['like', 'rejectedReason', $this->rejectedReason]);
+
+		$dataProvider->setSort([
+			'attributes' => [
+				'id',
+			//	'user_id',
+			//	'vollieName' => [
+			//		'asc' => ['mmf_profile.givenName' => SORT_ASC, 'mmf_profile.familyName' => SORT_ASC],
+			//		'desc' => ['mmf_profile.givenName' => SORT_DESC, 'mmf_profile.familyName' => SORT_DESC],
+			//		'label' => 'Name',
+			//		'default' => SORT_ASC
+			//	],
+			],
+        	'defaultOrder' => ['id' => SORT_ASC]
+		]);
 
 		return $dataProvider;
 	}
