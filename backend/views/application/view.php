@@ -11,7 +11,6 @@
 
 use yii\bootstrap\Html;
 use p2m\helpers\FA;
-//use yii\widgets\DetailView;
 use kartik\detail\DetailView;
 use kartik\grid\GridView;
 
@@ -22,7 +21,7 @@ p2m\sbAdmin\assets\SBAdmin2Asset::register($this);
 /* @var $profile     common\models\Profile */
 /* @var $commitments common\models\Commitment */
 
-$this->title = $model->volunteerName . ' (preferred: ' . $model->preferredName . ')';
+$this->title = $model->vollieName . ' (preferred: ' . $model->preferredName . ')';
 $this->params['breadcrumbs'][] = ['label' => 'Applications', 'url' => ['index']];
 
 
@@ -47,21 +46,18 @@ $attrModel = array();
 					'labelColOptions' => ['style' => 'width:10%', 'class' => 'text-right'],
 					'attributes' => [
 						[
-							'attribute' => 'job_choice_1',
+							'attribute' => 'jobPreference1',
 							'label' => '1',
-							'value' => $model->jobChoice1->name,
 							'displayOnly' => true,
 						],
 						[
-							'attribute' => 'job_choice_2',
+							'attribute' => 'jobPreference2',
 							'label' => '2',
-							'value' => $model->jobChoice2->name,
 							'displayOnly' => true,
 						],
 						[
-							'attribute' => 'job_choice_3',
+							'attribute' => 'jobPreference3',
 							'label' => '3',
-							'value' => $model->jobChoice2->name,
 							'displayOnly' => true,
 						],
 					],
@@ -200,7 +196,7 @@ $attrModel = array();
 							'displayOnly' => true,
 						],
 						[
-							'attribute' => 'emailAddress',
+							'attribute' => 'email',
 							'displayOnly' => true,
 						],
 					],

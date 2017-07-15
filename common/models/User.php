@@ -8,9 +8,9 @@ use yii\helpers\ArrayHelper;
 /**
  * User ActiveRecord model.
  *
- * @property bool	$isAdmin
- * @property bool	$isBlocked
- * @property bool	$isConfirmed
+ * @property bool    $isAdmin
+ * @property bool    $isBlocked
+ * @property bool    $isConfirmed
  *
  * Database fields:
  * @property integer $id

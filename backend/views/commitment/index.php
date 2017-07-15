@@ -27,65 +27,67 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="row">
 		<div class="col-lg-12">
 
-<div class="commitment-index">
+			<div class="commitment-index">
 
-	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+				<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-	<p>
-		<?php //Html::a('Create Commitment', ['create'], ['class' => 'btn btn-success']) ?>
-	</p>
+				<p>
+					<?php //Html::a('Create Commitment', ['create'], ['class' => 'btn btn-success']) ?>
+				</p>
 
-<?php Pjax::begin(); ?>
-	<?= GridView::widget([
-		'dataProvider' => $dataProvider,
-		'filterModel' => $searchModel,
-		'columns' => [
-			['class' => 'yii\grid\SerialColumn'],
+				<?php Pjax::begin(); ?>
+					<?= GridView::widget([
+						'dataProvider' => $dataProvider,
+						'filterModel' => $searchModel,
+						'columns' => [
+							['class' => 'yii\grid\SerialColumn'],
 
-			// 'id',
-			'user.fullName',
-			// 'application_id',
-			// 'team_id',
-			[
-				'header' => 'Year',
-				'headerOptions' => ['class' => 'text-center'],
-				'value' => 'year',
-				'contentOptions' => ['class' => 'text-center', 'style' => 'width:80px;'],
-			],
-			// 'year',
-			'job',
-			// 'hours',
-			// 'report:ntext',
-			[
-				'header' => 'Reinvite',
-				'headerOptions' => ['class' => 'text-center'],
-				'value' => function ($model) {
-					$class = '';
-					$text = '';
-					if ($model->reinvite) {
-						$class = 'success';
-						$text = 'Yes';
-					} else {
-						$class = 'danger';
-						$text = 'NO';
-					}
-					//return '<div class="text-center"><span class="' . $class . '">' . $text . '</span></div>';
-					return '<div class="btn btn-xs btn-block btn-'
-						. $class . '">' . $text . '</div>';
-				},
-				'contentOptions' => ['style' => 'width:120px;'],
-				'format' => 'raw',
-			],
-			// 'reinvite',
-			// 'created_at',
-			// 'created_by',
-			// 'updated_at',
-			// 'updated_by',
+							// 'id',
+							'vollieName',
+							// 'application_id',
+							// 'team_id',
+							[
+								'header' => 'Year',
+								'headerOptions' => ['class' => 'text-center'],
+								'value' => 'year',
+								'contentOptions' => ['class' => 'text-center', 'style' => 'width:80px;'],
+							],
+							// 'year',
+							'job',
+							// 'hours',
+							// 'report:ntext',
+							[
+								'header' => 'Reinvite',
+								'headerOptions' => ['class' => 'text-center'],
+								'value' => function ($model) {
+									$class = '';
+									$text = '';
+									if ($model->reinvite) {
+										$class = 'success';
+										$text = 'Yes';
+									} else {
+										$class = 'danger';
+										$text = 'NO';
+									}
+									//return '<div class="text-center"><span class="' . $class . '">' . $text . '</span></div>';
+									return '<div class="btn btn-xs btn-block btn-'
+										. $class . '" disabled>' . $text . '</div>';
+								},
+								'contentOptions' => ['style' => 'width:120px;'],
+								'format' => 'raw',
+							],
+							// 'reinvite',
+							// 'created_at',
+							// 'created_by',
+							// 'updated_at',
+							// 'updated_by',
 
-			['class' => 'yii\grid\ActionColumn'],
-		],
-	]); ?>
-<?php Pjax::end(); ?></div>
+							// ['class' => 'yii\grid\ActionColumn'],
+						],
+					]); ?>
+				<?php Pjax::end(); ?>
+
+			</div>
 
 		</div>
 	</div>

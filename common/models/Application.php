@@ -42,30 +42,30 @@ use yii\helpers\ArrayHelper;
  * @property \common\models\Profile $user
  * @property string $aliasModel
  *
- * @property string $volunteerName
+ * @property string $vollieName
  * @property string $preferredName
+ * @property string[] $jobChoices
  * @property string $jobPreference1
  * @property string $jobPreference2
  * @property string $jobPreference3
  * @property string $availableFrom
  * @property string $availableTo
  * @property string $earlyLate
- *
- * @property string[] $jobChoices
+ * @property string $returned
  */
 class Application extends BaseApplication
 {
 	// virtual attributes
-	public $volunteerName;
-	public $preferredName;
-	public $jobPreference1;
-	public $jobPreference2 = 'none';
-	public $jobPreference3 = 'none';
-	public $availableFrom;
-	public $availableTo;
-	public $earlyLate;
-
+	private $vollieName;
+	private $preferredName;
 	public $jobChoices = [];
+	private $jobPreference1;
+	private $jobPreference2;
+	private $jobPreference3;
+	private $availableFrom;
+	private $availableTo;
+	private $earlyLate;
+	private $returned;
 
 	public function behaviors()
 	{
@@ -83,7 +83,7 @@ class Application extends BaseApplication
 			parent::rules(),
 			[
 				# custom validation rules
-				[['volunteerName', 'preferredName', 'jobPreference1', 'jobPreference2', 'jobPreference3', 'availableFrom', 'availableTo', 'earlyLate'], 'safe'],
+				[['volunteerName', 'preferredName', 'jobPreference1', 'jobPreference2', 'jobPreference3', 'availableFrom', 'availableTo', 'earlyLate', 'returned'], 'safe'],
 			]
 		);
 	}
@@ -118,6 +118,7 @@ class Application extends BaseApplication
 			'refereePhone' =>        'Referee Phone',
 			'bestCallingTime' =>     'Best Calling Time',
 			'status' =>              'Status',
+			'returned' =>            'Returned',
 			'team_id' =>             'Team ID',
 			'rejectedReason' =>      'Rejected Reason',
 			'created_at' => 'Created At',
@@ -131,32 +132,116 @@ class Application extends BaseApplication
 	{
 		parent::afterFind();
 
-		$this->volunteerName = $this->user->fullName;
-		$this->preferredName = $this->user->preferredName;
+		//$this->setJobChoices();
+	}
+
+	public function getVollieName()
+	{
+		if ($this->vollieName) {
+			return $this->vollieName;
+		}
+
+		return $this->vollieName = $this->user->vollieName;
+	}
+
+	public function getPreferredName()
+	{
+		if ($this->preferredName) {
+			return $this->preferredName;
+		}
+
+		return $this->preferredName = $this->user->preferredName;
+	}
+
+	public function getJobPreference1()
+	{
+		if (count($this->jobChoices) == 3) {
+			return $this->jobChoices[0];
+		}
 
 		$this->setJobChoices();
 
-		$this->availableFrom = $this->setAvailability(true);
-		$this->availableTo = $this->setAvailability(false);
+		return $this->jobChoices[0];
+	}
 
-		$this->earlyLate = $this->setEarlyLate($this->bestTime);
+	public function getJobPreference2()
+	{
+		if (count($this->jobChoices) == 3) {
+			return $this->jobChoices[1];
+		}
+
+		$this->setJobChoices();
+
+		return $this->jobChoices[1];
+	}
+
+	public function getJobPreference3()
+	{
+		if (count($this->jobChoices) == 3) {
+			return $this->jobChoices[2];
+		}
+
+		$this->setJobChoices();
+
+		return $this->jobChoices[2];
+	}
+
+	public function getAvailableFrom()
+	{
+		if ($this->availableFrom) {
+			return $this->availableFrom;
+		}
+
+		$this->setAvailability();
+
+		return $this->availableFrom;
+	}
+
+	public function getAvailableTo()
+	{
+		if ($this->availableTo) {
+			return $this->availableTo;
+		}
+
+		$this->setAvailability();
+
+		return $this->availableTo;
+	}
+
+	public function getEarlyLate()
+	{
+		if ($this->earlyLate) {
+			return $this->earlyLate;
+		}
+
+		if ($this->bestTime == 1) {
+			return $this->earlyLate = 'early';
+		}
+
+		if ($this->bestTime == 2) {
+			return $this->earlyLate = 'late';
+		}
+
+		return $this->earlyLate = 'not specified';
+	}
+
+	public function getReturned()
+	{
+		if ($this->returned) {
+			return $this->returned;
+		}
+
+		return $this->returned = $this->user->returned;
 	}
 
 	private function setJobChoices()
 	{
-		$this->jobChoices = [$this->jobChoice1->name];
-		$this->jobPreference1 = $this->jobChoice1->name;
-		if ($this->jobChoice2) {
-			$this->jobChoices[] = $this->jobChoice2->name;
-			$this->jobPreference2 = $this->jobChoice2->name;
-		}
-		if ($this->jobChoice3) {
-			$this->jobChoices[] = $this->jobChoice3->name;
-			$this->jobPreference3 = $this->jobChoice3->name;
-		}
+		$this->jobChoices[0] = $this->jobChoice1->name;
+		$this->jobChoices[1] = ($this->jobChoice2 ? $this->jobChoice2->name : '');
+		$this->jobChoices[2] = ($this->jobChoice3 ? $this->jobChoice3->name : '');
 	}
 
-	private function setAvailability($early)
+	private function setAvailability()
 	{
 		$times = [
 			1 => 'Early, 8:00 AM',
@@ -165,28 +250,40 @@ class Application extends BaseApplication
 			4 => 'Late, Midnight',
 		];
 
-		if ($early) {
-			$date = date_create(date("Y") . '-' . $this->availableFromDate);
-			$time = $times[$this->availableFromTime];
-		} else {
-			$date = date_create(date("Y") . '-' . $this->availableToDate);
-			$time = $times[$this->availableToTime];
-		}
-
-		return $date->format('l, m-d') . ' / ' . $time;
+		$date = date_create(date("Y") . '-' . $this->availableFromDate);
+		$time = $times[$this->availableFromTime];
+		$this->availableFrom = $date->format('l, m-d') . ' / ' . $time;
+		$date = date_create(date("Y") . '-' . $this->availableToDate);
+		$time = $times[$this->availableToTime];
+		$this->availableTo = $date->format('l, m-d') . ' / ' . $time;
 	}
 
-	private function setEarlyLate($value)
+
+
+
+	public function emailAcknowledgement()
 	{
-		if ($value == 1) {
-			return 'early';
-		}
-		if ($value == 2) {
-			return 'late';
-		}
-
-		return 'not specified';
+		Yii::$app->mailer->compose('application-complete', [
+			'vollieName' => $this->preferredName,
+			'jobChoices' => $this->jobChoices,
+		])
+			->setFrom('vollies@malenymusicfestival.com')
+			->setTo(Yii::$app->user->identity->email)
+			->setSubject('Maleny Music Festival 2017 Volunteer Application')
+			->send();;
 	}
+
+	public function emailUpdate()
+	{
+		Yii::$app->mailer->compose('vollies-update', [
+			'vollieName' => $this->preferredName,
+		])
+			->setFrom('vollies@malenymusicfestival.com')
+			->setTo($this->user->emailAddress)
+			->setSubject('Maleny Music Festival 2017 Volunteer Update')
+			->send();;
+	}
+
 
 
 }

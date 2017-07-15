@@ -43,7 +43,7 @@ use common\models\Application;
  * @property \common\models\Profile $user
  * @property string $aliasModel
  *
- * @property string $volunteerName
+ * @property string $vollieName
  * @property string $preferredName
  * @property string $jobPreference1
  * @property string $jobPreference2
@@ -57,7 +57,7 @@ use common\models\Application;
 class ApplicationSearch extends Application
 {
 	// virtual attributes
-	public $volunteerName;
+	public $vollieName;
 	public $preferredName;
 	public $jobPreference1;
 	public $jobPreference2 = 'none';
@@ -75,7 +75,7 @@ class ApplicationSearch extends Application
 	{
 		return [
 			[['id', 'user_id', 'job_choice_1', 'job_choice_2', 'job_choice_3', 'availableFromTime', 'availableToTime', 'bestTime', 'double', 'status', 'team_id', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-			[['year', 'availableFromDate', 'availableToDate', 'availabilityNotes', 'otherNotes', 'referee', 'refereeRelationship', 'refereePhone', 'bestCallingTime', 'rejectedReason', 'volunteerName', 'preferredName', 'jobPreference1', 'jobPreference2', 'jobPreference3', 'availableFrom', 'availableTo', 'earlyLate'], 'safe'],
+			[['year', 'availableFromDate', 'availableToDate', 'availabilityNotes', 'otherNotes', 'referee', 'refereeRelationship', 'refereePhone', 'bestCallingTime', 'rejectedReason', 'vollieName', 'preferredName', 'jobPreference1', 'jobPreference2', 'jobPreference3', 'availableFrom', 'availableTo', 'earlyLate'], 'safe'],
 		];
 	}
 
@@ -146,18 +146,13 @@ class ApplicationSearch extends Application
 		$dataProvider->setSort([
 			'attributes' => [
 				'id',
-				'user_id',
-				'volunteerName' => [
-					'asc' => [
-						'mmf_profile.familyName' => SORT_ASC,
-						'mmf_profile.givenName' => SORT_ASC
-					],
-					'desc' => [
-						'mmf_profile.familyName' => SORT_DESC,
-						'mmf_profile.givenName' => SORT_DESC
-					],
-					'label' => 'Volunteer Name'
-				]
+			//	'user_id',
+			//	'vollieName' => [
+			//		'asc' => ['mmf_profile.givenName' => SORT_ASC, 'mmf_profile.familyName' => SORT_ASC],
+			//		'desc' => ['mmf_profile.givenName' => SORT_DESC, 'mmf_profile.familyName' => SORT_DESC],
+			//		'label' => 'Name',
+			//		'default' => SORT_ASC
+			//	],
 			],
         	'defaultOrder' => ['id' => SORT_ASC]
 		]);

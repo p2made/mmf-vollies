@@ -25,23 +25,26 @@ $arrowIcon = FA::i('arrow')->tag('span');
 				<?= Html::a(FA::fw('dashboard') . ' Dashboard', Yii::$app->homeUrl) ?>
 			</li><!-- Dashboard -->
 			<li>
+				<?= Html::a(FA::fw('group') . 'Vollies', Url::to(['/profile/index'])) ?>
+			</li><!-- Profiles -->
+			<li>
+				<?= Html::a(FA::fw('group') . 'Applications', Url::to(['/application/index'])) ?>
+			</li><!-- Applications -->
+			<li>
 				<?= Html::a(FA::fw('group') . 'Teams', Url::to(['/team/index'])) ?>
 			</li><!-- Teams -->
 			<li>
 				<?= Html::a(FA::fw('group') . 'Jobs', Url::to(['/job/index'])) ?>
 			</li><!-- Jobs -->
 			<li>
-				<?= Html::a(FA::fw('group') . 'Applications', Url::to(['/application/index'])) ?>
-			</li><!-- Applications -->
-			<li>
-				<?= Html::a(FA::fw('group') . 'Vollies', Url::to(['/user/admin/index'])) ?>
-			</li><!-- Users -->
-			<li>
-				<?= Html::a(FA::fw('group') . 'Profiles', Url::to(['/profile/index'])) ?>
-			</li><!-- Profiles -->
-			<li>
 				<?= Html::a(FA::fw('group') . 'Commitments', Url::to(['/commitment/index'])) ?>
 			</li><!-- Commitments -->
+			<li>
+				<?= Html::a(FA::fw('group') . 'Users', Url::to(['/user/admin/index'])) ?>
+			</li><!-- Users -->
+			<li>
+				<?= Html::a(FA::fw('table') . 'Tables', Url::to(['/site/page', 'view' => 'tables'])) ?>
+			</li><!-- Tables -->
 			<!--<li>
 				<?= Html::a(FA::fw('group') . 'Histories', Url::to(['/history/index'])) ?>
 			</li>--><!-- Histories -->

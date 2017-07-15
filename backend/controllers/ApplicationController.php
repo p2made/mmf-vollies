@@ -178,4 +178,27 @@ class ApplicationController extends Controller
 			throw new NotFoundHttpException('The requested page does not exist.');
 		}
 	}
+
+	protected function actionMessage()
+	{
+		/*
+		$applicants = Application::find()
+			->where(['status' => 0])
+			->orderBy('id')
+			->all();
+
+		foreach($applicants as $applicant) {
+			$name = $applicant->preferredName;
+			$email = $applicant->user->emailAddress;
+
+			Yii::$app->mailer->compose('vollies-update', [
+				'name' => $applicant->preferredName
+			])->setTo($applicant->user->emailAddress)
+				->setSubject('Maleny Music Festival 2017 Vollies Update')
+				->send();
+		}
+		*/
+		return $this->redirect(['index']);
+	}
+
 }

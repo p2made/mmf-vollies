@@ -10,14 +10,9 @@
  */
 
 use yii\bootstrap\Html;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use yii\widgets\Pjax;
 use p2m\helpers\FA;
-
-use yii\helpers\Url;
-use yii\widgets\ActiveForm;
-
-use yii\bootstrap\Modal;
 
 p2m\sbAdmin\assets\SBAdmin2Asset::register($this);
 
@@ -48,44 +43,31 @@ $this->params['breadcrumbs'][] = $this->title;
 							['class' => 'yii\grid\SerialColumn'],
 
 							// 'id',
-							'vollieName',
+							// 'user.givenName',
+							// 'user.familyName',
+							'volunteerName',
 							[
 								'header' => 'Job Choice 1',
 								'value' => function ($model) {
-									return $model->jobPreference1;
+									return $model->jobChoices[0];
 								}
 							],
 							[
 								'header' => 'Job Choice 2',
 								'value' => function ($model) {
-									return $model->jobPreference2;
+									return count($model->jobChoices) > 1 ? $model->jobChoices[1] : '';
 								}
 							],
 							[
 								'header' => 'Job Choice 3',
 								'value' => function ($model) {
-									return $model->jobPreference3;
+									return count($model->jobChoices) > 2 ? $model->jobChoices[2] : '';
 								}
 							],
-							[
-								'header' => 'Returned',
-								'headerOptions' => ['class' => 'text-center'],
-								'value' => function ($model) {
-									$class = '';
-									$text = '';
-									if ($model->returned) {
-										$class = 'success';
-										$text = 'Yes';
-									} else {
-										$class = 'danger';
-										$text = 'NO';
-									}
-									return '<div class="btn btn-xs btn-block btn-'
-										. $class . '" disabled>' . $text . '</div>';
-								},
-								'contentOptions' => ['style' => 'width:120px;'],
-								'format' => 'raw',
-							],
+							// 'user.fullName',
+							// 'jobChoice1.name',
+							// 'jobChoice2.name',
+							// 'jobChoice3.name',
 							// 'year',
 							// 'availableFromDate',
 							// 'availableFromTime:datetime',
