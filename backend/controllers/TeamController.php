@@ -59,7 +59,7 @@ class TeamController extends Controller
 				'name',
 				'headName',
 			],
-			'defaultOrder' => ['sequence' => SORT_ASC]
+        	'defaultOrder' => ['sequence' => SORT_ASC]
 		]);
 
 		return $this->render('index', [

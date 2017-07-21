@@ -43,9 +43,6 @@ $arrowIcon = FA::i('arrow')->tag('span');
 				<?= Html::a(FA::fw('group') . 'Users', Url::to(['/user/admin/index'])) ?>
 			</li><!-- Users -->
 			<li>
-				<?= Html::a(FA::fw('envelope') . 'Send Update', Url::to(['/update/index'])) ?>
-			</li><!-- Update -->
-			<li>
 				<?= Html::a(FA::fw('table') . 'Tables', Url::to(['/site/page', 'view' => 'tables'])) ?>
 			</li><!-- Tables -->
 			<!--<li>

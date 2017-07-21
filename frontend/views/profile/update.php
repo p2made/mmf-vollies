@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
  * update.php
  *
@@ -34,6 +35,10 @@ $this->params['breadcrumbs'][] = 'Update';
 			<div class="col-md-12">
 
 				<div class="profile-update">
+=======
+
+use yii\helpers\Html;
+>>>>>>> parent of 98cfb25... before Gii profile
 
 					<h1><?= Html::encode($this->title) ?></h1>
 

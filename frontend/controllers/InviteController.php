@@ -3,15 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\Profile;
-use common\models\ProfileSearch;
+use common\models\Invite;
+use common\models\InviteSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProfileController implements the CRUD actions for Profile model.
+ * InviteController implements the CRUD actions for Invite model.
  */
-class ProfileController extends dektrium\user\controllers\ProfileController
+class InviteController extends Controller
 {
 	/**
 	 * @inheritdoc
@@ -28,13 +29,44 @@ class ProfileController extends dektrium\user\controllers\ProfileController
 		];
 	}
 
+	public function actionSend()
+	{
+		//
+		$searchModel = new InviteSearch();
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+		foreach ($dataProvider->models as $model) {
+			$this->sendInvite($model);
+		}
+
+		return $this->render('index', [
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider,
+		]);
+	}
+
+	public function sendInvite($model)
+	{
+		$layout = ($model->role == 1 ? 'invite-special' : 'invite-vollies');
+
+		Yii::$app->mailer->compose($layout, [
+			'email'	=> $model->email,
+			'name'	 => $model->name,
+			'password' => $model->password,
+		])
+			->setFrom('vollies@malenymusicfestival.com')
+			->setTo($model->email)
+			->setSubject('Maleny Music Festival 2017 Volunteer Application Invitation')
+			->send();;
+	}
+
 	/**
-	 * Lists all Profile models.
+	 * Lists all Invite models.
 	 * @return mixed
 	 */
 	public function actionIndex()
 	{
-		$searchModel = new ProfileSearch();
+		$searchModel = new InviteSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 		return $this->render('index', [
@@ -44,7 +76,7 @@ class ProfileController extends dektrium\user\controllers\ProfileController
 	}
 
 	/**
-	 * Displays a single Profile model.
+	 * Displays a single Invite model.
 	 * @param integer $id
 	 * @return mixed
 	 */
@@ -56,16 +88,16 @@ class ProfileController extends dektrium\user\controllers\ProfileController
 	}
 
 	/**
-	 * Creates a new Profile model.
+	 * Creates a new Invite model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
 	public function actionCreate()
 	{
-		$model = new Profile();
+		$model = new Invite();
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->user_id]);
+			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('create', [
 				'model' => $model,
@@ -74,7 +106,7 @@ class ProfileController extends dektrium\user\controllers\ProfileController
 	}
 
 	/**
-	 * Updates an existing Profile model.
+	 * Updates an existing Invite model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
 	 * @return mixed
@@ -84,7 +116,7 @@ class ProfileController extends dektrium\user\controllers\ProfileController
 		$model = $this->findModel($id);
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->user_id]);
+			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('update', [
 				'model' => $model,
@@ -93,7 +125,7 @@ class ProfileController extends dektrium\user\controllers\ProfileController
 	}
 
 	/**
-	 * Deletes an existing Profile model.
+	 * Deletes an existing Invite model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
 	 * @return mixed
@@ -106,15 +138,15 @@ class ProfileController extends dektrium\user\controllers\ProfileController
 	}
 
 	/**
-	 * Finds the Profile model based on its primary key value.
+	 * Finds the Invite model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return Profile the loaded model
+	 * @return Invite the loaded model
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	protected function findModel($id)
 	{
-		if (($model = Profile::findOne($id)) !== null) {
+		if (($model = Invite::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');

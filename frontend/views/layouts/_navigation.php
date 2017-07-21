@@ -23,7 +23,6 @@ $menuItems = [
 		['label' => 'Mailout', 'url' => ['/site/page', 'view' => 'mailout']],
 	]],
 	['label' => 'Models', 'items' => [
-		['label' => 'Profile', 'url' =>['/profile/update']],
 		['label' => 'Invite', 'url' =>['/invite/index']],
 		['label' => 'User', 'url' =>['/user/index']],
 		['label' => 'Account', 'url' =>['/user/settings/account']],
