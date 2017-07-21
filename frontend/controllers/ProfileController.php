@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 /**
  * ProfileController implements the CRUD actions for Profile model.
  */
-class ProfileController extends \dektrium\user\controllers\ProfileController
+class ProfileController extends \yii\web\Controller
 {
 
 	/**
