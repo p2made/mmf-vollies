@@ -19,7 +19,7 @@
 		"kartik-v/yii2-widget-activeform": "^1.4",
 		"kartik-v/yii2-widget-select2": "^2.0",
 		"kartik-v/yii2-widgets": "^3.4",
-		"dektrium/yii2-user": "^0.9"
+		"dektrium/yii2-user": "^0.9.12"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "^2.0",
@@ -27,7 +27,7 @@
 		"yiisoft/yii2-faker": "^2.0",
 		"codeception/base": "^2.2",
 		"codeception/verify": "^0.3",
-		"schmunk42/yii2-giiant": "^0.9.0"
+		"schmunk42/yii2-giiant": "^0.9.2"
 	},
 
 	"config": {

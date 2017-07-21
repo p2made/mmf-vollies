@@ -107,8 +107,8 @@ class ApplicationController extends Controller
 		);
 
 		return $this->render('view', [
-			'model'       => $model,
-			'profile'     => $profile,
+			'model'	   => $model,
+			'profile'	 => $profile,
 			'commitments' => $commitments,
 		]);
 	}
@@ -179,26 +179,21 @@ class ApplicationController extends Controller
 		}
 	}
 
-	protected function actionMessage()
+	public function actionSend()
 	{
-		/*
-		$applicants = Application::find()
-			->where(['status' => 0])
-			->orderBy('id')
-			->all();
+		$searchModel = new ApplicationSearch();
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-		foreach($applicants as $applicant) {
-			$name = $applicant->preferredName;
-			$email = $applicant->user->emailAddress;
+		$records = Application::find()->all();
 
-			Yii::$app->mailer->compose('vollies-update', [
-				'name' => $applicant->preferredName
-			])->setTo($applicant->user->emailAddress)
-				->setSubject('Maleny Music Festival 2017 Vollies Update')
-				->send();
+		foreach ($records as $model) {
+			$model->sendUpdate();
 		}
-		*/
-		return $this->redirect(['index']);
+
+		return $this->render('index', [
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider,
+		]);
 	}
 
 }

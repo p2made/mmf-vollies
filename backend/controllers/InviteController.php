@@ -1,34 +1,18 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use Yii;
-use common\models\Team;
-use common\models\TeamSearch;
+use common\models\Invite;
+use common\models\InviteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TeamController implements the CRUD actions for Team model.
- *
- * Model properties...
- *
- * @property integer $id
- * @property integer $head_id
- * @property integer $sequence
- * @property string $name
- * @property string $description
- * @property integer $created_at
- * @property integer $updated_at
- *
- * @property \common\models\Job[] $jobs
- * @property \common\models\Profile $head
- * @property string $aliasModel
- *
- * @property string $headName;
+ * InviteController implements the CRUD actions for Invite model.
  */
-class TeamController extends Controller
+class InviteController extends Controller
 {
 	/**
 	 * @inheritdoc
@@ -46,21 +30,13 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Lists all Team models.
+	 * Lists all Invite models.
 	 * @return mixed
 	 */
 	public function actionIndex()
 	{
-		$searchModel = new TeamSearch();
+		$searchModel = new InviteSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		$dataProvider->setSort([
-			'attributes' => [
-				'sequence',
-				'name',
-				'headName',
-			],
-			'defaultOrder' => ['sequence' => SORT_ASC]
-		]);
 
 		return $this->render('index', [
 			'searchModel' => $searchModel,
@@ -69,7 +45,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Displays a single Team model.
+	 * Displays a single Invite model.
 	 * @param integer $id
 	 * @return mixed
 	 */
@@ -81,13 +57,13 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Creates a new Team model.
+	 * Creates a new Invite model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
 	public function actionCreate()
 	{
-		$model = new Team();
+		$model = new Invite();
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
@@ -99,7 +75,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Updates an existing Team model.
+	 * Updates an existing Invite model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
 	 * @return mixed
@@ -118,7 +94,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Deletes an existing Team model.
+	 * Deletes an existing Invite model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
 	 * @return mixed
@@ -131,15 +107,15 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Finds the Team model based on its primary key value.
+	 * Finds the Invite model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return Team the loaded model
+	 * @return Invite the loaded model
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	protected function findModel($id)
 	{
-		if (($model = Team::findOne($id)) !== null) {
+		if (($model = Invite::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');

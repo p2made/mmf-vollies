@@ -3,32 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Team;
-use common\models\TeamSearch;
+use common\models\Update;
+use common\models\UpdateSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TeamController implements the CRUD actions for Team model.
- *
- * Model properties...
- *
- * @property integer $id
- * @property integer $head_id
- * @property integer $sequence
- * @property string $name
- * @property string $description
- * @property integer $created_at
- * @property integer $updated_at
- *
- * @property \common\models\Job[] $jobs
- * @property \common\models\Profile $head
- * @property string $aliasModel
- *
- * @property string $headName;
+ * UpdateController implements the CRUD actions for Update model.
  */
-class TeamController extends Controller
+class UpdateController extends Controller
 {
 	/**
 	 * @inheritdoc
@@ -46,21 +30,13 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Lists all Team models.
+	 * Lists all Update models.
 	 * @return mixed
 	 */
 	public function actionIndex()
 	{
-		$searchModel = new TeamSearch();
+		$searchModel = new UpdateSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		$dataProvider->setSort([
-			'attributes' => [
-				'sequence',
-				'name',
-				'headName',
-			],
-			'defaultOrder' => ['sequence' => SORT_ASC]
-		]);
 
 		return $this->render('index', [
 			'searchModel' => $searchModel,
@@ -69,7 +45,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Displays a single Team model.
+	 * Displays a single Update model.
 	 * @param integer $id
 	 * @return mixed
 	 */
@@ -81,13 +57,13 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Creates a new Team model.
+	 * Creates a new Update model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
 	public function actionCreate()
 	{
-		$model = new Team();
+		$model = new Update();
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
@@ -99,7 +75,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Updates an existing Team model.
+	 * Updates an existing Update model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
 	 * @return mixed
@@ -118,7 +94,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Deletes an existing Team model.
+	 * Deletes an existing Update model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
 	 * @return mixed
@@ -131,18 +107,36 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Finds the Team model based on its primary key value.
+	 * Finds the Update model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return Team the loaded model
+	 * @return Update the loaded model
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	protected function findModel($id)
 	{
-		if (($model = Team::findOne($id)) !== null) {
+		if (($model = Update::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');
 		}
 	}
+
+	public function actionSend()
+	{
+		$searchModel = new UpdateSearch();
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+		$records = Update::find()->all();
+
+		foreach ($records as $model) {
+			$model->sendUpdate();
+		}
+
+		return $this->render('index', [
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider,
+		]);
+	}
+
 }

@@ -17,8 +17,8 @@ use kartik\detail\DetailView
 p2m\sbAdmin\assets\SBAdmin2Asset::register($this);
 
 /* @var $this yii\web\View */
-/* @var $model      common\models\Application */
-/* @var $profile    common\models\Profile */
+/* @var $model	  common\models\Application */
+/* @var $profile	common\models\Profile */
 /* @var $commitment common\models\Commitment */
 
 $this->title = $model->id;

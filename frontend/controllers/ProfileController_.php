@@ -3,16 +3,15 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\Invite;
-use common\models\InviteSearch;
-use yii\web\Controller;
+use common\models\Profile;
+use common\models\ProfileSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * InviteController implements the CRUD actions for Invite model.
+ * ProfileController implements the CRUD actions for Profile model.
  */
-class InviteController extends Controller
+class ProfileController extends dektrium\user\controllers\ProfileController
 {
 	/**
 	 * @inheritdoc
@@ -29,44 +28,13 @@ class InviteController extends Controller
 		];
 	}
 
-	public function actionSend()
-	{
-		//
-		$searchModel = new InviteSearch();
-		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-		foreach ($dataProvider->models as $model) {
-			$this->sendInvite($model);
-		}
-
-		return $this->render('index', [
-			'searchModel' => $searchModel,
-			'dataProvider' => $dataProvider,
-		]);
-	}
-
-	public function sendInvite($model)
-	{
-		$layout = ($model->role == 1 ? 'invite-special' : 'invite-vollies');
-
-		Yii::$app->mailer->compose($layout, [
-			'email'	=> $model->email,
-			'name'	 => $model->name,
-			'password' => $model->password,
-		])
-			->setFrom('vollies@malenymusicfestival.com')
-			->setTo($model->email)
-			->setSubject('Maleny Music Festival 2017 Volunteer Application Invitation')
-			->send();;
-	}
-
 	/**
-	 * Lists all Invite models.
+	 * Lists all Profile models.
 	 * @return mixed
 	 */
 	public function actionIndex()
 	{
-		$searchModel = new InviteSearch();
+		$searchModel = new ProfileSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 		return $this->render('index', [
@@ -76,7 +44,7 @@ class InviteController extends Controller
 	}
 
 	/**
-	 * Displays a single Invite model.
+	 * Displays a single Profile model.
 	 * @param integer $id
 	 * @return mixed
 	 */
@@ -88,16 +56,16 @@ class InviteController extends Controller
 	}
 
 	/**
-	 * Creates a new Invite model.
+	 * Creates a new Profile model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
 	public function actionCreate()
 	{
-		$model = new Invite();
+		$model = new Profile();
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->id]);
+			return $this->redirect(['view', 'id' => $model->user_id]);
 		} else {
 			return $this->render('create', [
 				'model' => $model,
@@ -106,7 +74,7 @@ class InviteController extends Controller
 	}
 
 	/**
-	 * Updates an existing Invite model.
+	 * Updates an existing Profile model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
 	 * @return mixed
@@ -116,7 +84,7 @@ class InviteController extends Controller
 		$model = $this->findModel($id);
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->id]);
+			return $this->redirect(['view', 'id' => $model->user_id]);
 		} else {
 			return $this->render('update', [
 				'model' => $model,
@@ -125,7 +93,7 @@ class InviteController extends Controller
 	}
 
 	/**
-	 * Deletes an existing Invite model.
+	 * Deletes an existing Profile model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
 	 * @return mixed
@@ -138,15 +106,15 @@ class InviteController extends Controller
 	}
 
 	/**
-	 * Finds the Invite model based on its primary key value.
+	 * Finds the Profile model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return Invite the loaded model
+	 * @return Profile the loaded model
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	protected function findModel($id)
 	{
-		if (($model = Invite::findOne($id)) !== null) {
+		if (($model = Profile::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');

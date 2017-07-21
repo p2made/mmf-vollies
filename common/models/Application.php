@@ -273,17 +273,22 @@ class Application extends BaseApplication
 			->send();;
 	}
 
-	public function emailUpdate()
+	public function sendUpdate()
 	{
-		Yii::$app->mailer->compose('vollies-update', [
-			'vollieName' => $this->preferredName,
+		$layout = 'vollies-update-2017-07-17';
+
+		$name = $this->preferredName;
+		$email = $this->user->email;
+
+		Yii::$app->mailer->compose($layout, [
+			'email' => $email,
+			'name'  => $name,
 		])
 			->setFrom('vollies@malenymusicfestival.com')
-			->setTo($this->user->emailAddress)
-			->setSubject('Maleny Music Festival 2017 Volunteer Update')
+			->setTo($email)
+			->setSubject('Maleny Music Festival 2017 Volunteer Application Invitation')
 			->send();;
 	}
-
 
 
 }

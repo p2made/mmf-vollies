@@ -112,6 +112,10 @@ $this->params['breadcrumbs'][] = $this->title;
 					]); ?>
 				<?php Pjax::end(); ?>
 
+				<p>
+					<?= Html::a('Send Update', ['send'], ['class' => 'btn btn-danger']) ?>
+				</p>
+
 			</div>
 
 		</div>
