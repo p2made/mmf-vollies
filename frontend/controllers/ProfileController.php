@@ -12,11 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * ProfileController implements the CRUD actions for Profile model.
  */
-<<<<<<< HEAD
-class ProfileController extends \yii\web\Controller
-=======
 class ProfileController extends Controller
->>>>>>> parent of 98cfb25... before Gii profile
 {
 	/**
 	 * @inheritdoc

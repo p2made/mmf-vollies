@@ -14,7 +14,7 @@ return [
 			'viewPath' => '@common/mail',
 			'useFileTransport' => false,
 			'messageConfig' => [
-				'from' => ['vollies@malenymusicfestival.com' => 'Maleny Music Festival Vollies'],
+				'from' => ['no-reply@malenymusicfestival.com' => 'Maleny Music Festival Vollies'],
 				'replyTo' => ['vollies@malenymusicfestival.com' => 'MMF Volunteers Coordinator'],
 				'charset' => 'utf8',
 			],

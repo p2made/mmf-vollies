@@ -16,7 +16,7 @@ use yii\helpers\ArrayHelper;
 
 $menuItems = [
 	'<li><a href="http://malenymusicfestival.com">MMF Main Site</a></li>',
-	['label' => 'Vollies Home', 'url' => ['/site/index']],
+	['label' => 'Home', 'url' => ['/site/index']],
 ];
 if (Yii::$app->user->isGuest) {
 	$menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];

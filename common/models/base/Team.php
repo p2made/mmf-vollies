@@ -27,72 +27,72 @@ abstract class Team extends \yii\db\ActiveRecord
 
 
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'mmf_team';
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName()
+	{
+		return 'mmf_team';
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-            ],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => TimestampBehavior::className(),
+			],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['head_id', 'sequence'], 'integer'],
-            [['sequence', 'name'], 'required'],
-            [['description'], 'string'],
-            [['name'], 'string', 'max' => 24],
-            [['head_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Profile::className(), 'targetAttribute' => ['head_id' => 'user_id']]
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			[['head_id', 'sequence'], 'integer'],
+			[['sequence', 'name'], 'required'],
+			[['description'], 'string'],
+			[['name'], 'string', 'max' => 24],
+			[['head_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Profile::className(), 'targetAttribute' => ['head_id' => 'user_id']]
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'head_id' => 'Head ID',
-            'sequence' => 'Sequence',
-            'name' => 'Name',
-            'description' => 'Description',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'head_id' => 'Head ID',
+			'sequence' => 'Sequence',
+			'name' => 'Name',
+			'description' => 'Description',
+			'created_at' => 'Created At',
+			'updated_at' => 'Updated At',
+		];
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getJobs()
-    {
-        return $this->hasMany(\common\models\Job::className(), ['team_id' => 'id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getJobs()
+	{
+		return $this->hasMany(\common\models\Job::className(), ['team_id' => 'id']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getHead()
-    {
-        return $this->hasOne(\common\models\Profile::className(), ['user_id' => 'head_id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getHead()
+	{
+		return $this->hasOne(\common\models\Profile::className(), ['user_id' => 'head_id']);
+	}
 
 
 

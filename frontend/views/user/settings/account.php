@@ -24,12 +24,13 @@ $this->title = Yii::t('user', 'Volunteer Account');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
+
 <div class="container">
 	<div class="box">
 
 		<div class="row">
 			<div class="col-md-12">
-				<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
 				<hr>
 					<h2 class="intro-text text-center">
 						<?= Html::encode($this->title) ?>
@@ -60,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 				<?= $form->field($model, 'email') ?>
 
-				<?php //$form->field($model, 'username') ?>
+				<?= $form->field($model, 'username') ?>
 
 				<?= $form->field($model, 'new_password')->passwordInput() ?>
 

@@ -8,9 +8,9 @@ use yii\helpers\ArrayHelper;
 /**
  * User ActiveRecord model.
  *
- * @property bool    $isAdmin
- * @property bool    $isBlocked
- * @property bool    $isConfirmed
+ * @property bool	$isAdmin
+ * @property bool	$isBlocked
+ * @property bool	$isConfirmed
  *
  * Database fields:
  * @property integer $id
@@ -120,7 +120,6 @@ class User extends \dektrium\user\models\User
 
 		return ($application != null);
 	}
-
 	//protected function getFinder()
 
 	//protected function getMailer()
@@ -182,5 +181,7 @@ class User extends \dektrium\user\models\User
 	//public static function findIdentity($id)
 
 	//public static function findIdentityByAccessToken($token, $type = null)
+
+
 
 }
