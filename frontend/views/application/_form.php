@@ -296,8 +296,8 @@ $jobSelectWidget = array(
 		<div class="col-md-3">
 			<div class="form-group">
 				<?= Html::submitButton(
-				$model->isNewRecord ? 'Submit Your Application' : 'Update Your Application',
-				['class' => 'btn btn-' . ($model->isNewRecord ? 'success' : 'primary') . ' btn-lg btn-block']
+					$model->isNewRecord ? 'Submit Your Application' : 'Update Your Application',
+					['class' => 'btn btn-' . ($model->isNewRecord ? 'success' : 'primary') . ' btn-lg btn-block']
 				) ?>
 			</div>
 		</div><!-- / Submit -->
