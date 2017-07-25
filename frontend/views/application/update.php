@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = 'Update';
 	<div class="box">
 
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-md-12">
 				<hr>
 					<h2 class="intro-text text-center">
 						<?= Html::encode($this->title) ?>

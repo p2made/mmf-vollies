@@ -48,7 +48,7 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl(
 	<footer>
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12 text-center">
+				<div class="col-md-12 text-center">
 					<p>Copyright <?= FA::i('copyright') ?> Maleny Music Festival <?= date("Y") ?>
 					<br><?= Yii::powered() ?></p>
 				</div>

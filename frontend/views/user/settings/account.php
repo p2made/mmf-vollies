@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<?= $form->field($model, 'current_password')->passwordInput() ?>
 
 				<div class="form-group">
-					<div class="col-lg-offset-5 col-lg-7">
+					<div class="col-md-offset-5 col-lg-7">
 						<?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?><br>
 					</div>
 				</div>
