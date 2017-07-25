@@ -3,12 +3,13 @@
 namespace common\models;
 
 use Yii;
+use \common\models\base\SocialAccount as BaseSocialAccount;
 use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "mmf_commitment".
+ * This is the model class for table "mmf_social_account".
  */
-class Commitment extends \common\models\base\Commitment
+class SocialAccount extends BaseSocialAccount
 {
 
 public function behaviors()

@@ -3,13 +3,12 @@
 namespace common\models;
 
 use Yii;
-use \common\models\base\MenuGroup as BaseMenuGroup;
 use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "mmf_menu_group".
  */
-class MenuGroup extends BaseMenuGroup
+class MenuGroup extends \common\models\base\MenuGroup
 {
 
 public function behaviors()

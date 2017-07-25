@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use \common\models\base\Application as BaseApplication;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -41,7 +42,7 @@ use yii\helpers\ArrayHelper;
  * @property \common\models\Profile $user
  * @property string $aliasModel
  */
-class Application extends \common\models\base\Application
+class Application extends BaseApplication
 {
 
 	/**

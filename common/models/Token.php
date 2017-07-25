@@ -3,13 +3,12 @@
 namespace common\models;
 
 use Yii;
-use \common\models\base\Token as BaseToken;
 use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "mmf_token".
  */
-class Token extends BaseToken
+class Token extends \common\models\base\Token
 {
 
 public function behaviors()
