@@ -1,4 +1,4 @@
 # Maleny Music Festival Vollies
 
-A Yii 2 Advanced application for managing Maleny Music Festival volunteers.
+A Yii 2 Advanced application for managing [Maleny Music Festival](http://malenymusicfestival.com) volunteers.
 
