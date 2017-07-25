@@ -87,14 +87,6 @@ class ApplicationController extends Controller
 	{
 		$model = $this->findModel($id);
 
-		if (!$model->preferredName) {
-			$model->preferredName = $model->givenName;
-		}
-		if ($model->mmfVol == 1) {
-			$model->vol = 1;
-			$model->mmfAtt = 1;
-		}
-
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
@@ -136,8 +128,8 @@ class ApplicationController extends Controller
 	protected function emailApplicant($model)
 	{
 		Yii::$app->mailer->compose('application-complete', [
-			'vollieName' => $model->preferredName,
-			'jobChoices' => $model->jobChoices,
+			'vollieName' => $model->vollieName(),
+			'jobChoices' => $model->jobChoices(),
 		])
 			->setFrom('vollies@malenymusicfestival.com')
 			->setTo(Yii::$app->user->identity->email)

@@ -62,6 +62,8 @@ $this->params['breadcrumbs'][] = $this->title;
 					<?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/user/security/login']) ?>
 				</p>
 			</div>
+
+			<div class="clearfix"></div>
 		</div>
 
 	</div>

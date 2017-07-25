@@ -117,18 +117,16 @@ $jobSelectWidget = array(
 			<p>Nominate up to 3 job choices. We will do our best to fit you in to one of those. Select the last job item, "Special", <strong>only</strong> explicitly know before applying that you should select it.</p>
 		</div>
 	</div><!-- / Job Choices -->
-	<?php
-		echo Form::widget([
-			'model' => $model,
-			'form' => $form,
-			'columns' => 3,
-			'attributes' => [
-				'job_choice_1' => $jobSelectWidget,
-				'job_choice_2' => $jobSelectWidget,
-				'job_choice_3' => $jobSelectWidget,
-			]
-		]);
-	?>
+	<?php echo Form::widget([
+		'model' => $model,
+		'form' => $form,
+		'columns' => 3,
+		'attributes' => [
+			'job_choice_1' => $jobSelectWidget,
+			'job_choice_2' => $jobSelectWidget,
+			'job_choice_3' => $jobSelectWidget,
+		]
+	]) ?>
 
 	<div class="row">
 		<div class="col-md-12">
@@ -160,7 +158,7 @@ $jobSelectWidget = array(
 					'widgetClass' => '\kartik\widgets\Select2',
 					'options' => ['data' => [
 						null => 'Time available from',
-						1 => 'Early, 8:00 AM',
+						1 => 'Early, 6:00 AM',
 						2 => 'Midday, 12:00 PM',
 						3 => 'Evening, 6:00 PM',
 					]],
@@ -220,7 +218,7 @@ $jobSelectWidget = array(
 			'attributes' => [
 				'double' => [
 					'type' => Form::INPUT_CHECKBOX,
-					'label' => 'I am available to double shifts if required.',
+					'label' => 'I am available for double shifts if required.',
 				],
 			]
 		]);
@@ -289,9 +287,7 @@ $jobSelectWidget = array(
 		]);
 	?>
 
-	<div class="row">
-		<div class="col-md-12"><br></div>
-	</div>
+	<div class="row"><div class="col-md-12"><br></div></div>
 
 	<div class="row">
 		<div class="col-md-9">

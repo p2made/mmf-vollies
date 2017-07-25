@@ -106,16 +106,16 @@ if (Yii::$app->user->isGuest) {
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 	</button>
-	<?= Html::a('MMF Vollies HQ', Yii::$app->homeUrl, ['class' => 'navbar-brand']) ?>
+	<?= Html::a('P<sup>2</sup>SB Admin v2.0', Yii::$app->homeUrl, ['class' => 'navbar-brand']) ?>
 </div>
 
 <?php
 echo Nav::widget([
 	'options' => ['class' => 'nav navbar-top-links navbar-right'],
 	'items' => [
-		//$messagesMenu, // dropdown-messages
-		//$tasksMenu, // dropdown-tasks
-		//$alertsMenu, // dropdown-alerts
+		$messagesMenu, // dropdown-messages
+		$tasksMenu, // dropdown-tasks
+		$alertsMenu, // dropdown-alerts
 		$userMenu, // dropdown-user
 	],
 	'encodeLabels' => false,

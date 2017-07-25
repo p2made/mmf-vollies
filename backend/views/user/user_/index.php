@@ -12,34 +12,34 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
 
-	<h1><?= Html::encode($this->title) ?></h1>
-	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-	<p>
-		<?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-	</p>
-<?php Pjax::begin(); ?>	<?= GridView::widget([
-		'dataProvider' => $dataProvider,
-		'filterModel' => $searchModel,
-		'columns' => [
-			['class' => 'yii\grid\SerialColumn'],
+    <p>
+        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+<?php Pjax::begin(); ?>    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
-			'id',
-			'email:email',
-			'username',
-			'password_hash',
-			'auth_key',
-			// 'confirmed_at',
-			// 'unconfirmed_email:email',
-			// 'registration_ip',
-			// 'flags',
-			// 'admin',
-			// 'created_at',
-			// 'updated_at',
-			// 'last_login_at',
-			// 'blocked_at',
+            'id',
+            'email:email',
+            'username',
+            'password_hash',
+            'auth_key',
+            // 'confirmed_at',
+            // 'unconfirmed_email:email',
+            // 'registration_ip',
+            // 'flags',
+            // 'admin',
+            // 'created_at',
+            // 'updated_at',
+            // 'last_login_at',
+            // 'blocked_at',
 
-			['class' => 'yii\grid\ActionColumn'],
-		],
-	]); ?>
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
 <?php Pjax::end(); ?></div>

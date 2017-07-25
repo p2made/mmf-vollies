@@ -15,7 +15,6 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $group_id
  * @property integer $sequence
  * @property string $name
- * @property string $shortName
  * @property string $description
  * @property integer $created_at
  * @property integer $updated_at
@@ -60,10 +59,9 @@ abstract class Job extends \yii\db\ActiveRecord
 	{
 		return [
 			[['team_id', 'group_id', 'sequence'], 'integer'],
-			[['name', 'shortName'], 'required'],
+			[['group_id', 'sequence', 'name'], 'required'],
 			[['description'], 'string'],
-			[['name'], 'string', 'max' => 255],
-			[['shortName'], 'string', 'max' => 48],
+			[['name'], 'string', 'max' => 48],
 			[['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\MenuGroup::className(), 'targetAttribute' => ['group_id' => 'id']],
 			[['team_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Team::className(), 'targetAttribute' => ['team_id' => 'id']]
 		];
@@ -80,7 +78,6 @@ abstract class Job extends \yii\db\ActiveRecord
 			'group_id' => 'Group ID',
 			'sequence' => 'Sequence',
 			'name' => 'Name',
-			'shortName' => 'Short Name',
 			'description' => 'Description',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
@@ -128,7 +125,7 @@ abstract class Job extends \yii\db\ActiveRecord
 	}
 
 
-
+	
 	/**
 	 * @inheritdoc
 	 * @return \common\models\JobQuery the active query used by this AR class.
