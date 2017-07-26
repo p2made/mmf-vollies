@@ -41,7 +41,7 @@ class User extends \dektrium\user\models\User
 	//use ModuleTrait;
 
 	//const BEFORE_CREATE   = 'beforeCreate';
-	//const AFTER_CREATE    = 'afterCreate';
+	//const AFTER_CREATE	= 'afterCreate';
 	//const BEFORE_REGISTER = 'beforeRegister';
 	//const AFTER_REGISTER  = 'afterRegister';
 	//const BEFORE_CONFIRM  = 'beforeConfirm';

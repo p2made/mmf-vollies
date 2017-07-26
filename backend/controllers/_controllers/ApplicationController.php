@@ -107,8 +107,8 @@ class ApplicationController extends Controller
 		);
 
 		return $this->render('view', [
-			'model'       => $model,
-			'profile'     => $profile,
+			'model'	   => $model,
+			'profile'	 => $profile,
 			'commitments' => $commitments,
 		]);
 	}

@@ -12,29 +12,29 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="job-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+	<h1><?= Html::encode($this->title) ?></h1>
+	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Job', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+	<p>
+		<?= Html::a('Create Job', ['create'], ['class' => 'btn btn-success']) ?>
+	</p>
+<?php Pjax::begin(); ?>	<?= GridView::widget([
+		'dataProvider' => $dataProvider,
+		'filterModel' => $searchModel,
+		'columns' => [
+			['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'team_id',
-            'group_id',
-            'sequence',
-            'name',
-            // 'shortName',
-            // 'description:ntext',
-            // 'created_at',
-            // 'updated_at',
+			'id',
+			'team_id',
+			'group_id',
+			'sequence',
+			'name',
+			// 'shortName',
+			// 'description:ntext',
+			// 'created_at',
+			// 'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+			['class' => 'yii\grid\ActionColumn'],
+		],
+	]); ?>
 <?php Pjax::end(); ?></div>
