@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Job */
+/* @var $model backend\models\Job */
 
 $this->title = 'Create Job';
 $this->params['breadcrumbs'][] = ['label' => 'Jobs', 'url' => ['index']];

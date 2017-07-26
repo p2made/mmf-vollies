@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Application */
+/* @var $model backend\models\Application */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Applications', 'url' => ['index']];
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'availableFromTime:datetime',
             'availableToDate',
             'availableToTime:datetime',
-            'bestTIme:datetime',
+            'bestTime:datetime',
             'availabilityNotes:ntext',
             'double',
             'otherNotes:ntext',
@@ -46,9 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'refereeRelationship',
             'refereePhone',
             'bestCallingTime',
-            'accepted',
+            'status',
             'team_id',
-            'rejected',
             'rejectedReason:ntext',
             'created_at',
             'created_by',

@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\CommitmentSearch */
+/* @var $searchModel backend\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Commitments';
+$this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="commitment-index">
+<div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Commitment', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,18 +25,19 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'user_id',
-            'application_id',
-            'team_id',
-            'year',
-            // 'job',
-            // 'hours',
-            // 'report:ntext',
-            // 'reinvite',
+            'email:email',
+            'username',
+            'password_hash',
+            'auth_key',
+            // 'confirmed_at',
+            // 'unconfirmed_email:email',
+            // 'registration_ip',
+            // 'flags',
+            // 'admin',
             // 'created_at',
-            // 'created_by',
             // 'updated_at',
-            // 'updated_by',
+            // 'last_login_at',
+            // 'blocked_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

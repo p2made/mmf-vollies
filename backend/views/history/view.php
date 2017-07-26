@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\History */
+/* @var $model backend\models\History */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Histories', 'url' => ['index']];

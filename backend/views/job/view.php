@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Job */
+/* @var $model backend\models\Job */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Jobs', 'url' => ['index']];
@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'group_id',
             'sequence',
             'name',
+            'shortName',
             'description:ntext',
             'created_at',
             'updated_at',

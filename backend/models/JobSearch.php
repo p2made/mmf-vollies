@@ -1,14 +1,14 @@
 <?php
 
-namespace common\models;
+namespace backend\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Job;
+use backend\models\Job;
 
 /**
- * JobSearch represents the model behind the search form about `common\models\Job`.
+ * JobSearch represents the model behind the search form about `backend\models\Job`.
  */
 class JobSearch extends Job
 {
@@ -19,7 +19,7 @@ class JobSearch extends Job
     {
         return [
             [['id', 'team_id', 'group_id', 'sequence', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'description'], 'safe'],
+            [['name', 'shortName', 'description'], 'safe'],
         ];
     }
 
@@ -68,6 +68,7 @@ class JobSearch extends Job
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'shortName', $this->shortName])
             ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;

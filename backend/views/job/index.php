@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\JobSearch */
+/* @var $searchModel backend\models\JobSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Jobs';
@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'group_id',
             'sequence',
             'name',
+            // 'shortName',
             // 'description:ntext',
             // 'created_at',
             // 'updated_at',

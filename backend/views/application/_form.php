@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Application */
+/* @var $model backend\models\Application */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'availableToTime')->textInput() ?>
 
-    <?= $form->field($model, 'bestTIme')->textInput() ?>
+    <?= $form->field($model, 'bestTime')->textInput() ?>
 
     <?= $form->field($model, 'availabilityNotes')->textarea(['rows' => 6]) ?>
 
@@ -46,11 +46,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'bestCallingTime')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'accepted')->textInput() ?>
+    <?= $form->field($model, 'status')->textInput() ?>
 
     <?= $form->field($model, 'team_id')->textInput() ?>
-
-    <?= $form->field($model, 'rejected')->textInput() ?>
 
     <?= $form->field($model, 'rejectedReason')->textarea(['rows' => 6]) ?>
 

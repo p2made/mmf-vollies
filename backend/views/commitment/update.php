@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Commitment */
+/* @var $model backend\models\Commitment */
 
 $this->title = 'Update Commitment: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Commitments', 'url' => ['index']];

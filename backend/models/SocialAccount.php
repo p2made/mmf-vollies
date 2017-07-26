@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace backend\models;
 
 use Yii;
 use \common\models\base\SocialAccount as BaseSocialAccount;

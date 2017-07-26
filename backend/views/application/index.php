@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\ApplicationSearch */
+/* @var $searchModel backend\models\ApplicationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Applications';
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'availableFromTime:datetime',
             // 'availableToDate',
             // 'availableToTime:datetime',
-            // 'bestTIme:datetime',
+            // 'bestTime:datetime',
             // 'availabilityNotes:ntext',
             // 'double',
             // 'otherNotes:ntext',
@@ -42,9 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'refereeRelationship',
             // 'refereePhone',
             // 'bestCallingTime',
-            // 'accepted',
+            // 'status',
             // 'team_id',
-            // 'rejected',
             // 'rejectedReason:ntext',
             // 'created_at',
             // 'created_by',

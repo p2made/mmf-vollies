@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Commitment;
-use common\models\CommitmentSearch;
+use backend\models\Commitment;
+use backend\models\CommitmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

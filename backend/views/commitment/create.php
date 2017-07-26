@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Commitment */
+/* @var $model backend\models\Commitment */
 
 $this->title = 'Create Commitment';
 $this->params['breadcrumbs'][] = ['label' => 'Commitments', 'url' => ['index']];

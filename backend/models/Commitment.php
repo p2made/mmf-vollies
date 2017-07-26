@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace backend\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "mmf_commitment".
  */
-class Commitment extends \common\models\base\Commitment
+class Commitment extends \common\models\Commitment
 {
 
 public function behaviors()

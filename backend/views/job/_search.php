@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\JobSearch */
+/* @var $model backend\models\JobSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -24,6 +24,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'sequence') ?>
 
     <?= $form->field($model, 'name') ?>
+
+    <?php // echo $form->field($model, 'shortName') ?>
 
     <?php // echo $form->field($model, 'description') ?>
 

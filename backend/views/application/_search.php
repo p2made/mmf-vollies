@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ApplicationSearch */
+/* @var $model backend\models\ApplicationSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'availableToTime') ?>
 
-    <?php // echo $form->field($model, 'bestTIme') ?>
+    <?php // echo $form->field($model, 'bestTime') ?>
 
     <?php // echo $form->field($model, 'availabilityNotes') ?>
 
@@ -51,11 +51,9 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'bestCallingTime') ?>
 
-    <?php // echo $form->field($model, 'accepted') ?>
+    <?php // echo $form->field($model, 'status') ?>
 
     <?php // echo $form->field($model, 'team_id') ?>
-
-    <?php // echo $form->field($model, 'rejected') ?>
 
     <?php // echo $form->field($model, 'rejectedReason') ?>
 
