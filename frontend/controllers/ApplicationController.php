@@ -3,11 +3,11 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\Application;
-use common\models\ApplicationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use frontend\models\Application;
+use frontend\models\ApplicationSearch;
 
 /**
  * ApplicationController implements the CRUD actions for Application model.
@@ -133,6 +133,7 @@ class ApplicationController extends Controller
 		])
 			->setFrom('vollies@malenymusicfestival.com')
 			->setTo(Yii::$app->user->identity->email)
+			->setCc('vollies@malenymusicfestival.com')
 			->setSubject('Maleny Music Festival 2017 Volunteer Application')
 			->send();;
 	}
