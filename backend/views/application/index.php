@@ -1,8 +1,24 @@
 <?php
+/**
+ * index.php
+ *
+ * @copyright Copyright &copy; Pedro Plowman, 2017
+ * @author Pedro Plowman
+ * @link https://github.com/p2made
+ * @package p2made/yii2-sb-admin-theme
+ * @license MIT
+ */
 
-use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\bootstrap\Html;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
+use yii\widgets\ActiveForm;
+use kartik\grid\GridView;
+use p2m\helpers\FA;
+
+p2m\sbAdmin\assets\SBAdmin2Asset::register($this);
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ApplicationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -10,9 +26,12 @@ use yii\widgets\Pjax;
 $this->title = 'Applications';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div id="content-wrapper">
+	<div class="row">
+		<div class="col-md-12">
+
 <div class="application-index">
 
-	<h1><?= Html::encode($this->title) ?></h1>
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 	<p>
@@ -53,4 +72,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			['class' => 'yii\grid\ActionColumn'],
 		],
 	]); ?>
-<?php Pjax::end(); ?></div>
+<?php Pjax::end(); ?>
+</div>
+
+		</div>
+	</div>
+</div><!-- /#content-wrapper -->

@@ -306,7 +306,7 @@ $sizes = array(
 	<!-- ### NOTE ### - 1 or more naked rows go in here -->
 
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-md-12">
 
 			<div class="panel panel-info">
 				<div class="panel-heading">All Glyphicons</div>

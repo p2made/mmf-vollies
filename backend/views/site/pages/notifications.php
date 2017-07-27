@@ -26,7 +26,7 @@ $this->title = 'Notifications';
 
 	<div class="row">
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -50,7 +50,7 @@ $this->title = 'Notifications';
 
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -82,7 +82,7 @@ $this->title = 'Notifications';
 
 	<div class="row">
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -116,7 +116,7 @@ $this->title = 'Notifications';
 
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">

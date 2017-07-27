@@ -16,7 +16,7 @@ use p2m\widgets\Alert;
 	<div class="container-fluid">
 
 		<header class="row">
-			<div class="col-lg-12">
+			<div class="col-md-12">
 				<h1 class="page-header"><?php echo $this->title; ?></h1>
 				<?= Breadcrumbs::widget([
 					'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

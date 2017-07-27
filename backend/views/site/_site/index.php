@@ -31,7 +31,7 @@ $this->title = 'Dashboard';
 <div id="content-wrapper">
 
 	<div class="row">
-		<div class="col-lg-3 col-md-6">
+		<div class="col-md-3 col-md-6">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div class="row">
@@ -51,7 +51,7 @@ $this->title = 'Dashboard';
 				</a>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-6">
+		<div class="col-md-3 col-md-6">
 			<div class="panel panel-green">
 				<div class="panel-heading">
 					<div class="row">
@@ -73,7 +73,7 @@ $this->title = 'Dashboard';
 				</a>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-6">
+		<div class="col-md-3 col-md-6">
 			<div class="panel panel-yellow">
 				<div class="panel-heading">
 					<div class="row">
@@ -95,7 +95,7 @@ $this->title = 'Dashboard';
 				</a>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-6">
+		<div class="col-md-3 col-md-6">
 			<div class="panel panel-red">
 				<div class="panel-heading">
 					<div class="row">

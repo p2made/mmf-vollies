@@ -25,7 +25,7 @@ $this->title = 'Forms';
 	<!-- ### NOTE ### - 1 or more naked rows go in here -->
 
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-md-12">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -33,7 +33,7 @@ $this->title = 'Forms';
 				</div><!-- /.panel-heading -->
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-lg-6">
+						<div class="col-md-6">
 							<form role="form">
 								<div class="form-group">
 									<label>Text Input</label>
@@ -140,7 +140,7 @@ $this->title = 'Forms';
 								<button type="reset" class="btn btn-default">Reset Button</button>
 							</form>
 						</div><!-- /.col-lg-6 (nested) -->
-						<div class="col-lg-6">
+						<div class="col-md-6">
 							<h1>Disabled Form States</h1>
 							<form role="form">
 								<fieldset disabled>

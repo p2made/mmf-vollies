@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div id="content-wrapper">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-md-12">
 
 <div class="application-update">
 

@@ -20,7 +20,7 @@ $this->title = $name;
 ?>
 <div id="content-wrapper">
 	<div class="row">
-		<div class="col-lg-6 col-lg-offset-3 col-sm-12">
+		<div class="col-md-6 col-lg-offset-3 col-sm-12">
 			<div class="panel panel-red">
 				<div class="panel-heading">
 					<div class="row">

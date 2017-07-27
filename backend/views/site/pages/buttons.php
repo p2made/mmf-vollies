@@ -30,7 +30,7 @@ $this->title = 'Buttons';
 
 	<div class="row">
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -110,7 +110,7 @@ $this->title = 'Buttons';
 
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -147,7 +147,7 @@ $this->title = 'Buttons';
 				</div><!-- /.panel-heading -->
 				<div class="panel-body">
 					<h4>Social Buttons</h4>
-					<div class="col-lg-6">
+					<div class="col-md-6">
 	<?= BSocial::b('adn') ?>
 	<?= BSocial::b('bitbucket') ?>
 	<?= BSocial::b('dropbox') ?>
@@ -159,7 +159,7 @@ $this->title = 'Buttons';
 	<?= BSocial::b('instagram') ?>
 	<?= BSocial::b('linkedin') ?>
 					</div>
-					<div class="col-lg-6">
+					<div class="col-md-6">
 	<?= BSocial::b('microsoft') ?>
 	<?= BSocial::b('openid') ?>
 	<?= BSocial::b('pinterest') ?>
@@ -171,7 +171,7 @@ $this->title = 'Buttons';
 	<?= BSocial::b('vk') ?>
 	<?= BSocial::b('yahoo') ?>
 					</div>
-					<div class="col-lg-12 text-center">
+					<div class="col-md-12 text-center">
 						<hr>
 	<?= BSocial::i('adn') ?>
 	<?= BSocial::i('bitbucket') ?>
@@ -184,7 +184,7 @@ $this->title = 'Buttons';
 	<?= BSocial::i('instagram') ?>
 	<?= BSocial::i('linkedin') ?>
 					</div>
-					<div class="col-lg-12 text-center">
+					<div class="col-md-12 text-center">
 						<br>
 	<?= BSocial::i('microsoft') ?>
 	<?= BSocial::i('openid') ?>

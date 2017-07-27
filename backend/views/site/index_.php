@@ -13,7 +13,6 @@ use yii\bootstrap\Html;
 use yii\bootstrap\Button;
 use yii\bootstrap\ButtonDropdown;
 use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Modal;
 use p2m\helpers\FA;
 
 p2m\sbAdmin\assets\SBAdmin2Asset::register($this);

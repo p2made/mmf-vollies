@@ -26,7 +26,7 @@ $this->title = 'Panels and Wells';
 
 	<div class="row">
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -42,7 +42,7 @@ $this->title = 'Panels and Wells';
 
 		</div>
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -58,7 +58,7 @@ $this->title = 'Panels and Wells';
 
 		</div>
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 
 			<div class="panel panel-success">
 				<div class="panel-heading">
@@ -78,7 +78,7 @@ $this->title = 'Panels and Wells';
 
 	<div class="row">
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 
 			<div class="panel panel-info">
 				<div class="panel-heading">
@@ -94,7 +94,7 @@ $this->title = 'Panels and Wells';
 
 		</div>
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 
 			<div class="panel panel-warning">
 				<div class="panel-heading">
@@ -110,7 +110,7 @@ $this->title = 'Panels and Wells';
 
 		</div>
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 
 			<div class="panel panel-danger">
 				<div class="panel-heading">
@@ -130,7 +130,7 @@ $this->title = 'Panels and Wells';
 
 	<div class="row">
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 
 			<div class="panel panel-green">
 				<div class="panel-heading">
@@ -146,7 +146,7 @@ $this->title = 'Panels and Wells';
 
 		</div>
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 
 			<div class="panel panel-yellow">
 				<div class="panel-heading">
@@ -162,7 +162,7 @@ $this->title = 'Panels and Wells';
 
 		</div>
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 
 			<div class="panel panel-red">
 				<div class="panel-heading">
@@ -182,7 +182,7 @@ $this->title = 'Panels and Wells';
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -236,7 +236,7 @@ $this->title = 'Panels and Wells';
 
 	<div class="row">
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Basic Tabs
@@ -278,7 +278,7 @@ $this->title = 'Panels and Wells';
 
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -324,21 +324,21 @@ $this->title = 'Panels and Wells';
 
 	<div class="row">
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 			<div class="well">
 				<h4>Normal Well</h4>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
 			</div>
 		</div>
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 			<div class="well well-lg">
 				<h4>Large Well</h4>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
 			</div>
 		</div>
 
-		<div class="col-lg-4">
+		<div class="col-md-4">
 			<div class="well well-sm">
 				<h4>Small Well</h4>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
@@ -349,7 +349,7 @@ $this->title = 'Panels and Wells';
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 			<div class="jumbotron">
 				<h1>Jumbotron</h1>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing.</p>

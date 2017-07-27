@@ -25,7 +25,7 @@ $this->title = 'Typography';
 	<!-- ### NOTE ### - 1 or more naked rows go in here -->
 
 	<div class="row">
-		<div class="col-lg-4">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Headings
@@ -55,7 +55,7 @@ $this->title = 'Typography';
 			<!-- /.panel -->
 		</div>
 		<!-- /.col-lg-4 -->
-		<div class="col-lg-4">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Paragraphs
@@ -83,7 +83,7 @@ $this->title = 'Typography';
 			<!-- /.panel -->
 		</div>
 		<!-- /.col-lg-4 -->
-		<div class="col-lg-4">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Emphasis Classes
@@ -104,7 +104,7 @@ $this->title = 'Typography';
 	</div>
 
 	<div class="row">
-		<div class="col-lg-4">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Abbreviations
@@ -134,7 +134,7 @@ $this->title = 'Typography';
 			<!-- /.panel -->
 		</div>
 		<!-- /.col-lg-4 -->
-		<div class="col-lg-4">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Blockquotes
@@ -161,7 +161,7 @@ $this->title = 'Typography';
 			<!-- /.panel -->
 		</div>
 		<!-- /.col-lg-4 -->
-		<div class="col-lg-4">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Lists
@@ -207,7 +207,7 @@ $this->title = 'Typography';
 	</div>
 
 	<div class="row">
-		<div class="col-lg-4">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Description Lists
@@ -231,7 +231,7 @@ $this->title = 'Typography';
 			<!-- /.panel -->
 		</div>
 		<!-- /.col-lg-4 -->
-		<div class="col-lg-4">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Code

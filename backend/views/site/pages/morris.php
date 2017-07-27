@@ -28,7 +28,7 @@ $this->title = 'Morris.js Charts';
 
 	<div class="row">
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -41,7 +41,7 @@ $this->title = 'Morris.js Charts';
 
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -54,7 +54,7 @@ $this->title = 'Morris.js Charts';
 
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -67,7 +67,7 @@ $this->title = 'Morris.js Charts';
 
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -80,7 +80,7 @@ $this->title = 'Morris.js Charts';
 
 		</div>
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">

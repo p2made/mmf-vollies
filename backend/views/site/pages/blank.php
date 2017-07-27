@@ -25,7 +25,7 @@ $this->title = 'Blank Page';
 	<!-- ### NOTE ### - 1 or more naked rows go in here -->
 
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-md-12">
 
 
 		</div>

@@ -49,27 +49,30 @@ use yii\behaviors\TimestampBehavior;
  * @property \common\models\User $user
  * @property \common\models\Team[] $teams
  * @property string $aliasModel
+ *
+ * @property string $vollieName;
+ * @property string $lexicalName;
+ * @property string $email;
  */
-class Profile extends \dektrium\user\models\Profile
+class Profile extends \common\models\Profile
 {
+	// virtual attributes
+	private $vollieName;
+	private $lexicalName;
+	private $email;
+
 	//use ModuleTrait;
 	/** @var \dektrium\user\Module */
 	//protected $module;
 
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'mmf_profile';
-	}
+	// public static function tableName()
 
 	public function behaviors()
 	{
 		return ArrayHelper::merge(
 			parent::behaviors(),
 			[
-				'class' => TimestampBehavior::className(),
+				//
 			]
 		);
 	}
@@ -79,137 +82,147 @@ class Profile extends \dektrium\user\models\Profile
 		return ArrayHelper::merge(
 			parent::rules(),
 			[
-				[['givenName', 'familyName', 'phone1', 'address1', 'locality', 'emergencyContact', 'emergencyPhone1', 'discovery'], 'required'],
-				[['rsa', 'dl_c', 'dl_h', 'cse', 'ohs', 'bc', 'fa', 'vol', 'mmfVol', 'mmfAtt', 'returned'], 'integer'],
-				[['dnr'], 'safe'],
-				[['bio'], 'string'],
-				[['givenName', 'familyName', 'preferredName', 'locality', 'emergencyContact'], 'string', 'max' => 64],
-				[['phone1', 'phone2', 'state', 'postcode', 'country', 'emergencyPhone1', 'emergencyPhone2', 'gravatar_id'], 'string', 'max' => 32],
-				[['address1', 'address2', 'discoveryDetail', 'name', 'public_email', 'gravatar_email', 'location', 'website'], 'string', 'max' => 255],
-				[['discovery'], 'string', 'max' => 24],
-				[['timezone'], 'string', 'max' => 40],
-				[['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\User::className(), 'targetAttribute' => ['user_id' => 'id']]
+				[['vollieName', 'lexicalName', 'email'], 'safe'],
 			]
 		);
 	}
 
-	/**
-	 * @inheritdoc
-	 */
 	public function attributeLabels()
 	{
 		return [
-			'user_id' => 'User ID',
-			'givenName' => 'Given Name',
-			'familyName' => 'Family Name',
-			'preferredName' => 'Preferred Name',
-			'phone1' => 'Phone 1',
-			'phone2' => 'Phone 2',
-			'address1' => 'Address 1',
-			'address2' => 'Address 2',
-			'locality' => 'Locality',
-			'state' => 'State',
-			'postcode' => 'Postcode',
-			'country' => 'Country',
+			'user_id' =>          'User ID',
+			'givenName' =>        'Given Name',
+			'familyName' =>       'Family Name',
+			'preferredName' =>    'Preferred',
+			'vollieName' =>       'Name',
+			'lexicalName' =>      'Name',
+			'phone1' =>           'Primary Phone',
+			'phone2' =>           'Secondary Phone',
+			'email' =>            'Email Address',
+			'address1' =>         'Address 1',
+			'address2' =>         'Address 2',
+			'locality' =>         'Locality',
+			'state' =>            'State',
+			'postcode' =>         'Postcode',
+			'country' =>          'Country',
 			'emergencyContact' => 'Emergency Contact',
-			'emergencyPhone1' => 'Phone 1',
-			'emergencyPhone2' => 'Phone 2',
-			'rsa' => 'Responsible Service of Alcohol',
-			'dl_c' => 'Driver\'s Licence (car)',
-			'dl_h' => 'Driver\'s Licence (LR or above)',
-			'cse' => 'Customer Service Experience',
-			'ohs' => 'OH&S Qualifications',
-			'bc' => 'Blue Card (working with children)',
-			'fa' => 'First Aid Certificate',
-			'vol' => 'I have volunteered before',
-			'mmfVol' => 'I have volunteered at MMF',
-			'mmfAtt' => 'I have attended MMF',
-			'returned' => 'Returned',
-			'dnr' => 'Do Not Reinvite',
-			'discovery' => 'Discovery',
-			'discoveryDetail' => 'Discovery Detail',
-			'timezone' => 'Timezone',
-			'created_at' => 'Created At',
-			'updated_at' => 'Updated At',
+			'emergencyPhone1' =>  'Primary Phone',
+			'emergencyPhone2' =>  'Secondary Phone',
+			'rsa' =>              'Responsible Service of Alcohol',
+			'dl_c' =>             'Driver\'s Licence (car)',
+			'dl_h' =>             'Driver\'s Licence (LR or above)',
+			'cse' =>              'Customer Service Experience',
+			'ohs' =>              'OH&S Qualifications',
+			'bc' =>               'Blue Card (working with children)',
+			'fa' =>               'First Aid Certificate',
+			'vol' =>              'Has volunteered before',
+			'mmfVol' =>           'Has volunteered at MMF',
+			'mmfAtt' =>           'Has attended MMF',
+			'returned' =>         'Returned',
+		//	'dnr' =>              'Do Not Reinvite',
+			'dnr' =>              'DNR',
+			'discovery' =>        'Discovery',
+			'discoveryDetail' =>  'Discovery Detail',
+			'timezone' =>         'Timezone',
+			'created_at' =>       'Created At',
+			'updated_at' =>       'Updated At',
 		];
 	}
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getApplications()
+	public function afterFind()
 	{
-		return $this->hasMany(Application::className(), ['user_id' => 'user_id']);
+		parent::afterFind();
+
+		$this->email = $this->user->email;
 	}
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getCommitments()
+	public function beforeSave($insert)
 	{
-		return $this->hasMany(Commitment::className(), ['user_id' => 'user_id']);
+		parent::beforeSave($insert);
+
+		if (!$this->preferredName) {
+			$this->preferredName = $this->givenName;
+		}
 	}
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getHistories()
+	public function getPreferredName()
 	{
-		return $this->hasMany(History::className(), ['user_id' => 'user_id']);
+		if ($this->preferredName) {
+			return $this->preferredName;
+		}
+
+		$this->preferredName = $this->givenName;
+		$this->save();
+
+		return $this->preferredName;
 	}
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getTeams()
+	public function getVollieName()
 	{
-		return $this->hasMany(Team::className(), ['head_id' => 'user_id']);
+		if ($this->vollieName) {
+			return $this->vollieName;
+		}
+
+		return $this->vollieName = $this->givenName
+			. ($this->familyName ? ' ' . $this->familyName : '');
 	}
 
-	/**
-	 * @inheritdoc
-	 * @return \common\models\ProfileQuery the active query used by this AR class.
-	 */
-	public static function find()
+	public function getLexicalName()
 	{
-		return new \common\models\ProfileQuery(get_called_class());
+		if ($this->lexicalName) {
+			return $this->lexicalName;
+		}
+
+		return $this->lexicalName =
+			($this->familyName ? $this->familyName . ', ' : '')
+			. $this->givenName;
 	}
 
-	//public function init()
-
-	//public function getAvatarUrl($size = 200)
-
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getUser()
+	public function getEmail()
 	{
-		return $this->hasOne(User::className(), ['id' => 'user_id']);
+		return $this->email;
 	}
 
-	/**
-	 * @return \yii\db\ActiveQueryInterface
-	public function getUser()
+	public function getReturned()
 	{
-		return $this->hasOne($this->module->modelMap['User'], ['id' => 'user_id']);
+		if ($this->returned == true) {
+			return $this->returned;
+		}
+
+		if (count($this->commitments) > 1) {
+			$this->returned = 1;
+			$this->save();
+		}
+
+		return $this->returned;
 	}
-	 */
 
-	//public function rules()
+	// public function getApplications()
 
-	//public function attributeLabels()
+	// public function getCommitments()
 
-	//public function validateTimeZone($attribute, $params)
+	// public function getHistories()
 
-	//public function getTimeZone()
+	// public function getTeams()
 
-	//public function setTimeZone(\DateTimeZone $timeZone)
+	// public static function find()
 
-	//public function toLocalTime(\DateTime $dateTime = null)
+	// public function init()
 
-	//public function beforeSave($insert)
+	// public function getAvatarUrl($size = 200)
 
-	//public static function tableName()
+	// public function getUser()
 
+	// public function validateTimeZone($attribute, $params)
+
+	// public function getTimeZone()
+
+	// public function setTimeZone(\DateTimeZone $timeZone)
+
+	// public function toLocalTime(\DateTime $dateTime = null)
+
+	// public function beforeSave($insert)
+
+	// public static function tableName()
 
 }

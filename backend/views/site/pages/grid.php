@@ -26,7 +26,7 @@ $this->title = 'Grid';
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h3>Grid options</h3>
@@ -123,7 +123,7 @@ $this->title = 'Grid';
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h3>Example: Stacked-to-horizontal</h3>
@@ -165,7 +165,7 @@ $this->title = 'Grid';
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h3>Example: Mobile and desktop</h3>
@@ -193,7 +193,7 @@ $this->title = 'Grid';
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h3>Example: Mobile, tablet, desktops</h3>
@@ -218,7 +218,7 @@ $this->title = 'Grid';
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h3 id="grid-responsive-resets">Responsive column resets</h3>
@@ -245,7 +245,7 @@ $this->title = 'Grid';
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h3 id="grid-offsetting">Offsetting columns</h3>
@@ -273,7 +273,7 @@ $this->title = 'Grid';
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h3 id="grid-nesting">Nesting columns</h3>
@@ -302,7 +302,7 @@ $this->title = 'Grid';
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h3 id="grid-column-ordering">Column ordering</h3>
