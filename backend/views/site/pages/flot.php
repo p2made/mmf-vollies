@@ -2,11 +2,10 @@
 /**
  * blank.php
  *
- * @copyright Copyright &copy; Pedro Plowman, 2017
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
  * @author Pedro Plowman
- * @link https://github.com/p2made
- * @package p2made/yii2-sb-admin-theme
- * @license MIT
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
  */
 
 use yii\bootstrap\Html;
@@ -29,7 +28,7 @@ $this->title = 'Flot Charts';
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -44,7 +43,7 @@ $this->title = 'Flot Charts';
 
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -59,7 +58,7 @@ $this->title = 'Flot Charts';
 
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -74,7 +73,7 @@ $this->title = 'Flot Charts';
 
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -89,7 +88,7 @@ $this->title = 'Flot Charts';
 
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -104,7 +103,7 @@ $this->title = 'Flot Charts';
 
 		</div>
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">

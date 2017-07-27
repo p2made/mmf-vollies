@@ -1,108 +1,93 @@
 <?php
-
-/*
- * This file is part of the Dektrium project.
- *
- * (c) Dektrium project <http://github.com/dektrium>
- *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
- */
-
-use dektrium\user\widgets\Connect;
-use dektrium\user\models\LoginForm;
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-
 /**
- * @var yii\web\View $this
- * @var dektrium\user\models\LoginForm $model
- * @var dektrium\user\Module $module
+ * login.php
+ *
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
+ * @author Pedro Plowman
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
  */
 
-$this->title = Yii::t('user', 'Sign in');
-$this->params['breadcrumbs'][] = $this->title;
+use yii\bootstrap\Html;
+use yii\bootstrap\ActiveForm;
+use p2m\helpers\FA;
+use p2m\helpers\BSocial;
+
+/* @var $this yii\web\View */
+/* @var $form yii\bootstrap\ActiveForm */
+/* @var $model \common\models\LoginForm */
+
+$this->title = 'Login';
+
+$fieldOptions1 = [
+	'options' => ['class' => 'form-group has-feedback', 'autofocus' => 'autofocus'],
+	'inputTemplate' => "{input}<i class='glyphicon glyphicon-envelope form-control-feedback'></i>",
+];
+
+$fieldOptions2 = [
+	'options' => ['class' => 'form-group has-feedback'],
+	'inputTemplate' => "{input}<i class='glyphicon glyphicon-lock form-control-feedback'></i>",
+];
 ?>
+<div class="sb-box">
+	<div class="sb-logo">
+		<?= Html::a('<b>P<sup>2</sup>SB</b> Admin v2.0', Yii::$app->homeUrl) ?>
+	</div>
+	<div class="sb-box-body panel panel-default">
+		<div class="panel-body">
 
-<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
+			<p class="sb-box-msg">Login to start your session</p>
 
-<div class="row">
-	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-			</div>
-			<div class="panel-body">
-				<?php $form = ActiveForm::begin([
-					'id' => 'login-form',
-					'enableAjaxValidation' => true,
-					'enableClientValidation' => false,
-					'validateOnBlur' => false,
-					'validateOnType' => false,
-					'validateOnChange' => false,
-				]) ?>
+			<?php $form = ActiveForm::begin([
+				'id' => 'login-form',
+				'enableClientValidation' => false
+			]); ?>
 
-				<?php if ($module->debug): ?>
-					<?= $form->field($model, 'login', [
-						'inputOptions' => [
-							'autofocus' => 'autofocus',
-							'class' => 'form-control',
-							'tabindex' => '1']])->dropDownList(LoginForm::loginList());
-					?>
+				<?= $form
+					->field($model, 'username', $fieldOptions1)
+					->label(false)
+					->textInput(['placeholder' => $model->getAttributeLabel('username')])
+				?>
 
-				<?php else: ?>
+				<?= $form
+					->field($model, 'password', $fieldOptions2)
+					->label(false)
+					->passwordInput(['placeholder' => $model->getAttributeLabel('password')])
+				?>
 
-					<?= $form->field($model, 'login',
-						['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'form-control', 'tabindex' => '1']]
-					);
-					?>
-
-				<?php endif ?>
-
-				<?php if ($module->debug): ?>
-					<div class="alert alert-warning">
-						<?= Yii::t('user', 'Password is not necessary because the module is in DEBUG mode.'); ?>
+				<div class="row">
+					<div class="col-xs-8">
+						<?= $form->field($model, 'rememberMe')->checkbox() ?>
 					</div>
-				<?php else: ?>
-					<?= $form->field(
-						$model,
-						'password',
-						['inputOptions' => ['class' => 'form-control', 'tabindex' => '2']])
-						->passwordInput()
-						->label(
-							Yii::t('user', 'Password')
-							. ($module->enablePasswordRecovery ?
-								' (' . Html::a(
-									Yii::t('user', 'Forgot password?'),
-									['/user/recovery/request'],
-									['tabindex' => '5']
-								)
-								. ')' : '')
-						) ?>
-				<?php endif ?>
+					<div class="col-xs-4">
+						<?= Html::submitButton('Login', [
+							'class' => 'btn btn-primary btn-block btn-flat',
+							'name' => 'login-button'
+						]) ?>
+					</div>
+				</div>
 
-				<?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '3']) ?>
+			<?php ActiveForm::end(); ?>
 
-				<?= Html::submitButton(
-					Yii::t('user', 'Sign in'),
-					['class' => 'btn btn-primary btn-block', 'tabindex' => '4']
-				) ?>
-
-				<?php ActiveForm::end(); ?>
+			<div class="social-auth-links text-center">
+				<p>- OR -</p>
+				<a href="#" class="btn btn-block btn-social btn-facebook btn-flat">
+					<i class="fa fa-facebook"></i> Login using Facebook
+				</a>
+				<a href="#" class="btn btn-block btn-social btn-google-plus btn-flat">
+					<i class="fa fa-google-plus"></i> Login using Google+
+				</a>
 			</div>
+
 		</div>
-		<?php if ($module->enableConfirmation): ?>
-			<p class="text-center">
-				<?= Html::a(Yii::t('user', 'Didn\'t receive confirmation message?'), ['/user/registration/resend']) ?>
-			</p>
-		<?php endif ?>
-		<?php if ($module->enableRegistration): ?>
-			<p class="text-center">
-				<?= Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
-			</p>
-		<?php endif ?>
-		<?= Connect::widget([
-			'baseAuthUrl' => ['/user/security/auth'],
-		]) ?>
+	</div>
+
+	<!-- this goes on every site file in p2made demos -->
+	<br><div class="alert alert-success" role="alert">
+		<ul class="fa-ul">
+			<li>
+				<?= FA::fw(FA::_CODE)->li()->size(FA::SIZE_LARGE) ?> <code><?= __FILE__ ?></code>
+			</li>
+		</ul>
 	</div>
 </div>

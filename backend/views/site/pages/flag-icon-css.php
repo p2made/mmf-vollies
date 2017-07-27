@@ -2,11 +2,10 @@
 /**
  * flag-icon-css.php
  *
- * @copyright Copyright &copy; Pedro Plowman, 2017
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
  * @author Pedro Plowman
- * @link https://github.com/p2made
- * @package p2made/yii2-sb-admin-theme
- * @license MIT
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
  */
 
 use yii\bootstrap\Html;
@@ -78,7 +77,7 @@ $wrappers = array(
 
 	<div class="row">
 
-		<div class="col-lg-12">
+		<div class="col-md-12">
 
 			<p>
 				SVG flags &amp; CSS from <a href="https://lipis.github.io/flag-icon-css/" target="_blank">flag-icon-css<?= FA::icon(FA::_EXTERNAL_LINK) ?></a> as Yii 2 assets &amp; helpers.
@@ -120,16 +119,16 @@ $wrappers = array(
 							$randFlags[] = $allFlags['iso-flags'][$key];
 						}
 					?>
-					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+					<div class="col-md-3 col-md-4 col-sm-4 col-xs-6">
 						<div class="flag-wrapper"><?= FI::div('au') ?></div>
 					</div>
-					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+					<div class="col-md-3 col-md-4 col-sm-4 col-xs-6">
 						<div class="flag-wrapper"><?= FI::div(array_pop($randFlags)) ?></div>
 					</div>
-					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-3">
+					<div class="col-md-3 col-md-4 col-sm-4 col-xs-3">
 						<div class="flag-wrapper"><?= FI::div(array_pop($randFlags)) ?></div>
 					</div>
-					<div class="col-lg-3 col-sm-2 col-xs-3">
+					<div class="col-md-3 col-sm-2 col-xs-3">
 						<div class="flag-wrapper"><?= FI::div(array_pop($randFlags)) ?></div>
 					</div>
 					<div class="col-sm-2 col-xs-3">

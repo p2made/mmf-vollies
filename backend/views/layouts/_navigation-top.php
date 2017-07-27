@@ -2,11 +2,10 @@
 /**
  * navigation-top.php
  *
- * @copyright Copyright &copy; Pedro Plowman, 2017
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
  * @author Pedro Plowman
- * @link https://github.com/p2made
- * @package p2made/yii2-sb-admin-theme
- * @license MIT
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
  */
 
 use yii\bootstrap\Html;
@@ -106,16 +105,16 @@ if (Yii::$app->user->isGuest) {
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 	</button>
-	<?= Html::a('P<sup>2</sup>SB Admin v2.0', Yii::$app->homeUrl, ['class' => 'navbar-brand']) ?>
+	<?= Html::a('MMF Vollies HQ', Yii::$app->homeUrl, ['class' => 'navbar-brand']) ?>
 </div>
 
 <?php
 echo Nav::widget([
 	'options' => ['class' => 'nav navbar-top-links navbar-right'],
 	'items' => [
-		$messagesMenu, // dropdown-messages
-		$tasksMenu, // dropdown-tasks
-		$alertsMenu, // dropdown-alerts
+		//$messagesMenu, // dropdown-messages
+		//$tasksMenu, // dropdown-tasks
+		//$alertsMenu, // dropdown-alerts
 		$userMenu, // dropdown-user
 	],
 	'encodeLabels' => false,
