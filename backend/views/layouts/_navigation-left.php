@@ -30,7 +30,7 @@ $arrowIcon = FA::i('arrow')->tag('span');
 				<?= Html::a(FA::fw('group') . 'Applications', Url::to(['/application/index'])) ?>
 			</li><!-- Applications -->
 			<li>
-				<?= Html::a(FA::fw('group') . 'Teams', Url::to(['/team/index'])) ?>
+				<?= Html::a(FA::fw('group') . 'Work Areas', Url::to(['/team/index'])) ?>
 			</li><!-- Teams -->
 			<li>
 				<?= Html::a(FA::fw('group') . 'Jobs', Url::to(['/job/index'])) ?>
