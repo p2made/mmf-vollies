@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "mmf_job".
  */
-class Job extends \common\models\Job
+class Job extends \backend\models\base\Job
 {
 
 public function behaviors()

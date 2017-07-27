@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "mmf_history".
  */
-class History extends \common\models\History
+class History extends \backend\models\base\History
 {
 
 public function behaviors()

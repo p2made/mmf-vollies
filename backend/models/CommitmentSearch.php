@@ -12,9 +12,7 @@ use backend\models\Commitment;
  */
 class CommitmentSearch extends Commitment
 {
-	/**
-	 * @inheritdoc
-	 */
+
 	public function rules()
 	{
 		return [
@@ -23,22 +21,12 @@ class CommitmentSearch extends Commitment
 		];
 	}
 
-	/**
-	 * @inheritdoc
-	 */
 	public function scenarios()
 	{
 		// bypass scenarios() implementation in the parent class
 		return Model::scenarios();
 	}
 
-	/**
-	 * Creates data provider instance with search query applied
-	 *
-	 * @param array $params
-	 *
-	 * @return ActiveDataProvider
-	 */
 	public function search($params)
 	{
 		$query = Commitment::find();
@@ -77,4 +65,5 @@ class CommitmentSearch extends Commitment
 
 		return $dataProvider;
 	}
+
 }
