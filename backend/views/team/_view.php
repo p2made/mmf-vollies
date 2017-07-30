@@ -1,6 +1,6 @@
 <?php
 /**
- * __blank.php
+ * view.php
  *
  * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
  * @author Pedro Plowman
@@ -15,17 +15,15 @@ use p2m\helpers\FA;
 p2m\sbAdmin\assets\SBAdmin2Asset::register($this);
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Team */
+/* @var $model backend\models\Team */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Teams', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div id="content-wrapper">
-	<div class="row">
-		<div class="col-md-12">
-
 <div class="team-view">
+
+	<h1><?= Html::encode($this->title) ?></h1>
 
 	<p>
 		<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -52,7 +50,3 @@ $this->params['breadcrumbs'][] = $this->title;
 	]) ?>
 
 </div>
-
-		</div>
-	</div>
-</div><!-- /#content-wrapper -->

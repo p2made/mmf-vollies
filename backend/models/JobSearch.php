@@ -1,4 +1,12 @@
 <?php
+/**
+ * JobSearch.php
+ *
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
+ * @author Pedro Plowman
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
+ */
 
 namespace backend\models;
 
@@ -17,6 +25,7 @@ use backend\models\Job;
  * @property string $name
  * @property string $shortName
  * @property string $description
+ * @property integer $required
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -34,20 +43,33 @@ class JobSearch extends Job
 	// virtual attributes
 	public $teamName;
 
+	/**
+	 * @inheritdoc
+	 */
 	public function rules()
 	{
 		return [
-			[['id', 'team_id', 'group_id', 'sequence', 'created_at', 'updated_at'], 'integer'],
+			[['id', 'team_id', 'group_id', 'sequence', 'required', 'created_at', 'updated_at'], 'integer'],
 			[['teamName', 'name', 'shortName', 'description'], 'safe'],
 		];
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function scenarios()
 	{
 		// bypass scenarios() implementation in the parent class
 		return Model::scenarios();
 	}
 
+	/**
+	 * Creates data provider instance with search query applied
+	 *
+	 * @param array $params
+	 *
+	 * @return ActiveDataProvider
+	 */
 	public function search($params)
 	{
 		$query = Job::find();
@@ -72,6 +94,7 @@ class JobSearch extends Job
 			'team_id' => $this->team_id,
 			'group_id' => $this->group_id,
 			'sequence' => $this->sequence,
+			'required' => $this->required,
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at,
 		]);
@@ -85,6 +108,7 @@ class JobSearch extends Job
 				'sequence',
 				'name',
 				'shortName',
+				'required',
 				'teamName' => [
 					'asc' => ['mmf_team.name' => SORT_ASC],
 					'desc' => ['mmf_team.name' => SORT_DESC],

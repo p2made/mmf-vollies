@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 							'id',
 							'head_id',
-							'headName',
+							'head.vollieName',
 							'name',
 							'description:ntext',
 							// 'created_at',

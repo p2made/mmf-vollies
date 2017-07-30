@@ -8,21 +8,18 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the base-model class for table "mmf_team".
+ * This is the base-model class for table "mmf_menu_group".
  *
  * @property integer $id
- * @property integer $head_id
  * @property integer $sequence
  * @property string $name
- * @property string $description
  * @property integer $created_at
  * @property integer $updated_at
  *
  * @property \backend\models\Job[] $jobs
- * @property \backend\models\Profile $head
  * @property string $aliasModel
  */
-abstract class Team extends \yii\db\ActiveRecord
+abstract class MenuGroup extends \yii\db\ActiveRecord
 {
 
 
@@ -32,7 +29,7 @@ abstract class Team extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'mmf_team';
+        return 'mmf_menu_group';
     }
 
 
@@ -54,11 +51,9 @@ abstract class Team extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['head_id', 'sequence'], 'integer'],
             [['sequence', 'name'], 'required'],
-            [['description'], 'string'],
-            [['name'], 'string', 'max' => 24],
-            [['head_id'], 'exist', 'skipOnError' => true, 'targetClass' => \backend\models\Profile::className(), 'targetAttribute' => ['head_id' => 'user_id']]
+            [['sequence'], 'integer'],
+            [['name'], 'string', 'max' => 24]
         ];
     }
 
@@ -69,10 +64,8 @@ abstract class Team extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'head_id' => 'Head ID',
             'sequence' => 'Sequence',
             'name' => 'Name',
-            'description' => 'Description',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -83,15 +76,7 @@ abstract class Team extends \yii\db\ActiveRecord
      */
     public function getJobs()
     {
-        return $this->hasMany(\backend\models\Job::className(), ['team_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getHead()
-    {
-        return $this->hasOne(\backend\models\Profile::className(), ['user_id' => 'head_id']);
+        return $this->hasMany(\backend\models\Job::className(), ['group_id' => 'id']);
     }
 
 

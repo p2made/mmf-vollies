@@ -1,4 +1,12 @@
 <?php
+/**
+ * Application.php
+ *
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
+ * @author Pedro Plowman
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
+ */
 
 namespace backend\models;
 
@@ -218,7 +226,7 @@ class Application extends \backend\models\base\Application
 			return $this->earlyLate = 'late';
 		}
 
-		return $this->earlyLate = 'not specified';
+		return $this->earlyLate = '';
 	}
 
 	public function getReturned()
@@ -240,10 +248,10 @@ class Application extends \backend\models\base\Application
 	private function setAvailability()
 	{
 		$times = [
-			1 => 'Early, 8:00 AM',
-			2 => 'Midday, 12:00 PM',
-			3 => 'Evening, 6:00 PM',
-			4 => 'Late, Midnight',
+			1 => 'Early',
+			2 => 'Midday',
+			3 => 'Evening',
+			4 => 'Late',
 		];
 
 		$date = date_create(date("Y") . '-' . $this->availableFromDate);
