@@ -17,7 +17,6 @@ use backend\models\Job;
  * @property string $name
  * @property string $shortName
  * @property string $description
- * @property integer $required
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -32,33 +31,23 @@ use backend\models\Job;
  */
 class JobSearch extends Job
 {
-	/**
-	 * @inheritdoc
-	 */
+	// virtual attributes
+	public $teamName;
+
 	public function rules()
 	{
 		return [
-			[['id', 'team_id', 'group_id', 'sequence', 'required', 'created_at', 'updated_at'], 'integer'],
-			[['name', 'shortName', 'description'], 'safe'],
+			[['id', 'team_id', 'group_id', 'sequence', 'created_at', 'updated_at'], 'integer'],
+			[['teamName', 'name', 'shortName', 'description'], 'safe'],
 		];
 	}
 
-	/**
-	 * @inheritdoc
-	 */
 	public function scenarios()
 	{
 		// bypass scenarios() implementation in the parent class
 		return Model::scenarios();
 	}
 
-	/**
-	 * Creates data provider instance with search query applied
-	 *
-	 * @param array $params
-	 *
-	 * @return ActiveDataProvider
-	 */
 	public function search($params)
 	{
 		$query = Job::find();
@@ -83,14 +72,32 @@ class JobSearch extends Job
 			'team_id' => $this->team_id,
 			'group_id' => $this->group_id,
 			'sequence' => $this->sequence,
-			'required' => $this->required,
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at,
 		]);
 
 		$query->andFilterWhere(['like', 'name', $this->name])
-			->andFilterWhere(['like', 'shortName', $this->shortName])
 			->andFilterWhere(['like', 'description', $this->description]);
+
+		$dataProvider->setSort([
+			'attributes' => [
+				'team_id',
+				'sequence',
+				'name',
+				'shortName',
+				'teamName' => [
+					'asc' => ['mmf_team.name' => SORT_ASC],
+					'desc' => ['mmf_team.name' => SORT_DESC],
+					'label' => 'Team Name'
+				]
+			],
+        	'defaultOrder' => ['team_id' => SORT_ASC, 'sequence' => SORT_ASC]
+		]);
+
+		// filter by team name
+		$query->joinWith(['team' => function ($q) {
+			$q->where('mmf_team.name LIKE "%' . $this->teamName . '%"');
+		}]);
 
 		return $dataProvider;
 	}

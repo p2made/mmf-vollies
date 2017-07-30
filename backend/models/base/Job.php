@@ -17,6 +17,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $name
  * @property string $shortName
  * @property string $description
+ * @property integer $required
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -59,8 +60,8 @@ abstract class Job extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['team_id', 'group_id', 'sequence'], 'integer'],
-            [['name', 'shortName'], 'required'],
+            [['team_id', 'group_id', 'sequence', 'required'], 'integer'],
+            [['name', 'shortName', 'required'], 'required'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['shortName'], 'string', 'max' => 48],
@@ -82,6 +83,7 @@ abstract class Job extends \yii\db\ActiveRecord
             'name' => 'Name',
             'shortName' => 'Short Name',
             'description' => 'Description',
+            'required' => 'Required',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

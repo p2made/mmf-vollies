@@ -15,6 +15,7 @@ use yii\helpers\ArrayHelper;
  * @property string $name
  * @property string $shortName
  * @property string $description
+ * @property integer $required
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -64,6 +65,7 @@ class Job extends \backend\models\base\Job
 			'name' =>        'Name',
 			'shortName' =>   'Short Name',
 			'description' => 'Description',
+			'required' =>    'Required',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		];
