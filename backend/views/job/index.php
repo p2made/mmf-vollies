@@ -9,7 +9,7 @@
  */
 
 use yii\bootstrap\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use p2m\helpers\FA;
 
@@ -39,17 +39,37 @@ $this->params['breadcrumbs'][] = $this->title;
 						'dataProvider' => $dataProvider,
 						'filterModel' => $searchModel,
 						'columns' => [
-							['class' => 'yii\grid\SerialColumn'],
+							[
+								'class' => '\kartik\grid\SerialColumn',
+								'contentOptions' => ['style' => 'width:50px;'],
+								'hAlign' => 'center',
+							],
 
-							'team_id',
-							'name',
+							// 'team_id',
+							[
+								'attribute'=>'teamName',
+								'contentOptions' => ['style' => 'width:200px;'],
+							],
+							[
+								'attribute'=>'name',
+								'contentOptions' => ['style' => 'width:250px;'],
+							],
 							// 'shortName',
 							'description:ntext',
-							'required',
+							[
+								'attribute'=>'required',
+								'contentOptions' => ['style' => 'width:50px;'],
+							],
 							// 'created_at',
 							// 'updated_at',
 
-							['class' => 'yii\grid\ActionColumn'],
+							[
+								'class' => '\kartik\grid\ActionColumn',
+								//'template' => '{update}',
+								//'updateOptions' => ['label' => FA::fw('magic')],
+								'contentOptions' => ['style' => 'width:80px;'],
+								'hAlign' => 'center',
+							],
 						],
 					]); ?>
 				<?php Pjax::end(); ?>

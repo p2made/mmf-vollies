@@ -1,4 +1,12 @@
 <?php
+/**
+ * JobSearch.php
+ *
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
+ * @author Pedro Plowman
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
+ */
 
 namespace backend\models;
 
@@ -32,6 +40,9 @@ use backend\models\Job;
  */
 class JobSearch extends Job
 {
+	// virtual attributes
+	public $teamName;
+
 	/**
 	 * @inheritdoc
 	 */
@@ -39,7 +50,7 @@ class JobSearch extends Job
 	{
 		return [
 			[['id', 'team_id', 'group_id', 'sequence', 'required', 'created_at', 'updated_at'], 'integer'],
-			[['name', 'shortName', 'description'], 'safe'],
+			[['teamName', 'name', 'shortName', 'description'], 'safe'],
 		];
 	}
 
@@ -89,8 +100,28 @@ class JobSearch extends Job
 		]);
 
 		$query->andFilterWhere(['like', 'name', $this->name])
-			->andFilterWhere(['like', 'shortName', $this->shortName])
 			->andFilterWhere(['like', 'description', $this->description]);
+
+		$dataProvider->setSort([
+			'attributes' => [
+				'team_id',
+				'sequence',
+				'name',
+				'shortName',
+				'required',
+				'teamName' => [
+					'asc' => ['mmf_team.name' => SORT_ASC],
+					'desc' => ['mmf_team.name' => SORT_DESC],
+					'label' => 'Team Name'
+				]
+			],
+        	'defaultOrder' => ['team_id' => SORT_ASC, 'sequence' => SORT_ASC]
+		]);
+
+		// filter by team name
+		$query->joinWith(['team' => function ($q) {
+			$q->where('mmf_team.name LIKE "%' . $this->teamName . '%"');
+		}]);
 
 		return $dataProvider;
 	}

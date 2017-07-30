@@ -1,4 +1,12 @@
 <?php
+/**
+ * JobQuery.php
+ *
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
+ * @author Pedro Plowman
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
+ */
 
 namespace backend\models;
 
