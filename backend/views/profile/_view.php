@@ -223,11 +223,8 @@ $booValueOpts = ['style' => 'width:5%', 'class' => 'text-center'];
 				],
 			],
 		],
-
-
 		'hAlign' => 'right',
 		'vAlign' => 'middle',
-		'mode' => 'view',
 		//'condensed' => true,
 	]) ?>
 

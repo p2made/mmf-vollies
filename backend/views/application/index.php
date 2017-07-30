@@ -33,78 +33,67 @@ $this->params['breadcrumbs'][] = $this->title;
 
 				<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-				<p>
-					<?= Html::a('Create Application', ['create'], ['class' => 'btn btn-success']) ?>
-				</p>
+				<!-- <p>
+					<?php // Html::a('Create Application', ['create'], ['class' => 'btn btn-success']) ?>
+				</p> -->
 
 				<?php Pjax::begin(); ?>
 					<?= GridView::widget([
 						'dataProvider' => $dataProvider,
-						'filterModel' => $searchModel,
+						//'filterModel' => $searchModel,
 						'columns' => [
 							['class' => 'yii\grid\SerialColumn'],
 
-							// 'id',
 							'vollieName',
 							[
 								'header' => 'Job Choice 1',
-								'value' => function ($model) {
-									return $model->jobPreference1;
-								}
+								'value' => 'jobPreference1',
+								'contentOptions' => ['style' => 'width:210px;'],
 							],
 							[
 								'header' => 'Job Choice 2',
-								'value' => function ($model) {
-									return $model->jobPreference2;
-								}
+								'value' => 'jobPreference2',
+								'contentOptions' => ['style' => 'width:210px;'],
 							],
 							[
 								'header' => 'Job Choice 3',
-								'value' => function ($model) {
-									return $model->jobPreference3;
-								}
+								'value' => 'jobPreference3',
+								'contentOptions' => ['style' => 'width:210px;'],
 							],
 							[
-								'header' => 'Returned',
-								'headerOptions' => ['class' => 'text-center'],
+								'class'=>'kartik\grid\BooleanColumn',
+								'attribute'=>'returned',
+								'contentOptions' => ['style' => 'width:100px;'],
+							],
+							[
+								'header' => 'Status',
 								'value' => function ($model) {
-									$class = '';
-									$text = '';
-									if ($model->returned) {
-										$class = 'success';
-										$text = 'Yes';
-									} else {
-										$class = 'danger';
-										$text = 'NO';
+									$class = ''; $text = '';
+									switch ($model->status) {
+										case 1:
+											$class = 'success'; $text = 'Accepted'; break;
+										case 2:
+											$class = 'warning'; $text = 'Cancelled'; break;
+										case 3:
+											$class = 'danger'; $text = 'Rejected'; break;
+										default:
+											$class = 'info'; $text = 'Pending';
 									}
-									return '<div class="btn btn-xs btn-block btn-'
-										. $class . '" disabled>' . $text . '</div>';
+									return '<strong><div class="text-'
+										. $class . '">' . $text . '</div></strong>';
 								},
-								'contentOptions' => ['style' => 'width:120px;'],
+								'contentOptions' => ['style' => 'width:100px;'],
+								'hAlign' => 'center',
 								'format' => 'raw',
 							],
-							// 'year',
-							// 'availableFromDate',
-							// 'availableFromTime:datetime',
-							// 'availableToDate',
-							// 'availableToTime:datetime',
-							// 'bestTime:datetime',
-							// 'availabilityNotes:ntext',
-							// 'double',
-							// 'otherNotes:ntext',
-							// 'referee',
-							// 'refereeRelationship',
-							// 'refereePhone',
-							// 'bestCallingTime',
-							// 'status',
-							// 'team_id',
-							// 'rejectedReason:ntext',
-							// 'created_at',
-							// 'created_by',
-							// 'updated_at',
-							// 'updated_by',
 
-							['class' => 'yii\grid\ActionColumn'],
+							[
+								'class' => '\kartik\grid\ActionColumn',
+								'template' => '{update}',
+								'updateOptions' => ['label' => FA::fw('magic')],
+								'contentOptions' => ['style' => 'width:50px;'],
+								'hAlign' => 'center',
+							],
 						],
 					]); ?>
 				<?php Pjax::end(); ?>

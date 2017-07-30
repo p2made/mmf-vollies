@@ -1,21 +1,44 @@
 <?php
+/**
+ * update.php
+ *
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
+ * @author Pedro Plowman
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
+ */
 
-use yii\helpers\Html;
+use yii\bootstrap\Html;
+use p2m\helpers\FA;
+
+p2m\sbAdmin\assets\SBAdmin2Asset::register($this);
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Application */
+/* @var $model       common\models\Application */
+/* @var $profile     common\models\Profile */
+/* @var $commitments common\models\Commitment */
 
-$this->title = 'Update Application: ' . $model->id;
+$this->title = $model->vollieName . ' (preferred: ' . $model->preferredName . ')';
 $this->params['breadcrumbs'][] = ['label' => 'Applications', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="application-update">
+<div id="content-wrapper">
+	<div class="application-update">
 
-	<h1><?= Html::encode($this->title) ?></h1>
+		<div class="row">
+			<div class="col-md-12">
+				<h3>
+					Application
+					<?= $model->status == 2 ?
+						' <span class="text-warning">(cancelled)</span>' : '' ?>
+				</h3>
+			</div>
+		</div>
 
-	<?= $this->render('_form', [
-		'model' => $model,
-	]) ?>
+		<?= $this->render('_form', [
+			'model' => $model,
+			'profile' => $profile,
+			'commitments' => $commitments,
+		]) ?>
 
+	</div>
 </div>

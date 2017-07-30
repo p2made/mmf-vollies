@@ -24,6 +24,7 @@ class Team extends \backend\models\base\Team
 {
 	// virtual attributes
 	public $headName;
+	public $preferredName;
 
 	public function behaviors()
 	{
@@ -38,11 +39,11 @@ class Team extends \backend\models\base\Team
 	public function rules()
 	{
 		return ArrayHelper::merge(
-			 parent::rules(),
-			 [
+			parent::rules(),
+			[
 				# custom validation rules
 				[['headName'], 'safe'],
-			 ]
+			]
 		);
 	}
 
@@ -64,8 +65,24 @@ class Team extends \backend\models\base\Team
 	{
 		parent::afterFind();
 
-		//$this->headName = $this->head->preferredName;
-		//$this->headName = strval($this->head);
+	}
+
+	public function getHeadName()
+	{
+		if ($this->headName) {
+			return $this->headName;
+		}
+
+		return $this->headName = $this->head->vollieName;
+	}
+
+	public function getPreferredName()
+	{
+		if ($this->preferredName) {
+			return $this->preferredName;
+		}
+
+		return $this->preferredName = $this->head->preferredName;
 	}
 
 }

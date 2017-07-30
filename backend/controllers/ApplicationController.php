@@ -107,8 +107,8 @@ class ApplicationController extends Controller
 		);
 
 		return $this->render('view', [
-			'model'	   => $model,
-			'profile'	 => $profile,
+			'model'       => $model,
+			'profile'     => $profile,
 			'commitments' => $commitments,
 		]);
 	}
@@ -140,14 +140,21 @@ class ApplicationController extends Controller
 	public function actionUpdate($id)
 	{
 		$model = $this->findModel($id);
+		$profile = $model->user;
+		$commitments = (count($profile->commitments > 0)
+			? $profile->commitments
+			: null
+		);
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
-		} else {
-			return $this->render('update', [
-				'model' => $model,
-			]);
 		}
+
+		return $this->render('update', [
+			'model'       => $model,
+			'profile'     => $profile,
+			'commitments' => $commitments,
+		]);
 	}
 
 	/**
