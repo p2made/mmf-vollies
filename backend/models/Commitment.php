@@ -96,6 +96,11 @@ class Commitment extends \backend\models\base\Commitment
 		parent::afterFind();
 
 		$this->vollieName = $this->user->vollieName;
+
+		if (!$this->jobName || $this->jobName == '') {
+			$this->jobName = $this->job->name;
+			$this->save();
+		}
 	}
 
 	public function getVollieName()

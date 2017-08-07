@@ -51,6 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
 								'attribute' => 'name',
 								'width' => '250px',
 							],
+							[
+								'attribute' => 'shortName',
+								'width' => '200px',
+							],
 							// 'shortName',
 							'description:ntext',
 							[

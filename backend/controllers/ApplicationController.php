@@ -159,6 +159,41 @@ class ApplicationController extends Controller
 		]);
 	}
 
+/*
+ * @property integer $id
+ * @property integer $user_id
+ * @property integer $application_id
+ * @property integer $team_id
+ * @property integer $job_id
+ * @property string $jobName
+ * @property string $year
+ */
+
+/*
+
+	public function actionUpdate($id)
+	{
+		if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+			$modelEmp= Employee::find()->where(['Id' => $id])->one();
+			$modelUser= User::find()->where(['User_id' =>$id])->one();
+
+			$modelEmp->Name=$_POST['name']; // use your field names
+			$modelEmp->Email_id=$_POST['email_id'];
+
+			$modelUser->Name=$_POST['name'];
+			$modelUser->Email_id=$_POST['email_id'];
+
+			if ($modelEmp->save() && $modelUser->save()) {
+				return $this->redirect(['index']);
+			}
+		}
+		else {
+			return $this->render('update', ['model' => $model,]);
+		}
+	}
+
+*/
+
 	/**
 	 * Deletes an existing Application model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.

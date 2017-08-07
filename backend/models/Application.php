@@ -34,19 +34,18 @@ use yii\helpers\ArrayHelper;
  * @property string $refereeRelationship
  * @property string $refereePhone
  * @property string $bestCallingTime
- * @property integer $accepted
+ * @property integer $status
  * @property integer $team_id
- * @property integer $rejected
  * @property string $rejectedReason
  * @property integer $created_at
  * @property integer $created_by
  * @property integer $updated_at
  * @property integer $updated_by
  *
- * @property \common\models\Job $jobChoice1
- * @property \common\models\Job $jobChoice2
- * @property \common\models\Job $jobChoice3
- * @property \common\models\Profile $user
+ * @property \backend\models\Job $jobChoice1
+ * @property \backend\models\Job $jobChoice2
+ * @property \backend\models\Job $jobChoice3
+ * @property \backend\models\Profile $user
  * @property string $aliasModel
  *
  * @property string $vollieName
@@ -59,6 +58,9 @@ use yii\helpers\ArrayHelper;
  * @property string $availableTo
  * @property string $earlyLate
  * @property string $returned
+ *
+ * @property array $responseMenu[]
+ * @property array $jobTeamMap[]
  */
 class Application extends \backend\models\base\Application
 {
@@ -73,6 +75,10 @@ class Application extends \backend\models\base\Application
 	private $availableTo;
 	private $earlyLate;
 	private $returned;
+	private $assignment;
+
+	private $responseMenu = [];
+	private $jobTeamMap = [];
 
 	public function behaviors()
 	{
@@ -137,6 +143,49 @@ class Application extends \backend\models\base\Application
 		parent::afterFind();
 
 		//$this->setJobChoices();
+	}
+
+	public function beforeSave($insert)
+	{
+		if (!parent::beforeSave($insert)) {
+			return false;
+		}
+
+		/*
+		 * 0 - Pending
+		 * 1 - Accepted
+		 * 2 - Cancelled
+		 * 3 - Rejected
+		 */
+
+		if ($this->assignment) {
+			$this->assignApplication($this->assignment);
+		}
+
+		return true;
+}
+
+	private function assignApplication($assignment)
+	{
+		if ($assignment == 99) {
+			$this->status = 3;
+			return;
+		} // rejected
+
+		if ($assignment == 98) {
+			$this->status = 2;
+			return;
+		} // cancelled
+
+		$this->status = 1;
+
+		$commitment = new Commitment();
+		$commitment->application_id = $this->id;
+		$commitment->user_id = $this->user->user_id;
+		$commitment->job_id = $this->assignment;
+		$commitment->team_id = $this->jobTeamMap[$assignment];
+		$commitment->year = date('Y');
+		$commitment->save();
 	}
 
 	public function getVollieName()
@@ -238,6 +287,16 @@ class Application extends \backend\models\base\Application
 		return $this->returned = $this->user->returned;
 	}
 
+	public function setAssignment($value)
+	{
+		$this->assignment = $value;
+	}
+
+	public function getAssignment()
+	{
+		return $this->assignment;
+	}
+
 	private function setJobChoices()
 	{
 		$this->jobChoices[0] = $this->jobChoice1->name;
@@ -283,4 +342,114 @@ class Application extends \backend\models\base\Application
 			->send();;
 	}
 
+	public function getResponseMenu()
+	{
+		if ($this->responseMenu) {
+			return $this->responseMenu;
+		}
+
+		return $this->responseMenu = array(
+			null => '',
+			'Bars' => [
+				1 => 'Bar Doors',
+				2 => 'Bar Service',
+				3 => 'Bar Setup',
+			],
+			'Children’s Festival' => [
+				11 => 'Children’s Festival Helper',
+				14 => 'Children’s Festival Presenter',
+				6 => 'Children’s Festival Setup',
+			],
+			'Setup & Bump Out' => [
+				4 => 'Bump Out',
+				8 => 'Decor',
+				9 => 'Fencing',
+				10 => 'General Setup',
+			],
+			'Site' => [
+				5 => 'Campground',
+				7 => 'Cleaning',
+				18 => 'Traffic',
+			],
+			'Stages' => [
+				13 => 'MC',
+				16 => 'Stage Manager',
+				17 => 'Ticket Gates',
+			],
+			'Treasury' => [
+				12 => 'Instrument Lockup',
+				19 => 'Treasury',
+			],
+			'Shop' => [
+				15 => 'Shop',
+			],
+			'Vollies’ Tent' => [
+				20 => 'Vollies’ Tent',
+			],
+			'Special' => [
+				26 => 'Bars Manager',
+				27 => 'Children’s Festival Manager',
+				23 => 'Committee',
+				28 => 'Fencing Manager',
+				24 => 'Festival Director',
+				35 => 'Performer',
+				37 => 'Photographer',
+				30 => 'Shop Manager',
+				22 => 'Special',
+				31 => 'Stages Manager',
+				32 => 'Ticket Gates Manager',
+				33 => 'Treasury Manager',
+				34 => 'Vollies’ Tent Coordinator',
+				25 => 'Volunteer Coordinator',
+			],
+			'Non Accept' => [
+				98 => 'Cancel',
+				99 => 'Reject',
+			],
+		);
+	}
+
+	public function getJobTeamMap()
+	{
+		if ($this->jobTeamMap) {
+			return $this->jobTeamMap;
+		}
+
+		return $this->jobTeamMap = array(
+			1 => 1,
+			2 => 1,
+			3 => 1,
+			4 => 3,
+			5 => 4,
+			6 => 2,
+			7 => 4,
+			8 => 3,
+			9 => 3,
+			10 => 3,
+			11 => 2,
+			12 => 7,
+			13 => 5,
+			14 => 2,
+			15 => 8,
+			16 => 5,
+			17 => 6,
+			18 => 4,
+			19 => 7,
+			20 => 9,
+			22 => 11,
+			23 => 11,
+			24 => 11,
+			25 => 11,
+			26 => 11,
+			27 => 11,
+			28 => 11,
+			30 => 11,
+			31 => 11,
+			32 => 11,
+			33 => 11,
+			34 => 11,
+			35 => 11,
+			37 => 11,
+		);
+	}
 }

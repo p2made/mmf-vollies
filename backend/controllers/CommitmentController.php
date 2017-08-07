@@ -66,7 +66,7 @@ class CommitmentController extends \yii\web\Controller
 	public function actionIndex()
 	{
 		$searchModel = new CommitmentSearch();
-		//$searchModel->year = date('Y');
+		$searchModel->year = date('Y');
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		//$dataProvider->query->andWhere('year = YEAR(curdate())');
 
