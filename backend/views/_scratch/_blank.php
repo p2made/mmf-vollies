@@ -1,6 +1,6 @@
 <?php
 /**
- * __blank.php
+ * _blank.php
  *
  * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
  * @author Pedro Plowman

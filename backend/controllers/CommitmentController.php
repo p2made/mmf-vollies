@@ -1,18 +1,48 @@
 <?php
+/**
+ * CommitmentController.php
+ *
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
+ * @author Pedro Plowman
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
+ */
 
 namespace backend\controllers;
 
 use Yii;
 use backend\models\Commitment;
 use backend\models\CommitmentSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * CommitmentController implements the CRUD actions for Commitment model.
+ *
+ * @property integer $id
+ * @property integer $user_id
+ * @property integer $application_id
+ * @property integer $team_id
+ * @property integer $job_id
+ * @property string $job_name
+ * @property string $year
+ * @property integer $hours
+ * @property string $report
+ * @property integer $reinvite
+ * @property integer $created_at
+ * @property integer $created_by
+ * @property integer $updated_at
+ * @property integer $updated_by
+ *
+ * @property \backend\models\Application $application
+ * @property \backend\models\Job $job
+ * @property \backend\models\Profile $user
+ * @property \backend\models\Team $team
+ * @property string $aliasModel
+ *
+ * @property string $vollieName;
  */
-class CommitmentController extends Controller
+class CommitmentController extends \yii\web\Controller
 {
 	/**
 	 * @inheritdoc
@@ -36,7 +66,10 @@ class CommitmentController extends Controller
 	public function actionIndex()
 	{
 		$searchModel = new CommitmentSearch();
+		//$searchModel->year = date('Y');
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		//$dataProvider->query->andWhere('year = YEAR(curdate())');
+
 
 		return $this->render('index', [
 			'searchModel' => $searchModel,

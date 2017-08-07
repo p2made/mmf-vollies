@@ -252,14 +252,24 @@ class Application extends \backend\models\base\Application
 			2 => 'Midday',
 			3 => 'Evening',
 			4 => 'Late',
+			0 => 'unknown',
 		];
 
-		$date = date_create(date("Y") . '-' . $this->availableFromDate);
-		$time = $times[$this->availableFromTime];
-		$this->availableFrom = $date->format('l, m-d') . ' / ' . $time;
-		$date = date_create(date("Y") . '-' . $this->availableToDate);
-		$time = $times[$this->availableToTime];
-		$this->availableTo = $date->format('l, m-d') . ' / ' . $time;
+		if ($this->availableFromTime != 0) {
+			$date = date_create(date("Y") . '-' . $this->availableFromDate);
+			$time = $times[$this->availableFromTime];
+			$this->availableFrom = $date->format('l, m-d') . ' / ' . $time;
+		} else {
+			$this->availableFrom = 'unknown';
+		}
+
+		if ($this->availableToTime != 0) {
+			$date = date_create(date("Y") . '-' . $this->availableToDate);
+			$time = $times[$this->availableToTime];
+			$this->availableTo = $date->format('l, m-d') . ' / ' . $time;
+		} else {
+			$this->availableTo = 'unknown';
+		}
 	}
 
 	public function emailUpdate()

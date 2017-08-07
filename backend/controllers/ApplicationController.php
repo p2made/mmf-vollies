@@ -84,6 +84,8 @@ class ApplicationController extends Controller
 	public function actionIndex()
 	{
 		$searchModel = new ApplicationSearch();
+		$searchModel->year = date('Y');
+		//$searchModel->status = 0;
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 		return $this->render('index', [

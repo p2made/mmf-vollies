@@ -1,4 +1,12 @@
 <?php
+/**
+ * search.php
+ *
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
+ * @author Pedro Plowman
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
+ */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -23,9 +31,11 @@ use yii\widgets\ActiveForm;
 
 	<?= $form->field($model, 'team_id') ?>
 
-	<?= $form->field($model, 'year') ?>
+	<?= $form->field($model, 'job_id') ?>
 
-	<?php // echo $form->field($model, 'job') ?>
+	<?php // echo $form->field($model, 'job_name') ?>
+
+	<?php // echo $form->field($model, 'year') ?>
 
 	<?php // echo $form->field($model, 'hours') ?>
 

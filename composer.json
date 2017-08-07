@@ -11,15 +11,18 @@
 		"p2made/yii2-a4e": "^0.1",
 		"p2made/yii2-p2y2-things": "^2.8",
 		"p2made/yii2-p2y2-things-demo": "^2.8",
-		"ruskid/yii2-ip-behavior": "dev-master",
+		"conquer/modal": "^1.1",
+		"dektrium/yii2-user": "^0.9",
 		"kartik-v/yii2-builder": "^1.6",
 		"kartik-v/yii2-detail-view": "^1.7",
 		"kartik-v/yii2-dialog": "^1.0",
+		"kartik-v/yii2-editable": "^1.7",
 		"kartik-v/yii2-grid": "^3.1",
 		"kartik-v/yii2-widget-activeform": "^1.4",
 		"kartik-v/yii2-widget-select2": "^2.0",
 		"kartik-v/yii2-widgets": "^3.4",
-		"dektrium/yii2-user": "^0.9"
+		"loveorigami/yii2-modal-ajax": "^2.1",
+		"ruskid/yii2-ip-behavior": "dev-master"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "^2.0",

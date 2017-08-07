@@ -72,6 +72,45 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 
 	public function safeUp()
 	{
+		$this->userTable();
+		$this->profileTable();
+		$this->socialAccountTable();
+		$this->tokenTable();
+		$this->teamTable();
+		$this->menuGroupTable();
+		$this->jobTable();
+		$this->applicationTable();
+		$this->commitmentTable();
+		$this->historyTable();
+
+		$this->addIndexes();
+		$this->foreignKeys();
+	}
+
+	public function safeDown()
+	{
+		echo "m170524_081853_mmf_init_tables (down) destroys ALL existing data!\n";
+
+		$this->foreignKeys(true);
+
+		$this->historyTable(true);
+		$this->commitmentTable(true);
+		$this->applicationTable(true);
+		$this->jobTable(true);
+		$this->menuGroupTable(true);
+		$this->teamTable(true);
+		$this->tokenTable(true);
+		$this->socialAccountTable(true);
+		$this->profileTable(true);
+		$this->userTable(true);
+	}
+
+	private function userTable($down = false)
+	{
+		if ($down) {
+			$this->dropTable('{{%user}}');
+		}
+
 		$this->createTable('{{%user}}', [
 			'id'                => $this->primaryKey(),
 			'email'             => $this->string()->unique()->notNull(),
@@ -88,6 +127,13 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'last_login_at'     => $this->integer()->null(),
 			'blocked_at'        => $this->integer()->null(),
 		], $this->tableOptions);
+	}
+
+	private function profileTable($down = false)
+	{
+		if ($down) {
+			$this->dropTable('{{%profile}}');
+		}
 
 		$this->createTable('{{%profile}}', [
 			'user_id'          => $this->integer()->notNull()->append('primary key'),
@@ -130,6 +176,13 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'website'          => $this->string(255)->null(),
 			'bio'              => $this->text()->null(),
 		], $this->tableOptions);
+	}
+
+	private function socialAccountTable($down = false)
+	{
+		if ($down) {
+			$this->dropTable('{{%social_account}}');
+		}
 
 		$this->createTable('{{%social_account}}', [
 			'id'         => $this->primaryKey(),
@@ -142,6 +195,13 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'code'       => $this->string(32)->null(),
 			'created_at' => $this->integer()->null(),
 		], $this->tableOptions);
+	}
+
+	private function tokenTable($down = false)
+	{
+		if ($down) {
+			$this->dropTable('{{%token}}');
+		}
 
 		$this->createTable('{{%token}}', [
 			'user_id'    => $this->integer()->notNull(),
@@ -149,6 +209,13 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'created_at' => $this->integer()->notNull(),
 			'type'       => $this->smallInteger()->notNull(),
 		], $this->tableOptions);
+	}
+
+	private function teamTable($down = false)
+	{
+		if ($down) {
+			$this->dropTable('{{%team}}');
+		}
 
 		$this->createTable('{{%team}}', [
 			'id'          => $this->primaryKey(),
@@ -159,6 +226,13 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'created_at'  => $this->integer()->notNull(),
 			'updated_at'  => $this->integer()->notNull(),
 		], $this->tableOptions);
+	}
+
+	private function menuGroupTable($down = false)
+	{
+		if ($down) {
+			$this->dropTable('{{%menu_group}}');
+		}
 
 		$this->createTable('{{%menu_group}}', [
 			'id'         => $this->primaryKey(),
@@ -167,6 +241,13 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'created_at' => $this->integer()->notNull(),
 			'updated_at' => $this->integer()->notNull(),
 		], $this->tableOptions);
+	}
+
+	private function jobTable($down = false)
+	{
+		if ($down) {
+			$this->dropTable('{{%job}}');
+		}
 
 		$this->createTable('{{%job}}', [
 			'id'          => $this->primaryKey(),
@@ -179,6 +260,13 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'created_at'  => $this->integer()->notNull(),
 			'updated_at'  => $this->integer()->notNull(),
 		], $this->tableOptions);
+	}
+
+	private function applicationTable($down = false)
+	{
+		if ($down) {
+			$this->dropTable('{{%application}}');
+		}
 
 		$this->createTable('{{%application}}', [
 			'id'                  => $this->primaryKey(),
@@ -207,14 +295,22 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'updated_at'          => $this->integer()->notNull(),
 			'updated_by'          => $this->integer()->defaultValue(0),
 		], $this->tableOptions);
+	}
+
+	private function commitmentTable($down = false)
+	{
+		if ($down) {
+		$this->dropTable('{{%commitment}}');
+		}
 
 		$this->createTable('{{%commitment}}', [
 			'id'             => $this->primaryKey(),
 			'user_id'        => $this->integer()->notNull(),
 			'application_id' => $this->integer()->null(),
-			'team_id'        => $this->integer()->defaultValue(0),
+			'team_id'        => $this->integer()->null(),
+			'job_id'         => $this->integer()->null(),
+			'job_name'       => $this->string(48)->null(),
 			'year'           => 'year(4) not null',
-			'job'            => $this->string(48)->notNull(),
 			'hours'          => $this->smallInteger(6)->defaultValue(0),
 			'report'         => $this->text()->null(),
 			'reinvite'       => $this->boolean()->defaultValue(0),
@@ -223,6 +319,13 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'updated_at'     => $this->integer()->notNull(),
 			'updated_by'     => $this->integer()->defaultValue(0),
 		], $this->tableOptions);
+	}
+
+	private function historyTable($down = false)
+	{
+		if ($down) {
+			$this->dropTable('{{%history}}');
+		}
 
 		$this->createTable('{{%history}}', [
 			'id' => $this->primaryKey(),
@@ -265,7 +368,10 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 			'updated_at'       => $this->integer()->notNull(),
 			'updated_by'       => $this->integer()->defaultValue(0),
 		], $this->tableOptions);
+	}
 
+	private function addIndexes()
+	{
 		$this->createIndex('{{%user_unique_username}}', '{{%user}}', 'username', true);
 		$this->createIndex('{{%user_unique_email}}', '{{%user}}', 'email', true);
 		$this->createIndex('profile_givenName', '{{%profile}}', 'givenName');
@@ -275,6 +381,26 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 		$this->createIndex('account_unique', '{{%social_account}}', ['provider', 'client_id'], true);
 		$this->createIndex('{{%account_unique_code}}', '{{%social_account}}', 'code', true);
 		$this->createIndex('token_unique', '{{%token}}', ['user_id', 'code', 'type'], true);
+	}
+
+	private function foreignKeys($down = false)
+	{
+		if ($down) {
+			$this->dropForeignKey('fk_history_profile_id', '{{%history}}');
+			$this->dropForeignKey('fk_commitment_job_id', '{{%commitment}}');
+			$this->dropForeignKey('fk_commitment_team_id', '{{%commitment}}');
+			$this->dropForeignKey('fk_commitment_application_id', '{{%commitment}}');
+			$this->dropForeignKey('fk_commitment_profile_id', '{{%commitment}}');
+			$this->dropForeignKey('fk_application_job_choice_3', '{{%application}}');
+			$this->dropForeignKey('fk_application_job_choice_2', '{{%application}}');
+			$this->dropForeignKey('fk_application_job_choice_1', '{{%application}}');
+			$this->dropForeignKey('fk_application_profile_id', '{{%application}}');
+			$this->dropForeignKey('fk_job_group_id', '{{%job}}');
+			$this->dropForeignKey('fk_job_team_id', '{{%job}}');
+			$this->dropForeignKey('fk_team_head_id', '{{%team}}');
+			$this->dropForeignKey('fk_user_account', '{{%social_account}}');
+			$this->dropForeignKey('fk_user_profile', '{{%profile}}');
+		}
 
 		$this->addForeignKey('fk_user_profile',
 			'{{%profile}}', 'user_id', '{{%user}}', 'id', 'cascade', 'restrict'
@@ -309,36 +435,17 @@ class m170524_081853_mmf_init_tables extends \yii\db\Migration
 		$this->addForeignKey('fk_commitment_profile_id',
 			'{{%commitment}}', 'user_id', '{{%profile}}', 'user_id'
 		);
+		$this->addForeignKey('fk_commitment_application_id',
+			'{{%commitment}}', 'application_id', '{{%application}}', 'id'
+		);
+		$this->addForeignKey('fk_commitment_team_id',
+			'{{%commitment}}', 'team_id', '{{%team}}', 'id'
+		);
+		$this->addForeignKey('fk_commitment_job_id',
+			'{{%commitment}}', 'job_id', '{{%job}}', 'id'
+		);
 		$this->addForeignKey('fk_history_profile_id',
 			'{{%history}}', 'user_id', '{{%profile}}', 'user_id'
 		);
-	}
-
-	public function safeDown()
-	{
-		echo "m170524_081853_mmf_init_tables (down) destroys ALL existing data!\n";
-
-		$this->dropForeignKey('fk_history_profile_id', '{{%history}}');
-		$this->dropForeignKey('fk_commitment_profile_id', '{{%commitment}}');
-		$this->dropForeignKey('fk_application_job_choice_3', '{{%application}}');
-		$this->dropForeignKey('fk_application_job_choice_2', '{{%application}}');
-		$this->dropForeignKey('fk_application_job_choice_1', '{{%application}}');
-		$this->dropForeignKey('fk_application_profile_id', '{{%application}}');
-		$this->dropForeignKey('fk_job_group_id', '{{%job}}');
-		$this->dropForeignKey('fk_job_team_id', '{{%job}}');
-		$this->dropForeignKey('fk_team_head_id', '{{%team}}');
-		$this->dropForeignKey('fk_user_account', '{{%social_account}}');
-		$this->dropForeignKey('fk_user_profile', '{{%profile}}');
-
-		$this->dropTable('{{%history}}');
-		$this->dropTable('{{%commitment}}');
-		$this->dropTable('{{%application}}');
-		$this->dropTable('{{%job}}');
-		$this->dropTable('{{%menu_group}}');
-		$this->dropTable('{{%team}}');
-		$this->dropTable('{{%token}}');
-		$this->dropTable('{{%social_account}}');
-		$this->dropTable('{{%profile}}');
-		$this->dropTable('{{%user}}');
 	}
 }
