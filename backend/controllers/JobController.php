@@ -1,4 +1,12 @@
 <?php
+/**
+ * JobController.php
+ *
+ * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
+ * @author Pedro Plowman
+ * @package p2made/yii.mmf-vollies
+ * @license Private Use
+ */
 
 namespace backend\controllers;
 
@@ -13,6 +21,26 @@ use kartik\grid\EditableColumnAction;
 
 /**
  * JobController implements the CRUD actions for Job model.
+ *
+ * @property integer $id
+ * @property integer $team_id
+ * @property integer $group_id
+ * @property integer $sequence
+ * @property string $name
+ * @property string $shortName
+ * @property string $description
+ * @property integer $required
+ * @property integer $created_at
+ * @property integer $updated_at
+ *
+ * @property \common\models\Application[] $applications
+ * @property \common\models\Application[] $applications0
+ * @property \common\models\Application[] $applications1
+ * @property \common\models\MenuGroup $group
+ * @property \common\models\Team $team
+ * @property string $aliasModel
+ *
+ * @property string $teamName
  */
 class JobController extends Controller
 {
@@ -81,6 +109,11 @@ class JobController extends Controller
 	 * @return mixed
 	 */
 	public function actionView($id)
+	{
+		return $this->render('view', [
+			'model' => $this->findModel($id),
+		]);
+	}
 	{
 		return $this->render('view', [
 			'model' => $this->findModel($id),

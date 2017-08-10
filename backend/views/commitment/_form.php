@@ -1,12 +1,4 @@
 <?php
-/**
- * _form.php
- *
- * @copyright Copyright &copy; Pedro Plowman, Maleny Music Festival, 2017
- * @author Pedro Plowman
- * @package p2made/yii.mmf-vollies
- * @license Private Use
- */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -28,7 +20,7 @@ use yii\widgets\ActiveForm;
 
 	<?= $form->field($model, 'job_id')->textInput() ?>
 
-	<?= $form->field($model, 'job_name')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'jobName')->textInput(['maxlength' => true]) ?>
 
 	<?= $form->field($model, 'year')->textInput(['maxlength' => true]) ?>
 

@@ -16,9 +16,6 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "mmf_commitment".
  *
-/**
- * This is the base-model class for table "mmf_commitment".
- *
  * @property integer $id
  * @property integer $user_id
  * @property integer $application_id
@@ -47,6 +44,8 @@ class Commitment extends \backend\models\base\Commitment
 	// virtual attributes
 	private $vollieName;
 	private $teamName;
+
+	private $responseMenu = [];
 
 	public function behaviors()
 	{
@@ -103,6 +102,19 @@ class Commitment extends \backend\models\base\Commitment
 		}
 	}
 
+	/*
+	*/
+	public function beforeSave($insert)
+	{
+		if (!parent::beforeSave($insert)) {
+			return false;
+		}
+
+		$this->team_id = $this->job->team_id;
+		// ...custom code here...
+		return true;
+	}
+
 	public function getVollieName()
 	{
 		if ($this->vollieName) {
@@ -110,6 +122,19 @@ class Commitment extends \backend\models\base\Commitment
 		}
 
 		return $this->vollieName = $this->user->vollieName;
+	}
+
+	public function getTeamId()
+	{
+		/*
+		if ($this->team_id) {
+			return $this->team_id;
+		}
+
+		return $this->team_id = $this->job->team_id;
+		*/
+
+		return $this->job->team_id;
 	}
 
 	public function getTeamName()
@@ -123,10 +148,90 @@ class Commitment extends \backend\models\base\Commitment
 
 	public function getJobName()
 	{
-		if ($this->jobName) {
+		if ($this->jobName && $this->jobName != '') {
 			return $this->jobName;
 		}
 
 		return $this->jobName = ($this->job ? $this->job->name : '');
 	}
+
+	public function getResponseMenu()
+	{
+		if ($this->responseMenu) {
+			return $this->responseMenu;
+		}
+
+		return $this->responseMenu = array(
+			null => '',
+			'Bars' => [
+				1 => 'Bar Doors',
+				2 => 'Bar Service',
+				3 => 'Bar Setup',
+			],
+			'Children’s Festival' => [
+				11 => 'Children’s Festival Helper',
+				14 => 'Children’s Festival Presenter',
+				6 => 'Children’s Festival Setup',
+			],
+			'Setup & Bump Out' => [
+				4 => 'Bump Out',
+				8 => 'Decor',
+				9 => 'Fencing',
+				10 => 'General Setup',
+			],
+			'Site' => [
+				5 => 'Campground',
+				7 => 'Cleaning',
+				18 => 'Traffic',
+			],
+			'Stages' => [
+				13 => 'MC',
+				16 => 'Stage Manager',
+				17 => 'Ticket Gates',
+			],
+			'Treasury' => [
+				12 => 'Instrument Lockup',
+				19 => 'Treasury',
+			],
+			'Shop' => [
+				15 => 'Shop',
+			],
+			'Vollies’ Tent' => [
+				20 => 'Vollies’ Tent',
+			],
+			'Special' => [
+				26 => 'Bars Manager',
+				27 => 'Children’s Festival Manager',
+				23 => 'Committee',
+				28 => 'Fencing Manager',
+				24 => 'Festival Director',
+				35 => 'Performer',
+				37 => 'Photographer',
+				30 => 'Shop Manager',
+				22 => 'Special',
+				31 => 'Stages Manager',
+				32 => 'Ticket Gates Manager',
+				33 => 'Treasury Manager',
+				34 => 'Vollies’ Tent Coordinator',
+				25 => 'Volunteer Coordinator',
+			],
+			'Non Accept' => [
+				98 => 'Cancel',
+				99 => 'Reject',
+			],
+		);
+	}
+
+	public function teamID($JobId)
+	{
+		$jobTeams = array(
+			1 => 1, 2 => 1, 3 => 1, 4 => 3, 5 => 4, 6 => 2, 7 => 4, 8 => 3, 9 => 3, 10 => 3,
+			11 => 2, 12 => 7, 13 => 5, 14 => 2, 15 => 8, 16 => 5, 17 => 6, 18 => 4, 19 => 7,
+			20 => 9, 22 => 11, 23 => 11, 24 => 11, 25 => 11, 26 => 11, 27 => 11, 28 => 11,
+			30 => 11, 31 => 11, 32 => 11, 33 => 11, 34 => 11, 35 => 11, 37 => 11,
+		);
+
+		return $jobTeams[$JobId];
+	}
+
 }

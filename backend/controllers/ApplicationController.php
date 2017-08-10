@@ -149,8 +149,19 @@ class ApplicationController extends Controller
 		);
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			if ($model->status == 1) { // assgn job
+				return $this->redirect(['/commitment/create', 'id' => $model->id]);
+			}
+
 			return $this->redirect(['view', 'id' => $model->id]);
 		}
+
+		/*
+		if ($model->load(Yii::$app->request->post())) {
+			$jobAssignment = $_POST['assignment'];
+			$model->assignJob($jobAssignment);
+		}
+		*/
 
 		return $this->render('update', [
 			'model'       => $model,

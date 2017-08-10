@@ -36,6 +36,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Applications', 'url' => ['index']]
 					Application
 					<?= $model->status == 2 ?
 						' <span class="text-warning">(cancelled)</span>' : '' ?>
+					<?= $model->status == 3 ?
+						' <span class="text-danger">(rejected)</span>' : '' ?>
 				</h3>
 			</div>
 		</div>

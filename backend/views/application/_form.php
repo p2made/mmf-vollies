@@ -55,6 +55,13 @@ $jobTeams = array(
 	35 => 11,
 	37 => 11,
 );
+
+/*
+ * 0 - Pending
+ * 1 - Accepted
+ * 2 - Cancelled
+ * 3 - Rejected
+ */
 ?>
 <div class="application-form">
 	<div class="row">
@@ -69,12 +76,16 @@ $jobTeams = array(
 								'model' => $model,
 								'form' => $form,
 								'attributes' => [
-									'assignment' => [
-										'type' => Form::INPUT_WIDGET,
-										'widgetClass' => '\kartik\widgets\Select2',
-										'label' => 'Assign to Job...',
-										'options' => ['data' => $model->responseMenu],
+									'status' => [
+										'type' => Form::INPUT_RADIO_LIST,
+										'items' => [
+											1 => 'Assign to Job',
+											2 => 'Cancel',
+											3 => 'Reject',
+										],
+										'options' => ['inline' => true],
 									],
+									'label' => 'Application Actions...'
 								]
 							]) ?>
 

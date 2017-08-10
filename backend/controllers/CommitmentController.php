@@ -13,8 +13,13 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Commitment;
 use backend\models\CommitmentSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\Profile;
+use backend\models\Application;
+use backend\models\Job;
+use backend\models\Team;
 
 /**
  * CommitmentController implements the CRUD actions for Commitment model.
@@ -42,7 +47,7 @@ use yii\filters\VerbFilter;
  *
  * @property string $vollieName;
  */
-class CommitmentController extends \yii\web\Controller
+class CommitmentController extends Controller
 {
 	/**
 	 * @inheritdoc
@@ -70,7 +75,6 @@ class CommitmentController extends \yii\web\Controller
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		//$dataProvider->query->andWhere('year = YEAR(curdate())');
 
-
 		return $this->render('index', [
 			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
@@ -94,15 +98,35 @@ class CommitmentController extends \yii\web\Controller
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
-	public function actionCreate()
+	public function actionCreate($id)
 	{
 		$model = new Commitment();
 
+		$model->application_id = $id;
+		$application = Application::findOne($id);
+		$profile = $application->user;
+		$model->user_id = $profile->user_id;
+		$model->year = gmdate('Y');
+
+		/*
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
+		}
+		else {
+			return $this->render('create', [
+				'model' => $model,
+			]);
+		}
+		*/
+
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			//return $this->redirect(['update', 'id' => $model->id]);
+			return $this->redirect(['/application/update', 'id' => $model->id]);
 		} else {
 			return $this->render('create', [
 				'model' => $model,
+				'application' => $application,
+				'profile' => $profile,
 			]);
 		}
 	}
@@ -117,6 +141,22 @@ class CommitmentController extends \yii\web\Controller
 	{
 		$model = $this->findModel($id);
 
+		$model = $this->findModel($id);
+		$application = $model->application;;
+		$profile = $model->user;
+
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			return $this->redirect(['view', 'id' => $model->id]);
+		}
+		else {
+			return $this->render('update', [
+				'model' => $model,
+				'application' => $application,
+				'profile' => $profile,
+			]);
+		}
+
+		/*
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
@@ -124,6 +164,7 @@ class CommitmentController extends \yii\web\Controller
 				'model' => $model,
 			]);
 		}
+		*/
 	}
 
 	/**

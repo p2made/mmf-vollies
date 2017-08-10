@@ -27,32 +27,47 @@ $this->title = 'Applications';
 $this->params['breadcrumbs'][] = $this->title;
 
 $toolbar = array(
-	'{export}',
 	'{toggleData}',
+	'{export}',
 );
 $exportConfig = array(
-	GridView::EXCEL => [
-		'label' => 'Excel',
-		'icon' => 'file-excel-o',
-		'iconOptions' => ['class' => 'text-success'],
+	GridView::CSV => [
+		'label' => 'CSV',
+		'icon' => 'file-code-o',
+		'iconOptions' => ['class' => 'text-primary'],
 		'showHeader' => true,
 		'showPageSummary' => true,
 		'showFooter' => true,
 		'showCaption' => true,
 		'filename' => 'grid-export',
-		'alertMsg' => 'The EXCEL export file will be generated for download.',
-		'options' => ['title' => 'Microsoft Excel 95+'],
-		'mime' => 'application/vnd.ms-excel',
+		'alertMsg' => 'The CSV export file will be generated for download.',
+		'options' => ['title' => 'Comma Separated Values'],
+		'mime' => 'application/csv',
 		'config' => [
-			'worksheet' => 'ExportWorksheet',
-			'cssFile' => ''
+			'colDelimiter' => ",",
+			'rowDelimiter' => "\r\n",
 		]
 	],
 );
 $columns = array(
 	['class' => 'yii\grid\SerialColumn'],
 
-	'vollieName',
+	[
+		'attribute' => 'vollieName',
+		'label' => 'Legal Name',
+	],
+	[
+		'attribute' => 'preferredName',
+		'label' => 'Preferred',
+	],
+	[
+		'attribute' => 'phone1',
+		'hidden' => true,
+	],
+	[
+		'attribute' => 'phone2',
+		'hidden' => true,
+	],
 	[
 		'header' => 'Job Choice 1',
 		'value' => 'jobPreference1',
@@ -69,9 +84,17 @@ $columns = array(
 		'contentOptions' => ['style' => 'width:210px;'],
 	],
 	[
-		'class'=>'kartik\grid\BooleanColumn',
-		'attribute'=>'returned',
+		'class' => 'kartik\grid\BooleanColumn',
+		'attribute' => 'returned',
 		'contentOptions' => ['style' => 'width:100px;'],
+		'hiddenFromExport' => true,
+	],
+	[
+		'header' => 'Returned',
+		'value' => function ($model) {
+			return $model->returned ? 'Yes' : 'No';
+		},
+		'hidden' => true,
 	],
 	[
 		'header' => 'Status',
@@ -103,8 +126,6 @@ $columns = array(
 		'hAlign' => 'center',
 	],
 );
-
-
 ?>
 <div id="content-wrapper">
 	<div class="application-index">
@@ -122,17 +143,16 @@ $columns = array(
 					<?= GridView::widget([
 						'dataProvider' => $dataProvider,
 						//'filterModel' => $searchModel,
-	'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
-	'headerRowOptions' => ['class' => 'kartik-sheet-style'],
-	'filterRowOptions' => ['class' => 'kartik-sheet-style'],
-	'pjax' => true, // pjax is set to always true for this demo
+						'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
+						'headerRowOptions' => ['class' => 'kartik-sheet-style'],
+						'filterRowOptions' => ['class' => 'kartik-sheet-style'],
+						'pjax' => true, // pjax is set to always true for this demo
 						'toolbar' => $toolbar,
 						'exportConfig' => $exportConfig,
 						'columns' => $columns,
-    'panel' => [
-        'heading' => '<b>My View</b>',
-        'before' => 'Before content', //IMPORTANT
-    ],
+						'panel' => [
+							'heading' => '<b>Applications</b>',
+						],
 					]); ?>
 				<?php Pjax::end(); ?>
 

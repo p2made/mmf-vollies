@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Commitment;
-use backend\models\CommitmentSearch;
+use common\models\Commitment;
+use common\models\CommitmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -36,10 +36,7 @@ class CommitmentController extends Controller
 	public function actionIndex()
 	{
 		$searchModel = new CommitmentSearch();
-		//$searchModel->year = date('Y');
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		$dataProvider->query->andWhere('year = YEAR(curdate())');
-
 
 		return $this->render('index', [
 			'searchModel' => $searchModel,

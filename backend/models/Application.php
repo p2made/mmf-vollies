@@ -67,6 +67,8 @@ class Application extends \backend\models\base\Application
 	// virtual attributes
 	private $vollieName;
 	private $preferredName;
+	private $phone1;
+	private $phone2;
 	public $jobChoices = [];
 	private $jobPreference1;
 	private $jobPreference2;
@@ -75,9 +77,9 @@ class Application extends \backend\models\base\Application
 	private $availableTo;
 	private $earlyLate;
 	private $returned;
+	private $statusFlag;
 	private $assignment;
 
-	private $responseMenu = [];
 	private $jobTeamMap = [];
 
 	public function behaviors()
@@ -96,7 +98,7 @@ class Application extends \backend\models\base\Application
 			parent::rules(),
 			[
 				# custom validation rules
-				[['volunteerName', 'preferredName', 'jobPreference1', 'jobPreference2', 'jobPreference3', 'availableFrom', 'availableTo', 'earlyLate', 'returned'], 'safe'],
+				[['volunteerName', 'preferredName', 'phone1', 'phone2', 'jobPreference1', 'jobPreference2', 'jobPreference3', 'availableFrom', 'availableTo', 'earlyLate', 'returned'], 'safe'],
 			]
 		);
 	}
@@ -108,6 +110,8 @@ class Application extends \backend\models\base\Application
 			'user_id' =>             'User ID',
 			'volunteerName' =>       'Volunteer Name',
 			'preferredName' =>       'Preferred Name',
+			'phone1' =>              'Primary Phone',
+			'phone2' =>              'Secondary Phone',
 			'job_choice_1' =>        'Job Choice 1',
 			'job_choice_2' =>        'Job Choice 2',
 			'job_choice_3' =>        'Job Choice 3',
@@ -152,21 +156,23 @@ class Application extends \backend\models\base\Application
 		}
 
 		/*
+		if ($this->assignment) {
+			$this->assignApplication($this->assignment);
+		}
+		*/
+
+		return true;
+}
+
+	public function assignJob($assignment)
+	{
+		/*
 		 * 0 - Pending
 		 * 1 - Accepted
 		 * 2 - Cancelled
 		 * 3 - Rejected
 		 */
 
-		if ($this->assignment) {
-			$this->assignApplication($this->assignment);
-		}
-
-		return true;
-}
-
-	private function assignApplication($assignment)
-	{
 		if ($assignment == 99) {
 			$this->status = 3;
 			return;
@@ -204,6 +210,24 @@ class Application extends \backend\models\base\Application
 		}
 
 		return $this->preferredName = $this->user->preferredName;
+	}
+
+	public function getPhone1()
+	{
+		if ($this->phone1) {
+			return $this->phone1;
+		}
+
+		return $this->phone1 = $this->user->phone1;
+	}
+
+	public function getPhone2()
+	{
+		if ($this->phone2) {
+			return $this->phone2;
+		}
+
+		return $this->phone2 = $this->user->phone2;
 	}
 
 	public function getJobPreference1()
@@ -297,6 +321,19 @@ class Application extends \backend\models\base\Application
 		return $this->assignment;
 	}
 
+	public function setStatusFlag()
+	{
+		if ($this->status == 0) {
+			return '';
+		}
+		if ($this->status == 1) {
+		}
+		elseif ($this->status == 2) {
+		}
+		else {
+		}
+	}
+
 	private function setJobChoices()
 	{
 		$this->jobChoices[0] = $this->jobChoice1->name;
@@ -342,73 +379,6 @@ class Application extends \backend\models\base\Application
 			->send();;
 	}
 
-	public function getResponseMenu()
-	{
-		if ($this->responseMenu) {
-			return $this->responseMenu;
-		}
-
-		return $this->responseMenu = array(
-			null => '',
-			'Bars' => [
-				1 => 'Bar Doors',
-				2 => 'Bar Service',
-				3 => 'Bar Setup',
-			],
-			'Children’s Festival' => [
-				11 => 'Children’s Festival Helper',
-				14 => 'Children’s Festival Presenter',
-				6 => 'Children’s Festival Setup',
-			],
-			'Setup & Bump Out' => [
-				4 => 'Bump Out',
-				8 => 'Decor',
-				9 => 'Fencing',
-				10 => 'General Setup',
-			],
-			'Site' => [
-				5 => 'Campground',
-				7 => 'Cleaning',
-				18 => 'Traffic',
-			],
-			'Stages' => [
-				13 => 'MC',
-				16 => 'Stage Manager',
-				17 => 'Ticket Gates',
-			],
-			'Treasury' => [
-				12 => 'Instrument Lockup',
-				19 => 'Treasury',
-			],
-			'Shop' => [
-				15 => 'Shop',
-			],
-			'Vollies’ Tent' => [
-				20 => 'Vollies’ Tent',
-			],
-			'Special' => [
-				26 => 'Bars Manager',
-				27 => 'Children’s Festival Manager',
-				23 => 'Committee',
-				28 => 'Fencing Manager',
-				24 => 'Festival Director',
-				35 => 'Performer',
-				37 => 'Photographer',
-				30 => 'Shop Manager',
-				22 => 'Special',
-				31 => 'Stages Manager',
-				32 => 'Ticket Gates Manager',
-				33 => 'Treasury Manager',
-				34 => 'Vollies’ Tent Coordinator',
-				25 => 'Volunteer Coordinator',
-			],
-			'Non Accept' => [
-				98 => 'Cancel',
-				99 => 'Reject',
-			],
-		);
-	}
-
 	public function getJobTeamMap()
 	{
 		if ($this->jobTeamMap) {
@@ -452,4 +422,11 @@ class Application extends \backend\models\base\Application
 			37 => 11,
 		);
 	}
+
+
+					<?= $model->status == 2 ?
+						' <span class="text-warning">(cancelled)</span>' : '' ?>
+					<?= $model->status == 3 ?
+						' <span class="text-danger">(rejected)</span>' : '' ?>
+
 }

@@ -24,6 +24,7 @@ $this->title = $model->vollieName . ' (preferred: ' . $model->preferredName . ')
 $this->params['breadcrumbs'][] = ['label' => 'Applications', 'url' => ['index']];
 
 $attrModel = array();
+$statusFlag = array();
 ?>
 <div id="content-wrapper">
 	<div class="application-view">
@@ -33,7 +34,7 @@ $attrModel = array();
 				<h3>
 					Application
 					<?= $model->status == 2 ?
-						' <span class="text-warning">(cancelled)</span>' : '' ?>
+						' <span class="' . $model->status == 2 ? 'text-warning' : 'text-danger' . '">(cancelled)</span>' : '' ?>
 				</h3>
 			</div>
 		</div>
