@@ -260,6 +260,7 @@ class Commitment extends \backend\models\base\Commitment
 			'Bars' => [
 				1 => 'Bar Doors',
 				2 => 'Bar Service',
+				38 => 'Bar Ticketing',
 				3 => 'Bar Setup',
 			],
 			'Children’s Festival' => [
