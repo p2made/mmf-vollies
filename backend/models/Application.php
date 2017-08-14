@@ -485,6 +485,7 @@ class Application extends \backend\models\base\Application
 				35 => 'Performer',
 				36 => 'Photographer',
 				30 => 'Shop Manager',
+				37 => 'Site Manager',
 				22 => 'Special',
 				31 => 'Stages Manager',
 				32 => 'Ticket Gates Manager',

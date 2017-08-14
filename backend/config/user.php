@@ -8,7 +8,7 @@ return [
 		'noel',                 // Festival Director - Noel Gardner
 		'pedro',                // Vollies Coordinator 2017 - Pedro
 		// '',                  // Setup & Bump Out -
-		// '',                  // Site - Tony Reynolds
+		'TonyReynolds',         // Site - Tony Reynolds
 		'john',                 // Stages - John Wright
 		'tom',                  // Stages - Tom Nealson
 		'joan',                 // Bars - Joan Chenery
