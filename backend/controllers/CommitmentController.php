@@ -11,11 +11,11 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Commitment;
-use backend\models\CommitmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\Commitment;
+use backend\models\CommitmentSearch;
 use backend\models\Profile;
 use backend\models\Application;
 use backend\models\Job;
@@ -102,33 +102,22 @@ class CommitmentController extends Controller
 	{
 		$model = new Commitment();
 
-		$model->application_id = $id;
 		$application = Application::findOne($id);
 		$profile = $application->user;
+
+		$model->application_id = $id;
 		$model->user_id = $profile->user_id;
 		$model->year = gmdate('Y');
 
-		/*
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->id]);
+			return $this->redirect(['update', 'id' => $model->id]);
 		}
-		else {
-			return $this->render('create', [
-				'model' => $model,
-			]);
-		}
-		*/
 
-		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			//return $this->redirect(['update', 'id' => $model->id]);
-			return $this->redirect(['/application/update', 'id' => $model->id]);
-		} else {
-			return $this->render('create', [
-				'model' => $model,
-				'application' => $application,
-				'profile' => $profile,
-			]);
-		}
+		return $this->render('create', [
+			'model' => $model,
+			'application' => $application,
+			'profile' => $profile,
+		]);
 	}
 
 	/**
@@ -141,30 +130,18 @@ class CommitmentController extends Controller
 	{
 		$model = $this->findModel($id);
 
-		$model = $this->findModel($id);
-		$application = $model->application;;
+		$application = $model->application;
 		$profile = $model->user;
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		}
-		else {
-			return $this->render('update', [
-				'model' => $model,
-				'application' => $application,
-				'profile' => $profile,
-			]);
-		}
 
-		/*
-		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->id]);
-		} else {
-			return $this->render('update', [
-				'model' => $model,
-			]);
-		}
-		*/
+		return $this->render('update', [
+			'model' => $model,
+			'application' => $application,
+			'profile' => $profile,
+		]);
 	}
 
 	/**

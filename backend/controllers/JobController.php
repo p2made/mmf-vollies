@@ -114,11 +114,6 @@ class JobController extends Controller
 			'model' => $this->findModel($id),
 		]);
 	}
-	{
-		return $this->render('view', [
-			'model' => $this->findModel($id),
-		]);
-	}
 
 	/**
 	 * Creates a new Job model.

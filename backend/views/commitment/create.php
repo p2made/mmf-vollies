@@ -31,16 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div class="col-md-12">
 				<h3>
 					Application
-					<?= $application->status == 2 ?
-						' <span class="text-warning">(cancelled)</span>' : '' ?>
+					<?= $application->statusFlag ?>
 				</h3>
 			</div>
 		</div>
 
 		<?= $this->render('_application', [
-			'model' => $model,
+			'model'       => $model,
+			'profile'     => $profile,
 			'application' => $application,
-			'profile' => $profile,
 		]) ?>
 
 	</div>

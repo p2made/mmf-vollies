@@ -46,6 +46,7 @@ use yii\helpers\ArrayHelper;
  * @property \backend\models\Job $jobChoice2
  * @property \backend\models\Job $jobChoice3
  * @property \backend\models\Profile $user
+ * @property \backend\models\Commitment $commitment
  * @property string $aliasModel
  *
  * @property string $vollieName
@@ -81,6 +82,7 @@ class Application extends \backend\models\base\Application
 	private $assignment;
 
 	private $jobTeamMap = [];
+	private $responseMenu = [];
 
 	public function behaviors()
 	{
@@ -98,7 +100,7 @@ class Application extends \backend\models\base\Application
 			parent::rules(),
 			[
 				# custom validation rules
-				[['volunteerName', 'preferredName', 'phone1', 'phone2', 'jobPreference1', 'jobPreference2', 'jobPreference3', 'availableFrom', 'availableTo', 'earlyLate', 'returned'], 'safe'],
+				[['vollieName', 'preferredName', 'phone1', 'phone2', 'jobPreference1', 'jobPreference2', 'jobPreference3', 'availableFrom', 'availableTo', 'earlyLate', 'returned'], 'safe'],
 			]
 		);
 	}
@@ -107,11 +109,11 @@ class Application extends \backend\models\base\Application
 	{
 		return [
 			'id' => 'ID',
-			'user_id' =>             'User ID',
-			'volunteerName' =>       'Volunteer Name',
+			'user_id'             => 'User ID',
+			'vollieName' =>          'Volunteer Name',
 			'preferredName' =>       'Preferred Name',
 			'phone1' =>              'Primary Phone',
-			'phone2' =>              'Secondary Phone',
+			'phone2' =>              'Other Phone',
 			'job_choice_1' =>        'Job Choice 1',
 			'job_choice_2' =>        'Job Choice 2',
 			'job_choice_3' =>        'Job Choice 3',
@@ -124,13 +126,13 @@ class Application extends \backend\models\base\Application
 			'availableTo' =>         'Available To',
 			'bestTime' =>            'I am...',
 			'earlyLate' =>           'Best Time',
-			'availabilityNotes' =>   'Availability Notes',
-			'double' =>              'Double',
-			'otherNotes' =>          'Other Notes',
-			'referee' =>             'Referee',
+			'availabilityNotes'   => 'Availability Notes',
+			'double'              => 'Double',
+			'otherNotes'          => 'Other Notes',
+			'referee'             => 'Referee',
 			'refereeRelationship' => 'Referee Relationship',
-			'refereePhone' =>        'Referee Phone',
-			'bestCallingTime' =>     'Best Calling Time',
+			'refereePhone'        => 'Referee Phone',
+			'bestCallingTime'     => 'Best Calling Time',
 			'status' =>              'Status',
 			'returned' =>            'Returned',
 			'team_id' =>             'Team ID',
@@ -321,17 +323,26 @@ class Application extends \backend\models\base\Application
 		return $this->assignment;
 	}
 
-	public function setStatusFlag()
+	public function getStatusFlag()
 	{
 		if ($this->status == 0) {
-			return '';
+			$class = 'text-info';
+			$title = 'pending';
 		}
-		if ($this->status == 1) {
+		elseif ($this->status == 1) {
+			$class = 'text-success';
+			$title = 'assigned';
 		}
 		elseif ($this->status == 2) {
+			$class = 'text-warning';
+			$title = 'cancelled';
 		}
 		else {
+			$class = 'text-danger';
+			$title = 'REJECTED';
 		}
+
+		return ' <span class="' . $class . '"><strong>(' . $title . ')</strong></span>';
 	}
 
 	private function setJobChoices()
@@ -423,10 +434,72 @@ class Application extends \backend\models\base\Application
 		);
 	}
 
+	public function getResponseMenu()
+	{
+		if ($this->responseMenu) {
+			return $this->responseMenu;
+		}
 
-					<?= $model->status == 2 ?
-						' <span class="text-warning">(cancelled)</span>' : '' ?>
-					<?= $model->status == 3 ?
-						' <span class="text-danger">(rejected)</span>' : '' ?>
-
+		return $this->responseMenu = array(
+			null => '',
+			'Bars' => [
+				1 => 'Bar Doors',
+				2 => 'Bar Service',
+				3 => 'Bar Setup',
+			],
+			'Children’s Festival' => [
+				11 => 'Children’s Festival Helper',
+				14 => 'Children’s Festival Presenter',
+				6 => 'Children’s Festival Setup',
+			],
+			'Setup & Bump Out' => [
+				4 => 'Bump Out',
+				8 => 'Decor',
+				9 => 'Fencing',
+				10 => 'General Setup',
+			],
+			'Site' => [
+				5 => 'Campground',
+				7 => 'Cleaning',
+				18 => 'Traffic',
+			],
+			'Stages' => [
+				13 => 'MC',
+				16 => 'Stage Manager',
+			],
+			'Treasury' => [
+				12 => 'Instrument Lockup',
+				19 => 'Treasury',
+			],
+			'Other' => [
+				15 => 'Shop',
+				17 => 'Ticket Gates',
+				20 => 'Vollies’ Tent',
+			],
+			'Special' => [
+				26 => 'Bars Manager',
+				27 => 'Children’s Festival Manager',
+				23 => 'Committee',
+				28 => 'Fencing Manager',
+				24 => 'Festival Director',
+				35 => 'Performer',
+				36 => 'Photographer',
+				30 => 'Shop Manager',
+				22 => 'Special',
+				31 => 'Stages Manager',
+				32 => 'Ticket Gates Manager',
+				33 => 'Treasury Manager',
+				34 => 'Vollies’ Tent Coordinator',
+				25 => 'Volunteer Coordinator',
+			],
+			'Non Accept' => [
+				98 => 'Cancel',
+				99 => 'Reject',
+			],
+		);
+	}
 }
+
+
+
+

@@ -23,6 +23,8 @@ use p2m\helpers\FA;
  * @property integer $job_id
  * @property string $jobName
  * @property string $year
+ * @property integer $rostered
+ * @property string $notes
  * @property integer $hours
  * @property string $report
  * @property integer $reinvite
@@ -38,12 +40,16 @@ use p2m\helpers\FA;
  * @property string $aliasModel
  *
  * @property string $vollieName;
+ * @property string $preferredName;
+ * @property string $phone1;
+ * @property string $phone2;
+ * @property string $teamName;
  */
 
 /* @var $this yii\web\View */
 /* @var $model       backend\models\Commitment */
-/* @var $application backend\models\Application */
 /* @var $profile     backend\models\Profile */
+/* @var $application backend\models\Application */
 /* @var $form yii\widgets\ActiveForm */
 
 $boolIcon = [
@@ -52,6 +58,182 @@ $boolIcon = [
 ];
 $emptyCol = ['label' => '', 'value' => ''];
 ?>
+<div class="row">
+	<div class="col-md-12">
+		<?= DetailView::widget([
+			'model' => $profile,
+			'panel' => [
+				'heading' => 'Vollie Info',
+				'headingOptions' => ['template' => '{title}'],
+				'type' => 'default',
+			],
+			'labelColOptions' => ['style' => 'width:10%', 'class' => 'text-right'],
+			'attributes' => [
+				[
+					'columns' => [
+						[
+							'attribute' => 'vollieName',
+							'valueColOptions' => ['style' => 'width:25%'],
+							'displayOnly' => true,
+						],
+						[
+							'attribute' => 'preferredName',
+							'valueColOptions' => ['style' => 'width:15%'],
+							'displayOnly' => true,
+						],
+						[
+							'attribute' => 'phone1',
+							'valueColOptions' => ['style' => 'width:10%'],
+							'displayOnly' => true,
+						],
+						[
+							'attribute' => 'phone2',
+							'valueColOptions' => ['style' => 'width:10%'],
+							'displayOnly' => true,
+						],
+					],
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'email',
+							'labelColOptions' => ['style' => 'width:70%', 'class' => 'text-right'],
+							'valueColOptions' => ['style' => 'width:30%'],
+							'displayOnly' => true,
+						],
+					],
+				],
+			],
+			'mode' => 'view',
+			'condensed' => true,
+		]) ?>
+	</div>
+</div><!-- / Application -->
+
+<div class="row">
+	<div class="col-md-6">
+		<?= DetailView::widget([
+			'model' => $profile,
+			'panel' => [
+				'heading' => 'Useful Attributes',
+				'headingOptions' => ['template' => '{title}'],
+				'type' => 'default',
+			],
+			'labelColOptions' => ['style' => 'width:40%', 'class' => 'text-right'],
+			'valueColOptions' => ['style' => 'width:10%', 'class' => 'text-center'],
+			'attributes' => [
+				[
+					'columns' => [
+						[
+							'attribute' => 'rsa',
+							'format' => 'raw',
+							'value' => $profile->rsa ? $boolIcon[1] : $boolIcon[0],
+							'displayOnly' => true,
+						],
+						[
+							'attribute' => 'dl_c',
+							'format' => 'raw',
+							'value' => $profile->dl_c ? $boolIcon[1] : $boolIcon[0],
+							'displayOnly' => true,
+						],
+					],
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'dl_h',
+							'format' => 'raw',
+							'value' => $profile->dl_h ? $boolIcon[1] : $boolIcon[0],
+							'displayOnly' => true,
+						],
+						[
+							'attribute' => 'cse',
+							'format' => 'raw',
+							'value' => $profile->cse ? $boolIcon[1] : $boolIcon[0],
+							'displayOnly' => true,
+						],
+					],
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'ohs',
+							'format' => 'raw',
+							'value' => $profile->ohs ? $boolIcon[1] : $boolIcon[0],
+							'displayOnly' => true,
+						],
+						[
+							'attribute' => 'bc',
+							'format' => 'raw',
+							'value' => $profile->bc ? $boolIcon[1] : $boolIcon[0],
+							'displayOnly' => true,
+						],
+					],
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'fa',
+							'format' => 'raw',
+							'value' => $profile->fa ? $boolIcon[1] : $boolIcon[0],
+							'displayOnly' => true,
+						],
+						$emptyCol,
+					],
+				],
+			],
+			'mode' => 'view',
+			'condensed' => true,
+		]) ?>
+	</div>
+	<div class="col-md-6">
+		<?= DetailView::widget([
+			'model' => $profile,
+			'panel' => [
+				'heading' => 'Experience',
+				'headingOptions' => ['template' => '{title}'],
+				'type' => 'default',
+			],
+			'labelColOptions' => ['style' => 'width:40%', 'class' => 'text-right'],
+			'valueColOptions' => ['style' => 'width:10%', 'class' => 'text-center'],
+			'attributes' => [
+				[
+					'columns' => [
+						[
+							'attribute' => 'vol',
+							'format' => 'raw',
+							'label' => 'Has volunteered before',
+							'value' => $profile->vol ? $boolIcon[1] : $boolIcon[0],
+							'displayOnly' => true,
+						],
+						[
+							'attribute' => 'mmfVol',
+							'format' => 'raw',
+							'label' => 'Has volunteered at MMF',
+							'value' => $profile->mmfVol ? $boolIcon[1] : $boolIcon[0],
+							'displayOnly' => true,
+						],
+					],
+				],
+				[
+					'columns' => [
+						[
+							'attribute' => 'mmfAtt',
+							'format' => 'raw',
+							'label' => 'Has attended MMF',
+							'value' => $profile->mmfAtt ? $boolIcon[1] : $boolIcon[0],
+							'displayOnly' => true,
+						],
+						$emptyCol,
+					],
+				],
+			],
+			'mode' => 'view',
+			'condensed' => true,
+		]) ?>
+	</div>
+</div><!-- / Volunteer Info -->
+
 <div class="row">
 	<div class="col-md-3">
 		<?= DetailView::widget([
@@ -180,4 +362,3 @@ $emptyCol = ['label' => '', 'value' => ''];
 		]) ?>
 	</div>
 </div><!-- / Application -->
-

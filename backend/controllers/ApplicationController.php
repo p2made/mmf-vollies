@@ -85,7 +85,7 @@ class ApplicationController extends Controller
 	{
 		$searchModel = new ApplicationSearch();
 		$searchModel->year = date('Y');
-		//$searchModel->status = 0;
+		$searchModel->status = 0;
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 		return $this->render('index', [
@@ -153,7 +153,7 @@ class ApplicationController extends Controller
 				return $this->redirect(['/commitment/create', 'id' => $model->id]);
 			}
 
-			return $this->redirect(['view', 'id' => $model->id]);
+			return $this->redirect(['index']);
 		}
 
 		/*

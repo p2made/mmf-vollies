@@ -26,20 +26,13 @@ p2m\sbAdmin\assets\SBAdmin2Asset::register($this);
 $this->title = 'Applications';
 $this->params['breadcrumbs'][] = $this->title;
 
-$toolbar = array(
-	'{toggleData}',
-	'{export}',
-);
 $exportConfig = array(
 	GridView::CSV => [
 		'label' => 'CSV',
 		'icon' => 'file-code-o',
 		'iconOptions' => ['class' => 'text-primary'],
 		'showHeader' => true,
-		'showPageSummary' => true,
-		'showFooter' => true,
-		'showCaption' => true,
-		'filename' => 'grid-export',
+		'filename' => 'MMF Vollie Applications ' . date('Y-m-d H.i.s'),
 		'alertMsg' => 'The CSV export file will be generated for download.',
 		'options' => ['title' => 'Comma Separated Values'],
 		'mime' => 'application/csv',
@@ -52,6 +45,11 @@ $exportConfig = array(
 $columns = array(
 	['class' => 'yii\grid\SerialColumn'],
 
+	[
+		'attribute' => 'id',
+		//'contentOptions' => ['style' => 'width:60px;'],
+		'hAlign' => 'right',
+	],
 	[
 		'attribute' => 'vollieName',
 		'label' => 'Legal Name',
@@ -143,16 +141,11 @@ $columns = array(
 					<?= GridView::widget([
 						'dataProvider' => $dataProvider,
 						//'filterModel' => $searchModel,
-						'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
-						'headerRowOptions' => ['class' => 'kartik-sheet-style'],
-						'filterRowOptions' => ['class' => 'kartik-sheet-style'],
 						'pjax' => true, // pjax is set to always true for this demo
-						'toolbar' => $toolbar,
+						'panel' => ['heading' => '<b>Applications</b>'],
+						'toolbar' => ['{toggleData}', '{export}'],
 						'exportConfig' => $exportConfig,
 						'columns' => $columns,
-						'panel' => [
-							'heading' => '<b>Applications</b>',
-						],
 					]); ?>
 				<?php Pjax::end(); ?>
 

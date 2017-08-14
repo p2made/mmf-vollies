@@ -23,6 +23,8 @@ use yii\helpers\ArrayHelper;
  * @property integer $job_id
  * @property string $jobName
  * @property string $year
+ * @property integer $rostered
+ * @property string $notes
  * @property integer $hours
  * @property string $report
  * @property integer $reinvite
@@ -38,12 +40,34 @@ use yii\helpers\ArrayHelper;
  * @property string $aliasModel
  *
  * @property string $vollieName;
+ * @property string $preferredName;
+ * @property string $phone1;
+ * @property string $phone2;
+ * @property string $teamName;
  */
 class Commitment extends \backend\models\base\Commitment
 {
 	// virtual attributes
 	private $vollieName;
+	private $preferredName;
+	private $phone1;
+	private $phone2;
 	private $teamName;
+
+	// virtual attributes
+	//private $vollieName;
+	//public $jobChoices = [];
+	//private $jobPreference1;
+	//private $jobPreference2;
+	//private $jobPreference3;
+	//private $availableFrom;
+	//private $availableTo;
+	//private $earlyLate;
+	//private $returned;
+	//private $statusFlag;
+	//private $assignment;
+
+	//private $jobTeamMap = [];
 
 	private $responseMenu = [];
 
@@ -73,6 +97,10 @@ class Commitment extends \backend\models\base\Commitment
 		return [
 			'id' => 'ID',
 			'user_id'        => 'User ID',
+			'vollieName'     => 'Volunteer Name',
+			'preferredName'  => 'Preferred Name',
+			'phone1'         => 'Primary Phone',
+			'phone2'         => 'Other Phone',
 			'application_id' => 'Application ID',
 			'team_id'        => 'Team ID',
 			'job_id'         => 'Job ID',
@@ -80,6 +108,8 @@ class Commitment extends \backend\models\base\Commitment
 			'teamName'       => 'Work Area',
 			'jobName'        => 'Job Name',
 			'year'           => 'Year',
+			'rostered'       => 'Rostered',
+			'notes'          => 'Area Head\'s Notes',
 			'hours'          => 'Hours',
 			'report'         => 'Report',
 			'reinvite'       => 'Reinvite',
@@ -89,6 +119,45 @@ class Commitment extends \backend\models\base\Commitment
 			'updated_by' => 'Updated By',
 		];
 	}
+	/*
+	{
+		return [
+			'id' => 'ID',
+			'user_id' =>             'User ID',
+			'vollieName' =>          'Volunteer Name',
+			'preferredName' =>       'Preferred Name',
+			'phone1' =>              'Primary Phone',
+			'phone2' =>              'Secondary Phone',
+			'job_choice_1' =>        'Job Choice 1',
+			'job_choice_2' =>        'Job Choice 2',
+			'job_choice_3' =>        'Job Choice 3',
+			'year' =>                'Year',
+			'availableFromDate' =>   'Available from Date',
+			'availableFromTime' =>   'from Time',
+			'availableFrom' =>       'Available From',
+			'availableToDate' =>     'Available to Date',
+			'availableToTime' =>     'to Time',
+			'availableTo' =>         'Available To',
+			'bestTime' =>            'I am...',
+			'earlyLate' =>           'Best Time',
+			'availabilityNotes' =>   'Availability Notes',
+			'double' =>              'Double',
+			'otherNotes' =>          'Other Notes',
+			'referee' =>             'Referee',
+			'refereeRelationship' => 'Referee Relationship',
+			'refereePhone' =>        'Referee Phone',
+			'bestCallingTime' =>     'Best Calling Time',
+			'status' =>              'Status',
+			'returned' =>            'Returned',
+			'team_id' =>             'Team ID',
+			'rejectedReason' =>      'Rejected Reason',
+			'created_at' => 'Created At',
+			'created_by' => 'Created By',
+			'updated_at' => 'Updated At',
+			'updated_by' => 'Updated By',
+		];
+	}
+	*/
 
 	public function afterFind()
 	{
@@ -102,8 +171,6 @@ class Commitment extends \backend\models\base\Commitment
 		}
 	}
 
-	/*
-	*/
 	public function beforeSave($insert)
 	{
 		if (!parent::beforeSave($insert)) {
@@ -122,6 +189,33 @@ class Commitment extends \backend\models\base\Commitment
 		}
 
 		return $this->vollieName = $this->user->vollieName;
+	}
+
+	public function getPreferredName()
+	{
+		if ($this->preferredName) {
+			return $this->preferredName;
+		}
+
+		return $this->preferredName = $this->user->preferredName;
+	}
+
+	public function getPhone1()
+	{
+		if ($this->phone1) {
+			return $this->phone1;
+		}
+
+		return $this->phone1 = $this->user->phone1;
+	}
+
+	public function getPhone2()
+	{
+		if ($this->phone2) {
+			return $this->phone2;
+		}
+
+		return $this->phone2 = $this->user->phone2;
 	}
 
 	public function getTeamId()
@@ -187,16 +281,14 @@ class Commitment extends \backend\models\base\Commitment
 			'Stages' => [
 				13 => 'MC',
 				16 => 'Stage Manager',
-				17 => 'Ticket Gates',
 			],
 			'Treasury' => [
 				12 => 'Instrument Lockup',
 				19 => 'Treasury',
 			],
-			'Shop' => [
+			'Other' => [
 				15 => 'Shop',
-			],
-			'Vollies’ Tent' => [
+				17 => 'Ticket Gates',
 				20 => 'Vollies’ Tent',
 			],
 			'Special' => [
@@ -206,7 +298,7 @@ class Commitment extends \backend\models\base\Commitment
 				28 => 'Fencing Manager',
 				24 => 'Festival Director',
 				35 => 'Performer',
-				37 => 'Photographer',
+				36 => 'Photographer',
 				30 => 'Shop Manager',
 				22 => 'Special',
 				31 => 'Stages Manager',

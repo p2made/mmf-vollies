@@ -41,6 +41,7 @@ use yii\behaviors\TimestampBehavior;
  * @property \backend\models\Job $jobChoice2
  * @property \backend\models\Job $jobChoice3
  * @property \backend\models\Profile $user
+ * @property \backend\models\Commitment $commitment
  * @property string $aliasModel
  */
 abstract class Application extends \yii\db\ActiveRecord
@@ -157,6 +158,14 @@ abstract class Application extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(\backend\models\Profile::className(), ['user_id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCommitment()
+    {
+        return $this->hasOne(\backend\models\Commitment::className(), ['application_id' => 'id']);
     }
 
 

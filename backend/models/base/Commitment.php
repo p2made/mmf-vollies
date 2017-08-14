@@ -18,6 +18,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $job_id
  * @property string $jobName
  * @property string $year
+ * @property integer $rostered
+ * @property string $notes
  * @property integer $hours
  * @property string $report
  * @property integer $reinvite
@@ -67,11 +69,12 @@ abstract class Commitment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'jobName', 'year'], 'required'],
-            [['user_id', 'application_id', 'team_id', 'job_id', 'hours', 'reinvite'], 'integer'],
+            [['user_id', 'year'], 'required'],
+            [['user_id', 'application_id', 'team_id', 'job_id', 'rostered', 'hours', 'reinvite'], 'integer'],
             [['year'], 'safe'],
-            [['report'], 'string'],
+            [['notes', 'report'], 'string'],
             [['jobName'], 'string', 'max' => 48],
+            [['application_id'], 'unique'],
             [['application_id'], 'exist', 'skipOnError' => true, 'targetClass' => \backend\models\Application::className(), 'targetAttribute' => ['application_id' => 'id']],
             [['job_id'], 'exist', 'skipOnError' => true, 'targetClass' => \backend\models\Job::className(), 'targetAttribute' => ['job_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \backend\models\Profile::className(), 'targetAttribute' => ['user_id' => 'user_id']],
@@ -92,6 +95,8 @@ abstract class Commitment extends \yii\db\ActiveRecord
             'job_id' => 'Job ID',
             'jobName' => 'Job Name',
             'year' => 'Year',
+            'rostered' => 'Rostered',
+            'notes' => 'Notes',
             'hours' => 'Hours',
             'report' => 'Report',
             'reinvite' => 'Reinvite',
