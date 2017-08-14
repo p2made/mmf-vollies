@@ -24,17 +24,22 @@ $this->params['breadcrumbs'][] = ['label' => 'Applications', 'url' => ['index']]
 <div id="content-wrapper">
 	<div class="application-update">
 
+		<?= $this->render('_assign', [
+			'model' => $model,
+			'profile' => $profile,
+			'commitments' => $commitments,
+		]) ?>
+
 		<div class="row">
 			<div class="col-md-12">
 				<h3>
 					Application
-					<?= $model->status == 2 ?
-						' <span class="text-warning">(cancelled)</span>' : '' ?>
+					<?= $model->statusFlag ?>
 				</h3>
 			</div>
 		</div>
 
-		<?= $this->render('_form', [
+		<?= $this->render('_view', [
 			'model' => $model,
 			'profile' => $profile,
 			'commitments' => $commitments,

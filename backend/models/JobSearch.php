@@ -78,6 +78,7 @@ class JobSearch extends Job
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
+			'pagination' => false,
 		]);
 
 		$this->load($params);

@@ -1,11 +1,4 @@
 <?php
-/*
- * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
- * #####														   #####
- * #####   Customise these lines to suit your host configuration   #####
- * #####														   #####
- * ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ ##### ^ #####
- */
 $_urlBase = 'malenymusicfestival.com';
 $_urlBaseFrontend = 'http://vollies'  . $_urlBase;
 $_urlBaseBackend  = 'http://volhq.'   . $_urlBase;
@@ -18,7 +11,6 @@ return [
 	],
 	'components' => [
 		'assetManager' => [
-			//'appendTimestamp' => true, // useful while developing custom assets
 			'bundles' => [
 				'yii\web\JqueryAsset' => [
 					'sourcePath' => null, 'js' => [],
@@ -40,7 +32,7 @@ return [
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
-			'suffix' => '.mff',
+			'suffix' => '.mmf',
 			'rules' => [
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

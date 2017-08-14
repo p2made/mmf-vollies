@@ -93,11 +93,11 @@ class Profile extends \common\models\Profile
 			'user_id' =>          'User ID',
 			'givenName' =>        'Given Name',
 			'familyName' =>       'Family Name',
-			'preferredName' =>    'Preferred',
 			'vollieName' =>       'Name',
 			'lexicalName' =>      'Name',
+			'preferredName' =>    'Preferred',
 			'phone1' =>           'Primary Phone',
-			'phone2' =>           'Secondary Phone',
+			'phone2' =>           'Other Phone',
 			'email' =>            'Email Address',
 			'address1' =>         'Address 1',
 			'address2' =>         'Address 2',
@@ -134,6 +134,11 @@ class Profile extends \common\models\Profile
 		parent::afterFind();
 
 		$this->email = $this->user->email;
+
+		if (!$this->preferredName || $this->preferredName == '') {
+			$this->preferredName = $this->givenName;
+			$this->save();
+		}
 	}
 
 	public function beforeSave($insert)
@@ -143,18 +148,6 @@ class Profile extends \common\models\Profile
 		if (!$this->preferredName) {
 			$this->preferredName = $this->givenName;
 		}
-	}
-
-	public function getPreferredName()
-	{
-		if ($this->preferredName) {
-			return $this->preferredName;
-		}
-
-		$this->preferredName = $this->givenName;
-		$this->save();
-
-		return $this->preferredName;
 	}
 
 	public function getVollieName()

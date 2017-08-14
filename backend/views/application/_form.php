@@ -9,341 +9,99 @@
  */
 
 use yii\bootstrap\Html;
-use yii\widgets\ActiveForm;
 use kartik\detail\DetailView;
 use kartik\grid\GridView;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
 use p2m\helpers\FA;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Application */
 /* @var $form yii\widgets\ActiveForm */
 
-$attrModel = array();
-$boolIcon = [
-	0 => '<div class="text-danger">' . FA::fw('close') . '</div>',
-	1 => '<div class="text-success">' . FA::fw('check') . '</div>',
-];
-$emptyCol = ['label' => '', 'value' => ''];
+$jobTeams = array(
+	1 => 1,
+	2 => 1,
+	3 => 1,
+	4 => 3,
+	5 => 4,
+	6 => 2,
+	7 => 4,
+	8 => 3,
+	9 => 3,
+	10 => 3,
+	11 => 2,
+	12 => 7,
+	13 => 5,
+	14 => 2,
+	15 => 8,
+	16 => 5,
+	17 => 6,
+	18 => 4,
+	19 => 7,
+	20 => 9,
+	22 => 11,
+	23 => 11,
+	24 => 11,
+	25 => 11,
+	26 => 11,
+	27 => 11,
+	28 => 11,
+	30 => 11,
+	31 => 11,
+	32 => 11,
+	33 => 11,
+	34 => 11,
+	35 => 11,
+	37 => 11,
+);
+
+/*
+ * 0 - Pending
+ * 1 - Accepted
+ * 2 - Cancelled
+ * 3 - Rejected
+ */
 ?>
-<div class="row">
-	<div class="col-md-3">
-		<?= DetailView::widget([
-			'model' => $model,
-			'panel' => [
-				'heading' => 'Preferred Jobs',
-				'headingOptions' => ['template' => '{title}'],
-				'type' => 'primary',
-			],
-			'labelColOptions' => ['style' => 'width:10%', 'class' => 'text-right'],
-			'attributes' => [
-				[
-					'attribute' => 'jobPreference1',
-					'label' => '1',
-					'displayOnly' => true,
-				],
-				[
-					'attribute' => 'jobPreference2',
-					'label' => '2',
-					'displayOnly' => true,
-				],
-				[
-					'attribute' => 'jobPreference3',
-					'label' => '3',
-					'displayOnly' => true,
-				],
-			],
-			'mode' => 'view',
-			'condensed' => true,
-		]) ?>
-	</div>
-	<div class="col-md-9">
-		<?= DetailView::widget([
-			'model' => $model,
-			'panel' => [
-				'heading' => 'Availability',
-				'headingOptions' => ['template' => '{title}'],
-				'type' => 'primary',
-			],
-			'labelColOptions' => ['style' => 'width:15%', 'class' => 'text-right'],
-			'attributes' => [
-				[
-					'columns' => [
-						[
-							'attribute' => 'availableFrom',
-							'valueColOptions' => ['style' => 'width:25%'],
-							'displayOnly' => true,
-						],
-						[
-							'attribute' => 'availableTo',
-							'valueColOptions' => ['style' => 'width:25%'],
-							'displayOnly' => true,
-						],
-						[
-							'attribute' => 'earlyLate',
-							'valueColOptions' => ['style' => 'width:5%'],
-							'displayOnly' => true,
-						],
-					],
-				],
-				[
-					'columns' => [
-						[
-							'attribute' => 'availabilityNotes',
-							'valueColOptions' => ['style' => 'width:65%'],
-							'displayOnly' => true,
-						],
-						[
-							'attribute' => 'double',
-							'format' => 'raw',
-							'valueColOptions' => ['style' => 'width:5%', 'class' => 'text-center'],
-							'label' => 'Double Shift',
-							'value' => $model->double ? $boolIcon[1] : $boolIcon[0],
-							'displayOnly' => true,
-						],
-					],
-				],
-			],
-			'mode' => 'view',
-			'condensed' => true,
-		]) ?>
-		<?= DetailView::widget([
-			'model' => $model,
-			'panel' => [
-				'heading' => 'Other Info',
-				'headingOptions' => ['template' => '{title}'],
-				'type' => 'primary',
-			],
-			'labelColOptions' => ['style' => 'width:10%', 'class' => 'text-right'],
-			'attributes' => [
-				[
-					'columns' => [
-						[
-							'attribute' => 'referee',
-							'valueColOptions' => ['style' => 'width:23%'],
-							'displayOnly' => true,
-						],
-						[
-							'attribute' => 'refereeRelationship',
-							'label' => 'Relationship',
-							'valueColOptions' => ['style' => 'width:24%'],
-							'displayOnly' => true,
-						],
-						[
-							'attribute' => 'refereePhone',
-							'label' => 'Phone',
-							'valueColOptions' => ['style' => 'width:23%'],
-							'displayOnly' => true,
-						],
-					],
-				],
-				[
-					'attribute' => 'otherNotes',
-					'valueColOptions' => ['style' => 'width:90%'],
-					'displayOnly' => true,
-				],
-				[
-					'attribute' => 'bestCallingTime',
-					'labelColOptions' => ['style' => 'width:15%', 'class' => 'text-right'],
-					'valueColOptions' => ['style' => 'width:85%'],
-					'displayOnly' => true,
-				],
-			],
-			'mode' => 'view',
-			'condensed' => true,
-		]) ?>
-	</div>
-</div><!-- / Application -->
-
-<div class="row">
-	<div class="col-md-12">
-		<h3>Volunteer Info</h3>
-	</div>
-	<div class="col-md-5">
-		<?= DetailView::widget([
-			'model' => $profile,
-			'panel' => [
-				'heading' => 'Contact Details',
-				'headingOptions' => ['template' => '{title}'],
-				'type' => 'primary',
-			],
-			'labelColOptions' => ['style' => 'width:35%', 'class' => 'text-right'],
-			'attributes' => [
-				[
-					'attribute' => 'phone1',
-					'displayOnly' => true,
-				],
-				[
-					'attribute' => 'phone2',
-					'displayOnly' => true,
-				],
-				[
-					'attribute' => 'email',
-					'displayOnly' => true,
-				],
-			],
-			'mode' => 'view',
-			'condensed' => true,
-		]) ?>
-
-		<?php if ($commitments): ?>
-		<?php endif ?>
-
-	</div>
-	<div class="col-md-7">
-		<?= DetailView::widget([
-			'model' => $profile,
-			'panel' => [
-				'heading' => 'Experience & Useful Attributes',
-				'headingOptions' => ['template' => '{title}'],
-				'type' => 'primary',
-			],
-			'labelColOptions' => ['style' => 'width:40%', 'class' => 'text-right'],
-			'valueColOptions' => ['style' => 'width:10%', 'class' => 'text-center'],
-			'attributes' => [
-				[
-					'columns' => [
-						[
-							'attribute' => 'rsa',
-							'format' => 'raw',
-							'value' => $profile->rsa ? $boolIcon[1] : $boolIcon[0],
-							'displayOnly' => true,
-						],
-						[
-							'attribute' => 'dl_c',
-							'format' => 'raw',
-							'value' => $profile->dl_c ? $boolIcon[1] : $boolIcon[0],
-							'displayOnly' => true,
-						],
-					],
-				],
-				[
-					'columns' => [
-						[
-							'attribute' => 'dl_h',
-							'format' => 'raw',
-							'value' => $profile->dl_h ? $boolIcon[1] : $boolIcon[0],
-							'displayOnly' => true,
-						],
-						[
-							'attribute' => 'cse',
-							'format' => 'raw',
-							'value' => $profile->cse ? $boolIcon[1] : $boolIcon[0],
-							'displayOnly' => true,
-						],
-					],
-				],
-				[
-					'columns' => [
-						[
-							'attribute' => 'ohs',
-							'format' => 'raw',
-							'value' => $profile->ohs ? $boolIcon[1] : $boolIcon[0],
-							'displayOnly' => true,
-						],
-						[
-							'attribute' => 'bc',
-							'format' => 'raw',
-							'value' => $profile->bc ? $boolIcon[1] : $boolIcon[0],
-							'displayOnly' => true,
-						],
-					],
-				],
-				[
-					'columns' => [
-						[
-							'attribute' => 'fa',
-							'format' => 'raw',
-							'value' => $profile->fa ? $boolIcon[1] : $boolIcon[0],
-							'displayOnly' => true,
-						],
-						$emptyCol,
-					],
-				],
-				[
-					'columns' => [
-						[
-							'attribute' => 'vol',
-							'format' => 'raw',
-							'label' => 'Has volunteered before',
-							'value' => $profile->vol ? $boolIcon[1] : $boolIcon[0],
-							'displayOnly' => true,
-						],
-						[
-							'attribute' => 'mmfVol',
-							'format' => 'raw',
-							'label' => 'Has volunteered at MMF',
-							'value' => $profile->mmfVol ? $boolIcon[1] : $boolIcon[0],
-							'displayOnly' => true,
-						],
-					],
-				],
-				[
-					'columns' => [
-						[
-							'attribute' => 'mmfAtt',
-							'format' => 'raw',
-							'label' => 'Has attended MMF',
-							'value' => $profile->mmfAtt ? $boolIcon[1] : $boolIcon[0],
-							'displayOnly' => true,
-						],
-						$emptyCol,
-					],
-				],
-			],
-			'mode' => 'view',
-			'condensed' => true,
-		]) ?>
-	</div>
-</div><!-- / Volunteer Info -->
-
 <div class="application-form">
+	<div class="row">
+		<div class="col-md-4">
 
-	<?php $form = ActiveForm::begin(); ?>
+			<div class="panel panel-primary">
+				<div class="panel-body">
+					<?php $form = ActiveForm::begin(); ?>
+					<div class="row">
+						<div class="col-md-9">
+							<?php echo Form::widget([
+								'model' => $model,
+								'form' => $form,
+								'attributes' => [
+									'status' => [
+										'type' => Form::INPUT_RADIO_LIST,
+										'items' => [
+											1 => 'Assign to Job',
+											2 => 'Cancel',
+											3 => 'Reject',
+										],
+										'options' => ['inline' => true],
+									],
+									'label' => 'Application Actions...'
+								]
+							]) ?>
 
-	<?= $form->field($model, 'user_id')->textInput() ?>
+						</div>
+						<div class="col-md-3">
+							<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+						</div>
+					</div>
 
-	<?= $form->field($model, 'job_choice_1')->textInput() ?>
 
-	<?= $form->field($model, 'job_choice_2')->textInput() ?>
 
-	<?= $form->field($model, 'job_choice_3')->textInput() ?>
+					<?php ActiveForm::end(); ?>
 
-	<?= $form->field($model, 'year')->textInput(['maxlength' => true]) ?>
+				</div>
+			</div>
 
-	<?= $form->field($model, 'availableFromDate')->textInput(['maxlength' => true]) ?>
-
-	<?= $form->field($model, 'availableFromTime')->textInput() ?>
-
-	<?= $form->field($model, 'availableToDate')->textInput(['maxlength' => true]) ?>
-
-	<?= $form->field($model, 'availableToTime')->textInput() ?>
-
-	<?= $form->field($model, 'bestTime')->textInput() ?>
-
-	<?= $form->field($model, 'availabilityNotes')->textarea(['rows' => 6]) ?>
-
-	<?= $form->field($model, 'double')->textInput() ?>
-
-	<?= $form->field($model, 'otherNotes')->textarea(['rows' => 6]) ?>
-
-	<?= $form->field($model, 'referee')->textInput(['maxlength' => true]) ?>
-
-	<?= $form->field($model, 'refereeRelationship')->textInput(['maxlength' => true]) ?>
-
-	<?= $form->field($model, 'refereePhone')->textInput(['maxlength' => true]) ?>
-
-	<?= $form->field($model, 'bestCallingTime')->textInput(['maxlength' => true]) ?>
-
-	<?= $form->field($model, 'status')->textInput() ?>
-
-	<?= $form->field($model, 'team_id')->textInput() ?>
-
-	<?= $form->field($model, 'rejectedReason')->textarea(['rows' => 6]) ?>
-
-	<div class="form-group">
-		<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+		</div>
 	</div>
-
-	<?php ActiveForm::end(); ?>
-
 </div>

@@ -18,9 +18,11 @@ use yii\widgets\ActiveForm;
 
 	<?= $form->field($model, 'team_id')->textInput() ?>
 
-	<?= $form->field($model, 'year')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'job_id')->textInput() ?>
 
-	<?= $form->field($model, 'job')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'jobName')->textInput(['maxlength' => true]) ?>
+
+	<?= $form->field($model, 'year')->textInput(['maxlength' => true]) ?>
 
 	<?= $form->field($model, 'hours')->textInput() ?>
 

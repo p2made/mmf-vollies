@@ -15,8 +15,11 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $user_id
  * @property integer $application_id
  * @property integer $team_id
+ * @property integer $job_id
+ * @property string $jobName
  * @property string $year
- * @property string $job
+ * @property integer $rostered
+ * @property string $notes
  * @property integer $hours
  * @property string $report
  * @property integer $reinvite
@@ -25,7 +28,10 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $updated_at
  * @property integer $updated_by
  *
+ * @property \backend\models\Application $application
+ * @property \backend\models\Job $job
  * @property \backend\models\Profile $user
+ * @property \backend\models\Team $team
  * @property string $aliasModel
  */
 abstract class Commitment extends \yii\db\ActiveRecord
@@ -63,12 +69,16 @@ abstract class Commitment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'year', 'job'], 'required'],
-            [['user_id', 'application_id', 'team_id', 'hours', 'reinvite'], 'integer'],
+            [['user_id', 'year'], 'required'],
+            [['user_id', 'application_id', 'team_id', 'job_id', 'rostered', 'hours', 'reinvite'], 'integer'],
             [['year'], 'safe'],
-            [['report'], 'string'],
-            [['job'], 'string', 'max' => 48],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \backend\models\Profile::className(), 'targetAttribute' => ['user_id' => 'user_id']]
+            [['notes', 'report'], 'string'],
+            [['jobName'], 'string', 'max' => 48],
+            [['application_id'], 'unique'],
+            [['application_id'], 'exist', 'skipOnError' => true, 'targetClass' => \backend\models\Application::className(), 'targetAttribute' => ['application_id' => 'id']],
+            [['job_id'], 'exist', 'skipOnError' => true, 'targetClass' => \backend\models\Job::className(), 'targetAttribute' => ['job_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \backend\models\Profile::className(), 'targetAttribute' => ['user_id' => 'user_id']],
+            [['team_id'], 'exist', 'skipOnError' => true, 'targetClass' => \backend\models\Team::className(), 'targetAttribute' => ['team_id' => 'id']]
         ];
     }
 
@@ -82,8 +92,11 @@ abstract class Commitment extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'application_id' => 'Application ID',
             'team_id' => 'Team ID',
+            'job_id' => 'Job ID',
+            'jobName' => 'Job Name',
             'year' => 'Year',
-            'job' => 'Job',
+            'rostered' => 'Rostered',
+            'notes' => 'Notes',
             'hours' => 'Hours',
             'report' => 'Report',
             'reinvite' => 'Reinvite',
@@ -97,9 +110,33 @@ abstract class Commitment extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getApplication()
+    {
+        return $this->hasOne(\backend\models\Application::className(), ['id' => 'application_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getJob()
+    {
+        return $this->hasOne(\backend\models\Job::className(), ['id' => 'job_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getUser()
     {
         return $this->hasOne(\backend\models\Profile::className(), ['user_id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTeam()
+    {
+        return $this->hasOne(\backend\models\Team::className(), ['id' => 'team_id']);
     }
 
 

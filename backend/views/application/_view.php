@@ -27,7 +27,7 @@ $emptyCol = ['label' => '', 'value' => ''];
 			'panel' => [
 				'heading' => 'Preferred Jobs',
 				'headingOptions' => ['template' => '{title}'],
-				'type' => 'primary',
+				'type' => 'default',
 			],
 			'labelColOptions' => ['style' => 'width:10%', 'class' => 'text-right'],
 			'attributes' => [
@@ -57,7 +57,7 @@ $emptyCol = ['label' => '', 'value' => ''];
 			'panel' => [
 				'heading' => 'Availability',
 				'headingOptions' => ['template' => '{title}'],
-				'type' => 'primary',
+				'type' => 'default',
 			],
 			'labelColOptions' => ['style' => 'width:15%', 'class' => 'text-right'],
 			'attributes' => [
@@ -106,7 +106,7 @@ $emptyCol = ['label' => '', 'value' => ''];
 			'panel' => [
 				'heading' => 'Other Info',
 				'headingOptions' => ['template' => '{title}'],
-				'type' => 'primary',
+				'type' => 'default',
 			],
 			'labelColOptions' => ['style' => 'width:10%', 'class' => 'text-right'],
 			'attributes' => [
@@ -159,7 +159,7 @@ $emptyCol = ['label' => '', 'value' => ''];
 			'panel' => [
 				'heading' => 'Contact Details',
 				'headingOptions' => ['template' => '{title}'],
-				'type' => 'primary',
+				'type' => 'default',
 			],
 			'labelColOptions' => ['style' => 'width:35%', 'class' => 'text-right'],
 			'attributes' => [
@@ -190,7 +190,7 @@ $emptyCol = ['label' => '', 'value' => ''];
 			'panel' => [
 				'heading' => 'Experience & Useful Attributes',
 				'headingOptions' => ['template' => '{title}'],
-				'type' => 'primary',
+				'type' => 'default',
 			],
 			'labelColOptions' => ['style' => 'width:40%', 'class' => 'text-right'],
 			'valueColOptions' => ['style' => 'width:10%', 'class' => 'text-center'],

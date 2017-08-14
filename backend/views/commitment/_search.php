@@ -23,9 +23,11 @@ use yii\widgets\ActiveForm;
 
 	<?= $form->field($model, 'team_id') ?>
 
-	<?= $form->field($model, 'year') ?>
+	<?= $form->field($model, 'job_id') ?>
 
-	<?php // echo $form->field($model, 'job') ?>
+	<?php // echo $form->field($model, 'jobName') ?>
+
+	<?php // echo $form->field($model, 'year') ?>
 
 	<?php // echo $form->field($model, 'hours') ?>
 

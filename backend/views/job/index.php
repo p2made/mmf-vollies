@@ -30,36 +30,48 @@ $this->params['breadcrumbs'][] = $this->title;
 
 				<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-				<p>
-					<?= Html::a('Create Job', ['create'], ['class' => 'btn btn-success']) ?>
-				</p>
-
 				<?php Pjax::begin(); ?>
 					<?= GridView::widget([
 						'dataProvider' => $dataProvider,
-						'filterModel' => $searchModel,
+						//'filterModel' => $searchModel,
 						'columns' => [
 							[
 								'class' => '\kartik\grid\SerialColumn',
-								'contentOptions' => ['style' => 'width:50px;'],
 								'hAlign' => 'center',
+								'width' => '50px',
 							],
 
 							// 'team_id',
 							[
-								'attribute'=>'teamName',
-								'contentOptions' => ['style' => 'width:200px;'],
+								'attribute' => 'teamName',
+								'width' => '200px',
+								'group' => true,
 							],
 							[
-								'attribute'=>'name',
-								'contentOptions' => ['style' => 'width:250px;'],
+								'attribute' => 'name',
+								'width' => '250px',
+							],
+							[
+								'attribute' => 'shortName',
+								'width' => '200px',
 							],
 							// 'shortName',
 							'description:ntext',
 							[
-								'attribute'=>'required',
-								'contentOptions' => ['style' => 'width:50px;'],
+								'class' => 'kartik\grid\EditableColumn',
+								'attribute' => 'required',
+								'editableOptions' => [
+									'formOptions' => ['action' => ['/job/editjob']],
+									'inputType' => \kartik\editable\Editable::INPUT_SPIN,
+									'options' => ['pluginOptions' => ['min' => 0, 'max' => 200]]
+								],
+								'format' => ['decimal', 0],
+								'hAlign' => 'right',
+								'width' => '50px',
+								//'pageSummary' => true,
 							],
+
+
 							// 'created_at',
 							// 'updated_at',
 
@@ -67,12 +79,17 @@ $this->params['breadcrumbs'][] = $this->title;
 								'class' => '\kartik\grid\ActionColumn',
 								//'template' => '{update}',
 								//'updateOptions' => ['label' => FA::fw('magic')],
-								'contentOptions' => ['style' => 'width:80px;'],
 								'hAlign' => 'center',
+								'width' => '80px',
 							],
 						],
 					]); ?>
 				<?php Pjax::end(); ?>
+
+				<p>
+					<?= Html::a('Create Job', ['create'], ['class' => 'btn btn-success']) ?>
+				</p>
+
 			</div>
 
 		</div>

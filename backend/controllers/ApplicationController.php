@@ -84,6 +84,8 @@ class ApplicationController extends Controller
 	public function actionIndex()
 	{
 		$searchModel = new ApplicationSearch();
+		$searchModel->year = date('Y');
+		$searchModel->status = 0;
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 		return $this->render('index', [
@@ -147,8 +149,19 @@ class ApplicationController extends Controller
 		);
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->id]);
+			if ($model->status == 1) { // assgn job
+				return $this->redirect(['/commitment/create', 'id' => $model->id]);
+			}
+
+			return $this->redirect(['index']);
 		}
+
+		/*
+		if ($model->load(Yii::$app->request->post())) {
+			$jobAssignment = $_POST['assignment'];
+			$model->assignJob($jobAssignment);
+		}
+		*/
 
 		return $this->render('update', [
 			'model'       => $model,
@@ -156,6 +169,41 @@ class ApplicationController extends Controller
 			'commitments' => $commitments,
 		]);
 	}
+
+/*
+ * @property integer $id
+ * @property integer $user_id
+ * @property integer $application_id
+ * @property integer $team_id
+ * @property integer $job_id
+ * @property string $jobName
+ * @property string $year
+ */
+
+/*
+
+	public function actionUpdate($id)
+	{
+		if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+			$modelEmp= Employee::find()->where(['Id' => $id])->one();
+			$modelUser= User::find()->where(['User_id' =>$id])->one();
+
+			$modelEmp->Name=$_POST['name']; // use your field names
+			$modelEmp->Email_id=$_POST['email_id'];
+
+			$modelUser->Name=$_POST['name'];
+			$modelUser->Email_id=$_POST['email_id'];
+
+			if ($modelEmp->save() && $modelUser->save()) {
+				return $this->redirect(['index']);
+			}
+		}
+		else {
+			return $this->render('update', ['model' => $model,]);
+		}
+	}
+
+*/
 
 	/**
 	 * Deletes an existing Application model.

@@ -34,19 +34,19 @@ use yii\helpers\ArrayHelper;
  * @property string $refereeRelationship
  * @property string $refereePhone
  * @property string $bestCallingTime
- * @property integer $accepted
+ * @property integer $status
  * @property integer $team_id
- * @property integer $rejected
  * @property string $rejectedReason
  * @property integer $created_at
  * @property integer $created_by
  * @property integer $updated_at
  * @property integer $updated_by
  *
- * @property \common\models\Job $jobChoice1
- * @property \common\models\Job $jobChoice2
- * @property \common\models\Job $jobChoice3
- * @property \common\models\Profile $user
+ * @property \backend\models\Job $jobChoice1
+ * @property \backend\models\Job $jobChoice2
+ * @property \backend\models\Job $jobChoice3
+ * @property \backend\models\Profile $user
+ * @property \backend\models\Commitment $commitment
  * @property string $aliasModel
  *
  * @property string $vollieName
@@ -59,12 +59,17 @@ use yii\helpers\ArrayHelper;
  * @property string $availableTo
  * @property string $earlyLate
  * @property string $returned
+ *
+ * @property array $responseMenu[]
+ * @property array $jobTeamMap[]
  */
 class Application extends \backend\models\base\Application
 {
 	// virtual attributes
 	private $vollieName;
 	private $preferredName;
+	private $phone1;
+	private $phone2;
 	public $jobChoices = [];
 	private $jobPreference1;
 	private $jobPreference2;
@@ -73,6 +78,11 @@ class Application extends \backend\models\base\Application
 	private $availableTo;
 	private $earlyLate;
 	private $returned;
+	private $statusFlag;
+	private $assignment;
+
+	private $jobTeamMap = [];
+	private $responseMenu = [];
 
 	public function behaviors()
 	{
@@ -90,7 +100,7 @@ class Application extends \backend\models\base\Application
 			parent::rules(),
 			[
 				# custom validation rules
-				[['volunteerName', 'preferredName', 'jobPreference1', 'jobPreference2', 'jobPreference3', 'availableFrom', 'availableTo', 'earlyLate', 'returned'], 'safe'],
+				[['vollieName', 'preferredName', 'phone1', 'phone2', 'jobPreference1', 'jobPreference2', 'jobPreference3', 'availableFrom', 'availableTo', 'earlyLate', 'returned'], 'safe'],
 			]
 		);
 	}
@@ -99,9 +109,11 @@ class Application extends \backend\models\base\Application
 	{
 		return [
 			'id' => 'ID',
-			'user_id' =>             'User ID',
-			'volunteerName' =>       'Volunteer Name',
+			'user_id'             => 'User ID',
+			'vollieName' =>          'Volunteer Name',
 			'preferredName' =>       'Preferred Name',
+			'phone1' =>              'Primary Phone',
+			'phone2' =>              'Other Phone',
 			'job_choice_1' =>        'Job Choice 1',
 			'job_choice_2' =>        'Job Choice 2',
 			'job_choice_3' =>        'Job Choice 3',
@@ -114,13 +126,13 @@ class Application extends \backend\models\base\Application
 			'availableTo' =>         'Available To',
 			'bestTime' =>            'I am...',
 			'earlyLate' =>           'Best Time',
-			'availabilityNotes' =>   'Availability Notes',
-			'double' =>              'Double',
-			'otherNotes' =>          'Other Notes',
-			'referee' =>             'Referee',
+			'availabilityNotes'   => 'Availability Notes',
+			'double'              => 'Double',
+			'otherNotes'          => 'Other Notes',
+			'referee'             => 'Referee',
 			'refereeRelationship' => 'Referee Relationship',
-			'refereePhone' =>        'Referee Phone',
-			'bestCallingTime' =>     'Best Calling Time',
+			'refereePhone'        => 'Referee Phone',
+			'bestCallingTime'     => 'Best Calling Time',
 			'status' =>              'Status',
 			'returned' =>            'Returned',
 			'team_id' =>             'Team ID',
@@ -139,6 +151,51 @@ class Application extends \backend\models\base\Application
 		//$this->setJobChoices();
 	}
 
+	public function beforeSave($insert)
+	{
+		if (!parent::beforeSave($insert)) {
+			return false;
+		}
+
+		/*
+		if ($this->assignment) {
+			$this->assignApplication($this->assignment);
+		}
+		*/
+
+		return true;
+}
+
+	public function assignJob($assignment)
+	{
+		/*
+		 * 0 - Pending
+		 * 1 - Accepted
+		 * 2 - Cancelled
+		 * 3 - Rejected
+		 */
+
+		if ($assignment == 99) {
+			$this->status = 3;
+			return;
+		} // rejected
+
+		if ($assignment == 98) {
+			$this->status = 2;
+			return;
+		} // cancelled
+
+		$this->status = 1;
+
+		$commitment = new Commitment();
+		$commitment->application_id = $this->id;
+		$commitment->user_id = $this->user->user_id;
+		$commitment->job_id = $this->assignment;
+		$commitment->team_id = $this->jobTeamMap[$assignment];
+		$commitment->year = date('Y');
+		$commitment->save();
+	}
+
 	public function getVollieName()
 	{
 		if ($this->vollieName) {
@@ -155,6 +212,24 @@ class Application extends \backend\models\base\Application
 		}
 
 		return $this->preferredName = $this->user->preferredName;
+	}
+
+	public function getPhone1()
+	{
+		if ($this->phone1) {
+			return $this->phone1;
+		}
+
+		return $this->phone1 = $this->user->phone1;
+	}
+
+	public function getPhone2()
+	{
+		if ($this->phone2) {
+			return $this->phone2;
+		}
+
+		return $this->phone2 = $this->user->phone2;
 	}
 
 	public function getJobPreference1()
@@ -238,6 +313,38 @@ class Application extends \backend\models\base\Application
 		return $this->returned = $this->user->returned;
 	}
 
+	public function setAssignment($value)
+	{
+		$this->assignment = $value;
+	}
+
+	public function getAssignment()
+	{
+		return $this->assignment;
+	}
+
+	public function getStatusFlag()
+	{
+		if ($this->status == 0) {
+			$class = 'text-info';
+			$title = 'pending';
+		}
+		elseif ($this->status == 1) {
+			$class = 'text-success';
+			$title = 'assigned';
+		}
+		elseif ($this->status == 2) {
+			$class = 'text-warning';
+			$title = 'cancelled';
+		}
+		else {
+			$class = 'text-danger';
+			$title = 'REJECTED';
+		}
+
+		return ' <span class="' . $class . '"><strong>(' . $title . ')</strong></span>';
+	}
+
 	private function setJobChoices()
 	{
 		$this->jobChoices[0] = $this->jobChoice1->name;
@@ -252,14 +359,24 @@ class Application extends \backend\models\base\Application
 			2 => 'Midday',
 			3 => 'Evening',
 			4 => 'Late',
+			0 => 'unknown',
 		];
 
-		$date = date_create(date("Y") . '-' . $this->availableFromDate);
-		$time = $times[$this->availableFromTime];
-		$this->availableFrom = $date->format('l, m-d') . ' / ' . $time;
-		$date = date_create(date("Y") . '-' . $this->availableToDate);
-		$time = $times[$this->availableToTime];
-		$this->availableTo = $date->format('l, m-d') . ' / ' . $time;
+		if ($this->availableFromTime != 0) {
+			$date = date_create(date("Y") . '-' . $this->availableFromDate);
+			$time = $times[$this->availableFromTime];
+			$this->availableFrom = $date->format('l, m-d') . ' / ' . $time;
+		} else {
+			$this->availableFrom = 'unknown';
+		}
+
+		if ($this->availableToTime != 0) {
+			$date = date_create(date("Y") . '-' . $this->availableToDate);
+			$time = $times[$this->availableToTime];
+			$this->availableTo = $date->format('l, m-d') . ' / ' . $time;
+		} else {
+			$this->availableTo = 'unknown';
+		}
 	}
 
 	public function emailUpdate()
@@ -273,4 +390,116 @@ class Application extends \backend\models\base\Application
 			->send();;
 	}
 
+	public function getJobTeamMap()
+	{
+		if ($this->jobTeamMap) {
+			return $this->jobTeamMap;
+		}
+
+		return $this->jobTeamMap = array(
+			1 => 1,
+			2 => 1,
+			3 => 1,
+			4 => 3,
+			5 => 4,
+			6 => 2,
+			7 => 4,
+			8 => 3,
+			9 => 3,
+			10 => 3,
+			11 => 2,
+			12 => 7,
+			13 => 5,
+			14 => 2,
+			15 => 8,
+			16 => 5,
+			17 => 6,
+			18 => 4,
+			19 => 7,
+			20 => 9,
+			22 => 11,
+			23 => 11,
+			24 => 11,
+			25 => 11,
+			26 => 11,
+			27 => 11,
+			28 => 11,
+			30 => 11,
+			31 => 11,
+			32 => 11,
+			33 => 11,
+			34 => 11,
+			35 => 11,
+			37 => 11,
+		);
+	}
+
+	public function getResponseMenu()
+	{
+		if ($this->responseMenu) {
+			return $this->responseMenu;
+		}
+
+		return $this->responseMenu = array(
+			null => '',
+			'Bars' => [
+				1 => 'Bar Doors',
+				2 => 'Bar Service',
+				3 => 'Bar Setup',
+			],
+			'Children’s Festival' => [
+				11 => 'Children’s Festival Helper',
+				14 => 'Children’s Festival Presenter',
+				6 => 'Children’s Festival Setup',
+			],
+			'Setup & Bump Out' => [
+				4 => 'Bump Out',
+				8 => 'Decor',
+				9 => 'Fencing',
+				10 => 'General Setup',
+			],
+			'Site' => [
+				5 => 'Campground',
+				7 => 'Cleaning',
+				18 => 'Traffic',
+			],
+			'Stages' => [
+				13 => 'MC',
+				16 => 'Stage Manager',
+			],
+			'Treasury' => [
+				12 => 'Instrument Lockup',
+				19 => 'Treasury',
+			],
+			'Other' => [
+				15 => 'Shop',
+				17 => 'Ticket Gates',
+				20 => 'Vollies’ Tent',
+			],
+			'Special' => [
+				26 => 'Bars Manager',
+				27 => 'Children’s Festival Manager',
+				23 => 'Committee',
+				28 => 'Fencing Manager',
+				24 => 'Festival Director',
+				35 => 'Performer',
+				36 => 'Photographer',
+				30 => 'Shop Manager',
+				22 => 'Special',
+				31 => 'Stages Manager',
+				32 => 'Ticket Gates Manager',
+				33 => 'Treasury Manager',
+				34 => 'Vollies’ Tent Coordinator',
+				25 => 'Volunteer Coordinator',
+			],
+			'Non Accept' => [
+				98 => 'Cancel',
+				99 => 'Reject',
+			],
+		);
+	}
 }
+
+
+
+
